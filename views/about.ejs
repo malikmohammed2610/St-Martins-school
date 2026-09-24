@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About | St. Martin's High School, Balanagar</title>
+
+    <meta name="description"
+          content="Learn about St. Martin's High School, Balanagar, Hyderabad — our history, values, vision, mission and educational philosophy.">
+
+    <link rel="icon"
+          type="image/png"
+          href="/images/logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Global stylesheet -->
+    <link rel="stylesheet"
+          href="/css/style.css">
+
+
+    <style>
+
+        /* ==========================================================
+           ABOUT PAGE — SAFE PAGE-SPECIFIC DESIGN
+           ========================================================== */
+
+        .about-page {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #f7f3eb !important;
+            color: #172333;
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        .about-page *,
+        .about-page *::before,
+        .about-page *::after {
+            box-sizing: border-box;
+        }
+
+
+        /* ==========================================================
+           HEADER
+           ========================================================== */
+
+        .about-page .school-header {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: 100% !important;
+            z-index: 1000 !important;
+            background: #071a2b;
+        }
+
+        .about-page .school-topbar {
+            background: #ffffff;
+            min-height: 88px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(197,164,90,.25);
+        }
+
+        .about-page .school-topbar-inner {
+            width: min(1400px, 94%);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .about-page .school-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+        }
+
+        .about-page .school-brand img {
+            width: 62px;
+            height: 62px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .about-page .school-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-page .school-brand-title {
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 29px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: .5px;
+        }
+
+        .about-page .school-brand-location {
+            margin-top: 6px;
+            color: #8d7441;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.2px;
+            text-transform: uppercase;
+        }
+
+        .about-page .school-top-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .about-page .school-phone {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #071a2b;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .about-page .school-phone i {
+            color: #b28b3d;
+        }
+
+        .about-page .teacher-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 12px 19px;
+            background: #071a2b;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid #c5a45a;
+            transition: all .3s ease;
+        }
+
+        .about-page .teacher-login:hover {
+            background: #c5a45a;
+            color: #071a2b;
+        }
+
+
+        /* ==========================================================
+           NAVIGATION
+           ========================================================== */
+
+        .about-page .school-nav {
+            background: #071a2b;
+            min-height: 62px;
+            border-bottom: 1px solid rgba(197,164,90,.35);
+        }
+
+        .about-page .school-nav-inner {
+            width: min(1400px, 94%);
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 62px;
+        }
+
+        .about-page .school-nav-list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 4px;
+        }
+
+        .about-page .school-nav-list > li {
+            position: relative;
+        }
+
+        .about-page .school-nav-list > li > a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 62px;
+            padding: 0 17px;
+            color: #f7f3eb;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: all .25s ease;
+        }
+
+        .about-page .school-nav-list > li > a:hover,
+        .about-page .school-nav-list > li.active > a {
+            color: #d9b96e;
+        }
+
+        .about-page .school-nav-list > li > a i {
+            font-size: 9px;
+            transition: transform .25s ease;
+        }
+
+        .about-page .school-nav-list > li:hover > a i {
+            transform: rotate(180deg);
+        }
+
+
+        /* ==========================================================
+           DROPDOWN
+           ========================================================== */
+
+        .about-page .school-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 245px;
+            padding: 10px 0;
+            margin: 0;
+            list-style: none;
+            background: #ffffff;
+            border-top: 3px solid #c5a45a;
+            box-shadow: 0 18px 40px rgba(0,0,0,.18);
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .25s ease;
+
+            z-index: 2000;
+        }
+
+        .about-page .school-nav-list > li:hover > .school-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .about-page .school-dropdown li {
+            width: 100%;
+        }
+
+        .about-page .school-dropdown a {
+            display: flex;
+            align-items: center;
+            min-height: 45px;
+            padding: 10px 19px;
+            color: #172333;
+            background: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .2px;
+            transition: all .25s ease;
+        }
+
+        .about-page .school-dropdown a:hover {
+            color: #071a2b;
+            background: #f5efe2;
+            padding-left: 25px;
+        }
+
+
+        /* ==========================================================
+           MAIN CONTENT SAFETY
+           ========================================================== */
+
+        .about-page main {
+            display: block !important;
+            position: relative !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            overflow: visible !important;
+        }
+
+
+        /* ==========================================================
+           PAGE HERO
+           ========================================================== */
+
+        .about-page .about-hero {
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a2b 0%,
+                    #0b263d 55%,
+                    #102f47 100%
+                );
+            overflow: hidden;
+        }
+
+        .about-page .about-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(197,164,90,.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(197,164,90,.10),
+                    transparent 35%
+                );
+            pointer-events: none;
+        }
+
+        .about-page .about-hero::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -170px;
+            width: 520px;
+            height: 520px;
+            border: 1px solid rgba(197,164,90,.16);
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-page .about-hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(900px, 90%);
+            padding: 80px 0;
+        }
+
+        .about-page .hero-eyebrow {
+            color: #d7bb77;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .about-page .about-hero h1 {
+            margin: 0;
+            color: #ffffff;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(54px, 7vw, 88px);
+            font-weight: 600;
+            line-height: .95;
+        }
+
+        .about-page .hero-line {
+            width: 80px;
+            height: 2px;
+            margin: 27px auto;
+            background: #c5a45a;
+        }
+
+        .about-page .about-hero p {
+            max-width: 720px;
+            margin: auto;
+            color: rgba(255,255,255,.78);
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+
+        /* ==========================================================
+           SECTION BASE
+           ========================================================== */
+
+        .about-page .about-section {
+            position: relative;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            padding: 105px 0;
+            background: #f7f3eb;
+        }
+
+        .about-page .about-section.light {
+            background: #ffffff;
+        }
+
+        .about-page .about-container {
+            width: min(1180px, 90%);
+            margin: 0 auto;
+        }
+
+
+        /* ==========================================================
+           INTRO
+           ========================================================== */
+
+        .about-page .intro-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 75px;
+        }
+
+        .about-page .section-kicker {
+            color: #9b7b3d;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .about-page .section-title {
+            margin: 0 0 25px;
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(42px, 5vw, 62px);
+            line-height: .98;
+            font-weight: 600;
+        }
+
+        .about-page .section-title span {
+            color: #a58242;
+        }
+
+        .about-page .section-copy {
+            color: #5d6670;
+            font-size: 15px;
+            line-height: 1.95;
+            margin-bottom: 18px;
+        }
+
+        .about-page .intro-image {
+            position: relative;
+        }
+
+        .about-page .intro-image img {
+            display: block;
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            background: #e8e1d3;
+        }
+
+        .about-page .intro-image::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 20px;
+            left: 20px;
+            border: 1px solid #c5a45a;
+            z-index: 0;
+        }
+
+        .about-page .intro-image img {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* ==========================================================
+           HERITAGE
+           ========================================================== */
+
+        .about-page .heritage-grid {
+            display: grid;
+            grid-template-columns: .95fr 1.05fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-page .heritage-image img {
+            display: block;
+            width: 100%;
+            height: 470px;
+            object-fit: cover;
+            background: #e8e1d3;
+        }
+
+        .about-page .heritage-text {
+            padding-left: 20px;
+        }
+
+        .about-page .heritage-text p {
+            color: #5d6670;
+            font-size: 15px;
+            line-height: 1.95;
+            margin-bottom: 18px;
+        }
+
+        .about-page .gold-rule {
+            width: 70px;
+            height: 2px;
+            background: #c5a45a;
+            margin: 25px 0;
+        }
+
+
+        /* ==========================================================
+           VISION & MISSION
+           ========================================================== */
+
+        .about-page .vm-section {
+            background: #071a2b;
+            color: #ffffff;
+        }
+
+        .about-page .vm-heading {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 55px;
+        }
+
+        .about-page .vm-heading .section-kicker {
+            color: #d7bb77;
+        }
+
+        .about-page .vm-heading .section-title {
+            color: #ffffff;
+        }
+
+        .about-page .vm-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .about-page .vm-card {
+            position: relative;
+            padding: 48px;
+            border: 1px solid rgba(197,164,90,.28);
+            background: rgba(255,255,255,.035);
+            transition: transform .3s ease, border-color .3s ease;
+        }
+
+        .about-page .vm-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(197,164,90,.75);
+        }
+
+        .about-page .vm-number {
+            color: #c5a45a;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 42px;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .about-page .vm-card h3 {
+            color: #ffffff;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 17px;
+        }
+
+        .about-page .vm-card p {
+            color: rgba(255,255,255,.72);
+            font-size: 14px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+
+        /* ==========================================================
+           PHILOSOPHY
+           ========================================================== */
+
+        .about-page .philosophy-heading {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 60px;
+        }
+
+        .about-page .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .about-page .principle-card {
+            padding: 38px 27px;
+            min-height: 280px;
+            background: #ffffff;
+            border: 1px solid rgba(7,26,43,.10);
+            transition: all .3s ease;
+        }
+
+        .about-page .principle-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(197,164,90,.65);
+            box-shadow: 0 20px 40px rgba(7,26,43,.08);
+        }
+
+        .about-page .principle-icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c5a45a;
+            color: #9b7b3d;
+            margin-bottom: 25px;
+        }
+
+        .about-page .principle-card h3 {
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .about-page .principle-card p {
+            color: #6b737c;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+
+        /* ==========================================================
+           STATEMENT
+           ========================================================== */
+
+        .about-page .statement-section {
+            padding: 120px 0;
+            background: #eee8db;
+        }
+
+        .about-page .statement {
+            max-width: 950px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-page .statement-mark {
+            color: #c5a45a;
+            font-family: Georgia, serif;
+            font-size: 80px;
+            line-height: .5;
+            margin-bottom: 30px;
+        }
+
+        .about-page .statement p {
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(29px, 4vw, 48px);
+            line-height: 1.2;
+            font-weight: 500;
+        }
+
+
+        /* ==========================================================
+           AT A GLANCE
+           ========================================================== */
+
+        .about-page .glance-section {
+            background: #ffffff;
+        }
+
+        .about-page .glance-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .about-page .glance-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid rgba(7,26,43,.12);
+            border-left: 1px solid rgba(7,26,43,.12);
+        }
+
+        .about-page .glance-card {
+            min-height: 180px;
+            padding: 35px 25px;
+            text-align: center;
+            border-right: 1px solid rgba(7,26,43,.12);
+            border-bottom: 1px solid rgba(7,26,43,.12);
+        }
+
+        .about-page .glance-number {
+            color: #9b7b3d;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 13px;
+        }
+
+        .about-page .glance-card h4 {
+            color: #071a2b;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+
+        /* ==========================================================
+           CTA
+           ========================================================== */
+
+        .about-page .about-cta {
+            position: relative;
+            padding: 100px 0;
+            background: #071a2b;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .about-page .about-cta::before {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px solid rgba(197,164,90,.22);
+            pointer-events: none;
+        }
+
+        .about-page .about-cta-content {
+            position: relative;
+            z-index: 2;
+            width: min(800px, 90%);
+            margin: auto;
+        }
+
+        .about-page .about-cta h2 {
+            color: #ffffff;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(40px, 5vw, 58px);
+            margin-bottom: 18px;
+        }
+
+        .about-page .about-cta p {
+            color: rgba(255,255,255,.72);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .about-page .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 28px;
+            color: #071a2b;
+            background: #c5a45a;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all .3s ease;
+        }
+
+        .about-page .cta-button:hover {
+            background: #ffffff;
+            color: #071a2b;
+        }
+
+
+        /* ==========================================================
+           FOOTER
+           ========================================================== */
+
+        .about-page .school-footer {
+            background: #05131f;
+            color: #ffffff;
+            padding: 75px 0 0;
+        }
+
+        .about-page .footer-container {
+            width: min(1200px, 90%);
+            margin: auto;
+        }
+
+        .about-page .footer-grid {
+            display: grid;
+            grid-template-columns: 1.25fr .8fr .9fr;
+            gap: 60px;
+            padding-bottom: 55px;
+        }
+
+        .about-page .footer-brand {
+            display: flex;
+            align-items: flex-start;
+            gap: 17px;
+        }
+
+        .about-page .footer-brand img {
+            width: 62px;
+            height: 62px;
+            object-fit: contain;
+        }
+
+        .about-page .footer-brand h3 {
+            color: #ffffff;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .about-page .footer-brand p {
+            color: rgba(255,255,255,.55);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            margin-top: 7px;
+        }
+
+        .about-page .footer-description {
+            color: rgba(255,255,255,.60);
+            font-size: 13px;
+            line-height: 1.9;
+            margin-top: 25px;
+            max-width: 440px;
+        }
+
+        .about-page .footer-column h4 {
+            color: #c5a45a;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .about-page .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .about-page .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .about-page .footer-links a {
+            color: rgba(255,255,255,.62);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color .25s ease;
+        }
+
+        .about-page .footer-links a:hover {
+            color: #d7bb77;
+        }
+
+        .about-page .footer-contact {
+            color: rgba(255,255,255,.65);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .about-page .footer-contact div {
+            margin-bottom: 12px;
+        }
+
+        .about-page .footer-contact i {
+            width: 22px;
+            color: #c5a45a;
+        }
+
+        .about-page .footer-map {
+            width: 100%;
+            border-top: 1px solid rgba(197,164,90,.20);
+            padding-top: 35px;
+        }
+
+        .about-page .footer-map iframe {
+            display: block;
+            width: 100%;
+            height: 300px;
+            border: 0;
+            filter: grayscale(.25);
+        }
+
+        .about-page .footer-bottom {
+            margin-top: 35px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,.08);
+            text-align: center;
+            color: rgba(255,255,255,.40);
+            font-size: 11px;
+            letter-spacing: .5px;
+        }
+
+
+        /* ==========================================================
+           MOBILE
+           ========================================================== */
+
+        @media (max-width: 1100px) {
+
+            .about-page .school-nav-list > li > a {
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 10px;
+            }
+
+            .about-page .intro-grid,
+            .about-page .heritage-grid {
+                gap: 45px;
+            }
+
+            .about-page .philosophy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 850px) {
+
+            .about-page .school-topbar {
+                min-height: auto;
+                padding: 15px 0;
+            }
+
+            .about-page .school-topbar-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .about-page .school-top-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .about-page .school-nav {
+                overflow-x: auto;
+            }
+
+            .about-page .school-nav-inner {
+                width: max-content;
+                min-width: 100%;
+            }
+
+            .about-page .school-nav-list {
+                justify-content: flex-start;
+            }
+
+            .about-page .school-nav-list > li > a {
+                min-height: 56px;
+            }
+
+            .about-page .school-dropdown {
+                position: fixed;
+                left: auto;
+            }
+
+            .about-page .intro-grid,
+            .about-page .heritage-grid,
+            .about-page .vm-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-page .heritage-text {
+                padding-left: 0;
+            }
+
+            .about-page .glance-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-page .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .about-page .school-brand-title {
+                font-size: 23px;
+            }
+
+            .about-page .school-brand-location {
+                font-size: 9px;
+                letter-spacing: 1.5px;
+            }
+
+            .about-page .school-brand img {
+                width: 52px;
+                height: 52px;
+            }
+
+            .about-page .school-top-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .about-page .about-hero {
+                min-height: 420px;
+            }
+
+            .about-page .about-section {
+                padding: 75px 0;
+            }
+
+            .about-page .intro-image img,
+            .about-page .heritage-image img {
+                height: 360px;
+            }
+
+            .about-page .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-page .glance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-page .vm-card {
+                padding: 32px 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body class="about-page">
+
+
+<!-- ==========================================================
+     HEADER
+     ========================================================== -->
+
+<header class="school-header">
+
+    <!-- TOP BRAND BAR -->
+    <div class="school-topbar">
+
+        <div class="school-topbar-inner">
+
+            <a href="/" class="school-brand">
+
+                <img src="/images/logo.png"
+                     alt="St. Martin's High School Logo">
+
+                <div class="school-brand-text">
+
+                    <div class="school-brand-title">
+                        ST. MARTIN'S HIGH SCHOOL
+                    </div>
+
+                    <div class="school-brand-location">
+                        BALANAGAR • HYDERABAD
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <div class="school-top-actions">
+
+                <a href="tel:04040204839"
+                   class="school-phone">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <span>
+                        040 - 4020 4839
+                    </span>
+
+                </a>
+
+
+                <a href="/teacher-login"
+                   class="teacher-login">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                    Teacher Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+    <nav class="school-nav">
+
+        <div class="school-nav-inner">
+
+            <ul class="school-nav-list">
+
+                <li>
+                    <a href="/">
+                        Home
+                    </a>
+                </li>
+
+
+                <!-- ABOUT -->
+                <li class="active">
+
+                    <a href="/about">
+                        About Us
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+
+                    <ul class="school-dropdown">
+
+                        <li>
+                            <a href="/about">
+                                School Overview
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/management">
+                                Principal &amp; Management
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/disclosure">
+                                Disclosure
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/facilities">
+                                Our Facilities
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- FACILITIES -->
+                <li>
+
+                    <a href="/facilities">
+                        Facilities
+                    </a>
+
+                </li>
+
+
+                <!-- CURRICULUM -->
+                <li>
+
+                    <a href="/academics">
+                        Curriculum
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+
+                    <ul class="school-dropdown">
+
+                        <li>
+                            <a href="/academics">
+                                Curriculum Overview
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/academics/primary">
+                                Primary
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/academics/middle">
+                                Middle School
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/academics/secondary">
+                                Secondary
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- STUDENT LIFE -->
+                <li>
+
+                    <a href="/student-life">
+                        Student Life
+                    </a>
+
+                </li>
+
+
+                <!-- ADMISSIONS -->
+                <li>
+
+                    <a href="/admissions">
+                        Admissions
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+
+                    <ul class="school-dropdown">
+
+                        <li>
+                            <a href="/admissions">
+                                Admission Details
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/fee-structure">
+                                Fee Structure
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- GALLERY -->
+                <li>
+
+                    <a href="/gallery">
+                        Gallery
+                    </a>
+
+                </li>
+
+
+                <!-- CONTACT -->
+                <li>
+
+                    <a href="/contact">
+                        Contact Us
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ==========================================================
+     MAIN
+     ========================================================== -->
+
+<main>
+
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+
+    <section class="about-hero">
+
+        <div class="about-hero-content">
+
+            <div class="hero-eyebrow">
+                OUR STORY • OUR PURPOSE • OUR FUTURE
+            </div>
+
+            <h1>
+                About Our School
+            </h1>
+
+            <div class="hero-line"></div>
+
+            <p>
+                A learning community dedicated to developing
+                confident, compassionate and capable young people
+                through purposeful education and enduring values.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         INTRO
+         ====================================================== -->
+
+    <section class="about-section">
+
+        <div class="about-container">
+
+            <div class="intro-grid">
+
+                <div>
+
+                    <div class="section-kicker">
+                        A SCHOOL WITH PURPOSE
+                    </div>
+
+                    <h2 class="section-title">
+                        Education with
+                        <span>Purpose.</span>
+                    </h2>
+
+                    <p class="section-copy">
+                        St. Martin's High School, Balanagar,
+                        Hyderabad, is committed to creating an
+                        environment where every student is encouraged
+                        to learn, question, discover and grow.
+                    </p>
+
+                    <p class="section-copy">
+                        We believe education extends beyond academic
+                        achievement. It is about developing character,
+                        confidence, discipline, creativity and a genuine
+                        sense of responsibility towards society.
+                    </p>
+
+                    <p class="section-copy">
+                        Through a balanced approach to academics,
+                        co-curricular experiences, technology,
+                        sports and values-based learning, our school
+                        strives to prepare students for a rapidly
+                        changing world while keeping them firmly
+                        grounded in timeless principles.
+                    </p>
+
+                </div>
+
+
+                <div class="intro-image">
+
+                    <img src="/images/about-school.jpg"
+                         alt="St. Martin's High School">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         HERITAGE
+         ====================================================== -->
+
+    <section class="about-section light">
+
+        <div class="about-container">
+
+            <div class="heritage-grid">
+
+                <div class="heritage-image">
+
+                    <img src="/images/heritage.jpg"
+                         alt="School heritage">
+
+                </div>
+
+
+                <div class="heritage-text">
+
+                    <div class="section-kicker">
+                        OUR HERITAGE
+                    </div>
+
+                    <h2 class="section-title">
+                        Rooted in Values.
+                        <span>Ready for Tomorrow.</span>
+                    </h2>
+
+                    <div class="gold-rule"></div>
+
+                    <p>
+                        The foundation of St. Martin's High School is
+                        built upon the belief that meaningful education
+                        should shape both the mind and the character.
+                    </p>
+
+                    <p>
+                        Our school community brings together teachers,
+                        students and families with a shared commitment
+                        to learning, integrity and personal growth.
+                    </p>
+
+                    <p>
+                        While we respect the traditions and values that
+                        have shaped our educational journey, we also
+                        embrace innovation, technology and new methods
+                        of learning that help our students meet the
+                        demands of tomorrow.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         VISION & MISSION
+         ====================================================== -->
+
+    <section class="about-section vm-section">
+
+        <div class="about-container">
+
+            <div class="vm-heading">
+
+                <div class="section-kicker">
+                    OUR DIRECTION
+                </div>
+
+                <h2 class="section-title">
+                    Vision &amp; Mission
+                </h2>
+
+            </div>
+
+
+            <div class="vm-grid">
+
+                <article class="vm-card">
+
+                    <div class="vm-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Our Vision
+                    </h3>
+
+                    <p>
+                        To nurture confident, responsible and
+                        compassionate individuals who possess the
+                        knowledge, skills and values required to make
+                        meaningful contributions to society and to
+                        lead purposeful lives.
+                    </p>
+
+                </article>
+
+
+                <article class="vm-card">
+
+                    <div class="vm-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Our Mission
+                    </h3>
+
+                    <p>
+                        To provide a safe, inspiring and intellectually
+                        stimulating environment where every learner is
+                        encouraged to achieve academic excellence,
+                        develop character, discover talents and become
+                        a lifelong learner.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         EDUCATIONAL PHILOSOPHY
+         ====================================================== -->
+
+    <section class="about-section">
+
+        <div class="about-container">
+
+            <div class="philosophy-heading">
+
+                <div class="section-kicker">
+                    HOW WE EDUCATE
+                </div>
+
+                <h2 class="section-title">
+                    Educational Philosophy
+                </h2>
+
+                <p class="section-copy">
+                    Our approach to education combines strong
+                    academic foundations with opportunities for
+                    personal discovery, creativity and responsible
+                    citizenship.
+                </p>
+
+            </div>
+
+
+            <div class="philosophy-grid">
+
+
+                <article class="principle-card">
+
+                    <div class="principle-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <h3>
+                        Academic Excellence
+                    </h3>
+
+                    <p>
+                        We encourage curiosity, disciplined study,
+                        critical thinking and a deep understanding
+                        of concepts rather than learning through
+                        memorisation alone.
+                    </p>
+
+                </article>
+
+
+                <article class="principle-card">
+
+                    <div class="principle-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <h3>
+                        Character
+                    </h3>
+
+                    <p>
+                        Integrity, respect, empathy, responsibility
+                        and self-discipline form an essential part
+                        of the student's educational journey.
+                    </p>
+
+                </article>
+
+
+                <article class="principle-card">
+
+                    <div class="principle-icon">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+
+                    <h3>
+                        Innovation
+                    </h3>
+
+                    <p>
+                        Technology, creativity and new approaches to
+                        learning help students develop the confidence
+                        to adapt to an evolving world.
+                    </p>
+
+                </article>
+
+
+                <article class="principle-card">
+
+                    <div class="principle-icon">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+
+                    <h3>
+                        Community
+                    </h3>
+
+                    <p>
+                        We believe meaningful education grows through
+                        collaboration between students, teachers,
+                        parents and the wider community.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         STATEMENT
+         ====================================================== -->
+
+    <section class="statement-section">
+
+        <div class="about-container">
+
+            <div class="statement">
+
+                <div class="statement-mark">
+                    “
+                </div>
+
+                <p>
+                    We do not simply prepare students for examinations.
+                    We prepare them for life — with knowledge in their
+                    minds, values in their hearts and confidence in
+                    their abilities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         AT A GLANCE
+         ====================================================== -->
+
+    <section class="about-section glance-section">
+
+        <div class="about-container">
+
+            <div class="glance-heading">
+
+                <div class="section-kicker">
+                    THE SCHOOL AT A GLANCE
+                </div>
+
+                <h2 class="section-title">
+                    A Community of
+                    <span>Learning.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="glance-grid">
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        01
+                    </div>
+
+                    <h4>
+                        Purposeful Education
+                    </h4>
+
+                </div>
+
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        02
+                    </div>
+
+                    <h4>
+                        Values-Based Learning
+                    </h4>
+
+                </div>
+
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        03
+                    </div>
+
+                    <h4>
+                        Modern Learning
+                    </h4>
+
+                </div>
+
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        04
+                    </div>
+
+                    <h4>
+                        Holistic Development
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         CTA
+         ====================================================== -->
+
+    <section class="about-cta">
+
+        <div class="about-cta-content">
+
+            <h2>
+                Discover St. Martin's
+            </h2>
+
+            <p>
+                Explore our facilities, curriculum, admissions
+                information and student life to discover more about
+                the St. Martin's High School experience.
+            </p>
+
+            <a href="/contact"
+               class="cta-button">
+
+                Contact Our School
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ==========================================================
+     FOOTER
+     ========================================================== -->
+
+<footer class="school-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-grid">
+
+
+            <!-- BRAND -->
+            <div>
+
+                <div class="footer-brand">
+
+                    <img src="/images/logo.png"
+                         alt="St. Martin's High School Logo">
+
+                    <div>
+
+                        <h3>
+                            St. Martin's High School
+                        </h3>
+
+                        <p>
+                            BALANAGAR • HYDERABAD
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <p class="footer-description">
+
+                    A school committed to academic excellence,
+                    character development and purposeful education,
+                    preparing students to meet the future with
+                    confidence and integrity.
+
+                </p>
+
+            </div>
+
+
+            <!-- QUICK LINKS -->
+            <div class="footer-column">
+
+                <h4>
+                    Quick Links
+                </h4>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/about">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/facilities">
+                            Our Facilities
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/academics">
+                            Curriculum
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/admissions">
+                            Admissions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/gallery">
+                            Gallery
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/contact">
+                            Contact Us
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- CONTACT -->
+            <div class="footer-column">
+
+                <h4>
+                    Contact
+                </h4>
+
+                <div class="footer-contact">
+
+                    <div>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        040 - 4020 4839
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Balanagar, Hyderabad,
+                        Telangana
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        School Office
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MAP -->
+        <div class="footer-map">
+
+            <iframe
+                src="https://www.google.com/maps?q=St.%20Martin's%20High%20School%20Balanagar%20Hyderabad&output=embed"
+                loading="lazy"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+        <div class="footer-bottom">
+
+            © <%= new Date().getFullYear() %>
+            St. Martin's High School, Balanagar, Hyderabad.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ==========================================================
+     BOOTSTRAP JS
+     ========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Principal &amp; Management | St. Martin's High School, Balanagar</title>
+
+    <meta name="description"
+          content="Meet the leadership and management of St. Martin's High School, Balanagar, Hyderabad.">
+
+    <link rel="icon"
+          type="image/png"
+          href="/images/logo.png">
+
+    <!-- ==========================================================
+         GOOGLE FONTS
+         ========================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- ==========================================================
+         BOOTSTRAP
+         ========================================================== -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <!-- ==========================================================
+         FONT AWESOME
+         ========================================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- ==========================================================
+         GLOBAL CSS
+         ========================================================== -->
+
+    <link rel="stylesheet"
+          href="/css/style.css">
+
+
+    <!-- ==========================================================
+         PAGE-SPECIFIC CSS
+         ========================================================== -->
+
+    <style>
+
+        /* ==========================================================
+           BASE
+           ========================================================== */
+
+        .principal-page {
+            margin: 0;
+            padding: 0;
+            background: #f7f3eb;
+            color: #20252a;
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        .principal-page *,
+        .principal-page *::before,
+        .principal-page *::after {
+            box-sizing: border-box;
+        }
+
+
+        /* ==========================================================
+           HEADER
+           ========================================================== */
+
+        .principal-page .school-header {
+            position: relative !important;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .principal-page .school-topbar {
+            background: #ffffff;
+            min-height: 88px;
+            border-bottom: 1px solid rgba(197,164,90,.25);
+            display: flex;
+            align-items: center;
+        }
+
+        .principal-page .school-topbar-inner {
+            width: min(1400px, 94%);
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .principal-page .school-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+        }
+
+        .principal-page .school-brand img {
+            width: 62px;
+            height: 62px;
+            object-fit: contain;
+        }
+
+        .principal-page .school-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .principal-page .school-brand-title {
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 29px;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+
+        .principal-page .school-brand-location {
+            margin-top: 6px;
+            color: #92743a;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .principal-page .school-top-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .principal-page .school-phone {
+            color: #071a2b;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .principal-page .school-phone i {
+            color: #c5a45a;
+            margin-right: 8px;
+        }
+
+        .principal-page .teacher-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 18px;
+            color: #071a2b;
+            background: #ffffff;
+            border: 1px solid #071a2b;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: .3s ease;
+        }
+
+        .principal-page .teacher-login:hover {
+            background: #071a2b;
+            color: #ffffff;
+        }
+
+
+        /* ==========================================================
+           NAVIGATION
+           ========================================================== */
+
+        .principal-page .school-nav {
+            background: #071a2b !important;
+            min-height: 62px;
+            border-bottom: 1px solid rgba(197,164,90,.35);
+        }
+
+        .principal-page .school-nav-inner {
+            width: min(1400px, 94%);
+            min-height: 62px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .principal-page .school-nav-list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .principal-page .school-nav-list > li {
+            position: relative;
+            list-style: none;
+        }
+
+        .principal-page .school-nav-list > li > a {
+            min-height: 62px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #ffffff !important;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: .25s ease;
+        }
+
+        .principal-page .school-nav-list > li > a:hover,
+        .principal-page .school-nav-list > li.active > a {
+            color: #d9b96e !important;
+        }
+
+        .principal-page .school-nav-list > li > a i {
+            font-size: 8px;
+        }
+
+
+        /* ==========================================================
+           DROPDOWNS
+           ========================================================== */
+
+        .principal-page .school-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 245px;
+            margin: 0;
+            padding: 9px 0;
+            list-style: none;
+            background: #ffffff;
+            border-top: 3px solid #c5a45a;
+            box-shadow: 0 18px 40px rgba(0,0,0,.18);
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .25s ease;
+
+            z-index: 5000;
+        }
+
+        .principal-page .school-nav-list > li:hover > .school-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .principal-page .school-dropdown li {
+            list-style: none;
+        }
+
+        .principal-page .school-dropdown a {
+            display: block;
+            padding: 12px 20px;
+            color: #20252a !important;
+            background: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: .25s ease;
+        }
+
+        .principal-page .school-dropdown a:hover {
+            background: #f5efe2;
+            color: #071a2b !important;
+            padding-left: 26px;
+        }
+
+
+        /* ==========================================================
+           HERO
+           ========================================================== */
+
+        .principal-page .leadership-hero {
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a2b 0%,
+                    #0b263d 55%,
+                    #102f47 100%
+                );
+            overflow: hidden;
+        }
+
+        .principal-page .leadership-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at 15% 25%,
+                    rgba(197,164,90,.17),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(197,164,90,.10),
+                    transparent 35%
+                );
+        }
+
+        .principal-page .leadership-hero::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(197,164,90,.17);
+            border-radius: 50%;
+            bottom: -260px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .principal-page .leadership-hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(900px, 90%);
+            padding: 80px 0;
+        }
+
+        .principal-page .hero-eyebrow {
+            color: #d7bb77;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .principal-page .leadership-hero h1 {
+            margin: 0;
+            color: #ffffff;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(50px, 7vw, 82px);
+            line-height: .95;
+            font-weight: 600;
+        }
+
+        .principal-page .hero-rule {
+            width: 75px;
+            height: 2px;
+            margin: 28px auto;
+            background: #c5a45a;
+        }
+
+        .principal-page .leadership-hero p {
+            max-width: 720px;
+            margin: auto;
+            color: rgba(255,255,255,.78);
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+
+        /* ==========================================================
+           CONTENT
+           ========================================================== */
+
+        .principal-page .leadership-section {
+            padding: 105px 0;
+            background: #f7f3eb;
+        }
+
+        .principal-page .leadership-container {
+            width: min(1180px, 90%);
+            margin: auto;
+        }
+
+
+        /* ==========================================================
+           INTRO
+           ========================================================== */
+
+        .principal-page .intro-content {
+            max-width: 920px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .principal-page .section-kicker {
+            color: #9b7b3d;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .principal-page .section-title {
+            margin: 0 0 25px;
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(42px, 5vw, 62px);
+            line-height: 1;
+            font-weight: 600;
+        }
+
+        .principal-page .section-title span {
+            color: #a58242;
+        }
+
+        .principal-page .intro-content p {
+            color: #606a73;
+            font-size: 15px;
+            line-height: 1.95;
+        }
+
+
+        /* ==========================================================
+           LEADERSHIP CARDS
+           ========================================================== */
+
+        .principal-page .leaders-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 65px;
+        }
+
+        .principal-page .leader-card {
+            position: relative;
+            background: #ffffff;
+            padding: 45px;
+            border: 1px solid rgba(7,26,43,.08);
+            border-top: 3px solid #c5a45a;
+            box-shadow: 0 20px 45px rgba(7,26,43,.07);
+            transition: .35s ease;
+        }
+
+        .principal-page .leader-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 55px rgba(7,26,43,.12);
+        }
+
+        .principal-page .leader-icon {
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9b7b3d;
+            border: 1px solid #c5a45a;
+            margin-bottom: 28px;
+            font-size: 22px;
+        }
+
+        .principal-page .leader-card h2 {
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .principal-page .leader-role {
+            color: #9b7b3d;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .principal-page .leader-card p {
+            color: #626b73;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+
+
+        /* ==========================================================
+           PRINCIPAL MESSAGE
+           ========================================================== */
+
+        .principal-page .message-section {
+            background: #ffffff;
+        }
+
+        .principal-page .message-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .principal-page .portrait-placeholder {
+            min-height: 460px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(
+                    145deg,
+                    #071a2b,
+                    #12344d
+                );
+            border: 1px solid rgba(197,164,90,.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principal-page .portrait-placeholder::before {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px solid rgba(197,164,90,.25);
+        }
+
+        .principal-page .portrait-placeholder i {
+            position: relative;
+            z-index: 2;
+            color: #c5a45a;
+            font-size: 90px;
+            opacity: .7;
+        }
+
+        .principal-page .message-content .section-kicker {
+            margin-bottom: 13px;
+        }
+
+        .principal-page .message-content h2 {
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(40px, 5vw, 58px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .principal-page .message-content h2 span {
+            color: #a58242;
+        }
+
+        .principal-page .message-content blockquote {
+            position: relative;
+            margin: 0 0 25px;
+            padding-left: 28px;
+            border-left: 3px solid #c5a45a;
+            color: #35404a;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 28px;
+            line-height: 1.45;
+            font-weight: 500;
+        }
+
+        .principal-page .message-content p {
+            color: #68717a;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+
+        /* ==========================================================
+           MANAGEMENT PHILOSOPHY
+           ========================================================== */
+
+        .principal-page .philosophy-section {
+            background: #071a2b;
+        }
+
+        .principal-page .philosophy-heading {
+            max-width: 750px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .principal-page .philosophy-heading .section-kicker {
+            color: #d7bb77;
+        }
+
+        .principal-page .philosophy-heading .section-title {
+            color: #ffffff;
+        }
+
+        .principal-page .philosophy-heading p {
+            color: rgba(255,255,255,.68);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .principal-page .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-top: 60px;
+        }
+
+        .principal-page .philosophy-card {
+            padding: 38px 30px;
+            border: 1px solid rgba(197,164,90,.25);
+            background: rgba(255,255,255,.035);
+            transition: .3s ease;
+        }
+
+        .principal-page .philosophy-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(197,164,90,.75);
+        }
+
+        .principal-page .philosophy-card i {
+            color: #c5a45a;
+            font-size: 24px;
+            margin-bottom: 23px;
+        }
+
+        .principal-page .philosophy-card h3 {
+            color: #ffffff;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 29px;
+            margin-bottom: 13px;
+        }
+
+        .principal-page .philosophy-card p {
+            color: rgba(255,255,255,.62);
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+
+        /* ==========================================================
+           CTA
+           ========================================================== */
+
+        .principal-page .leadership-cta {
+            padding: 100px 0;
+            background: #eee8db;
+            text-align: center;
+        }
+
+        .principal-page .leadership-cta-content {
+            max-width: 780px;
+            margin: auto;
+        }
+
+        .principal-page .leadership-cta h2 {
+            color: #071a2b;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(40px, 5vw, 58px);
+            margin-bottom: 18px;
+        }
+
+        .principal-page .leadership-cta p {
+            color: #626b73;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .principal-page .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 28px;
+            color: #071a2b;
+            background: #c5a45a;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            transition: .3s ease;
+        }
+
+        .principal-page .cta-button:hover {
+            background: #071a2b;
+            color: #ffffff;
+        }
+
+
+        /* ==========================================================
+           RESPONSIVE
+           ========================================================== */
+
+        @media (max-width: 1050px) {
+
+            .principal-page .school-nav-list > li > a {
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 10px;
+            }
+
+            .principal-page .message-grid {
+                gap: 45px;
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .principal-page .school-topbar {
+                padding: 15px 0;
+            }
+
+            .principal-page .school-topbar-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .principal-page .school-top-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .principal-page .school-nav {
+                overflow-x: auto;
+            }
+
+            .principal-page .school-nav-inner {
+                width: max-content;
+                min-width: 100%;
+            }
+
+            .principal-page .school-nav-list {
+                justify-content: flex-start;
+            }
+
+            .principal-page .leaders-grid,
+            .principal-page .message-grid,
+            .principal-page .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .principal-page .message-grid {
+                gap: 50px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .principal-page .school-brand-title {
+                font-size: 23px;
+            }
+
+            .principal-page .school-brand-location {
+                font-size: 9px;
+                letter-spacing: 1.5px;
+            }
+
+            .principal-page .school-brand img {
+                width: 52px;
+                height: 52px;
+            }
+
+            .principal-page .school-top-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .principal-page .leadership-hero {
+                min-height: 430px;
+            }
+
+            .principal-page .leadership-section {
+                padding: 75px 0;
+            }
+
+            .principal-page .leader-card {
+                padding: 32px 25px;
+            }
+
+            .principal-page .portrait-placeholder {
+                min-height: 350px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="principal-page">
+
+
+<!-- ==========================================================
+     GLOBAL HEADER
+     ========================================================== -->
+
+<header class="school-header">
+
+
+    <!-- TOP BRAND BAR -->
+
+    <div class="school-topbar">
+
+        <div class="school-topbar-inner">
+
+
+            <a href="/"
+               class="school-brand">
+
+                <img src="/images/logo.png"
+                     alt="St. Martin's High School Logo">
+
+                <div class="school-brand-text">
+
+                    <div class="school-brand-title">
+                        ST. MARTIN'S HIGH SCHOOL
+                    </div>
+
+                    <div class="school-brand-location">
+                        BALANAGAR • HYDERABAD
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <div class="school-top-actions">
+
+                <a href="tel:04040204839"
+                   class="school-phone">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    040 - 4020 4839
+
+                </a>
+
+
+                <a href="/teacher-login"
+                   class="teacher-login">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                    Teacher Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         NAVIGATION
+         ====================================================== -->
+
+    <nav class="school-nav">
+
+        <div class="school-nav-inner">
+
+            <ul class="school-nav-list">
+
+
+                <!-- HOME -->
+
+                <li>
+
+                    <a href="/">
+                        Home
+                    </a>
+
+                </li>
+
+
+                <!-- ABOUT -->
+
+                <li class="active">
+
+                    <a href="/about">
+
+                        About Us
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </a>
+
+
+                    <ul class="school-dropdown">
+
+                        <li>
+                            <a href="/about">
+                                School Overview
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/principal">
+                                Principal &amp; Management
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/disclosure">
+                                Disclosure
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/facilities">
+                                Our Facilities
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- FACILITIES -->
+
+                <li>
+
+                    <a href="/facilities">
+                        Facilities
+                    </a>
+
+                </li>
+
+
+                <!-- CURRICULUM -->
+
+                <li>
+
+                    <a href="/academics">
+
+                        Curriculum
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </a>
+
+
+                    <ul class="school-dropdown">
+
+                        <li>
+                            <a href="/academics">
+                                Curriculum Overview
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/academics/primary">
+                                Primary
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/academics/middle">
+                                Middle School
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/academics/secondary">
+                                Secondary
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- STUDENT LIFE -->
+
+                <li>
+
+                    <a href="/student-life">
+                        Student Life
+                    </a>
+
+                </li>
+
+
+                <!-- ADMISSIONS -->
+
+                <li>
+
+                    <a href="/admissions">
+
+                        Admissions
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </a>
+
+
+                    <ul class="school-dropdown">
+
+                        <li>
+                            <a href="/admissions">
+                                Admission Details
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/fee-structure">
+                                Fee Structure
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- GALLERY -->
+
+                <li>
+
+                    <a href="/gallery">
+                        Gallery
+                    </a>
+
+                </li>
+
+
+                <!-- CONTACT -->
+
+                <li>
+
+                    <a href="/contact">
+                        Contact Us
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ==========================================================
+     MAIN
+     ========================================================== -->
+
+<main>
+
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+
+    <section class="leadership-hero">
+
+        <div class="leadership-hero-content">
+
+            <div class="hero-eyebrow">
+                LEADERSHIP • VISION • GUIDANCE
+            </div>
+
+            <h1>
+                Principal &amp;<br>
+                Management
+            </h1>
+
+            <div class="hero-rule"></div>
+
+            <p>
+                Strong educational leadership, purposeful management
+                and a shared commitment to the growth and success of
+                every student at St. Martin's High School.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         INTRODUCTION
+         ====================================================== -->
+
+    <section class="leadership-section">
+
+        <div class="leadership-container">
+
+
+            <div class="intro-content">
+
+                <div class="section-kicker">
+                    LEADERSHIP AT ST. MARTIN'S
+                </div>
+
+                <h2 class="section-title">
+                    Guiding the School with
+                    <span>Purpose.</span>
+                </h2>
+
+                <p>
+                    The leadership of St. Martin's High School is
+                    committed to creating an environment in which
+                    academic excellence, character, discipline and
+                    personal development work together.
+                </p>
+
+                <p>
+                    Our administration and academic leadership work
+                    closely with teachers, students and families to
+                    maintain a culture of learning, responsibility,
+                    respect and continuous improvement.
+                </p>
+
+            </div>
+
+
+
+            <!-- LEADERS -->
+
+            <div class="leaders-grid">
+
+
+                <!-- PRINCIPAL -->
+
+                <article class="leader-card">
+
+                    <div class="leader-icon">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                    </div>
+
+                    <h2>
+                        The Principal
+                    </h2>
+
+                    <div class="leader-role">
+                        Academic &amp; Institutional Leadership
+                    </div>
+
+                    <p>
+                        The Principal provides academic direction and
+                        leadership across the school, working to ensure
+                        that students receive a balanced and meaningful
+                        educational experience.
+                    </p>
+
+                    <p>
+                        Through collaboration with teachers, students
+                        and parents, the Principal supports high
+                        standards of teaching, student welfare,
+                        discipline and overall school development.
+                    </p>
+
+                </article>
+
+
+
+                <!-- MANAGEMENT -->
+
+                <article class="leader-card">
+
+                    <div class="leader-icon">
+
+                        <i class="fa-solid fa-building-columns"></i>
+
+                    </div>
+
+                    <h2>
+                        School Management
+                    </h2>
+
+                    <div class="leader-role">
+                        Strategic Direction &amp; Governance
+                    </div>
+
+                    <p>
+                        The school management provides strategic
+                        direction and supports the continued development
+                        of the institution, its facilities, educational
+                        programmes and wider school community.
+                    </p>
+
+                    <p>
+                        The management works with the academic and
+                        administrative teams to maintain an environment
+                        focused on student welfare, educational quality
+                        and institutional excellence.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         PRINCIPAL'S MESSAGE
+         ====================================================== -->
+
+    <section class="leadership-section message-section">
+
+        <div class="leadership-container">
+
+            <div class="message-grid">
+
+
+                <!-- PHOTO AREA -->
+
+                <div class="portrait-placeholder">
+
+                    <i class="fa-solid fa-user-tie"></i>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div class="message-content">
+
+                    <div class="section-kicker">
+                        FROM THE PRINCIPAL'S DESK
+                    </div>
+
+                    <h2>
+                        Education Beyond
+                        <span>Examinations.</span>
+                    </h2>
+
+                    <blockquote>
+                        “Education is not merely the accumulation
+                        of facts, but the training of the mind to
+                        think critically and act with integrity.”
+                    </blockquote>
+
+                    <p>
+                        At St. Martin's High School, we believe that
+                        every learner has the potential to achieve
+                        meaningful success when provided with the right
+                        environment, encouragement and opportunities.
+                    </p>
+
+                    <p>
+                        Our responsibility is not limited to preparing
+                        students for examinations. We aim to develop
+                        confident young people who can think
+                        independently, communicate effectively, work
+                        with others and make responsible decisions.
+                    </p>
+
+                    <p>
+                        We remain committed to creating a school
+                        culture in which curiosity is encouraged,
+                        effort is respected and every student's
+                        individual strengths are valued.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         MANAGEMENT PHILOSOPHY
+         ====================================================== -->
+
+    <section class="leadership-section philosophy-section">
+
+        <div class="leadership-container">
+
+
+            <div class="philosophy-heading">
+
+                <div class="section-kicker">
+                    OUR LEADERSHIP PRINCIPLES
+                </div>
+
+                <h2 class="section-title">
+                    What Guides Us
+                </h2>
+
+                <p>
+                    Effective school leadership is built upon clear
+                    values, responsible decision-making and a
+                    consistent commitment to the wellbeing and
+                    development of students.
+                </p>
+
+            </div>
+
+
+
+            <div class="philosophy-grid">
+
+
+                <!-- CARD 1 -->
+
+                <article class="philosophy-card">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    <h3>
+                        Academic Excellence
+                    </h3>
+
+                    <p>
+                        Supporting strong teaching and learning
+                        practices that encourage students to develop
+                        knowledge, curiosity and critical thinking.
+                    </p>
+
+                </article>
+
+
+
+                <!-- CARD 2 -->
+
+                <article class="philosophy-card">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    <h3>
+                        Student Welfare
+                    </h3>
+
+                    <p>
+                        Placing student safety, wellbeing, confidence
+                        and personal development at the heart of
+                        school life.
+                    </p>
+
+                </article>
+
+
+
+                <!-- CARD 3 -->
+
+                <article class="philosophy-card">
+
+                    <i class="fa-solid fa-compass"></i>
+
+                    <h3>
+                        Responsible Leadership
+                    </h3>
+
+                    <p>
+                        Making thoughtful decisions that strengthen
+                        the school community and create opportunities
+                        for continuous improvement.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         LEADERSHIP CTA
+         ====================================================== -->
+
+    <section class="leadership-cta">
+
+        <div class="leadership-container">
+
+            <div class="leadership-cta-content">
+
+                <div class="section-kicker">
+                    DISCOVER MORE
+                </div>
+
+                <h2>
+                    Explore the St. Martin's Community
+                </h2>
+
+                <p>
+                    Discover our educational approach, facilities,
+                    curriculum and opportunities that support the
+                    complete development of every student.
+                </p>
+
+                <a href="/facilities"
+                   class="cta-button">
+
+                    Explore Our Facilities
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ==========================================================
+     FOOTER
+     
+     IMPORTANT:
+     Keep the EJS include INSIDE body and BEFORE </body>.
+     ========================================================== -->
+
+<%- include('partials/footer') %>
+
+
+
+<!-- ==========================================================
+     BOOTSTRAP JS
+     ========================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script src="/js/script.js">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery | St. Martin's High School</title>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="/images/logo.png">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MAIN WEBSITE CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+
+        :root {
+            --navy-midnight: #071A2B;
+            --navy-light: #10283d;
+            --gold: #C5A45A;
+            --gold-light: #dfc982;
+            --ivory: #F6F1E7;
+            --cream: #faf7f0;
+            --charcoal: #20252A;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ivory);
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .global-header {
+            background: #ffffff;
+            border-bottom: 1px solid rgba(7, 26, 43, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        .brand-container {
+            max-width: 1140px;
+            margin: auto;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--navy-midnight);
+        }
+
+        .brand-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .brand-title {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--navy-midnight);
+        }
+
+        .brand-location {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #6c757d;
+        }
+
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .phone-number {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        .phone-number i {
+            color: var(--gold);
+            margin-right: 6px;
+        }
+
+        .teacher-login {
+            text-decoration: none;
+            background: var(--navy-midnight);
+            color: #ffffff;
+            padding: 11px 18px;
+            font-size: 0.72rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .teacher-login:hover {
+            background: var(--gold);
+            color: var(--navy-midnight);
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .main-navigation {
+            background: var(--navy-midnight);
+            border-bottom: 1px solid rgba(197, 164, 90, 0.25);
+        }
+
+        .navigation-container {
+            max-width: 1140px;
+            margin: auto;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar .nav-link {
+            color: #ffffff !important;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 16px 10px !important;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--gold-light) !important;
+        }
+
+        .dropdown-menu {
+            border: none;
+            border-radius: 0;
+            padding: 8px 0;
+            box-shadow: 0 15px 35px rgba(7, 26, 43, 0.18);
+        }
+
+        .dropdown-item {
+            font-size: 0.82rem;
+            padding: 10px 20px;
+            color: var(--charcoal);
+        }
+
+        .dropdown-item:hover {
+            background: var(--ivory);
+            color: var(--navy-midnight);
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255,255,255,0.25);
+            border-radius: 0;
+            margin: 10px 15px;
+        }
+
+        /* =====================================================
+           PAGE HERO
+        ===================================================== */
+
+        .gallery-hero {
+            position: relative;
+            padding: 105px 20px 90px;
+            background:
+                linear-gradient(
+                    rgba(7, 26, 43, 0.94),
+                    rgba(7, 26, 43, 0.97)
+                ),
+                url('/images/gallery/campus.jpg') center/cover;
+            color: #ffffff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .gallery-hero::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(197,164,90,0.35);
+            right: 8%;
+            top: 25%;
+            transform: rotate(45deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            margin-bottom: 15px;
+        }
+
+        .gallery-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 0.95;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        .hero-line {
+            width: 70px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 25px;
+        }
+
+        .gallery-hero p {
+            max-width: 650px;
+            margin: auto;
+            color: rgba(255,255,255,0.78);
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        /* =====================================================
+           INTRODUCTION
+        ===================================================== */
+
+        .gallery-introduction {
+            max-width: 1050px;
+            margin: auto;
+            padding: 90px 20px 50px;
+            text-align: center;
+        }
+
+        .section-eyebrow {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .gallery-introduction h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--navy-midnight);
+            font-weight: 600;
+            margin: 12px 0 20px;
+        }
+
+        .gold-rule {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 25px;
+        }
+
+        .gallery-introduction p {
+            max-width: 760px;
+            margin: auto;
+            color: #5d6873;
+            line-height: 1.9;
+            font-size: 0.96rem;
+        }
+
+        /* =====================================================
+           GALLERY FILTERS
+        ===================================================== */
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px auto 55px;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            border: 1px solid rgba(7, 26, 43, 0.2);
+            background: transparent;
+            color: var(--navy-midnight);
+            padding: 10px 20px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--navy-midnight);
+            color: #ffffff;
+            border-color: var(--navy-midnight);
+        }
+
+        /* =====================================================
+           GALLERY
+        ===================================================== */
+
+        .gallery-section {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 100px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .gallery-card {
+            position: relative;
+            overflow: hidden;
+            background: var(--navy-midnight);
+            min-height: 310px;
+            border: 1px solid rgba(197,164,90,0.25);
+        }
+
+        .gallery-card.large {
+            grid-column: span 2;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            min-height: 310px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-card:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-placeholder {
+            min-height: 310px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            text-align: center;
+            padding: 30px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--navy-midnight),
+                    var(--navy-light)
+                );
+        }
+
+        .gallery-placeholder i {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 28px 24px 22px;
+            background: linear-gradient(
+                transparent,
+                rgba(7,26,43,0.96)
+            );
+            color: #ffffff;
+        }
+
+        .gallery-category {
+            color: var(--gold-light);
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+        }
+
+        .gallery-overlay h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.65rem;
+            margin: 4px 0 0;
+            font-weight: 500;
+        }
+
+        .gallery-overlay p {
+            margin: 5px 0 0;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.72);
+        }
+
+        /* =====================================================
+           DETAILS SECTION
+        ===================================================== */
+
+        .gallery-details {
+            background: #ffffff;
+            padding: 90px 20px;
+        }
+
+        .details-container {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .details-heading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .details-heading h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy-midnight);
+            font-size: 3rem;
+            margin-top: 10px;
+        }
+
+        .detail-box {
+            height: 100%;
+            padding: 35px;
+            border: 1px solid rgba(7,26,43,0.1);
+            background: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .detail-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(7,26,43,0.08);
+        }
+
+        .detail-icon {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .detail-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy-midnight);
+            font-size: 1.7rem;
+        }
+
+        .detail-box p {
+            color: #68727c;
+            line-height: 1.8;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* =====================================================
+           CALL TO ACTION
+        ===================================================== */
+
+        .gallery-cta {
+            padding: 90px 20px;
+            background: var(--navy-midnight);
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .gallery-cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .gallery-cta p {
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy-midnight);
+            text-decoration: none;
+            padding: 13px 27px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #ffffff;
+            color: var(--navy-midnight);
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .site-footer {
+            background: #04111d;
+            color: #ffffff;
+            padding: 70px 20px 25px;
+            border-top: 1px solid rgba(197,164,90,0.25);
+        }
+
+        .footer-container {
+            max-width: 1140px;
+            margin: auto;
+        }
+
+        .footer-logo {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 18px;
+        }
+
+        .footer-school-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-description {
+            color: rgba(255,255,255,0.58);
+            line-height: 1.8;
+            font-size: 0.85rem;
+            max-width: 330px;
+        }
+
+        .footer-title {
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.7rem;
+            margin-bottom: 22px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 11px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            font-size: 0.82rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .footer-contact {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.82rem;
+            line-height: 1.9;
+        }
+
+        .footer-contact i {
+            width: 20px;
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            color: rgba(255,255,255,0.42);
+            font-size: 0.7rem;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 991px) {
+
+            .header-contact {
+                display: none;
+            }
+
+            .navbar-nav {
+                display: block;
+            }
+
+            .navbar .nav-link {
+                padding: 12px 15px !important;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-card.large {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .brand-title {
+                font-size: 1rem;
+            }
+
+            .brand-location {
+                font-size: 0.58rem;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+                margin-right: 10px;
+            }
+
+            .gallery-hero {
+                padding: 80px 20px 70px;
+            }
+
+            .gallery-introduction {
+                padding-top: 65px;
+            }
+
+            .gallery-introduction h2,
+            .details-heading h2 {
+                font-size: 2.4rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-card.large {
+                grid-column: span 1;
+            }
+
+            .gallery-cta h2 {
+                font-size: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         GLOBAL BRAND HEADER
+    ===================================================== -->
+
+    <header class="global-header">
+
+        <div class="brand-container">
+
+            <a href="/" class="brand-link">
+
+                <img
+                    src="/images/logo.png"
+                    alt="St. Martin's High School Logo"
+                    class="brand-logo"
+                    onerror="this.style.display='none';">
+
+                <div>
+
+                    <h1 class="brand-title">
+                        ST. MARTIN'S HIGH SCHOOL
+                    </h1>
+
+                    <span class="brand-location">
+                        BALANAGAR, HYDERABAD
+                    </span>
+
+                </div>
+
+            </a>
+
+            <div class="header-contact">
+
+                <span class="phone-number">
+                    <i class="fas fa-phone-alt"></i>
+                    040 - 4020 4839
+                </span>
+
+                <a href="/teacher-login" class="teacher-login">
+                    Teacher Login
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- =================================================
+             GLOBAL NAVIGATION
+        ================================================= -->
+
+        <div class="main-navigation">
+
+            <div class="navigation-container">
+
+                <nav class="navbar navbar-expand-lg navbar-dark">
+
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+
+                        <span class="navbar-toggler-icon"></span>
+
+                    </button>
+
+                    <div
+                        class="collapse navbar-collapse"
+                        id="mainNavbar">
+
+                        <ul class="navbar-nav">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">
+                                    HOME
+                                </a>
+                            </li>
+
+                            <!-- ABOUT US -->
+
+                            <li class="nav-item dropdown">
+
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown">
+
+                                    ABOUT US
+
+                                </a>
+
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <a class="dropdown-item" href="/about">
+                                            School Overview
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="/principal">
+                                            Principal &amp; Management
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="/disclosure">
+                                            Disclosure
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="/facilities">
+                                            Our Facilities
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                            <!-- ACADEMICS -->
+
+                            <li class="nav-item dropdown">
+
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown">
+
+                                    ACADEMICS
+
+                                </a>
+
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <a class="dropdown-item" href="/academics">
+                                            Academics
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="/academics/curriculum">
+                                            Curriculum
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a
+                                    class="nav-link"
+                                    href="/student-life">
+
+                                    STUDENT LIFE
+
+                                </a>
+
+                            </li>
+
+                            <!-- ADMISSIONS -->
+
+                            <li class="nav-item dropdown">
+
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown">
+
+                                    ADMISSIONS
+
+                                </a>
+
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <a class="dropdown-item" href="/admissions">
+                                            Admission Process
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="/fee-structure">
+                                            Fee Structure
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a
+                                    class="nav-link"
+                                    href="/gallery">
+
+                                    GALLERY
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a
+                                    class="nav-link"
+                                    href="/contact">
+
+                                    CONTACT US
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         GALLERY HERO
+    ===================================================== -->
+
+    <section class="gallery-hero">
+
+        <div class="hero-content">
+
+            <span class="eyebrow">
+                Visual Archive
+            </span>
+
+            <h1>
+                Campus &amp; Student Life
+            </h1>
+
+            <div class="hero-line"></div>
+
+            <p>
+                Explore the people, places, experiences and moments
+                that form the vibrant educational community of
+                St. Martin's High School, Balanagar.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INTRODUCTION
+    ===================================================== -->
+
+    <section class="gallery-introduction">
+
+        <span class="section-eyebrow">
+            The St. Martin's Experience
+        </span>
+
+        <h2>
+            Moments That Define Our School
+        </h2>
+
+        <div class="gold-rule"></div>
+
+        <p>
+            From the classrooms where curiosity begins to the
+            playgrounds where teamwork develops, every part of
+            St. Martin's High School contributes to the growth
+            of our students. Our gallery offers a glimpse into
+            academic life, sporting activities, celebrations,
+            facilities and the everyday moments that make our
+            school community special.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTER BUTTONS
+    ===================================================== -->
+
+    <div class="gallery-filters">
+
+        <button class="filter-btn active" data-filter="all">
+            All
+        </button>
+
+        <button class="filter-btn" data-filter="campus">
+            Campus
+        </button>
+
+        <button class="filter-btn" data-filter="academics">
+            Academics
+        </button>
+
+        <button class="filter-btn" data-filter="sports">
+            Sports
+        </button>
+
+        <button class="filter-btn" data-filter="events">
+            Events
+        </button>
+
+        <button class="filter-btn" data-filter="student-life">
+            Student Life
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         GALLERY
+         
+         TO ADD YOUR OWN PHOTO:
+         
+         Put the image inside:
+         public/images/gallery/
+         
+         Example:
+         public/images/gallery/campus.jpg
+         
+         Then replace the placeholder with:
+         
+         <img src="/images/gallery/campus.jpg"
+              alt="School Campus"
+              class="gallery-image">
+    ===================================================== -->
+
+    <section class="gallery-section">
+
+        <div class="gallery-grid">
+
+
+            <!-- CAMPUS -->
+
+            <div class="gallery-card large" data-category="campus">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+                        <i class="fas fa-school"></i>
+
+                        <strong>
+                            ADD CAMPUS PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/campus.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Campus
+                    </span>
+
+                    <h3>
+                        Our School Campus
+                    </h3>
+
+                    <p>
+                        A welcoming environment designed for learning,
+                        growth and discovery.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SPORTS -->
+
+            <div class="gallery-card" data-category="sports">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+
+                        <i class="fas fa-futbol"></i>
+
+                        <strong>
+                            ADD SPORTS PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/sports.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Sports
+                    </span>
+
+                    <h3>
+                        Sports &amp; Athletics
+                    </h3>
+
+                    <p>
+                        Building teamwork, discipline and confidence.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACADEMICS -->
+
+            <div class="gallery-card" data-category="academics">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+
+                        <i class="fas fa-book-open"></i>
+
+                        <strong>
+                            ADD CLASSROOM PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/classroom.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Academics
+                    </span>
+
+                    <h3>
+                        Learning Spaces
+                    </h3>
+
+                    <p>
+                        Classrooms that encourage curiosity and participation.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- EVENTS -->
+
+            <div class="gallery-card" data-category="events">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+
+                        <i class="fas fa-calendar-days"></i>
+
+                        <strong>
+                            ADD EVENT PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/events.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Events
+                    </span>
+
+                    <h3>
+                        School Celebrations
+                    </h3>
+
+                    <p>
+                        Important occasions and memorable celebrations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STUDENT LIFE -->
+
+            <div class="gallery-card large" data-category="student-life">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+
+                        <i class="fas fa-users"></i>
+
+                        <strong>
+                            ADD STUDENT LIFE PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/student-life.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Student Life
+                    </span>
+
+                    <h3>
+                        Life Beyond the Classroom
+                    </h3>
+
+                    <p>
+                        Experiences that help students discover their
+                        interests, talents and potential.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FACILITIES -->
+
+            <div class="gallery-card" data-category="campus">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+
+                        <i class="fas fa-building"></i>
+
+                        <strong>
+                            ADD FACILITY PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/facilities.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Campus
+                    </span>
+
+                    <h3>
+                        School Facilities
+                    </h3>
+
+                    <p>
+                        Purpose-built spaces supporting modern education.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CULTURAL -->
+
+            <div class="gallery-card" data-category="events">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+
+                        <i class="fas fa-masks-theater"></i>
+
+                        <strong>
+                            ADD CULTURAL PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/cultural.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Events
+                    </span>
+
+                    <h3>
+                        Cultural Activities
+                    </h3>
+
+                    <p>
+                        Celebrating creativity, expression and talent.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STUDENT ACTIVITIES -->
+
+            <div class="gallery-card" data-category="student-life">
+
+                <div class="gallery-placeholder">
+
+                    <div>
+
+                        <i class="fas fa-lightbulb"></i>
+
+                        <strong>
+                            ADD ACTIVITY PHOTO
+                        </strong>
+
+                        <small style="display:block;margin-top:8px;">
+                            /images/gallery/activities.jpg
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="gallery-overlay">
+
+                    <span class="gallery-category">
+                        Student Life
+                    </span>
+
+                    <h3>
+                        Student Activities
+                    </h3>
+
+                    <p>
+                        Opportunities to explore interests beyond academics.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         GALLERY DETAILS
+    ===================================================== -->
+
+    <section class="gallery-details">
+
+        <div class="details-container">
+
+            <div class="details-heading">
+
+                <span class="section-eyebrow">
+                    More Than A Photograph
+                </span>
+
+                <h2>
+                    A School Full of Experiences
+                </h2>
+
+                <div class="gold-rule"></div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <div class="col-lg-4">
+
+                    <div class="detail-box">
+
+                        <div class="detail-icon">
+
+                            <i class="fas fa-graduation-cap"></i>
+
+                        </div>
+
+                        <h3>
+                            Academic Life
+                        </h3>
+
+                        <p>
+                            Our classrooms and learning spaces encourage
+                            students to ask questions, develop knowledge
+                            and build the confidence required for lifelong
+                            learning.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4">
+
+                    <div class="detail-box">
+
+                        <div class="detail-icon">
+
+                            <i class="fas fa-trophy"></i>
+
+                        </div>
+
+                        <h3>
+                            Sports &amp; Activities
+                        </h3>
+
+                        <p>
+                            Sports and co-curricular activities give
+                            students opportunities to develop discipline,
+                            teamwork, leadership and resilience.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4">
+
+                    <div class="detail-box">
+
+                        <div class="detail-icon">
+
+                            <i class="fas fa-heart"></i>
+
+                        </div>
+
+                        <h3>
+                            Community
+                        </h3>
+
+                        <p>
+                            School life is built around relationships,
+                            participation and a strong sense of belonging
+                            among students, teachers and families.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CALL TO ACTION
+    ===================================================== -->
+
+    <section class="gallery-cta">
+
+        <h2>
+            Discover St. Martin's
+        </h2>
+
+        <p>
+            Explore our school, learn about our academic approach
+            and discover the environment in which our students grow.
+        </p>
+
+        <a href="/about" class="cta-button">
+            Discover Our School
+            <i class="fas fa-arrow-right ms-2"></i>
+        </a>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="row g-5">
+
+
+                <!-- SCHOOL -->
+
+                <div class="col-lg-5">
+
+                    <img
+                        src="/images/logo.png"
+                        alt="St. Martin's High School Logo"
+                        class="footer-logo">
+
+                    <h2 class="footer-school-name">
+                        St. Martin's High School
+                    </h2>
+
+                    <p class="footer-description">
+                        A school committed to academic excellence,
+                        character development and the holistic growth
+                        of every student.
+                    </p>
+
+                </div>
+
+
+                <!-- QUICK LINKS -->
+
+                <div class="col-lg-3 col-md-6">
+
+                    <h3 class="footer-title">
+                        Quick Links
+                    </h3>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="/">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/about">
+                                About the School
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/academics">
+                                Academics
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admissions">
+                                Admissions
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/gallery">
+                                Gallery
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/contact">
+                                Contact Us
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <h3 class="footer-title">
+                        Contact
+                    </h3>
+
+                    <div class="footer-contact">
+
+                        <div>
+                            <i class="fas fa-location-dot"></i>
+                            Balanagar, Hyderabad, Telangana
+                        </div>
+
+                        <div>
+                            <i class="fas fa-phone"></i>
+                            040 - 4020 4839
+                        </div>
+
+                        <div>
+                            <i class="fas fa-envelope"></i>
+                            St. Martin's High School
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © <span id="currentYear"></span>
+                    St. Martin's High School. All Rights Reserved.
+                </span>
+
+                <span>
+                    Balanagar • Hyderabad
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- BOOTSTRAP JAVASCRIPT -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <!-- GALLERY FILTER SCRIPT -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const buttons = document.querySelectorAll(".filter-btn");
+            const cards = document.querySelectorAll(".gallery-card");
+
+            buttons.forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    buttons.forEach(function (btn) {
+                        btn.classList.remove("active");
+                    });
+
+                    this.classList.add("active");
+
+                    const filter = this.getAttribute("data-filter");
+
+                    cards.forEach(function (card) {
+
+                        const category = card.getAttribute("data-category");
+
+                        if (filter === "all" || category === filter) {
+
+                            card.style.display = "";
+
+                        } else {
+
+                            card.style.display = "none";
+
+                        }
+
+                    });
+
+                });
+
+            });
+
+
+            const yearElement = document.getElementById("currentYear");
+
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

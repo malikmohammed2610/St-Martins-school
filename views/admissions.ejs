@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Admissions | St. Martin's High School, Balanagar, Hyderabad</title>
+
+<link rel="icon" type="image/png" href="/images/logo.png">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+    /* =========================================================
+       ROOT
+    ========================================================= */
+
+    :root {
+        --navy: #071525;
+        --navy-mid: #0d2035;
+        --navy-light: #142b44;
+
+        --ivory: #f7f4ec;
+        --cream: #eee9dc;
+        --white: #ffffff;
+
+        --gold: #c5a45a;
+        --gold-light: #d8bd7a;
+
+        --text: #17202b;
+        --muted: #66717d;
+
+        --border: rgba(197,164,90,0.25);
+
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "Inter", Arial, sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--sans);
+        background: var(--ivory);
+        color: var(--text);
+        line-height: 1.7;
+        overflow-x: hidden;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font-family: inherit;
+    }
+
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .site-header {
+        height: 78px;
+        background: rgba(7,21,37,0.98);
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(197,164,90,0.25);
+    }
+
+    .header-inner {
+        width: min(1180px, 92%);
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+    }
+
+    .brand img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+    }
+
+    .brand-text {
+        color: white;
+    }
+
+    .brand-text strong {
+        display: block;
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: .3px;
+        line-height: 1;
+    }
+
+    .brand-text span {
+        font-size: 8px;
+        letter-spacing: 2.5px;
+        color: var(--gold-light);
+        text-transform: uppercase;
+    }
+
+    .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 27px;
+    }
+
+    .main-nav a {
+        color: rgba(255,255,255,.85);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: .4px;
+        transition: .25s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+        color: var(--gold-light);
+    }
+
+    .nav-apply {
+        border: 1px solid var(--gold);
+        padding: 9px 17px;
+        color: var(--gold-light) !important;
+    }
+
+    .nav-apply:hover {
+        background: var(--gold);
+        color: var(--navy) !important;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .admission-hero {
+        min-height: 390px;
+        background:
+            linear-gradient(90deg,
+                rgba(7,21,37,.97) 0%,
+                rgba(7,21,37,.89) 52%,
+                rgba(7,21,37,.63) 100%
+            ),
+            url("/images/admissions.jpg") center/cover no-repeat;
+
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: .05;
+        background-image:
+            linear-gradient(30deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%),
+            linear-gradient(150deg, #fff 12%, transparent 12.5%, transparent 87%, #fff 87.5%);
+        background-size: 80px 80px;
+    }
+
+    .hero-inner {
+        width: min(1180px, 92%);
+        margin: auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-copy {
+        max-width: 720px;
+    }
+
+    .eyebrow {
+        color: var(--gold-light);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+
+    .hero-copy h1 {
+        color: white;
+        font-family: var(--serif);
+        font-size: clamp(48px, 7vw, 78px);
+        font-weight: 500;
+        line-height: .95;
+        margin-bottom: 20px;
+    }
+
+    .hero-copy h1 span {
+        color: var(--gold-light);
+    }
+
+    .hero-copy p {
+        color: rgba(255,255,255,.78);
+        font-size: 15px;
+        max-width: 650px;
+    }
+
+    .hero-line {
+        width: 75px;
+        height: 1px;
+        background: var(--gold);
+        margin-top: 25px;
+    }
+
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .container {
+        width: min(1120px, 92%);
+        margin: auto;
+    }
+
+    .section-heading {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .section-heading .small {
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 10px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .section-heading h2 {
+        font-family: var(--serif);
+        font-size: clamp(38px, 5vw, 56px);
+        font-weight: 500;
+        color: var(--navy);
+        line-height: 1;
+    }
+
+    .section-heading p {
+        max-width: 650px;
+        margin: 15px auto 0;
+        color: var(--muted);
+        font-size: 14px;
+    }
+
+    .intro-grid {
+        display: grid;
+        grid-template-columns: 1.15fr .85fr;
+        gap: 55px;
+        align-items: center;
+    }
+
+    .intro-content h3 {
+        font-family: var(--serif);
+        color: var(--navy);
+        font-size: 34px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .intro-content p {
+        color: #626d77;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .intro-highlight {
+        border-left: 2px solid var(--gold);
+        padding: 16px 20px;
+        margin-top: 22px;
+        background: rgba(255,255,255,.55);
+    }
+
+    .intro-highlight strong {
+        display: block;
+        font-family: var(--serif);
+        font-size: 24px;
+        color: var(--navy);
+        font-weight: 600;
+    }
+
+    .intro-highlight span {
+        font-size: 12px;
+        color: var(--muted);
+    }
+
+    .intro-card {
+        background: var(--navy);
+        color: white;
+        padding: 42px 35px;
+        position: relative;
+        box-shadow: 0 20px 55px rgba(7,21,37,.14);
+    }
+
+    .intro-card::before {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 1px solid rgba(197,164,90,.3);
+        pointer-events: none;
+    }
+
+    .intro-card .icon {
+        color: var(--gold-light);
+        font-size: 27px;
+        margin-bottom: 20px;
+    }
+
+    .intro-card h3 {
+        font-family: var(--serif);
+        font-size: 31px;
+        font-weight: 500;
+        margin-bottom: 12px;
+    }
+
+    .intro-card p {
+        color: rgba(255,255,255,.68);
+        font-size: 13px;
+    }
+
+
+    /* =========================================================
+       ADMISSION PROCESS
+    ========================================================= */
+
+    .process-section {
+        background: white;
+    }
+
+    .process-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: #dedbd3;
+        border: 1px solid #dedbd3;
+    }
+
+    .process-item {
+        background: white;
+        padding: 34px 25px;
+        min-height: 225px;
+        position: relative;
+    }
+
+    .process-number {
+        font-family: var(--serif);
+        font-size: 42px;
+        color: rgba(197,164,90,.65);
+        line-height: 1;
+        margin-bottom: 20px;
+    }
+
+    .process-item i {
+        color: var(--gold);
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .process-item h3 {
+        color: var(--navy);
+        font-family: var(--serif);
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .process-item p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+
+    /* =========================================================
+       ELIGIBILITY
+    ========================================================= */
+
+    .eligibility-grid {
+        display: grid;
+        grid-template-columns: .9fr 1.1fr;
+        gap: 60px;
+        align-items: start;
+    }
+
+    .eligibility-title {
+        font-family: var(--serif);
+        color: var(--navy);
+        font-size: 44px;
+        line-height: 1;
+        font-weight: 500;
+        margin-bottom: 18px;
+    }
+
+    .eligibility-copy {
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    .grade-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid #d9d5cc;
+        border-left: 1px solid #d9d5cc;
+    }
+
+    .grade-item {
+        background: rgba(255,255,255,.7);
+        padding: 20px 22px;
+        border-right: 1px solid #d9d5cc;
+        border-bottom: 1px solid #d9d5cc;
+    }
+
+    .grade-item strong {
+        display: block;
+        color: var(--navy);
+        font-family: var(--serif);
+        font-size: 21px;
+        font-weight: 600;
+    }
+
+    .grade-item span {
+        color: var(--muted);
+        font-size: 11px;
+    }
+
+
+    /* =========================================================
+       DOCUMENTS
+    ========================================================= */
+
+    .documents-section {
+        background: var(--navy);
+        color: white;
+    }
+
+    .documents-section .section-heading h2 {
+        color: white;
+    }
+
+    .documents-section .section-heading p {
+        color: rgba(255,255,255,.62);
+    }
+
+    .documents-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .document-card {
+        border: 1px solid rgba(197,164,90,.23);
+        background: rgba(255,255,255,.035);
+        padding: 25px;
+        transition: .3s ease;
+    }
+
+    .document-card:hover {
+        border-color: var(--gold);
+        transform: translateY(-4px);
+        background: rgba(255,255,255,.055);
+    }
+
+    .document-card i {
+        color: var(--gold-light);
+        font-size: 21px;
+        margin-bottom: 14px;
+    }
+
+    .document-card h3 {
+        font-family: var(--serif);
+        font-size: 23px;
+        font-weight: 500;
+        margin-bottom: 7px;
+    }
+
+    .document-card p {
+        color: rgba(255,255,255,.6);
+        font-size: 12px;
+    }
+
+
+    /* =========================================================
+       APPLICATION FORM
+    ========================================================= */
+
+    .application-section {
+        background: #eeeae0;
+    }
+
+    .application-wrapper {
+        display: grid;
+        grid-template-columns: .75fr 1.25fr;
+        background: white;
+        box-shadow: 0 20px 55px rgba(7,21,37,.08);
+    }
+
+    .application-info {
+        background: var(--navy);
+        color: white;
+        padding: 50px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .application-info::after {
+        content: "ADMISSIONS";
+        position: absolute;
+        right: -45px;
+        bottom: 35px;
+        transform: rotate(-90deg);
+        color: rgba(255,255,255,.035);
+        font-size: 70px;
+        font-weight: 700;
+        letter-spacing: 5px;
+    }
+
+    .application-info .small {
+        color: var(--gold-light);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    .application-info h2 {
+        font-family: var(--serif);
+        font-size: 43px;
+        font-weight: 500;
+        line-height: 1;
+        margin: 12px 0 18px;
+    }
+
+    .application-info > p {
+        color: rgba(255,255,255,.66);
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+
+    .info-row {
+        display: flex;
+        gap: 13px;
+        margin-bottom: 20px;
+        align-items: flex-start;
+    }
+
+    .info-row i {
+        width: 25px;
+        color: var(--gold-light);
+        margin-top: 4px;
+    }
+
+    .info-row div strong {
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 3px;
+    }
+
+    .info-row div span {
+        color: rgba(255,255,255,.65);
+        font-size: 12px;
+    }
+
+    .application-form {
+        padding: 50px;
+    }
+
+    .application-form h3 {
+        font-family: var(--serif);
+        font-size: 32px;
+        color: var(--navy);
+        margin-bottom: 5px;
+    }
+
+    .application-form > p {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 28px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        color: var(--navy);
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        border: 1px solid #d8d5ce;
+        background: #fbfaf7;
+        padding: 13px 14px;
+        font-size: 13px;
+        color: var(--text);
+        outline: none;
+        transition: .2s ease;
+    }
+
+    .form-group textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: var(--gold);
+        background: white;
+        box-shadow: 0 0 0 3px rgba(197,164,90,.08);
+    }
+
+    .submit-btn {
+        margin-top: 22px;
+        border: none;
+        background: var(--navy);
+        color: white;
+        padding: 14px 28px;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: .25s ease;
+    }
+
+    .submit-btn:hover {
+        background: var(--gold);
+        color: var(--navy);
+    }
+
+
+    /* =========================================================
+       CONTACT STRIP
+    ========================================================= */
+
+    .contact-strip {
+        background: var(--cream);
+        padding: 42px 0;
+        border-top: 1px solid #ddd7c9;
+        border-bottom: 1px solid #ddd7c9;
+    }
+
+    .contact-strip-inner {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .contact-mini {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+    }
+
+    .contact-mini i {
+        color: var(--gold);
+        font-size: 19px;
+        margin-top: 4px;
+    }
+
+    .contact-mini strong {
+        display: block;
+        color: var(--navy);
+        font-family: var(--serif);
+        font-size: 21px;
+        font-weight: 600;
+    }
+
+    .contact-mini span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+        background: #050f1b;
+        color: white;
+        padding: 55px 0 20px;
+    }
+
+    .footer-grid {
+        width: min(1120px, 92%);
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1.4fr .7fr .8fr 1fr;
+        gap: 45px;
+        padding-bottom: 40px;
+    }
+
+    .footer-brand {
+        max-width: 310px;
+    }
+
+    .footer-brand img {
+        width: 55px;
+        margin-bottom: 14px;
+    }
+
+    .footer-brand h3 {
+        font-family: var(--serif);
+        font-size: 27px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+        color: rgba(255,255,255,.5);
+        font-size: 11px;
+        line-height: 1.8;
+    }
+
+    footer h4 {
+        color: var(--gold-light);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 17px;
+    }
+
+    .footer-links a {
+        display: block;
+        color: rgba(255,255,255,.55);
+        font-size: 11px;
+        margin-bottom: 8px;
+        transition: .2s;
+    }
+
+    .footer-links a:hover {
+        color: white;
+    }
+
+    .footer-contact p {
+        color: rgba(255,255,255,.55);
+        font-size: 11px;
+        margin-bottom: 9px;
+    }
+
+    .footer-bottom {
+        width: min(1120px, 92%);
+        margin: auto;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255,255,255,.08);
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        color: rgba(255,255,255,.35);
+        font-size: 9px;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+        .main-nav {
+            display: none;
+        }
+
+        .intro-grid,
+        .eligibility-grid,
+        .application-wrapper {
+            grid-template-columns: 1fr;
+        }
+
+        .process-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .documents-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .contact-strip-inner {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+
+        .site-header {
+            height: 70px;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .brand-text strong {
+            font-size: 18px;
+        }
+
+        .admission-hero {
+            min-height: 340px;
+        }
+
+        .section {
+            padding: 55px 0;
+        }
+
+        .process-grid,
+        .documents-grid,
+        .form-grid,
+        .grade-list {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full {
+            grid-column: auto;
+        }
+
+        .application-form {
+            padding: 32px 22px;
+        }
+
+        .application-info {
+            padding: 38px 25px;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+        }
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+
+
+<div class="header-inner">
+
+    <a href="/" class="brand">
+
+        <img src="/images/logo.png"
+             alt="St. Martin's High School Logo">
+
+        <div class="brand-text">
+            <strong>St. Martin's High School</strong>
+            <span> · Balanagar · Hyderabad</span>
+        </div>
+
+    </a>
+
+    <nav class="main-nav">
+
+        <a href="/">Home</a>
+
+        <a href="/about">About</a>
+
+        <a href="/academics">Academics</a>
+
+        <a href="/admissions" class="active">Admissions</a>
+
+        <a href="/gallery">Gallery</a>
+
+        <a href="/contact">Contact</a>
+
+        <a href="#apply" class="nav-apply">Apply Now</a>
+
+    </nav>
+
+</div>
+
+
+</header>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="admission-hero">
+
+
+<div class="hero-pattern"></div>
+
+<div class="hero-inner">
+
+    <div class="hero-copy">
+
+        <div class="eyebrow">
+            Admissions · 2026–27
+        </div>
+
+        <h1>
+            Begin Your Child's
+            <span>Journey.</span>
+        </h1>
+
+        <p>
+            A strong beginning shapes a remarkable future.
+            Discover an environment where academic excellence,
+            character, curiosity and confidence grow together.
+        </p>
+
+        <div class="hero-line"></div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================================================
+     INTRODUCTION
+========================================================= -->
+
+<section class="section">
+
+
+<div class="container">
+
+    <div class="intro-grid">
+
+        <div class="intro-content">
+
+            <div class="eyebrow" style="color:var(--gold);">
+                Welcome to St. Martin's
+            </div>
+
+            <h3>
+                Where bright minds
+                become confident futures.
+            </h3>
+
+            <p>
+                At St. Martin's High School, we believe education
+                should develop the whole child. Our approach brings
+                together academic learning, critical thinking,
+                physical development, emotional skills and strong
+                moral values.
+            </p>
+
+            <p>
+                We create opportunities for students to discover
+                their strengths, develop curiosity and grow into
+                responsible, confident individuals.
+            </p>
+
+            <div class="intro-highlight">
+
+                <strong>
+                    Admissions Open 2026–27
+                </strong>
+
+                <span>
+                    Applications are currently being accepted.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-card">
+
+            <div class="icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <h3>
+                Knowledge<br>
+                For Wisdom
+            </h3>
+
+            <p>
+                Our educational philosophy is centred on nurturing
+                students academically, socially, emotionally and
+                morally — preparing them not only for examinations,
+                but for life.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================================================
+     ADMISSION PROCESS
+========================================================= -->
+
+<section class="section process-section">
+
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div class="small">
+            The Process
+        </div>
+
+        <h2>
+            Your Admission Journey
+        </h2>
+
+        <p>
+            A simple and guided process designed to make
+            your child's transition into St. Martin's smooth.
+        </p>
+
+    </div>
+
+
+    <div class="process-grid">
+
+        <div class="process-item">
+
+            <div class="process-number">
+                01
+            </div>
+
+            <i class="fa-solid fa-file-pen"></i>
+
+            <h3>
+                Enquire
+            </h3>
+
+            <p>
+                Submit your admission enquiry with the student's
+                basic information and the grade you are interested in.
+            </p>
+
+        </div>
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                02
+            </div>
+
+            <i class="fa-solid fa-comments"></i>
+
+            <h3>
+                Connect
+            </h3>
+
+            <p>
+                Our admissions team can guide parents regarding
+                the next steps and admission-related requirements.
+            </p>
+
+        </div>
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                03
+            </div>
+
+            <i class="fa-solid fa-school"></i>
+
+            <h3>
+                Visit
+            </h3>
+
+            <p>
+                Get to know the campus, learning environment,
+                facilities and the educational experience at
+                St. Martin's.
+            </p>
+
+        </div>
+
+
+        <div class="process-item">
+
+            <div class="process-number">
+                04
+            </div>
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h3>
+                Enrol
+            </h3>
+
+            <p>
+                Complete the required admission formalities
+                and begin your child's journey with us.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================================================
+     GRADES / EDUCATIONAL STAGES
+========================================================= -->
+
+<section class="section">
+
+
+<div class="container">
+
+    <div class="eligibility-grid">
+
+        <div>
+
+            <div class="eyebrow" style="color:var(--gold);">
+                Academic Stages
+            </div>
+
+            <h2 class="eligibility-title">
+                A learning journey
+                for every stage.
+            </h2>
+
+            <p class="eligibility-copy">
+                St. Martin's provides a progressive learning
+                environment from the foundational years through
+                secondary education.
+            </p>
+
+        </div>
+
+
+        <div class="grade-list">
+
+            <div class="grade-item">
+                <strong>Preprimary I & II</strong>
+                <span>Foundational Stage</span>
+            </div>
+
+            <div class="grade-item">
+                <strong>Grades I – V</strong>
+                <span>Preparatory Learning</span>
+            </div>
+
+            <div class="grade-item">
+                <strong>Grades VI – VIII</strong>
+                <span>Middle Stage</span>
+            </div>
+
+            <div class="grade-item">
+                <strong>Grades IX – X</strong>
+                <span>Secondary Stage</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================================================
+     DOCUMENTS / PREPARATION
+========================================================= -->
+
+<section class="section documents-section">
+
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div class="small">
+            Before You Apply
+        </div>
+
+        <h2>
+            Prepare for the Process
+        </h2>
+
+        <p>
+            Parents are encouraged to keep the relevant
+            information and documents ready when proceeding
+            with admission formalities.
+        </p>
+
+    </div>
+
+
+    <div class="documents-grid">
+
+        <div class="document-card">
+
+            <i class="fa-solid fa-id-card"></i>
+
+            <h3>
+                Student Information
+            </h3>
+
+            <p>
+                Keep the student's name, date of birth,
+                current class and other basic information ready.
+            </p>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <i class="fa-solid fa-user-group"></i>
+
+            <h3>
+                Parent Details
+            </h3>
+
+            <p>
+                Parent or guardian contact information should
+                be available during the enquiry and application.
+            </p>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <i class="fa-solid fa-folder-open"></i>
+
+            <h3>
+                Supporting Documents
+            </h3>
+
+            <p>
+                Keep relevant academic and identity documents
+                ready as requested by the school during admission.
+            </p>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <h3>
+                Contact Details
+            </h3>
+
+            <p>
+                Ensure your phone number and email address
+                are accurate so the admissions team can reach you.
+            </p>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            <h3>
+                Admission Schedule
+            </h3>
+
+            <p>
+                Admission dates, availability and procedures
+                may vary. Contact the school for current details.
+            </p>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <h3>
+                Need Assistance?
+            </h3>
+
+            <p>
+                Our school office can help parents with
+                admission-related questions and guidance.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================================================
+     APPLICATION FORM
+========================================================= -->
+
+<section class="section application-section" id="apply">
+
+
+<div class="container">
+
+    <div class="application-wrapper">
+
+
+        <!-- LEFT INFORMATION -->
+
+        <div class="application-info">
+
+            <div class="small">
+                Admissions Open
+            </div>
+
+            <h2>
+                Register Your Interest
+            </h2>
+
+            <p>
+                Take the first step towards becoming part of
+                the St. Martin's learning community.
+            </p>
+
+
+            <div class="info-row">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <div>
+                    <strong>Campus</strong>
+
+                    <span>
+                        Navjeevan Colony, Balanagar, <br>
+                        Hyderabad, Telangana 500037
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <div>
+                    <strong>Call Us</strong>
+
+                    <span>
+                        040-2308 2365<br>
+                        040-2308 0515
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <div>
+                    <strong>Email</strong>
+
+                    <span>
+                        admissions@stmartins.edu.in
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <div>
+                    <strong>Office Hours</strong>
+
+                    <span>
+                        Monday – Saturday<br>
+                        08:40 AM – 04:00 PM
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="application-form">
+
+            <h3>
+                Admission Enquiry
+            </h3>
+
+            <p>
+                Fill in the details below and our team can
+                get in touch with you regarding the next steps.
+            </p>
+
+
+            <form action="/contact" method="POST">
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="studentName">
+                            Student Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            name="studentName"
+                            placeholder="Enter student's full name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="parentName">
+                            Parent / Guardian Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="parentName"
+                            name="parentName"
+                            placeholder="Enter parent or guardian name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email *
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter email address"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter phone number"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="grade">
+                            Grade Applying For *
+                        </label>
+
+                        <select
+                            id="grade"
+                            name="grade"
+                            required>
+
+                            <option value="">
+                                Select grade
+                            </option>
+
+                            <option value="Preprimary I">
+                                Preprimary I
+                            </option>
+
+                            <option value="Preprimary II">
+                                Preprimary II
+                            </option>
+
+                            <option value="Grade I">
+                                Grade I
+                            </option>
+
+                            <option value="Grade II">
+                                Grade II
+                            </option>
+
+                            <option value="Grade III">
+                                Grade III
+                            </option>
+
+                            <option value="Grade IV">
+                                Grade IV
+                            </option>
+
+                            <option value="Grade V">
+                                Grade V
+                            </option>
+
+                            <option value="Grade VI">
+                                Grade VI
+                            </option>
+
+                            <option value="Grade VII">
+                                Grade VII
+                            </option>
+
+                            <option value="Grade VIII">
+                                Grade VIII
+                            </option>
+
+                            <option value="Grade IX">
+                                Grade IX
+                            </option>
+
+                            <option value="Grade X">
+                                Grade X
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="academicYear">
+                            Academic Year
+                        </label>
+
+                        <select
+                            id="academicYear"
+                            name="academicYear">
+
+                            <option value="2026-27">
+                                2026–27
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="message">
+                            Message / Enquiry
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Tell us anything you would like the admissions team to know..."></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    Submit Admission Enquiry
+                    <i class="fa-solid fa-arrow-right"
+                       style="margin-left:8px;"></i>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================================================
+     CONTACT STRIP
+========================================================= -->
+
+<section class="contact-strip">
+
+
+<div class="container">
+
+    <div class="contact-strip-inner">
+
+        <div class="contact-mini">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <div>
+                <strong>Visit Us</strong>
+
+                <span>
+                    Navjeevan Nagar, Balanagar, Hyderabad
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="contact-mini">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <div>
+                <strong>Call Admissions</strong>
+
+                <span>
+                    040-2308 2365 · 040-2308 0515
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="contact-mini">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            <div>
+                <strong>Email Us</strong>
+
+                <span>
+                    admission@stmartins.edu.in
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+
+<div class="footer-grid">
+
+
+    <div class="footer-brand">
+
+        <img
+            src="/images/logo.png"
+            alt="St. Martin's High School Logo">
+
+        <h3>
+            St. Martin's High School
+        </h3>
+
+        <p>
+            Navjeevan Nagar, Balanagar,<br>
+            Hyderabad, Telangana 500037
+        </p>
+
+        <p style="margin-top:10px;">
+            <em>Knowledge for Wisdom</em>
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h4>
+            Explore
+        </h4>
+
+        <div class="footer-links">
+
+            <a href="/">Home</a>
+
+            <a href="/about">About Us</a>
+
+            <a href="/academics">Academics</a>
+
+            <a href="/admissions">Admissions</a>
+
+            <a href="/gallery">Gallery</a>
+
+        </div>
+
+    </div>
+
+
+    <div>
+
+        <h4>
+            Admissions
+        </h4>
+
+        <div class="footer-links">
+
+            <a href="#apply">Apply Now</a>
+
+            <a href="/contact">Contact Us</a>
+
+            <a href="/fee-structure">Fee Structure</a>
+
+            <a href="/school-calendar">School Calendar</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-contact">
+
+        <h4>
+            Contact
+        </h4>
+
+        <p>
+            <i class="fa-solid fa-phone"
+               style="color:var(--gold); margin-right:6px;"></i>
+            040-2308 2365
+        </p>
+
+        <p>
+            <i class="fa-solid fa-phone"
+               style="color:var(--gold); margin-right:6px;"></i>
+            040-2308 0515
+        </p>
+
+        <p>
+            <i class="fa-solid fa-envelope"
+               style="color:var(--gold); margin-right:6px;"></i>
+            admission@stmartins.edu.in
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+    <span>
+        © 2026 St. Martin's High School, Chintal.
+        All rights reserved.
+    </span>
+
+    <span>
+        Knowledge for Wisdom
+    </span>
+
+</div>
+
+
+</footer>
+
+</body>
+</html>

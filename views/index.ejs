@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>St. Martin's High School | Balanagar, Hyderabad</title>
+
+    <link rel="icon" type="image/png" href="/images/logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        :root {
+            --navy: #071A2B;
+            --navy-light: #10283d;
+            --gold: #C5A45A;
+            --gold-light: #dfc982;
+            --cream: #F6F1E7;
+            --white: #ffffff;
+            --muted: #9eabb8;
+            --text: #333b43;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        a {
+            transition: all 0.3s ease;
+        }
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .text-navy {
+            color: var(--navy) !important;
+        }
+
+        .text-gold {
+            color: var(--gold) !important;
+        }
+
+        .tracking-widest {
+            letter-spacing: 0.16em;
+        }
+
+        .section-spacing {
+            padding: 100px 0;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .school-header {
+            background: rgba(255,255,255,0.98);
+            border-bottom: 1px solid rgba(7,26,43,0.10);
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+        }
+
+        .school-logo {
+            width: 62px;
+            height: 62px;
+            object-fit: contain;
+        }
+
+        .school-name {
+            color: var(--navy);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .school-location {
+            color: #6c757d;
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+        }
+
+        .header-phone {
+            color: #6c757d;
+            font-size: 0.84rem;
+        }
+
+        .header-phone i {
+            color: var(--gold);
+        }
+
+        .teacher-btn {
+            border: 1px solid var(--navy);
+            color: var(--navy);
+            background: transparent;
+            padding: 9px 18px;
+            font-size: 0.72rem;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+        }
+
+        .teacher-btn:hover {
+            background: var(--navy);
+            color: white;
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .main-navigation {
+            background: var(--navy);
+            z-index: 1040;
+        }
+
+        .main-navigation .nav-link {
+            color: white !important;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.07em;
+            padding: 15px 8px !important;
+            position: relative;
+        }
+
+        .main-navigation .nav-link::after {
+            transition: all 0.3s ease;
+        }
+
+        .main-navigation .nav-link:hover {
+            color: var(--gold-light) !important;
+        }
+
+        .dropdown-menu {
+            border: none;
+            border-radius: 0;
+            padding: 8px 0;
+            box-shadow: 0 20px 50px rgba(7,26,43,0.18);
+        }
+
+        .dropdown-item {
+            padding: 10px 22px;
+            font-size: 0.83rem;
+            color: var(--navy);
+        }
+
+        .dropdown-item:hover {
+            background: var(--cream);
+            color: var(--navy);
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 720px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--navy);
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(7,26,43,0.92) 0%,
+                    rgba(7,26,43,0.72) 45%,
+                    rgba(7,26,43,0.45) 100%
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-eyebrow {
+            color: var(--gold-light);
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: clamp(3.4rem, 7vw, 6.5rem);
+            line-height: 0.95;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            max-width: 680px;
+            margin: auto;
+            color: rgba(255,255,255,0.82);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .btn-premium {
+            padding: 13px 27px;
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .btn-premium:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-premium-outline {
+            padding: 13px 27px;
+            border: 1px solid rgba(255,255,255,0.65);
+            background: transparent;
+            color: white;
+            font-size: 0.74rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .btn-premium-outline:hover {
+            background: white;
+            color: var(--navy);
+        }
+
+        /* =====================================================
+           INTRO
+        ===================================================== */
+
+        .intro-section {
+            background: white;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            display: inline-block;
+            margin-bottom: 22px;
+        }
+
+        .section-eyebrow {
+            color: var(--gold);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            color: var(--navy);
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            line-height: 1;
+            margin: 12px 0 25px;
+            font-weight: 600;
+        }
+
+        .body-text {
+            color: #66717b;
+            line-height: 1.9;
+            font-size: 0.96rem;
+        }
+
+        .intro-image-wrapper {
+            position: relative;
+        }
+
+        .intro-image {
+            width: 100%;
+            height: 470px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-accent {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            right: -18px;
+            bottom: -18px;
+            border-right: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats-section {
+            background: var(--navy);
+            padding: 65px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .stat-number {
+            color: var(--gold-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.65);
+            margin-top: 8px;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* =====================================================
+           VIDEO SECTION
+        ===================================================== */
+
+        .video-section {
+            background: var(--cream);
+        }
+
+        .video-frame {
+            background: var(--navy);
+            padding: 8px;
+            box-shadow: 0 25px 60px rgba(7,26,43,0.18);
+        }
+
+        .video-frame iframe {
+            display: block;
+            width: 100%;
+            height: 480px;
+            border: 0;
+        }
+
+        .video-caption {
+            color: #7b858e;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* =====================================================
+           WHY CHOOSE US
+        ===================================================== */
+
+        .features-section {
+            background: white;
+        }
+
+        .feature-card {
+            height: 100%;
+            padding: 42px 32px;
+            background: white;
+            border: 1px solid #e7e7e7;
+            position: relative;
+            transition: all 0.35s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(7,26,43,0.10);
+            border-color: rgba(197,164,90,0.45);
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(197,164,90,0.5);
+            color: var(--gold);
+            font-size: 1.25rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            color: var(--navy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            margin-bottom: 14px;
+        }
+
+        .feature-card p {
+            color: #75808a;
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        /* =====================================================
+           CAMPUS LOCATION
+        ===================================================== */
+
+        .location-section {
+            background: #f4f5f6;
+        }
+
+        .location-card {
+            background: white;
+            padding: 45px;
+            border-left: 3px solid var(--gold);
+            box-shadow: 0 15px 45px rgba(7,26,43,0.07);
+        }
+
+        .location-card h3 {
+            color: var(--navy);
+            font-size: 2rem;
+        }
+
+        .location-card p {
+            color: #737e87;
+            line-height: 1.9;
+        }
+
+        .map-frame {
+            height: 430px;
+            overflow: hidden;
+            background: #ddd;
+            box-shadow: 0 15px 45px rgba(7,26,43,0.10);
+        }
+
+        .map-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* =====================================================
+           REVIEWS
+        ===================================================== */
+
+        .reviews-section {
+            background: var(--cream);
+        }
+
+        .review-box {
+            background: white;
+            padding: 55px;
+            border: 1px solid rgba(7,26,43,0.08);
+            box-shadow: 0 20px 55px rgba(7,26,43,0.08);
+        }
+
+        .review-box label {
+            color: var(--navy);
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 0;
+            border: 1px solid #dfe3e6;
+            padding: 12px 14px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 0.15rem rgba(197,164,90,0.12);
+        }
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta-section {
+            background:
+                linear-gradient(
+                    rgba(7,26,43,0.94),
+                    rgba(7,26,43,0.94)
+                ),
+                url('/images/hero-bg.jpg') center/cover;
+            padding: 90px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1;
+            margin-bottom: 18px;
+        }
+
+        .cta-text {
+            color: rgba(255,255,255,0.7);
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .site-footer {
+            background: #061522;
+            color: white;
+            border-top: 3px solid var(--gold);
+            padding: 75px 0 25px;
+        }
+
+        .footer-school-logo {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+            margin-right: 14px;
+        }
+
+        .footer-brand-title {
+            color: var(--gold-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .footer-heading {
+            color: var(--gold);
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .footer-text {
+            color: #9ba8b4;
+            font-size: 0.84rem;
+            line-height: 1.8;
+        }
+
+        .footer-link {
+            display: block;
+            color: #9ba8b4;
+            text-decoration: none;
+            font-size: 0.84rem;
+            margin-bottom: 13px;
+        }
+
+        .footer-link:hover {
+            color: var(--gold-light);
+            padding-left: 4px;
+        }
+
+        .footer-contact {
+            color: #9ba8b4;
+            font-size: 0.84rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            width: 25px;
+            color: var(--gold);
+        }
+
+        .footer-map {
+            width: 100%;
+            height: 220px;
+            border: 1px solid rgba(197,164,90,0.3);
+        }
+
+        .footer-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .footer-divider {
+            border-color: rgba(197,164,90,0.2);
+            margin: 45px 0 22px;
+        }
+
+        .footer-bottom {
+            color: #71808d;
+            font-size: 0.72rem;
+        }
+
+        .teacher-footer-link {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        .teacher-footer-link:hover {
+            color: white;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 991px) {
+
+            .hero {
+                min-height: 620px;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .section-spacing {
+                padding: 75px 0;
+            }
+
+            .intro-image {
+                height: 380px;
+            }
+
+            .video-frame iframe {
+                height: 400px;
+            }
+
+            .location-card {
+                padding: 35px;
+            }
+
+        }
+
+        @media (max-width: 767px) {
+
+            .school-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .school-name {
+                font-size: 1rem;
+            }
+
+            .school-location {
+                font-size: 0.58rem;
+            }
+
+            .hero {
+                min-height: 600px;
+            }
+
+            .hero-title {
+                font-size: 3.3rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+
+            .section-spacing {
+                padding: 65px 0;
+            }
+
+            .section-title {
+                font-size: 2.7rem;
+            }
+
+            .video-frame iframe {
+                height: 280px;
+            }
+
+            .review-box {
+                padding: 30px 22px;
+            }
+
+            .map-frame {
+                height: 320px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="school-header">
+
+    <div class="container py-3">
+
+        <div class="d-flex align-items-center justify-content-between">
+
+            <a
+                href="/"
+                class="d-flex align-items-center text-decoration-none">
+
+                <img
+                    src="/images/logo.png"
+                    alt="St. Martin's High School Logo"
+                    class="school-logo me-3"
+                    onerror="this.style.display='none';">
+
+                <div>
+
+                    <h1 class="school-name font-serif mb-0">
+                        ST. MARTIN'S HIGH SCHOOL
+                    </h1>
+
+                    <div class="school-location">
+                        BALANAGAR • HYDERABAD
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <div class="d-none d-lg-flex align-items-center gap-4">
+
+                <div class="header-phone">
+
+                    <i class="fas fa-phone-alt me-2"></i>
+
+                    040 - 4020 4839
+
+                </div>
+
+
+                <a
+                    href="/teacher-login"
+                    class="teacher-btn text-decoration-none">
+
+                    Teacher Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark main-navigation">
+
+    <div class="container">
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar">
+
+            <ul
+                class="navbar-nav w-100 justify-content-between align-items-lg-center">
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        HOME
+                    </a>
+                </li>
+
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown">
+
+                        ABOUT US
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a class="dropdown-item" href="/about">
+                                School Overview
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="/principal">
+                                Principal & Management
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="/educational-society">
+                                Educational Society
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="/disclosure">
+                                Disclosure
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="/facilities">
+                        FACILITIES
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown">
+
+                        ACADEMICS
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics">
+                                Academics
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/curriculum">
+                                Curriculum
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/student-life">
+
+                        STUDENT LIFE
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown">
+
+                        ADMISSIONS
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/admissions">
+                                Admission Process
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/fee-structure">
+                                Fee Structure
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="/gallery">
+                        GALLERY
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="/contact">
+                        CONTACT US
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="hero-video">
+
+        <source
+            src="/images/placeholders/campus-hero.mp4"
+            type="video/mp4">
+
+    </video>
+
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="container hero-content text-center">
+
+        <div class="hero-eyebrow">
+            Welcome to Scholastic Excellence
+        </div>
+
+
+        <h1 class="hero-title font-serif">
+
+            St. Martin's<br>
+            High School
+
+        </h1>
+
+
+        <p class="hero-description mb-5">
+
+            Empowering young minds through academic
+            excellence, moral integrity and holistic
+            development in Balanagar, Hyderabad.
+
+        </p>
+
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+            <a
+                href="/admissions"
+                class="btn-premium text-decoration-none">
+
+                Explore Admissions
+
+            </a>
+
+
+            <a
+                href="/about"
+                class="btn-premium-outline text-decoration-none">
+
+                Discover Our School
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     INTRODUCTION
+========================================================= -->
+
+<section class="intro-section section-spacing">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <span class="gold-line"></span>
+
+                <div class="section-eyebrow">
+                    Who We Are
+                </div>
+
+
+                <h2 class="section-title font-serif">
+
+                    A Tradition of Academic Distinction
+                    & Moral Integrity
+
+                </h2>
+
+
+                <p class="body-text">
+
+                    St. Martin's High School in Balanagar,
+                    Hyderabad, is committed to creating an
+                    environment where education goes beyond
+                    textbooks and examinations.
+
+                </p>
+
+
+                <p class="body-text">
+
+                    Our approach combines academic discipline,
+                    character development, creativity and
+                    responsible citizenship. Every student is
+                    encouraged to think independently, discover
+                    their strengths and develop the confidence
+                    needed to succeed in an ever-changing world.
+
+                </p>
+
+
+                <a
+                    href="/about"
+                    class="btn btn-dark rounded-0 px-4 py-3 mt-2">
+
+                    Discover Our Story →
+
+                </a>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="intro-image-wrapper">
+
+                    <img
+                        src="/images/story-image.png"
+                        alt="St. Martin's High School Campus"
+                        class="intro-image">
+
+                    <div class="image-accent"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-item">
+
+                    <div class="stat-number">
+                        Excellence
+                    </div>
+
+                    <div class="stat-label">
+                        Academic Focus
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-item">
+
+                    <div class="stat-number">
+                        Values
+                    </div>
+
+                    <div class="stat-label">
+                        Character Building
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-item">
+
+                    <div class="stat-number">
+                        Holistic
+                    </div>
+
+                    <div class="stat-label">
+                        Student Development
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="stat-item">
+
+                    <div class="stat-number">
+                        Future
+                    </div>
+
+                    <div class="stat-label">
+                        Ready Students
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SCHOOL VIDEO
+========================================================= -->
+
+<section class="video-section section-spacing">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-5">
+
+                <span class="gold-line"></span>
+
+                <div class="section-eyebrow">
+                    Experience Our Campus
+                </div>
+
+
+                <h2 class="section-title font-serif">
+
+                    Discover Life at
+                    St. Martin's
+
+                </h2>
+
+
+                <p class="body-text">
+
+                    Take a closer look at the learning
+                    environment, student activities and
+                    vibrant school life at St. Martin's
+                    High School.
+
+                </p>
+
+
+                <p class="body-text">
+
+                    From classrooms and laboratories to
+                    sports and extracurricular activities,
+                    our campus is designed to encourage
+                    curiosity, confidence and meaningful
+                    learning.
+
+                </p>
+
+
+                <a
+                    href="/facilities"
+                    class="btn btn-dark rounded-0 px-4 py-3">
+
+                    Explore Facilities →
+
+                </a>
+
+            </div>
+
+
+            <div class="col-lg-7">
+
+                <div class="video-frame">
+
+                    <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        style="display:block; width:100%; height:480px; object-fit:cover;">
+                        <source src="/images/placeholders/master%20video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                </div>
+
+
+                <p class="video-caption text-center mt-3 mb-0">
+
+                    A glimpse into the academic environment
+                    and student life at St. Martin's High School.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WHY CHOOSE US
+========================================================= -->
+
+<section class="features-section section-spacing">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="gold-line"></span>
+
+            <div class="section-eyebrow">
+                The St. Martin's Difference
+            </div>
+
+
+            <h2 class="section-title font-serif">
+                Why Choose Our School?
+            </h2>
+
+
+            <p
+                class="body-text mx-auto"
+                style="max-width:700px;">
+
+                We believe that true education develops
+                knowledge, character, confidence and a
+                lifelong desire to learn.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-graduation-cap"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Academic Excellence
+                    </h3>
+
+
+                    <p>
+
+                        A disciplined academic environment
+                        designed to strengthen understanding,
+                        critical thinking and independent
+                        learning.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-users"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Dedicated Faculty
+                    </h3>
+
+
+                    <p>
+
+                        Teachers who guide, mentor and
+                        encourage students while recognizing
+                        their individual abilities and
+                        potential.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-shield-heart"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Values & Discipline
+                    </h3>
+
+
+                    <p>
+
+                        We nurture responsible young citizens
+                        through integrity, discipline,
+                        respect and a strong sense of
+                        social responsibility.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-flask"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Learning Beyond Books
+                    </h3>
+
+
+                    <p>
+
+                        Students are encouraged to explore,
+                        experiment and develop practical
+                        skills through activities and
+                        experiential learning.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-futbol"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Holistic Development
+                    </h3>
+
+
+                    <p>
+
+                        Academic learning is complemented
+                        by sports, creativity, collaboration
+                        and extracurricular opportunities.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fas fa-lightbulb"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Future Ready
+                    </h3>
+
+
+                    <p>
+
+                        Our students are encouraged to build
+                        confidence, adaptability and the
+                        skills required for a rapidly changing
+                        world.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCATION
+========================================================= -->
+
+<section class="location-section section-spacing">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="gold-line"></span>
+
+            <div class="section-eyebrow">
+                Campus Location
+            </div>
+
+
+            <h2 class="section-title font-serif">
+                Visit Our Campus
+            </h2>
+
+
+            <p class="body-text">
+
+                Find St. Martin's High School in
+                Balanagar, Hyderabad.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 align-items-stretch">
+
+
+            <div class="col-lg-5">
+
+                <div class="location-card h-100">
+
+                    <div class="section-eyebrow mb-3">
+                        St. Martin's High School
+                    </div>
+
+
+                    <h3 class="font-serif mb-4">
+                        Balanagar Campus
+                    </h3>
+
+
+                    <p>
+
+                        Door No. 4-144, Near BHEL R&D,<br>
+                        Balanagar, Navajeevan Nagar,<br>
+                        Ferozguda, Hyderabad,<br>
+                        Telangana - 500037.
+
+                    </p>
+
+
+                    <hr class="my-4">
+
+
+                    <p class="mb-2">
+
+                        <i
+                            class="fas fa-phone me-2"
+                            style="color:#C5A45A;">
+                        </i>
+
+                        040 - 4020 4839
+
+                    </p>
+
+
+                    <p>
+
+                        <i
+                            class="fas fa-envelope me-2"
+                            style="color:#C5A45A;">
+                        </i>
+
+                        info@stmartinsbalanagar.com
+
+                    </p>
+
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=St+Martins+High+School+Balanagar+Hyderabad"
+                        target="_blank"
+                        class="btn btn-dark rounded-0 px-4 py-3 mt-3">
+
+                        <i class="fas fa-location-arrow me-2"></i>
+
+                        Get Directions
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-7">
+
+                <div class="map-frame">
+
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.0!2d78.45!3d17.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI4JzEyLjAiTiA3OMKwMjcnMDAuMCJF!5e0!3m2!1sen!2sin!4v1600000000000"
+                        allowfullscreen
+                        loading="lazy"
+                        title="St. Martin's High School Balanagar Map">
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PARENT REVIEWS
+========================================================= -->
+
+<section class="reviews-section section-spacing">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="gold-line"></span>
+
+            <div class="section-eyebrow">
+                Community Voices
+            </div>
+
+
+            <h2 class="section-title font-serif">
+
+                What Our Parents Say
+
+            </h2>
+
+
+            <p class="body-text">
+
+                Your feedback helps us continue improving
+                the school experience for every student.
+
+            </p>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+                <div class="review-box">
+
+                    <h3
+                        class="font-serif text-navy mb-2"
+                        style="font-size:2.2rem;">
+
+                        Share Your Experience
+
+                    </h3>
+
+
+                    <p class="text-muted mb-4">
+
+                        We value the experiences and feedback
+                        of our parent community.
+
+                    </p>
+
+
+                    <div
+                        id="reviewAlert"
+                        class="alert d-none">
+                    </div>
+
+
+                    <form
+                        id="reviewForm"
+                        onsubmit="submitReview(event)">
+
+
+                        <div class="row g-4">
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Parent Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="parent_name"
+                                    name="parent_name"
+                                    class="form-control"
+                                    placeholder="Enter your name"
+                                    required>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Enter your email"
+                                    required>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Rating
+                                </label>
+
+
+                                <select
+                                    id="rating"
+                                    name="rating"
+                                    class="form-select"
+                                    required>
+
+                                    <option value="5">
+                                        ★★★★★ — Excellent
+                                    </option>
+
+                                    <option value="4">
+                                        ★★★★☆ — Very Good
+                                    </option>
+
+                                    <option value="3">
+                                        ★★★☆☆ — Good
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label class="form-label">
+                                    Your Review
+                                </label>
+
+
+                                <textarea
+                                    id="review"
+                                    name="review"
+                                    rows="5"
+                                    class="form-control"
+                                    placeholder="Tell us about your experience..."
+                                    required></textarea>
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-dark rounded-0 px-5 py-3">
+
+                                    Submit Review →
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ADMISSIONS CTA
+========================================================= -->
+
+<section class="cta-section">
+
+    <div class="container">
+
+        <div class="section-eyebrow mb-3">
+            Admissions 2026–2027
+        </div>
+
+
+        <h2 class="cta-title">
+
+            Begin Your Child's
+            Journey Toward Excellence
+
+        </h2>
+
+
+        <p class="cta-text mb-4">
+
+            Discover an educational environment where
+            academic learning, character and confidence
+            come together to prepare students for the future.
+
+        </p>
+
+
+        <a
+            href="/admissions"
+            class="btn-premium text-decoration-none d-inline-block">
+
+            Explore Admissions →
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+
+            <!-- SCHOOL -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="d-flex align-items-center mb-4">
+
+                    <img
+                        src="/images/logo.png"
+                        alt="St. Martin's High School Logo"
+                        class="footer-school-logo"
+                        onerror="this.style.display='none';">
+
+
+                    <div>
+
+                        <h3 class="footer-brand-title">
+                            St. Martin's High School
+                        </h3>
+
+                        <small
+                            style="
+                            color:#8493a1;
+                            letter-spacing:1px;">
+
+                            BALANAGAR • HYDERABAD
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    style="
+                    color:#C5A45A;
+                    font-family:'Cormorant Garamond',serif;
+                    font-size:1.1rem;
+                    font-style:italic;">
+
+                    Inspiring minds.
+                    Shaping character.
+                    Building futures.
+
+                </p>
+
+
+                <p class="footer-text">
+
+                    St. Martin's High School is committed
+                    to providing quality education in a
+                    secure, disciplined and progressive
+                    environment where every student is
+                    encouraged to discover their potential.
+
+                </p>
+
+
+                <a
+                    href="/teacher-login"
+                    class="teacher-footer-link">
+
+                    <i class="fas fa-chalkboard-teacher me-2"></i>
+
+                    Teacher Portal Access
+
+                </a>
+
+            </div>
+
+
+            <!-- QUICK LINKS -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5 class="footer-heading">
+                    Quick Links
+                </h5>
+
+
+                <a href="/" class="footer-link">
+                    Home
+                </a>
+
+                <a href="/about" class="footer-link">
+                    School Overview
+                </a>
+
+                <a href="/principal" class="footer-link">
+                    Principal & Management
+                </a>
+
+                <a href="/facilities" class="footer-link">
+                    Facilities
+                </a>
+
+                <a href="/academics/primary" class="footer-link">
+                    Academics
+                </a>
+
+                <a href="/student-life" class="footer-link">
+                    Student Life
+                </a>
+
+                <a href="/gallery" class="footer-link">
+                    Gallery
+                </a>
+
+                <a href="/contact" class="footer-link">
+                    Contact Us
+                </a>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="footer-heading">
+                    Contact Details
+                </h5>
+
+
+                <div class="footer-contact">
+
+                    <i class="fas fa-location-dot"></i>
+
+                    Door No. 4-144, Near BHEL R&D,
+                    Balanagar, Hyderabad,
+                    Telangana - 500037.
+
+                </div>
+
+
+                <div class="footer-contact">
+
+                    <i class="fas fa-phone"></i>
+
+                    040 - 4020 4839
+
+                </div>
+
+
+                <div class="footer-contact">
+
+                    <i class="fas fa-envelope"></i>
+
+                    info@stmartinsbalanagar.com
+
+                </div>
+
+
+                <div class="footer-contact">
+
+                    <i class="fas fa-clock"></i>
+
+                    Monday – Saturday
+
+                </div>
+
+            </div>
+
+
+            <!-- MAP -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="footer-heading">
+                    Campus Location
+                </h5>
+
+
+                <div class="footer-map">
+
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.25!2d78.44!3d17.46!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI3JzM2LjAiTiA3OMKwMjYnMjQuMCJF!5e0!3m2!1sen!2sin!4v1650000000000"
+                        allowfullscreen
+                        loading="lazy"
+                        title="St. Martin's High School Balanagar Map">
+                    </iframe>
+
+                </div>
+
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=St+Martins+High+School+Balanagar+Hyderabad"
+                    target="_blank"
+                    class="teacher-footer-link d-inline-block mt-3">
+
+                    <i class="fas fa-location-arrow me-1"></i>
+
+                    Open in Google Maps →
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <hr class="footer-divider">
+
+
+        <div class="row align-items-center">
+
+            <div class="col-md-7">
+
+                <p class="footer-bottom mb-0">
+
+                    © 2026 St. Martin's High School,
+                    Balanagar, Hyderabad.
+                    All Rights Reserved.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-5 text-md-end mt-3 mt-md-0">
+
+                <span class="footer-bottom">
+
+                    Admissions Open 2026–2027
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- =========================================================
+     REVIEW SUBMISSION
+========================================================= -->
+
+<script>
+
+async function submitReview(event) {
+
+    event.preventDefault();
+
+
+    const alertBox =
+        document.getElementById('reviewAlert');
+
+
+    const formData = {
+
+        parent_name:
+            document.getElementById('parent_name').value,
+
+        email:
+            document.getElementById('email').value,
+
+        rating:
+            document.getElementById('rating').value,
+
+        review:
+            document.getElementById('review').value
+
+    };
+
+
+    try {
+
+        const response = await fetch(
+            '/api/reviews',
+            {
+                method: 'POST',
+
+                headers: {
+                    'Content-Type':
+                        'application/json'
+                },
+
+                body:
+                    JSON.stringify(formData)
+            }
+        );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+            throw new Error(
+                result.message ||
+                'Unable to submit review.'
+            );
+        }
+
+
+        alertBox.className =
+            'alert alert-success mt-4';
+
+
+        alertBox.innerText =
+            result.message ||
+            "Thank you for sharing your experience with St. Martin's High School.";
+
+
+        document
+            .getElementById('reviewForm')
+            .reset();
+
+    }
+
+
+    catch (error) {
+
+        alertBox.className =
+            'alert alert-danger mt-4';
+
+
+        alertBox.innerText =
+            error.message ||
+            'Error submitting review. Please try again.';
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

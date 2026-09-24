@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Login | St. Martin's High School</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="/images/logo.png">
+
+    <link rel="stylesheet"
+          href="/css/style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #163451,
+                    transparent 40%
+                ),
+                #06131f;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 1050px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            backdrop-filter: blur(18px);
+        }
+
+        .login-brand {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(8,35,57,0.96),
+                    rgba(7,24,39,0.98)
+                );
+        }
+
+        .logo {
+            width: 105px;
+            height: 105px;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #c5a45a;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .login-brand h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            line-height: 1.1;
+            margin: 0 0 20px;
+        }
+
+        .login-brand p {
+            color: #bdc8d2;
+            line-height: 1.8;
+            max-width: 430px;
+        }
+
+        .login-form-area {
+            background: #f7f3ea;
+            color: #10202e;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-box {
+            width: 100%;
+        }
+
+        .form-box h2 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+            margin: 0 0 10px;
+        }
+
+        .form-box > p {
+            color: #687481;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 16px;
+            border: 1px solid #d6d2c9;
+            border-radius: 12px;
+            background: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #c5a45a;
+            box-shadow: 0 0 0 3px rgba(197,164,90,0.12);
+        }
+
+        .login-button {
+            width: 100%;
+            border: 0;
+            padding: 16px;
+            border-radius: 12px;
+            background: #102b43;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .login-button:hover {
+            background: #c5a45a;
+            color: #10202e;
+            transform: translateY(-2px);
+        }
+
+        .message {
+            padding: 13px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .message.error {
+            display: block;
+            background: #fbe8e8;
+            color: #9d2b2b;
+        }
+
+        .message.success {
+            display: block;
+            background: #e7f6ec;
+            color: #246b3b;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: #8b6d2f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 18px;
+            color: #aebbc6;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        @media(max-width: 800px) {
+
+            .login-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .login-brand {
+                padding: 40px;
+            }
+
+            .login-form-area {
+                padding: 40px;
+            }
+
+            .login-brand h1 {
+                font-size: 34px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <section class="login-brand">
+
+        <img
+            src="/images/logo.png"
+            class="logo"
+            alt="St. Martin's High School Logo"
+        >
+
+        <div class="eyebrow">
+            Faculty Portal
+        </div>
+
+        <h1>
+            Welcome,<br>
+            Teacher.
+        </h1>
+
+        <p>
+            Access your St. Martin's High School
+            faculty dashboard, resources and
+            teacher services through the secure
+            staff portal.
+        </p>
+
+        <a
+            href="/"
+            class="back-home"
+        >
+            ← Return to school website
+        </a>
+
+    </section>
+
+
+    <section class="login-form-area">
+
+        <div class="form-box">
+
+            <h2>
+                Teacher Login
+            </h2>
+
+            <p>
+                Sign in using your approved
+                teacher account.
+            </p>
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Sign In
+                </button>
+
+            </form>
+
+            <div class="links">
+
+                New teacher?
+
+                <a href="/teacher-signup">
+                    Create an account
+                </a>
+
+                <br>
+
+                <a href="/principal-login">
+                    Principal Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+const form =
+    document.getElementById("loginForm");
+
+const message =
+    document.getElementById("message");
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        message.className = "message";
+        message.textContent = "";
+
+        const username =
+            document.getElementById("username")
+                .value
+                .trim();
+
+        const password =
+            document.getElementById("password")
+                .value;
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/teacher/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username,
+                            password
+                        })
+                    }
+                );
+
+            const data =
+                await response.json();
+
+            if (!data.success) {
+
+                message.className =
+                    "message error";
+
+                message.textContent =
+                    data.error ||
+                    "Unable to login.";
+
+                return;
+            }
+
+            message.className =
+                "message success";
+
+            message.textContent =
+                "Login successful. Redirecting...";
+
+            window.location.href =
+                data.redirect ||
+                "/teacher-dashboard";
+
+        } catch (error) {
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                "Unable to connect to the server.";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,3018 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mandatory Disclosure | St. Martin's High School</title>
+
+    <meta
+        name="description"
+        content="Mandatory Public Disclosure and institutional information of St. Martin's High School, Balanagar, Hyderabad."
+    >
+
+    <!-- Existing Website CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Premium Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --navy: #071A2B;
+            --navy-dark: #04111D;
+            --navy-soft: #0D263D;
+
+            --gold: #C5A45A;
+            --gold-light: #E0CA8B;
+
+            --ivory: #F6F1E7;
+            --cream: #FBF8F1;
+
+            --white: #FFFFFF;
+
+            --text: #20252A;
+            --muted: #687078;
+
+            --border: rgba(7, 26, 43, 0.10);
+        }
+
+
+        /* ==========================================
+           GLOBAL
+        ========================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ivory);
+            color: var(--text);
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1180px;
+        }
+
+
+/* ==========================================
+   TOP BRAND HEADER
+========================================== */
+
+.school-header {
+    background: var(--white);
+    border-bottom: 1px solid rgba(197,164,90,0.22);
+
+    position: relative !important;
+    top: auto !important;
+
+    width: 100%;
+    z-index: 1050;
+}
+
+.brand-container {
+    min-height: 88px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.school-brand {
+    display: flex;
+    align-items: center;
+    color: var(--navy);
+}
+
+.school-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-right: 16px;
+}
+
+.school-name {
+    margin: 0;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 1.45rem;
+    line-height: 1;
+
+    font-weight: 700;
+    letter-spacing: 0.04em;
+
+    color: var(--navy);
+}
+
+.school-location {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 0.67rem;
+    letter-spacing: 0.19em;
+
+    text-transform: uppercase;
+
+    color: #737B82;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-phone {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.header-phone i {
+    color: var(--gold);
+    margin-right: 7px;
+}
+
+.teacher-button {
+    border: 1px solid var(--navy);
+
+    padding: 10px 18px;
+
+    color: var(--navy);
+
+    font-size: 0.7rem;
+    font-weight: 500;
+
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+
+    transition: all 0.3s ease;
+
+    text-decoration: none;
+}
+
+.teacher-button:hover {
+    background: var(--navy);
+    color: var(--white);
+}
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+.main-navigation {
+    background: var(--navy);
+
+    min-height: 53px;
+
+    position: relative !important;
+    top: auto !important;
+
+    z-index: 1040;
+
+    box-shadow:
+        0 5px 20px rgba(7,26,43,0.13);
+}
+
+.main-navigation .navbar-nav {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.main-navigation .nav-link {
+    color: rgba(255,255,255,0.93) !important;
+
+    padding: 17px 7px !important;
+
+    font-size: 0.74rem;
+    font-weight: 500;
+
+    letter-spacing: 0.09em;
+
+    transition: color 0.3s ease;
+}
+
+.main-navigation .nav-link:hover {
+    color: var(--gold-light) !important;
+}
+
+.main-navigation .dropdown-menu {
+    margin-top: 0;
+
+    border: 0;
+
+    border-top: 2px solid var(--gold);
+
+    border-radius: 0;
+
+    padding: 8px 0;
+
+    min-width: 220px;
+
+    box-shadow:
+        0 20px 50px rgba(7,26,43,0.20);
+
+    z-index: 2000;
+}
+
+.main-navigation .dropdown-item {
+    padding: 11px 22px;
+
+    font-size: 0.8rem;
+
+    color: var(--navy);
+
+    transition: all 0.2s ease;
+}
+
+.main-navigation .dropdown-item:hover {
+    background: var(--cream);
+
+    color: var(--navy);
+
+    padding-left: 27px;
+}
+
+.navbar-toggler {
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 0;
+}
+
+
+/* ==========================================
+   DISCLOSURE HERO
+========================================== */
+
+.disclosure-hero {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+
+    min-height: 390px;
+
+    /*
+       IMPORTANT:
+       Force the hero content to begin BELOW
+       the navigation instead of being vertically
+       pulled underneath it.
+    */
+    display: block;
+
+    overflow: hidden;
+
+    padding: 80px 0 90px;
+
+    margin: 0 !important;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(4,17,29,0.98),
+            rgba(7,26,43,0.90),
+            rgba(7,26,43,0.70)
+        ),
+        url("/images/hero-bg.jpg")
+        center center / cover no-repeat;
+}
+
+
+/* ==========================================
+   HERO DECORATIVE CIRCLES
+========================================== */
+
+.disclosure-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -180px;
+    top: -220px;
+
+    border: 1px solid rgba(197,164,90,0.30);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.disclosure-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -50px;
+    bottom: -190px;
+
+    border: 1px solid rgba(197,164,90,0.18);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   HERO CONTENT — FIXED POSITION
+========================================== */
+
+.hero-content {
+    position: relative !important;
+
+    z-index: 10 !important;
+
+    width: 100%;
+
+    max-width: 820px;
+
+    /*
+       This prevents global hero styles from
+       pulling the content upward.
+    */
+    transform: none !important;
+
+    margin-top: 0 !important;
+
+    margin-bottom: 0 !important;
+}
+
+
+/* ==========================================
+   HERO EYEBROW
+========================================== */
+
+.hero-eyebrow {
+    color: var(--gold-light);
+
+    font-size: 0.72rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.28em;
+
+    text-transform: uppercase;
+
+    display: block;
+
+    margin-bottom: 0;
+}
+
+
+/* ==========================================
+   HERO TITLE
+========================================== */
+
+.hero-title {
+    margin: 17px 0 22px !important;
+
+    color: var(--white) !important;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(3rem, 7vw, 5rem);
+
+    line-height: 0.94;
+
+    font-weight: 600;
+
+    position: relative;
+
+    z-index: 20;
+
+    /*
+       Prevent any global transform from moving
+       the title behind the navigation.
+    */
+    transform: none !important;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+/* ==========================================
+   HERO DESCRIPTION
+========================================== */
+
+.hero-description {
+    max-width: 720px;
+
+    color: rgba(255,255,255,0.72);
+
+    font-size: 0.98rem;
+
+    font-weight: 300;
+
+    line-height: 1.9;
+
+    position: relative;
+
+    z-index: 10;
+
+    margin-bottom: 0;
+}
+
+
+/* ==========================================
+   HERO GOLD RULE
+========================================== */
+
+.hero-rule {
+    width: 65px;
+
+    height: 2px;
+
+    margin-top: 28px;
+
+    background: var(--gold);
+}
+
+
+/* ==========================================
+   MAIN
+========================================== */
+
+.main-section {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    padding: 95px 0;
+
+    margin-top: 0 !important;
+
+    transform: none !important;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+.eyebrow {
+    color: #98772D;
+
+    font-size: 0.7rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.23em;
+
+    text-transform: uppercase;
+}
+
+.section-title {
+    margin: 13px 0;
+
+    color: var(--navy);
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 2.8rem;
+
+    font-weight: 600;
+}
+
+.gold-line {
+    width: 62px;
+
+    height: 2px;
+
+    margin-bottom: 27px;
+
+    background: var(--gold);
+}
+
+.intro-copy {
+    max-width: 890px;
+
+    color: var(--muted);
+
+    font-size: 0.94rem;
+
+    font-weight: 300;
+
+    line-height: 1.95;
+}
+
+
+/* ==========================================
+   DISCLOSURE PAGE — HARD POSITION FIX
+========================================== */
+
+/*
+   These rules have !important deliberately.
+   They override any older global header/hero
+   positioning in style.css.
+*/
+
+.disclosure-page .school-header {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+}
+
+.disclosure-page .main-navigation {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+}
+
+.disclosure-page .disclosure-hero {
+    position: relative !important;
+
+    top: auto !important;
+    left: auto !important;
+
+    margin-top: 0 !important;
+
+    transform: none !important;
+
+    padding-top: 80px !important;
+}
+
+.disclosure-page .hero-content {
+    position: relative !important;
+
+    top: auto !important;
+    left: auto !important;
+
+    transform: none !important;
+
+    margin-top: 0 !important;
+}
+
+.disclosure-page .hero-title {
+    position: relative !important;
+
+    top: auto !important;
+
+    transform: none !important;
+
+    margin-top: 17px !important;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 991px) {
+
+    .brand-container {
+        min-height: 78px;
+    }
+
+    .school-logo {
+        width: 54px;
+        height: 54px;
+
+        margin-right: 12px;
+    }
+
+    .school-name {
+        font-size: 1.15rem;
+    }
+
+    .school-location {
+        font-size: 0.58rem;
+
+        letter-spacing: 0.13em;
+    }
+
+    .header-actions {
+        gap: 12px;
+    }
+
+    .header-phone {
+        display: none;
+    }
+
+    .teacher-button {
+        padding: 8px 12px;
+
+        font-size: 0.62rem;
+    }
+
+    .disclosure-hero {
+        min-height: 340px;
+
+        padding: 65px 0 75px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.6rem, 10vw, 4rem);
+    }
+
+    .main-section {
+        padding: 70px 0;
+    }
+
+    .disclosure-page .disclosure-hero {
+        padding-top: 65px !important;
+    }
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 575px) {
+
+    .brand-container {
+        min-height: 72px;
+    }
+
+    .school-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .school-name {
+        font-size: 1rem;
+    }
+
+    .school-location {
+        margin-top: 4px;
+
+        font-size: 0.52rem;
+    }
+
+    .teacher-button {
+        padding: 7px 9px;
+
+        font-size: 0.56rem;
+
+        letter-spacing: 0.08em;
+    }
+
+    .disclosure-hero {
+        min-height: 310px;
+
+        padding: 55px 0 65px;
+    }
+
+    .hero-title {
+        font-size: 2.7rem;
+    }
+
+    .hero-description {
+        font-size: 0.88rem;
+
+        line-height: 1.75;
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+    }
+
+    .disclosure-page .disclosure-hero {
+        padding-top: 55px !important;
+    }
+}
+
+        /* ==========================================
+           INFORMATION TABLE
+        ========================================== */
+
+        .disclosure-wrapper {
+            margin-top: 48px;
+
+            background: var(--white);
+
+            border: 1px solid rgba(197,164,90,0.27);
+
+            box-shadow:
+                0 20px 65px rgba(7,26,43,0.07);
+
+            overflow: hidden;
+        }
+
+        .disclosure-table {
+            margin: 0;
+        }
+
+        .disclosure-table thead {
+            background: var(--navy);
+        }
+
+        .disclosure-table th {
+            padding: 21px 25px;
+
+            color: var(--white);
+
+            border: 0;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 1.18rem;
+            font-weight: 600;
+        }
+
+        .disclosure-table td {
+            padding: 18px 25px;
+
+            color: #596168;
+
+            border-color: rgba(7,26,43,0.07);
+
+            font-size: 0.87rem;
+
+            line-height: 1.65;
+        }
+
+        .disclosure-table td:first-child {
+            width: 36%;
+
+            color: var(--navy);
+
+            font-weight: 600;
+        }
+
+        .disclosure-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .disclosure-table tbody tr:hover {
+            background: #FCFAF5;
+        }
+
+
+        /* ==========================================
+           QUICK STATISTICS
+        ========================================== */
+
+        .stats-section {
+            padding: 0 0 95px;
+        }
+
+        .stat-card {
+            height: 100%;
+
+            padding: 32px 27px;
+
+            background: var(--white);
+
+            border: 1px solid rgba(197,164,90,0.20);
+
+            transition: all 0.35s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(197,164,90,0.50);
+
+            box-shadow:
+                0 20px 50px rgba(7,26,43,0.09);
+        }
+
+        .stat-icon {
+            width: 49px;
+            height: 49px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            color: var(--gold);
+
+            border: 1px solid rgba(197,164,90,0.45);
+        }
+
+        .stat-card h3 {
+            margin-bottom: 10px;
+
+            color: var(--navy);
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 1.55rem;
+            font-weight: 600;
+        }
+
+        .stat-card p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 0.83rem;
+
+            line-height: 1.8;
+        }
+
+
+        /* ==========================================
+           DETAILED INFORMATION
+        ========================================== */
+
+        .details-section {
+            padding: 95px 0;
+
+            background: var(--cream);
+        }
+
+        .detail-panel {
+            height: 100%;
+
+            padding: 38px;
+
+            background: var(--white);
+
+            border: 1px solid rgba(197,164,90,0.20);
+
+            box-shadow:
+                0 10px 35px rgba(7,26,43,0.035);
+        }
+
+        .detail-number {
+            color: var(--gold);
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 2.3rem;
+
+            line-height: 1;
+        }
+
+        .detail-panel h3 {
+            margin: 10px 0 14px;
+
+            color: var(--navy);
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 1.65rem;
+        }
+
+        .detail-panel p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 0.85rem;
+
+            line-height: 1.9;
+        }
+
+        .detail-panel ul {
+            margin: 17px 0 0;
+            padding-left: 18px;
+        }
+
+        .detail-panel li {
+            margin-bottom: 9px;
+
+            color: #626A70;
+
+            font-size: 0.82rem;
+
+            line-height: 1.65;
+        }
+
+
+        /* ==========================================
+           DOCUMENTS
+        ========================================== */
+
+        .documents-section {
+            padding: 95px 0;
+        }
+
+        .document-row {
+            background: var(--white);
+
+            border: 1px solid rgba(197,164,90,0.20);
+
+            margin-bottom: 12px;
+
+            padding: 19px 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            transition: all 0.3s ease;
+        }
+
+        .document-row:hover {
+            border-color: rgba(197,164,90,0.55);
+
+            transform: translateX(4px);
+        }
+
+        .document-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .document-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--gold);
+
+            background: var(--cream);
+
+            border: 1px solid rgba(197,164,90,0.22);
+        }
+
+        .document-name {
+            color: var(--navy);
+
+            font-size: 0.86rem;
+            font-weight: 600;
+        }
+
+        .document-description {
+            margin-top: 3px;
+
+            color: #7A8187;
+
+            font-size: 0.74rem;
+        }
+
+        .document-status {
+            color: #98772D;
+
+            font-size: 0.67rem;
+            font-weight: 600;
+
+            letter-spacing: 0.1em;
+
+            text-transform: uppercase;
+        }
+
+
+        /* ==========================================
+           TRANSPARENCY
+        ========================================== */
+
+        .transparency-section {
+            padding: 90px 0;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--navy-dark),
+                    var(--navy-soft)
+                );
+
+            color: white;
+        }
+
+        .transparency-title {
+            margin: 12px 0;
+
+            color: white;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 2.9rem;
+        }
+
+        .transparency-copy {
+            max-width: 850px;
+
+            color: rgba(255,255,255,0.67);
+
+            font-size: 0.88rem;
+
+            line-height: 1.95;
+        }
+
+        .transparency-list {
+            list-style: none;
+
+            padding: 0;
+
+            margin-top: 30px;
+        }
+
+        .transparency-list li {
+            padding: 12px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,0.09);
+
+            color: rgba(255,255,255,0.70);
+
+            font-size: 0.83rem;
+        }
+
+        .transparency-list i {
+            color: var(--gold);
+
+            margin-right: 10px;
+        }
+
+
+        /* ==========================================
+           LOCATION
+        ========================================== */
+
+        .location-section {
+            padding: 95px 0;
+
+            background: var(--ivory);
+        }
+
+        .location-box {
+            margin-top: 42px;
+
+            background: white;
+
+            border: 1px solid rgba(197,164,90,0.22);
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px rgba(7,26,43,0.06);
+        }
+
+        .location-content {
+            padding: 42px;
+        }
+
+        .location-title {
+            margin-bottom: 14px;
+
+            color: var(--navy);
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 2.1rem;
+        }
+
+        .location-description {
+            color: var(--muted);
+
+            font-size: 0.86rem;
+
+            line-height: 1.85;
+        }
+
+        .location-item {
+            display: flex;
+
+            gap: 13px;
+
+            margin-top: 21px;
+
+            color: #596168;
+
+            font-size: 0.82rem;
+
+            line-height: 1.65;
+        }
+
+        .location-item i {
+            width: 20px;
+
+            color: var(--gold);
+
+            margin-top: 4px;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            min-height: 410px;
+
+            border: 0;
+        }
+
+        .directions-button {
+            display: inline-block;
+
+            margin-top: 23px;
+
+            padding: 13px 20px;
+
+            background: var(--navy);
+
+            color: white;
+
+            font-size: 0.69rem;
+            font-weight: 500;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+
+            transition: all 0.3s ease;
+        }
+
+        .directions-button:hover {
+            background: var(--gold);
+
+            color: var(--navy);
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        .school-footer {
+            padding-top: 75px;
+
+            background: #04131F;
+
+            color: rgba(255,255,255,0.67);
+        }
+
+        .footer-school-name {
+            margin-bottom: 15px;
+
+            color: white;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        .footer-description {
+            max-width: 380px;
+
+            color: rgba(255,255,255,0.55);
+
+            font-size: 0.8rem;
+
+            line-height: 1.9;
+        }
+
+        .footer-heading {
+            margin-bottom: 20px;
+
+            color: var(--gold-light);
+
+            font-size: 0.7rem;
+            font-weight: 600;
+
+            letter-spacing: 0.17em;
+
+            text-transform: uppercase;
+        }
+
+        .footer-links {
+            list-style: none;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.58);
+
+            font-size: 0.79rem;
+
+            transition: all 0.25s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+
+            padding-left: 4px;
+        }
+
+        .footer-contact {
+            color: rgba(255,255,255,0.58);
+
+            font-size: 0.79rem;
+
+            line-height: 1.85;
+        }
+
+        .footer-contact i {
+            width: 21px;
+
+            color: var(--gold);
+
+            margin-right: 5px;
+        }
+
+        .footer-map {
+            width: 100%;
+            height: 190px;
+
+            margin-top: 50px;
+
+            border: 0;
+
+            opacity: 0.82;
+        }
+
+        .footer-bottom {
+            margin-top: 45px;
+
+            padding: 21px 0;
+
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+            color: rgba(255,255,255,0.39);
+
+            font-size: 0.68rem;
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 991px) {
+
+            .header-actions {
+                display: none;
+            }
+
+            .main-navigation .navbar-nav {
+                padding: 10px 0;
+            }
+
+            .main-navigation .nav-link {
+                padding: 12px 0 !important;
+            }
+
+            .disclosure-hero {
+                min-height: 430px;
+            }
+
+            .map-frame {
+                min-height: 320px;
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .school-logo {
+                width: 52px;
+                height: 52px;
+
+                margin-right: 10px;
+            }
+
+            .school-name {
+                font-size: 1.05rem;
+            }
+
+            .school-location {
+                font-size: 0.54rem;
+
+                letter-spacing: 0.13em;
+            }
+
+            .hero-title {
+                font-size: 3.2rem;
+            }
+
+            .main-section,
+            .documents-section,
+            .location-section {
+                padding: 65px 0;
+            }
+
+            .details-section {
+                padding: 65px 0;
+            }
+
+            .transparency-section {
+                padding: 65px 0;
+            }
+
+            .section-title,
+            .transparency-title {
+                font-size: 2.3rem;
+            }
+
+            .document-row {
+                align-items: flex-start;
+            }
+
+            .document-status {
+                display: none;
+            }
+
+            .location-content {
+                padding: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SCHOOL HEADER
+========================================================= -->
+
+<header class="school-header">
+
+    <div class="container">
+
+        <div class="brand-container">
+
+            <a href="/" class="school-brand">
+
+                <img
+                    src="/images/logo.png"
+                    alt="St. Martin's High School Logo"
+                    class="school-logo"
+                    onerror="this.style.display='none'"
+                >
+
+                <div>
+
+                    <h1 class="school-name">
+                        ST. MARTIN'S HIGH SCHOOL
+                    </h1>
+
+                    <span class="school-location">
+                        BALANAGAR, HYDERABAD
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <div class="header-actions">
+
+                <div class="header-phone">
+
+                    <i class="fas fa-phone"></i>
+
+                    040 - 4020 4839
+
+                </div>
+
+
+                <a
+                    href="/teacher-login"
+                    class="teacher-button">
+
+                    Teacher Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="main-navigation navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar">
+
+            <ul class="navbar-nav">
+
+
+                <!-- HOME -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/">
+
+                        HOME
+
+                    </a>
+
+                </li>
+
+
+                <!-- ABOUT -->
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                        ABOUT US
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/about">
+
+                                School Overview
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/principal">
+
+                                Principal &amp; Management
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/disclosure">
+
+                                Mandatory Disclosure
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/facilities">
+
+                                Our Facilities
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- ACADEMICS -->
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                        ACADEMICS
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/primary">
+
+                                Primary School
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/middle">
+
+                                Middle School
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/secondary">
+
+                                Secondary School
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/curriculum">
+
+                                Curriculum
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- STUDENT LIFE -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/student-life">
+
+                        STUDENT LIFE
+
+                    </a>
+
+                </li>
+
+
+                <!-- ADMISSIONS -->
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                        ADMISSIONS
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/admissions">
+
+                                Admission Process
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/fee-structure">
+
+                                Fee Structure
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- GALLERY -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/gallery">
+
+                        GALLERY
+
+                    </a>
+
+                </li>
+
+
+                <!-- CONTACT -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/contact">
+
+                        CONTACT US
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="disclosure-hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <span class="hero-eyebrow">
+                Institutional Transparency
+            </span>
+
+            <h2 class="hero-title">
+                Mandatory<br>
+                Public Disclosure
+            </h2>
+
+            <p class="hero-description">
+
+                St. Martin's High School is committed to responsible
+                educational governance, transparent communication and
+                maintaining essential institutional information for
+                students, parents and the wider school community.
+
+            </p>
+
+            <div class="hero-rule"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     INTRODUCTION
+========================================================= -->
+
+<section class="main-section">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            Regulatory Compliance
+        </span>
+
+        <h2 class="section-title">
+            Institutional Information
+        </h2>
+
+        <div class="gold-line"></div>
+
+
+        <p class="intro-copy">
+
+            St. Martin's High School recognises that transparency is an
+            important part of building trust between an educational
+            institution and its community. This page presents key
+            institutional information in a structured and accessible
+            format for parents, students, educators, prospective
+            families and other stakeholders.
+
+        </p>
+
+
+        <p class="intro-copy mt-3">
+
+            The information provided on this page should be read together
+            with official institutional records and documentation
+            maintained by the authorised school administration. Where
+            applicable, documents and particulars may be reviewed and
+            updated periodically to reflect current institutional
+            information.
+
+        </p>
+
+
+        <!-- =====================================================
+             MAIN DISCLOSURE TABLE
+        ===================================================== -->
+
+        <div class="disclosure-wrapper">
+
+            <div class="table-responsive">
+
+                <table class="table disclosure-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Information Detail
+                            </th>
+
+                            <th>
+                                Institutional Information
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                Name of Institution
+                            </td>
+
+                            <td>
+                                St. Martin's High School, Balanagar
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Institution Type
+                            </td>
+
+                            <td>
+                                School Education Institution
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Location
+                            </td>
+
+                            <td>
+                                Balanagar, Hyderabad, Telangana
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Affiliation
+                            </td>
+
+                            <td>
+                                Affiliated to CISCE Council
+                                (Indian Certificate of Secondary Education)
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                School Principal
+                            </td>
+
+                            <td>
+                                Dr. Megha Sen
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Academic Session
+                            </td>
+
+                            <td>
+                                2026 – 2027
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Admissions
+                            </td>
+
+                            <td>
+                                Admissions Open for the Academic Session
+                                2026 – 2027
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Campus Address
+                            </td>
+
+                            <td>
+                                Door No. 4-144, Near BHEL R&amp;D,
+                                Balanagar, Navajeevan Nagar,
+                                Ferozguda, Hyderabad,
+                                Telangana - 500037
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                School Contact
+                            </td>
+
+                            <td>
+                                040 - 4020 4839
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Disclosure Contact
+                            </td>
+
+                            <td>
+                                Stmartinshighschool@gmail.com
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                School Website
+                            </td>
+
+                            <td>
+                                Official school website
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Teacher Portal
+                            </td>
+
+                            <td>
+                                Secure teacher login portal available
+                                through the school's website
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUICK INFORMATION
+========================================================= -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+
+                    <h3>
+                        Institution
+                    </h3>
+
+                    <p>
+                        A structured school environment focused on
+                        academic learning, discipline and holistic
+                        student development.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+
+                    <h3>
+                        Academics
+                    </h3>
+
+                    <p>
+                        Academic programmes designed to encourage
+                        knowledge, curiosity, critical thinking and
+                        continued learning.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+
+                    <h3>
+                        Students
+                    </h3>
+
+                    <p>
+                        A student-centred approach supporting academic,
+                        personal, social and co-curricular development.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+
+                    <h3>
+                        Community
+                    </h3>
+
+                    <p>
+                        Meaningful communication between the school,
+                        families, educators and the wider community.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DETAILED DISCLOSURE
+========================================================= -->
+
+<section class="details-section">
+
+    <div class="container">
+
+
+        <div class="text-center mb-5">
+
+            <span class="eyebrow">
+                Institutional Framework
+            </span>
+
+            <h2 class="section-title">
+                Key Areas of Information
+            </h2>
+
+            <div class="gold-line mx-auto"></div>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- GOVERNANCE -->
+
+            <div class="col-lg-6">
+
+                <div class="detail-panel">
+
+                    <div class="detail-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Governance &amp; Administration
+                    </h3>
+
+                    <p>
+
+                        Effective administration provides the foundation
+                        for an organised educational environment.
+                        Institutional leadership is responsible for
+                        academic planning, administration, communication
+                        and implementation of school policies.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Institutional administration and leadership
+                        </li>
+
+                        <li>
+                            Academic planning and school operations
+                        </li>
+
+                        <li>
+                            Parent and stakeholder communication
+                        </li>
+
+                        <li>
+                            Maintenance of institutional records
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACADEMICS -->
+
+            <div class="col-lg-6">
+
+                <div class="detail-panel">
+
+                    <div class="detail-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Academic Framework
+                    </h3>
+
+                    <p>
+
+                        The academic environment aims to develop strong
+                        foundations in knowledge while encouraging
+                        curiosity, disciplined study, communication and
+                        independent thinking.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Structured academic programmes
+                        </li>
+
+                        <li>
+                            Curriculum-based learning
+                        </li>
+
+                        <li>
+                            Assessment and academic progress
+                        </li>
+
+                        <li>
+                            Co-curricular learning opportunities
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- STUDENT WELFARE -->
+
+            <div class="col-lg-6">
+
+                <div class="detail-panel">
+
+                    <div class="detail-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Student Welfare
+                    </h3>
+
+                    <p>
+
+                        Student welfare is an important part of creating
+                        a positive learning environment. The school
+                        seeks to support students academically,
+                        socially and personally throughout their
+                        educational journey.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Student discipline and guidance
+                        </li>
+
+                        <li>
+                            Supportive learning environment
+                        </li>
+
+                        <li>
+                            Communication with parents and guardians
+                        </li>
+
+                        <li>
+                            Student participation in school activities
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- FACILITIES -->
+
+            <div class="col-lg-6">
+
+                <div class="detail-panel">
+
+                    <div class="detail-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Campus &amp; Facilities
+                    </h3>
+
+                    <p>
+
+                        The school's facilities are intended to support
+                        classroom learning, student activities and a
+                        balanced school experience.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Learning and classroom spaces
+                        </li>
+
+                        <li>
+                            Academic support facilities
+                        </li>
+
+                        <li>
+                            Student activity areas
+                        </li>
+
+                        <li>
+                            Campus infrastructure and services
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAFETY -->
+
+            <div class="col-lg-6">
+
+                <div class="detail-panel">
+
+                    <div class="detail-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Safety &amp; Responsible Conduct
+                    </h3>
+
+                    <p>
+
+                        Maintaining a safe and respectful school
+                        environment requires cooperation between
+                        students, parents, teachers and administration.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Responsible student conduct
+                        </li>
+
+                        <li>
+                            School discipline and behavioural standards
+                        </li>
+
+                        <li>
+                            Parent-school communication
+                        </li>
+
+                        <li>
+                            Appropriate supervision and administration
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMMUNICATION -->
+
+            <div class="col-lg-6">
+
+                <div class="detail-panel">
+
+                    <div class="detail-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Communication &amp; Accessibility
+                    </h3>
+
+                    <p>
+
+                        The school encourages parents and other
+                        stakeholders to use official communication
+                        channels when seeking information about
+                        admissions, academics, documentation or
+                        institutional matters.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Official school contact channels
+                        </li>
+
+                        <li>
+                            Admissions-related enquiries
+                        </li>
+
+                        <li>
+                            Academic communication
+                        </li>
+
+                        <li>
+                            Institutional information requests
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DOCUMENTS
+========================================================= -->
+
+<section class="documents-section">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            Public Information
+        </span>
+
+        <h2 class="section-title">
+            Important Institutional Documents
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p class="intro-copy mb-5">
+
+            Where applicable, official documents and supporting records
+            may be published through the school's designated
+            administrative channels. The list below provides a structured
+            framework for institutional documentation.
+
+        </p>
+
+
+        <div class="document-row">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    <i class="fas fa-file-lines"></i>
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        School Institutional Information
+                    </div>
+
+                    <div class="document-description">
+                        Basic institutional and administrative details
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="document-status">
+                Institutional
+            </span>
+
+        </div>
+
+
+        <div class="document-row">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        Academic &amp; Curriculum Information
+                    </div>
+
+                    <div class="document-description">
+                        Academic structure and curriculum-related details
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="document-status">
+                Academic
+            </span>
+
+        </div>
+
+
+        <div class="document-row">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    <i class="fas fa-indian-rupee-sign"></i>
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        Fee Structure
+                    </div>
+
+                    <div class="document-description">
+                        Current fee-related information for families
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="document-status">
+                Admissions
+            </span>
+
+        </div>
+
+
+        <div class="document-row">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        Admission Information
+                    </div>
+
+                    <div class="document-description">
+                        Admission process and relevant requirements
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="document-status">
+                Admissions
+            </span>
+
+        </div>
+
+
+        <div class="document-row">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    <i class="fas fa-building-columns"></i>
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        Institutional Policies
+                    </div>
+
+                    <div class="document-description">
+                        School policies and administrative information
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="document-status">
+                Policy
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRANSPARENCY
+========================================================= -->
+
+<section class="transparency-section">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-9">
+
+                <span
+                    class="eyebrow"
+                    style="color:var(--gold-light);">
+
+                    Our Commitment
+
+                </span>
+
+
+                <h2 class="transparency-title">
+
+                    Transparency, Responsibility
+                    &amp; Trust
+
+                </h2>
+
+
+                <div class="gold-line"></div>
+
+
+                <p class="transparency-copy">
+
+                    A strong educational institution is built on trust,
+                    responsibility and open communication. St. Martin's
+                    High School recognises the importance of providing
+                    families and stakeholders with clear access to
+                    essential institutional information.
+
+                </p>
+
+
+                <p class="transparency-copy mt-3">
+
+                    This disclosure page is intended to serve as a
+                    central reference point for important institutional
+                    information. Official records and published
+                    particulars should be reviewed periodically by the
+                    authorised school administration to ensure continued
+                    accuracy.
+
+                </p>
+
+
+                <ul class="transparency-list">
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Clear and accessible institutional information
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Responsible administrative communication
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Accessible information for parents and students
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Periodic review of published information
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Commitment to an organised educational environment
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCATION
+========================================================= -->
+
+<section class="location-section">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            Visit Our Campus
+        </span>
+
+        <h2 class="section-title">
+            School Location
+        </h2>
+
+        <div class="gold-line"></div>
+
+
+        <div class="location-box">
+
+            <div class="row g-0">
+
+
+                <div class="col-lg-5">
+
+                    <div class="location-content">
+
+                        <h3 class="location-title">
+                            St. Martin's High School
+                        </h3>
+
+
+                        <p class="location-description">
+
+                            Our campus is located in Balanagar,
+                            Hyderabad. Parents and visitors are encouraged
+                            to contact the school before visiting for
+                            admissions, documentation or other official
+                            enquiries.
+
+                        </p>
+
+
+                        <div class="location-item">
+
+                            <i class="fas fa-location-dot"></i>
+
+                            <span>
+
+                                Door No. 4-144, Near BHEL R&amp;D,
+                                Balanagar, Navajeevan Nagar,
+                                Ferozguda, Hyderabad,
+                                Telangana - 500037
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="location-item">
+
+                            <i class="fas fa-phone"></i>
+
+                            <span>
+                                040 - 4020 4839
+                            </span>
+
+                        </div>
+
+
+                        <div class="location-item">
+
+                            <i class="fas fa-envelope"></i>
+
+                            <span>
+                                Stmartinshighschool@gmail.com
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="https://www.google.com/maps/search/?api=1&query=St+Martins+High+School+Balanagar+Hyderabad"
+                            target="_blank"
+                            rel="noopener"
+                            class="directions-button">
+
+                            Get Directions
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-7">
+
+                    <iframe
+                        class="map-frame"
+                        src="https://www.google.com/maps?q=St.+Martin%27s+High+School+Balanagar+Hyderabad&output=embed"
+                        loading="lazy"
+                        title="St. Martin's High School location map">
+                    </iframe>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="school-footer">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+
+            <!-- SCHOOL -->
+
+            <div class="col-lg-4">
+
+                <div class="footer-school-name">
+
+                    ST. MARTIN'S HIGH SCHOOL
+
+                </div>
+
+
+                <p class="footer-description">
+
+                    Inspiring Academic Distinction, Shaping Moral
+                    Character &amp; Fostering Lifelong Success.
+
+                </p>
+
+
+                <p class="footer-description">
+
+                    Balanagar, Hyderabad, Telangana
+
+                </p>
+
+            </div>
+
+
+            <!-- EXPLORE -->
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-heading">
+                    Explore
+                </div>
+
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/about">
+                            About School
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/principal">
+                            Principal
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/facilities">
+                            Facilities
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/gallery">
+                            Gallery
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- ACADEMICS -->
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-heading">
+                    Academics
+                </div>
+
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/academics/primary">
+                            Primary
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/academics/middle">
+                            Middle School
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/academics/secondary">
+                            Secondary
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/academics/curriculum">
+                            Curriculum
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/disclosure">
+                            Disclosure
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="col-lg-4">
+
+                <div class="footer-heading">
+                    Contact
+                </div>
+
+
+                <div class="footer-contact">
+
+                    <p>
+
+                        <i class="fas fa-location-dot"></i>
+
+                        Door No. 4-144, Near BHEL R&amp;D,
+                        Balanagar, Navajeevan Nagar,
+                        Ferozguda, Hyderabad,
+                        Telangana - 500037
+
+                    </p>
+
+
+                    <p>
+
+                        <i class="fas fa-phone"></i>
+
+                        040 - 4020 4839
+
+                    </p>
+
+
+                    <p>
+
+                        <i class="fas fa-envelope"></i>
+
+                        info@stmartinsbalanagar.com
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER MAP -->
+
+        <iframe
+            class="footer-map"
+            src="https://www.google.com/maps?q=St.+Martin%27s+High+School+Balanagar+Hyderabad&output=embed"
+            loading="lazy"
+            title="St. Martin's High School map">
+        </iframe>
+
+
+        <!-- FOOTER BOTTOM -->
+
+        <div class="footer-bottom">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    © 2026 St. Martin's High School.
+                    All Rights Reserved.
+
+                </div>
+
+
+                <div class="col-md-6 text-md-end">
+
+                    Mandatory Public Disclosure
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     BOOTSTRAP JAVASCRIPT
+========================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+</html>

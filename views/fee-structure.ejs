@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fee Structure | St. Martin's High School, Balanagar</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           PAGE VARIABLES
+        ===================================================== */
+
+        :root {
+            --navy: #071A2B;
+            --navy-midnight: #051522;
+            --gold: #C5A45A;
+            --ivory: #F8F6F0;
+            --white: #ffffff;
+            --charcoal: #252A2E;
+            --muted: #70777d;
+            --light-border: rgba(7,26,43,0.12);
+        }
+
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ivory);
+            color: var(--charcoal);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .smhs-header {
+            background: var(--white);
+            border-bottom: 1px solid rgba(7,26,43,0.12);
+            box-shadow: 0 3px 18px rgba(7,26,43,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        .smhs-header-inner {
+            max-width: 1140px;
+            margin: auto;
+            padding: 14px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        /* =====================================================
+           BRAND
+        ===================================================== */
+
+        .smhs-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .smhs-brand img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .smhs-brand h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+
+        .smhs-brand small {
+            display: block;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+
+        /* =====================================================
+           HEADER RIGHT
+        ===================================================== */
+
+        .smhs-header-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .smhs-phone {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .smhs-phone i {
+            color: var(--gold);
+            margin-right: 6px;
+        }
+
+        .teacher-login {
+            color: var(--navy);
+            border: 1px solid var(--navy);
+            padding: 8px 15px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            transition: 0.3s ease;
+        }
+
+        .teacher-login:hover {
+            background: var(--navy);
+            color: white;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .smhs-navbar {
+            background: var(--navy);
+            padding: 8px 0;
+        }
+
+        .smhs-navbar .container {
+            max-width: 1140px;
+        }
+
+        .smhs-navbar .navbar-nav {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .smhs-navbar .nav-link {
+            color: #ffffff !important;
+            font-size: 0.83rem;
+            font-weight: 500;
+            padding: 9px 0 !important;
+            transition: color 0.25s ease;
+        }
+
+        .smhs-navbar .nav-link:hover {
+            color: var(--gold) !important;
+        }
+
+        .smhs-navbar .dropdown-menu {
+            border: none;
+            border-radius: 0;
+            padding: 8px 0;
+            box-shadow: 0 15px 35px rgba(7,26,43,0.18);
+        }
+
+        .smhs-navbar .dropdown-item {
+            padding: 10px 20px;
+            font-size: 0.82rem;
+            color: var(--charcoal);
+            transition: 0.2s ease;
+        }
+
+        .smhs-navbar .dropdown-item:hover {
+            background: var(--ivory);
+            color: var(--navy);
+            padding-left: 25px;
+        }
+
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 0;
+        }
+
+
+        /* =====================================================
+           PAGE HERO
+        ===================================================== */
+
+        .fee-page {
+            max-width: 1140px;
+            margin: auto;
+            padding: 6rem 15px 7rem;
+        }
+
+        .eyebrow {
+            display: block;
+            color: var(--muted);
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            margin-bottom: 10px;
+        }
+
+        .page-title {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy);
+            font-size: 4rem;
+            font-weight: 600;
+            margin: 0 0 15px;
+        }
+
+        .gold-rule {
+            width: 65px;
+            height: 3px;
+            background: var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .page-intro {
+            max-width: 850px;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-bottom: 4rem;
+        }
+
+
+        /* =====================================================
+           IMPORTANT NOTICE
+        ===================================================== */
+
+        .fee-notice {
+            background: var(--navy);
+            color: white;
+            padding: 28px 32px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 4rem;
+            border-left: 4px solid var(--gold);
+        }
+
+        .fee-notice-icon {
+            color: var(--gold);
+            font-size: 1.4rem;
+            padding-top: 2px;
+        }
+
+        .fee-notice h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin: 0 0 6px;
+        }
+
+        .fee-notice p {
+            margin: 0;
+            color: rgba(255,255,255,0.75);
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           SECTION HEADINGS
+        ===================================================== */
+
+        .section-heading {
+            margin-bottom: 25px;
+        }
+
+        .section-number {
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .section-heading h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           FEE TABLE
+        ===================================================== */
+
+        .fee-table-wrapper {
+            background: var(--white);
+            border: 1px solid rgba(197,164,90,0.25);
+            box-shadow: 0 15px 40px rgba(7,26,43,0.06);
+            overflow-x: auto;
+            margin-bottom: 4.5rem;
+        }
+
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            min-width: 650px;
+        }
+
+        .fee-table thead {
+            background: var(--navy);
+        }
+
+        .fee-table th {
+            color: white;
+            text-align: left;
+            padding: 17px 22px;
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .fee-table th:last-child,
+        .fee-table td:last-child {
+            text-align: right;
+        }
+
+        .fee-table td {
+            padding: 19px 22px;
+            border-bottom: 1px solid rgba(7,26,43,0.08);
+            font-size: 0.88rem;
+            color: var(--charcoal);
+        }
+
+        .fee-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .fee-table tbody tr:hover {
+            background: #fcfaf5;
+        }
+
+        .fee-class {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem !important;
+            color: var(--navy) !important;
+            font-weight: 600;
+        }
+
+        .fee-amount {
+            font-weight: 600;
+            color: var(--navy) !important;
+        }
+
+        .fee-placeholder {
+            color: var(--gold) !important;
+            font-style: italic;
+        }
+
+
+        /* =====================================================
+           THREE INFORMATION BOXES
+        ===================================================== */
+
+        .fee-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 5rem;
+        }
+
+        .fee-info-card {
+            background: white;
+            padding: 30px;
+            border-top: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(7,26,43,0.05);
+        }
+
+        .fee-info-card i {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+        }
+
+        .fee-info-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy);
+            font-size: 1.45rem;
+            margin-bottom: 12px;
+        }
+
+        .fee-info-card p {
+            color: var(--muted);
+            font-size: 0.83rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           PAYMENT INFORMATION
+        ===================================================== */
+
+        .payment-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--navy);
+            margin-bottom: 4.5rem;
+        }
+
+        .payment-content {
+            padding: 3.5rem;
+        }
+
+        .payment-content .section-number {
+            color: var(--gold);
+        }
+
+        .payment-content h2 {
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            margin-bottom: 18px;
+        }
+
+        .payment-content p {
+            color: rgba(255,255,255,0.72);
+            font-size: 0.88rem;
+            line-height: 1.8;
+        }
+
+        .payment-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0 0;
+        }
+
+        .payment-list li {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.84rem;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .payment-list li:last-child {
+            border-bottom: none;
+        }
+
+        .payment-list i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+
+        .accounts-panel {
+            background: #0d2539;
+            padding: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .accounts-panel h3 {
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 18px;
+        }
+
+        .accounts-panel p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .contact-account {
+            margin-top: 15px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .contact-account:hover {
+            color: white;
+        }
+
+
+        /* =====================================================
+           NOTES
+        ===================================================== */
+
+        .notes-box {
+            background: white;
+            border: 1px solid rgba(7,26,43,0.1);
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .notes-box h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy);
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+        }
+
+        .notes-box ol {
+            padding-left: 22px;
+            margin: 0;
+        }
+
+        .notes-box li {
+            color: var(--muted);
+            font-size: 0.86rem;
+            line-height: 1.9;
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .smhs-footer {
+            background: var(--navy);
+            color: white;
+            position: relative;
+        }
+
+        .smhs-footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .smhs-footer-inner {
+            max-width: 1140px;
+            margin: auto;
+            padding: 4.5rem 15px 2rem;
+        }
+
+        .smhs-footer-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr 1.25fr;
+            gap: 3rem;
+        }
+
+        .smhs-footer-brand img {
+            width: 62px;
+            height: 62px;
+            object-fit: contain;
+            margin-bottom: 18px;
+        }
+
+        .smhs-footer-brand h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.65rem;
+            margin: 0 0 5px;
+        }
+
+        .smhs-footer-location {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            font-size: .68rem;
+            margin-bottom: 15px;
+        }
+
+        .smhs-footer-brand p {
+            color: rgba(255,255,255,.65);
+            font-size: .86rem;
+            line-height: 1.8;
+            max-width: 390px;
+        }
+
+        .smhs-footer-title {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            font-size: .7rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .smhs-footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .smhs-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .smhs-footer-links a {
+            color: rgba(255,255,255,.7);
+            text-decoration: none;
+            font-size: .84rem;
+            transition: .2s ease;
+        }
+
+        .smhs-footer-links a:hover {
+            color: var(--gold);
+            padding-left: 4px;
+        }
+
+        .smhs-footer-contact {
+            color: rgba(255,255,255,.7);
+            font-size: .84rem;
+            line-height: 1.8;
+        }
+
+        .smhs-footer-contact strong {
+            color: white;
+            font-weight: 500;
+        }
+
+        .smhs-footer-contact a {
+            color: rgba(255,255,255,.7);
+            text-decoration: none;
+        }
+
+        .smhs-footer-contact a:hover {
+            color: var(--gold);
+        }
+
+        .smhs-footer-divider {
+            height: 1px;
+            background: rgba(255,255,255,.12);
+            margin: 3rem 0 1.5rem;
+        }
+
+        .smhs-footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            color: rgba(255,255,255,.45);
+            font-size: .74rem;
+        }
+
+        .smhs-footer-bottom a {
+            color: rgba(255,255,255,.55);
+            text-decoration: none;
+        }
+
+        .smhs-footer-bottom a:hover {
+            color: var(--gold);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 991px) {
+
+            .smhs-header-right {
+                display: none;
+            }
+
+            .smhs-navbar .navbar-nav {
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .smhs-navbar .nav-link {
+                padding: 10px 0 !important;
+            }
+
+            .fee-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-section {
+                grid-template-columns: 1fr;
+            }
+
+            .smhs-footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .smhs-header-inner {
+                padding: 12px 15px;
+            }
+
+            .smhs-brand img {
+                width: 52px;
+                height: 52px;
+                margin-right: 10px;
+            }
+
+            .smhs-brand h1 {
+                font-size: 1rem;
+            }
+
+            .smhs-brand small {
+                font-size: .56rem;
+            }
+
+            .fee-page {
+                padding: 4rem 18px 5rem;
+            }
+
+            .page-title {
+                font-size: 2.8rem;
+            }
+
+            .page-intro {
+                font-size: .95rem;
+            }
+
+            .fee-notice {
+                padding: 24px;
+            }
+
+            .fee-notice-icon {
+                display: none;
+            }
+
+            .section-heading h2 {
+                font-size: 2.1rem;
+            }
+
+            .payment-content,
+            .accounts-panel {
+                padding: 2.5rem 1.7rem;
+            }
+
+            .notes-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .smhs-footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.3rem;
+            }
+
+            .smhs-footer-inner {
+                padding: 3.5rem 20px 1.5rem;
+            }
+
+            .smhs-footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="smhs-header">
+
+    <div class="smhs-header-inner">
+
+        <a href="/" class="smhs-brand">
+
+            <img
+                src="/images/logo.png"
+                alt="St. Martin's High School Logo"
+                onerror="this.style.display='none'">
+
+            <div>
+
+                <h1>
+                    ST. MARTIN'S HIGH SCHOOL
+                </h1>
+
+                <small>
+                    BALANAGAR, HYDERABAD
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <div class="smhs-header-right">
+
+            <span class="smhs-phone">
+
+                <i class="fas fa-phone-alt"></i>
+
+                040 - 4020 4839
+
+            </span>
+
+
+            <a
+                href="/teacher-login"
+                class="teacher-login">
+
+                Teacher Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark smhs-navbar">
+
+    <div class="container">
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar">
+
+
+            <ul class="navbar-nav w-100">
+
+
+                <!-- HOME -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/">
+
+                        HOME
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- ABOUT -->
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                        ABOUT US
+
+                    </a>
+
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/about">
+
+                                School Overview
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/principal">
+
+                                Principal & Management
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/educational-society">
+
+                                Educational Society
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/disclosure">
+
+                                Disclosure
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+
+                <!-- FACILITIES -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/facilities">
+
+                        FACILITIES
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- ACADEMICS -->
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                        ACADEMICS
+
+                    </a>
+
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+
+                            <a
+                                class="dropdown-item"
+                                href="/academics/curriculum">
+
+                                Curriculum
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+
+                <!-- STUDENT LIFE -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/student-life">
+
+                        STUDENT LIFE
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- ADMISSIONS -->
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                        ADMISSIONS
+
+                    </a>
+
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+
+                            <a
+                                class="dropdown-item"
+                                href="/admissions">
+
+                                Admission Process
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a
+                                class="dropdown-item"
+                                href="/fee-structure"
+                                style="color: var(--gold);">
+
+                                Fee Structure
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+
+                <!-- GALLERY -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/gallery">
+
+                        GALLERY
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- CONTACT -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/contact">
+
+                        CONTACT US
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="fee-page">
+
+
+    <!-- PAGE INTRO -->
+
+    <span class="eyebrow">
+        Financial Transparency
+    </span>
+
+
+    <h1 class="page-title">
+        Fee Structure
+    </h1>
+
+
+    <div class="gold-rule"></div>
+
+
+    <p class="page-intro">
+
+        St. Martin's High School believes in maintaining clarity
+        and transparency regarding school fees. The fee structure
+        is designed to support the academic programme, learning
+        resources, campus facilities, student activities, and
+        overall educational experience provided by the school.
+
+    </p>
+
+
+
+    <!-- =====================================================
+         IMPORTANT NOTICE
+    ===================================================== -->
+
+    <div class="fee-notice">
+
+        <div class="fee-notice-icon">
+
+            <i class="fas fa-circle-info"></i>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Official Fee Information
+            </h3>
+
+            <p>
+
+                The amounts displayed in the tables below are
+                placeholders until the school's official fee
+                schedule is entered. Please verify the final
+                fee amount with the school administration before
+                making any payment.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ANNUAL SCHOOL FEES
+    ===================================================== -->
+
+    <div class="section-heading">
+
+        <span class="section-number">
+            01 · Annual Fees
+        </span>
+
+        <h2>
+            School Fee Structure
+        </h2>
+
+    </div>
+
+
+    <div class="fee-table-wrapper">
+
+        <table class="fee-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Class / Grade
+                    </th>
+
+                    <th>
+                        Annual Tuition Fee
+                    </th>
+
+                    <th>
+                        Other Charges
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td class="fee-class">
+                        Nursery
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        LKG
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        UKG
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        Class I – V
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        Class VI – VIII
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        Class IX – X
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ADDITIONAL FEES
+    ===================================================== -->
+
+    <div class="section-heading">
+
+        <span class="section-number">
+            02 · Additional Charges
+        </span>
+
+        <h2>
+            Admission & Other Charges
+        </h2>
+
+    </div>
+
+
+    <div class="fee-table-wrapper">
+
+        <table class="fee-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Fee / Charge
+                    </th>
+
+                    <th>
+                        Applicable To
+                    </th>
+
+                    <th>
+                        Amount
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td class="fee-class">
+                        Registration Fee
+                    </td>
+
+                    <td>
+                        New Admissions
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        Admission Fee
+                    </td>
+
+                    <td>
+                        New Admissions
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        Transport Fee
+                    </td>
+
+                    <td>
+                        Students using school transport
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        Examination / Activity Charges
+                    </td>
+
+                    <td>
+                        As applicable
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="fee-class">
+                        Other Charges
+                    </td>
+
+                    <td>
+                        As applicable
+                    </td>
+
+                    <td class="fee-placeholder">
+                        To be updated
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         INFORMATION CARDS
+    ===================================================== -->
+
+    <div class="fee-info-grid">
+
+
+        <div class="fee-info-card">
+
+            <i class="fas fa-calendar-check"></i>
+
+            <h3>
+                Fee Schedule
+            </h3>
+
+            <p>
+
+                School fees may be payable according to the
+                schedule communicated by the school administration.
+                Parents are advised to observe the applicable
+                payment deadlines.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="fee-info-card">
+
+            <i class="fas fa-file-invoice"></i>
+
+            <h3>
+                Fee Receipts
+            </h3>
+
+            <p>
+
+                Parents and guardians should retain official
+                fee receipts and transaction records for
+                future reference and school-related requirements.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="fee-info-card">
+
+            <i class="fas fa-headset"></i>
+
+            <h3>
+                Fee Assistance
+            </h3>
+
+            <p>
+
+                For questions regarding the applicable fee,
+                payment schedule, concessions, or other
+                financial matters, please contact the
+                school's administrative office.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         PAYMENT INFORMATION
+    ===================================================== -->
+
+    <section class="payment-section">
+
+
+        <div class="payment-content">
+
+            <span class="section-number">
+                03 · Payment Information
+            </span>
+
+
+            <h2>
+                Making Your Fee Payment
+            </h2>
+
+
+            <p>
+
+                Parents and guardians are requested to use
+                the payment method officially communicated
+                by the school. Please ensure that all
+                payment details are entered correctly.
+
+            </p>
+
+
+            <ul class="payment-list">
+
+                <li>
+
+                    <i class="fas fa-check"></i>
+
+                    Confirm the applicable fee before payment.
+
+                </li>
+
+
+                <li>
+
+                    <i class="fas fa-check"></i>
+
+                    Use only official school payment channels.
+
+                </li>
+
+
+                <li>
+
+                    <i class="fas fa-check"></i>
+
+                    Keep the payment confirmation or receipt.
+
+                </li>
+
+
+                <li>
+
+                    <i class="fas fa-check"></i>
+
+                    Contact the accounts office for payment-related queries.
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="accounts-panel">
+
+            <h3>
+                Accounts Office
+            </h3>
+
+
+            <p>
+
+                For clarification regarding tuition fees,
+                additional charges, payment deadlines,
+                receipts, or any discrepancy in the fee
+                information, please contact the school office.
+
+            </p>
+
+
+            <a
+                href="tel:04040204839"
+                class="contact-account">
+
+                <i class="fas fa-phone"></i>
+                &nbsp; 040 - 4020 4839
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         IMPORTANT NOTES
+    ===================================================== -->
+
+    <section class="notes-box">
+
+        <h2>
+            Important Notes
+        </h2>
+
+
+        <ol>
+
+            <li>
+                The fee amounts shown on this page should be
+                replaced with the school's officially approved
+                fee schedule before the website is published.
+            </li>
+
+
+            <li>
+                Fee amounts may vary depending on the student's
+                class, programme, transport requirements, or
+                other applicable services.
+            </li>
+
+
+            <li>
+                Any applicable admission, registration,
+                examination, activity, transport, or other
+                charges should be confirmed with the school
+                administration.
+            </li>
+
+
+            <li>
+                Parents should make payments only through
+                officially authorised school payment channels.
+            </li>
+
+
+            <li>
+                Please retain all official receipts and
+                transaction confirmations for future reference.
+            </li>
+
+
+            <li>
+                For the most current fee information, parents
+                and guardians should contact the school office
+                directly.
+            </li>
+
+        </ol>
+
+    </section>
+
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="smhs-footer">
+
+    <div class="smhs-footer-inner">
+
+
+        <div class="smhs-footer-grid">
+
+
+            <!-- BRAND -->
+
+            <div class="smhs-footer-brand">
+
+                <img
+                    src="/images/logo.png"
+                    alt="St. Martin's High School Logo"
+                    onerror="this.style.display='none'">
+
+
+                <h3>
+                    St. Martin's High School
+                </h3>
+
+
+                <div class="smhs-footer-location">
+                    Balanagar, Hyderabad
+                </div>
+
+
+                <p>
+
+                    A learning environment committed to
+                    academic excellence, character, confidence,
+                    and the holistic development of every student.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- EXPLORE -->
+
+            <div>
+
+                <h4 class="smhs-footer-title">
+                    Explore
+                </h4>
+
+
+                <ul class="smhs-footer-links">
+
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/about">
+                            School Overview
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/principal">
+                            Principal & Management
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/facilities">
+                            Facilities
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/gallery">
+                            Gallery
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- INFORMATION -->
+
+            <div>
+
+                <h4 class="smhs-footer-title">
+                    Information
+                </h4>
+
+
+                <ul class="smhs-footer-links">
+
+                    <li>
+                        <a href="/academics/curriculum">
+                            Curriculum
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/student-life">
+                            Student Life
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/admissions">
+                            Admissions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            href="/fee-structure"
+                            style="color:var(--gold);">
+
+                            Fee Structure
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/teacher-login">
+                            Teacher Login
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+
+            <div>
+
+                <h4 class="smhs-footer-title">
+                    Contact
+                </h4>
+
+
+                <div class="smhs-footer-contact">
+
+                    <p>
+                        <strong>
+                            St. Martin's High School
+                        </strong>
+                    </p>
+
+
+                    <p>
+                        Balanagar, Hyderabad, Telangana
+                    </p>
+
+
+                    <p>
+
+                        Phone:
+
+                        <a href="tel:04040204839">
+                            040 - 4020 4839
+                        </a>
+
+                    </p>
+
+
+                    <p>
+
+                        For admissions and school
+                        enquiries, please contact
+                        the school office.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- DIVIDER -->
+
+        <div class="smhs-footer-divider"></div>
+
+
+
+        <!-- BOTTOM -->
+
+        <div class="smhs-footer-bottom">
+
+            <span>
+
+                © 2026 St. Martin's High School.
+                All rights reserved.
+
+            </span>
+
+
+            <span>
+
+                <a href="/contact">
+                    Contact School
+                </a>
+
+                &nbsp; · &nbsp;
+
+                <a href="/teacher-login">
+                    Teacher Portal
+                </a>
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- MAIN JS -->
+
+<script src="/js/script.js"></script>
+
+
+</body>
+
+</html>

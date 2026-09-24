@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333333;
+        }
+        .bg-navy {
+            background-color: #071A2B;
+        }
+        .text-gold {
+            color: #C5A45A;
+        }
+        .border-gold {
+            border-color: #C5A45A !important;
+        }
+        .btn-gold {
+            background-color: #C5A45A;
+            color: #ffffff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background-color: #b0914c;
+            color: #ffffff;
+        }
+        .society-card {
+            border: 1px solid rgba(197, 164, 90, 0.3);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #ffffff;
+        }
+        .society-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(7, 26, 43, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Partial -->
+    <%- include('partials/header') %>
+
+    <!-- Page Header Banner -->
+    <section class="bg-navy py-5 text-white text-center" style="border-bottom: 4px solid #C5A45A;">
+        <div class="container py-4">
+            <span class="text-uppercase fw-bold text-gold tracking-wider" style="font-size: 13px; letter-spacing: 1.5px;">St. Martin's Children's Education Society</span>
+            <h1 class="display-5 fw-bold text-gold my-3">Founders & Governing Body</h1>
+            <p class="lead mx-auto" style="max-width: 700px; color: #b9c4d0;">
+                Founded in 1982 — Steering St. Martin's High School toward enduring academic distinction and moral integrity.
+            </p>
+        </div>
+    </section>
+
+    <!-- Founders & Leadership Banner Photo Section -->
+    <section class="py-5 bg-white">
+        <div class="container py-3">
+            <div class="text-center mb-4">
+                <span class="text-uppercase fw-bold text-gold" style="letter-spacing: 1.5px; font-size: 13px;">Our Honored Founders</span>
+                <h2 class="fw-bold" style="color: #071A2B;">The Executive Leadership Board</h2>
+                <p class="text-muted">Guiding visionaries behind the establishment and success of our educational institution.</p>
+            </div>
+
+            <!-- Management Photo Showcase -->
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card shadow-lg border-2 border-gold overflow-hidden rounded">
+                        <img src="/images/management-placeholder.png" alt="St. Martin's Children's Education Society Founders" class="img-fluid w-100" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Society Overview Section -->
+    <section class="py-5" style="background-color: #f1f4f8;">
+        <div class="container py-3">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="text-uppercase fw-bold text-gold" style="font-size: 13px; letter-spacing: 1.5px;">Our Legacy</span>
+                    <h2 class="fw-bold mb-4" style="color: #071A2B;">Decades of Commitment to Community & Quality Learning</h2>
+                    <p class="text-muted mb-4" style="line-height: 1.8;">
+                        St. Martin's High School operates under the careful stewardship and vision of the <strong>St. Martin's Children's Education Society (Founded in 1982)</strong>. Established with a profound dedication to empowering youth through knowledge, the society has consistently prioritized accessible, top-tier education paired with strong moral values.
+                    </p>
+                    <p class="text-muted mb-4" style="line-height: 1.8;">
+                        Through rigorous planning, philanthropic guidance, and continuous infrastructure upgrades, our founders ensure that our campus in Balanagar remains an inspirational hub of intellectual inquiry and character building.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="/about" class="btn btn-outline-dark px-4 py-2">School Overview</a>
+                        <a href="/contact" class="btn btn-gold px-4 py-2">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-4 rounded shadow-sm bg-navy text-white border-start border-4 border-gold">
+                        <h4 class="text-gold mb-3"><i class="fas fa-hands-helping me-2"></i> Society Core Objectives</h4>
+                        <ul class="list-unstyled text-muted mb-0" style="color: #b9c4d0 !important; line-height: 2;">
+                            <li><i class="fas fa-check-circle text-gold me-2"></i> Promoting academic excellence across all strata of society</li>
+                            <li><i class="fas fa-check-circle text-gold me-2"></i> Cultivating ethical responsibility, discipline, and patriotism</li>
+                            <li><i class="fas fa-check-circle text-gold me-2"></i> Upgrading educational technology, labs, and sports infrastructure</li>
+                            <li><i class="fas fa-check-circle text-gold me-2"></i> Supporting continuous faculty development and professional training</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Society Governance Pillars -->
+    <section class="py-5 bg-white">
+        <div class="container py-3">
+            <div class="text-center mb-5">
+                <span class="text-uppercase fw-bold text-gold" style="letter-spacing: 1.5px; font-size: 13px;">Guiding Principles</span>
+                <h2 class="fw-bold" style="color: #071A2B;">Pillars of Administration</h2>
+                <p class="text-muted">The core tenets upheld by our governing board to foster a thriving learning ecosystem.</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Pillar 1 -->
+                <div class="col-md-4">
+                    <div class="society-card p-4 h-100 text-center">
+                        <div class="bg-navy text-gold rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 70px; height: 70px;">
+                            <i class="fas fa-balance-scale fa-1x"></i>
+                        </div>
+                        <h4 class="fw-bold text-navy mb-3" style="color: #071A2B;">Ethical Integrity</h4>
+                        <p class="text-muted small" style="line-height: 1.7;">
+                            Operating with complete transparency, fairness, and a deep sense of responsibility toward students, parents, and the local community.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="col-md-4">
+                    <div class="society-card p-4 h-100 text-center">
+                        <div class="bg-navy text-gold rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 70px; height: 70px;">
+                            <i class="fas fa-lightbulb fa-1x"></i>
+                        </div>
+                        <h4 class="fw-bold text-navy mb-3" style="color: #071A2B;">Progressive Vision</h4>
+                        <p class="text-muted small" style="line-height: 1.7;">
+                            Embracing modern educational methodologies, digital tools, and dynamic curricula to keep students ahead in a competitive world.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="col-md-4">
+                    <div class="society-card p-4 h-100 text-center">
+                        <div class="bg-navy text-gold rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 70px; height: 70px;">
+                            <i class="fas fa-users-cog fa-1x"></i>
+                        </div>
+                        <h4 class="fw-bold text-navy mb-3" style="color: #071A2B;">Community Welfare</h4>
+                        <p class="text-muted small" style="line-height: 1.7;">
+                            Ensuring that quality schooling remains supportive, inclusive, and deeply rooted in values that benefit society at large.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Footer Partial -->
+    <%- include('partials/footer') %>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

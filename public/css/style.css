@@ -1,0 +1,2107 @@
+/* ==========================================================
+   ST. MARTIN'S HIGH SCHOOL — BALANAGAR
+   HYDERABAD
+
+   GLOBAL LUXURY DESIGN SYSTEM
+   Complete style.css
+   ========================================================== */
+
+
+/* ==========================================================
+   01. DESIGN TOKENS
+   ========================================================== */
+
+:root {
+    --midnight-navy: #071A2B;
+    --deep-navy: #0C2235;
+    --burgundy: #581722;
+    --champagne-gold: #C5A45A;
+    --gold-light: #E0C67B;
+    --warm-ivory: #F6F1E7;
+    --pure-white: #FFFFFF;
+    --charcoal: #20252A;
+    --muted-gray: #6C757D;
+    --soft-gray: #E9E5DC;
+
+    --shadow-sm: 0 5px 20px rgba(7, 26, 43, 0.08);
+    --shadow-md: 0 15px 45px rgba(7, 26, 43, 0.12);
+    --shadow-lg: 0 25px 70px rgba(7, 26, 43, 0.18);
+
+    --transition-fast: 0.25s ease;
+    --transition: 0.35s ease;
+    --transition-slow: 0.7s ease;
+}
+
+
+/* ==========================================================
+   02. GLOBAL RESET
+   ========================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Inter", sans-serif;
+    color: var(--charcoal);
+    background: var(--warm-ivory);
+
+    overflow-x: hidden;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video {
+    max-width: 100%;
+}
+
+img {
+    vertical-align: middle;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::selection {
+    background: var(--champagne-gold);
+    color: var(--midnight-navy);
+}
+
+
+/* ==========================================================
+   03. TYPOGRAPHY
+   ========================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-serif {
+    font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+}
+
+p {
+    line-height: 1.8;
+}
+
+.text-navy {
+    color: var(--midnight-navy) !important;
+}
+
+.text-champagne-gold,
+.text-warning {
+    color: var(--champagne-gold) !important;
+}
+
+.bg-navy {
+    background-color: var(--midnight-navy) !important;
+}
+
+.bg-deep-navy {
+    background-color: var(--deep-navy) !important;
+}
+
+.bg-ivory {
+    background-color: var(--warm-ivory) !important;
+}
+
+.border-champagne-gold {
+    border-color: var(--champagne-gold) !important;
+}
+
+.tracking-wider {
+    letter-spacing: 0.1em;
+}
+
+.tracking-widest {
+    letter-spacing: 0.2em;
+}
+
+
+/* ==========================================================
+   04. GLOBAL HEADER / NAVIGATION
+   ========================================================== */
+
+header.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.navbar-dark {
+    background: var(--midnight-navy) !important;
+}
+
+.navbar {
+    min-height: 76px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    max-height: 58px;
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    position: relative;
+
+    padding: 0.7rem 0.85rem;
+
+    color: var(--pure-white) !important;
+
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+
+    transition:
+        color var(--transition-fast),
+        opacity var(--transition-fast);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: var(--champagne-gold) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link::after {
+    transition:
+        width var(--transition),
+        background-color var(--transition);
+}
+
+
+/* ==========================================================
+   05. NAVIGATION DROPDOWN
+   ========================================================== */
+
+.dropdown-menu {
+    margin-top: 0.5rem;
+
+    padding: 0.5rem 0;
+
+    border: 1px solid rgba(197, 164, 90, 0.18);
+    border-radius: 0;
+
+    background: var(--pure-white);
+
+    box-shadow: var(--shadow-lg);
+
+    list-style: none !important;
+}
+
+.dropdown-menu li {
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li::marker {
+    display: none;
+}
+
+.dropdown-item {
+    display: block;
+
+    padding: 0.65rem 1.35rem;
+
+    color: var(--charcoal);
+
+    font-size: 0.86rem;
+    line-height: 1.4;
+
+    text-decoration: none;
+
+    transition:
+        color var(--transition-fast),
+        background-color var(--transition-fast),
+        padding-left var(--transition-fast);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    color: var(--midnight-navy);
+    background: var(--warm-ivory);
+    padding-left: 1.55rem;
+}
+
+
+/* ==========================================================
+   06. GENERAL PAGE STRUCTURE
+   ========================================================== */
+
+main {
+    width: 100%;
+}
+
+section {
+    position: relative;
+}
+
+.page-section {
+    padding: 100px 0;
+}
+
+.section-padding {
+    padding: 90px 0;
+}
+
+.section-heading {
+    max-width: 850px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.section-heading .eyebrow {
+    display: block;
+
+    margin-bottom: 15px;
+
+    color: var(--champagne-gold);
+
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin-bottom: 18px;
+
+    color: var(--midnight-navy);
+
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.section-heading p {
+    max-width: 700px;
+    margin: 0 auto;
+
+    color: var(--muted-gray);
+
+    font-size: 1rem;
+}
+
+
+/* ==========================================================
+   07. CINEMATIC 3D HERO
+   ========================================================== */
+
+.cinematic-hero {
+    position: relative;
+
+    width: 100%;
+    height: calc(100vh - 76px);
+    min-height: 650px;
+
+    overflow: hidden;
+
+    background: var(--midnight-navy);
+
+    perspective: 1400px;
+    transform-style: preserve-3d;
+}
+
+
+/* ==========================================================
+   HERO SLIDES
+   ========================================================== */
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        scale(1.08)
+        translateZ(0);
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease,
+        transform 7s cubic-bezier(0.2, 0.65, 0.2, 1);
+}
+
+.hero-slide.active {
+    z-index: 2;
+
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        scale(1)
+        translateZ(0);
+}
+
+
+/* ==========================================================
+   HERO MEDIA
+   ========================================================== */
+
+.hero-media {
+    position: absolute;
+
+    inset: -4%;
+
+    overflow: hidden;
+
+    transform:
+        translateZ(-80px)
+        scale(1.08);
+
+    transform-style: preserve-3d;
+}
+
+.hero-media img,
+.hero-media video {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.hero-media img {
+    user-select: none;
+}
+
+
+/* ==========================================================
+   CINEMATIC MEDIA ZOOM
+   ========================================================== */
+
+.hero-slide.active .hero-media img,
+.hero-slide.active .hero-media video {
+    animation:
+        cinematicZoom 9s ease-out forwards;
+}
+
+@keyframes cinematicZoom {
+
+    from {
+        transform: scale(1.08);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+
+/* ==========================================================
+   HERO VIDEO
+   ========================================================== */
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+}
+
+.hero-video video {
+    filter:
+        saturate(0.9)
+        contrast(1.06)
+        brightness(0.92);
+}
+
+
+/* ==========================================================
+   HERO OVERLAY
+   ========================================================== */
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 15, 27, 0.90) 0%,
+            rgba(3, 15, 27, 0.66) 32%,
+            rgba(3, 15, 27, 0.30) 68%,
+            rgba(3, 15, 27, 0.58) 100%
+        );
+
+    pointer-events: none;
+}
+
+.hero-overlay::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 35%;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(3, 15, 27, 0.95),
+            transparent
+        );
+}
+
+
+/* ==========================================================
+   3D DEPTH LAYERS
+   ========================================================== */
+
+.hero-depth-layer {
+    position: absolute;
+
+    pointer-events: none;
+
+    z-index: 4;
+}
+
+.depth-one {
+    inset: 12% 8%;
+
+    border:
+        1px solid rgba(197, 164, 90, 0.18);
+
+    transform:
+        translateZ(30px);
+
+    transition:
+        transform 0.25s ease;
+}
+
+.depth-two {
+    top: 18%;
+    right: 8%;
+
+    width: 220px;
+    height: 220px;
+
+    border:
+        1px solid rgba(197, 164, 90, 0.18);
+
+    opacity: 0.35;
+
+    transform:
+        rotate(45deg)
+        translateZ(80px);
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+/* ==========================================================
+   HERO CONTENT
+   ========================================================== */
+
+.hero-content {
+    position: absolute;
+
+    top: 50%;
+    left: 10%;
+
+    z-index: 6;
+
+    width: min(720px, 80%);
+
+    color: var(--pure-white);
+
+    transform:
+        translateY(-50%)
+        translateZ(100px);
+
+    transform-style: preserve-3d;
+}
+
+.hero-content-left {
+    left: 10%;
+    right: auto;
+}
+
+.hero-content-right {
+    left: auto;
+    right: 10%;
+}
+
+
+/* ==========================================================
+   HERO EYEBROW
+   ========================================================== */
+
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 28px;
+
+    color: var(--champagne-gold);
+
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+.hero-eyebrow::before {
+    content: "";
+
+    width: 42px;
+    height: 1px;
+
+    flex: 0 0 auto;
+
+    background: var(--champagne-gold);
+}
+
+
+/* ==========================================================
+   HERO HEADING
+   ========================================================== */
+
+.hero-content h1 {
+    margin: 0;
+
+    color: var(--pure-white);
+
+    font-family: "Cormorant Garamond", Georgia, serif;
+
+    font-size: clamp(64px, 7vw, 112px);
+    font-weight: 500;
+
+    line-height: 0.86;
+
+    letter-spacing: -3px;
+
+    text-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.28);
+}
+
+.hero-content h1 span {
+    display: block;
+
+    color: var(--pure-white);
+}
+
+
+/* ==========================================================
+   HERO DESCRIPTION
+   ========================================================== */
+
+.hero-content p {
+    max-width: 620px;
+
+    margin: 34px 0 0;
+
+    color: rgba(255, 255, 255, 0.82);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 16px;
+    line-height: 1.8;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* ==========================================================
+   HERO LOCATION
+   ========================================================== */
+
+.hero-location {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.hero-location span {
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+
+    flex: 0 0 6px;
+
+    border-radius: 50%;
+
+    background: var(--champagne-gold);
+}
+
+
+/* ==========================================================
+   HERO BUTTONS
+   ========================================================== */
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 38px;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 52px;
+
+    padding: 0 28px;
+
+    border: 1px solid transparent;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+
+    text-decoration: none;
+    text-transform: uppercase;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.hero-btn:hover {
+    transform: translateY(-4px);
+}
+
+.hero-btn-gold {
+    color: var(--midnight-navy);
+
+    background: var(--champagne-gold);
+
+    border-color: var(--champagne-gold);
+
+    box-shadow:
+        0 10px 30px rgba(197, 164, 90, 0.18);
+}
+
+.hero-btn-gold:hover {
+    color: var(--midnight-navy);
+
+    background: var(--gold-light);
+
+    border-color: var(--gold-light);
+
+    box-shadow:
+        0 15px 35px rgba(197, 164, 90, 0.25);
+}
+
+.hero-btn-outline {
+    color: var(--pure-white);
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border-color: rgba(255, 255, 255, 0.55);
+
+    backdrop-filter: blur(5px);
+}
+
+.hero-btn-outline:hover {
+    color: var(--midnight-navy);
+
+    background: var(--pure-white);
+
+    border-color: var(--pure-white);
+}
+
+
+/* ==========================================================
+   HERO SLIDE CONTROLS
+   ========================================================== */
+
+.hero-controls {
+    position: absolute;
+
+    right: 6%;
+    bottom: 55px;
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+/* ==========================================================
+   HERO ARROWS
+   ========================================================== */
+
+.hero-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.35);
+
+    background:
+        rgba(7, 26, 43, 0.25);
+
+    color: var(--pure-white);
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.hero-arrow:hover {
+    color: var(--midnight-navy);
+
+    background: var(--champagne-gold);
+
+    border-color: var(--champagne-gold);
+
+    transform: translateY(-3px);
+}
+
+.hero-arrow:focus-visible {
+    outline: 2px solid var(--champagne-gold);
+    outline-offset: 4px;
+}
+
+
+/* ==========================================================
+   HERO COUNTER
+   ========================================================== */
+
+.hero-counter {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--pure-white);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+.hero-counter-line {
+    position: relative;
+
+    width: 80px;
+    height: 1px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.25);
+}
+
+.hero-counter-line div {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0%;
+    height: 100%;
+
+    background: var(--champagne-gold);
+
+    transition:
+        width 0.5s ease;
+}
+
+
+/* ==========================================================
+   HERO SCROLL INDICATOR
+   ========================================================== */
+
+.hero-scroll {
+    position: absolute;
+
+    left: 6%;
+    bottom: 42px;
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    color: rgba(255, 255, 255, 0.6);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2.5px;
+}
+
+.scroll-line {
+    position: relative;
+
+    width: 55px;
+    height: 1px;
+
+    background:
+        rgba(255, 255, 255, 0.3);
+}
+
+.scroll-line span {
+    position: absolute;
+
+    top: -2px;
+    left: 0;
+
+    width: 15px;
+    height: 5px;
+
+    background: var(--champagne-gold);
+
+    animation:
+        scrollMove 2s ease-in-out infinite;
+}
+
+@keyframes scrollMove {
+
+    0% {
+        left: 0;
+    }
+
+    50% {
+        left: 40px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+
+/* ==========================================================
+   HERO TEXT REVEAL
+   ========================================================== */
+
+.hero-slide .hero-content > * {
+    opacity: 0;
+
+    transform:
+        translateY(35px);
+}
+
+.hero-slide.active .hero-content > * {
+    animation:
+        heroTextReveal 0.9s ease forwards;
+}
+
+.hero-slide.active .hero-content > *:nth-child(1) {
+    animation-delay: 0.25s;
+}
+
+.hero-slide.active .hero-content > *:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.hero-slide.active .hero-content > *:nth-child(3) {
+    animation-delay: 0.55s;
+}
+
+.hero-slide.active .hero-content > *:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+.hero-slide.active .hero-content > *:nth-child(5) {
+    animation-delay: 0.85s;
+}
+
+@keyframes heroTextReveal {
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ==========================================================
+   08. LEGACY / SIMPLE HERO SUPPORT
+   ========================================================== */
+
+/*
+   These classes are kept for pages that still use
+   the original .hero structure.
+
+   They do NOT override the .cinematic-hero system.
+*/
+
+.hero {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 85vh;
+    min-height: 550px;
+
+    overflow: hidden;
+
+    background: var(--midnight-navy);
+}
+
+.hero > .hero-video {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    z-index: 0;
+
+    min-width: 100%;
+    min-height: 100%;
+
+    width: auto;
+    height: auto;
+
+    object-fit: cover;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+.hero > .hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7, 26, 43, 0.88) 0%,
+            rgba(12, 34, 53, 0.78) 100%
+        );
+}
+
+.hero > .hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    top: auto;
+    left: auto;
+    right: auto;
+
+    width: auto;
+
+    transform: none;
+}
+
+
+/* ==========================================================
+   09. LUXURY CARDS
+   ========================================================== */
+
+.luxury-card {
+    position: relative;
+
+    height: 100%;
+
+    padding: 30px;
+
+    background: var(--pure-white);
+
+    border:
+        1px solid rgba(197, 164, 90, 0.25);
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 5px 20px rgba(7, 26, 43, 0.04);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.luxury-card:hover {
+    border-color:
+        rgba(197, 164, 90, 0.5);
+
+    box-shadow:
+        var(--shadow-md);
+
+    transform:
+        translateY(-5px);
+}
+
+
+/* ==========================================================
+   10. GENERAL CONTENT CARDS
+   ========================================================== */
+
+.card-luxury {
+    background: var(--pure-white);
+
+    border:
+        1px solid rgba(197, 164, 90, 0.22);
+
+    border-radius: 0;
+
+    box-shadow:
+        var(--shadow-sm);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.card-luxury:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        var(--shadow-md);
+}
+
+.card-luxury img {
+    width: 100%;
+    height: 280px;
+
+    object-fit: cover;
+}
+
+
+/* ==========================================================
+   11. BUTTON SYSTEM
+   ========================================================== */
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-dark {
+    color: var(--pure-white);
+
+    background-color: var(--midnight-navy);
+
+    border-color: var(--midnight-navy);
+
+    border-radius: 0;
+
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.btn-dark:hover {
+    color: var(--pure-white);
+
+    background-color: var(--deep-navy);
+
+    border-color: var(--deep-navy);
+
+    transform: translateY(-2px);
+}
+
+.btn-gold {
+    color: var(--midnight-navy);
+
+    background-color: var(--champagne-gold);
+
+    border-color: var(--champagne-gold);
+
+    border-radius: 0;
+}
+
+.btn-gold:hover {
+    color: var(--midnight-navy);
+
+    background-color: var(--gold-light);
+
+    border-color: var(--gold-light);
+}
+
+.btn-outline-light {
+    border-radius: 0;
+}
+
+
+/* ==========================================================
+   12. FORMS
+   ========================================================== */
+
+.form-control,
+.form-select {
+    min-height: 48px;
+
+    padding:
+        0.65rem 1rem;
+
+    border:
+        1px solid #CED4DA;
+
+    border-radius: 0;
+
+    background: var(--pure-white);
+
+    color: var(--charcoal);
+
+    font-size: 0.95rem;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-control:focus,
+.form-select:focus {
+    color: var(--charcoal);
+
+    border-color:
+        var(--champagne-gold);
+
+    background: var(--pure-white);
+
+    box-shadow:
+        0 0 0 0.25rem
+        rgba(197, 164, 90, 0.20);
+
+    outline: none;
+}
+
+.form-label {
+    color: var(--midnight-navy);
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   13. REVIEW / TESTIMONIAL SECTION
+   ========================================================== */
+
+.review-card {
+    height: 100%;
+
+    padding: 1.75rem;
+
+    background: var(--pure-white);
+
+    border-left:
+        4px solid var(--champagne-gold);
+
+    box-shadow:
+        0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        var(--shadow-md);
+}
+
+.review-card p {
+    color: var(--muted-gray);
+}
+
+.review-stars {
+    color: var(--champagne-gold);
+    letter-spacing: 3px;
+}
+
+
+/* ==========================================================
+   14. IMAGE / GALLERY SYSTEM
+   ========================================================== */
+
+.gallery-item {
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--midnight-navy);
+}
+
+.gallery-item img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.7s ease,
+        opacity 0.5s ease;
+}
+
+.gallery-item:hover img {
+    opacity: 0.9;
+
+    transform:
+        scale(1.06);
+}
+
+.image-luxury {
+    display: block;
+
+    width: 100%;
+
+    object-fit: cover;
+
+    box-shadow:
+        var(--shadow-md);
+}
+
+
+/* ==========================================================
+   15. PAGE HERO
+   ========================================================== */
+
+.page-hero {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 420px;
+
+    padding: 90px 0;
+
+    overflow: hidden;
+
+    color: var(--pure-white);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--midnight-navy),
+            var(--deep-navy)
+        );
+}
+
+.page-hero::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 100px;
+
+    background:
+        linear-gradient(
+            to top,
+            var(--warm-ivory),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+.page-hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 900px;
+}
+
+.page-hero-content .eyebrow {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: var(--champagne-gold);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+.page-hero-content h1 {
+    margin-bottom: 18px;
+
+    color: var(--pure-white);
+
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+
+    font-weight: 500;
+
+    line-height: 0.9;
+}
+
+.page-hero-content p {
+    max-width: 720px;
+
+    margin-bottom: 0;
+
+    color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* ==========================================================
+   16. ABOUT / OVERVIEW CONTENT
+   ========================================================== */
+
+.overview-section {
+    padding: 100px 0;
+}
+
+.overview-content {
+    max-width: 850px;
+}
+
+.overview-content h2 {
+    color: var(--midnight-navy);
+
+    font-size: clamp(2.5rem, 5vw, 4rem);
+
+    font-weight: 500;
+
+    line-height: 1;
+}
+
+.overview-content p {
+    color: #555;
+
+    font-size: 1rem;
+}
+
+
+/* ==========================================================
+   17. FACILITY BLOCKS
+   ========================================================== */
+
+.facility-block {
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--pure-white);
+
+    border:
+        1px solid rgba(197, 164, 90, 0.2);
+
+    box-shadow:
+        var(--shadow-sm);
+}
+
+.facility-block img {
+    width: 100%;
+    height: 320px;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.7s ease;
+}
+
+.facility-block:hover img {
+    transform: scale(1.04);
+}
+
+.facility-content {
+    padding: 30px;
+}
+
+.facility-content h3 {
+    margin-bottom: 12px;
+
+    color: var(--midnight-navy);
+
+    font-size: 2rem;
+
+    font-weight: 500;
+}
+
+.facility-content p {
+    margin-bottom: 0;
+
+    color: var(--muted-gray);
+}
+
+
+/* ==========================================================
+   18. ADMISSIONS / FEE STRUCTURE
+   ========================================================== */
+
+.admission-card {
+    height: 100%;
+
+    padding: 35px;
+
+    background: var(--pure-white);
+
+    border:
+        1px solid rgba(197, 164, 90, 0.22);
+
+    box-shadow:
+        var(--shadow-sm);
+}
+
+.admission-card h3 {
+    color: var(--midnight-navy);
+
+    font-size: 2rem;
+
+    font-weight: 500;
+}
+
+.fee-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: var(--pure-white);
+}
+
+.fee-table th,
+.fee-table td {
+    padding: 15px 18px;
+
+    border-bottom:
+        1px solid rgba(7, 26, 43, 0.10);
+
+    text-align: left;
+}
+
+.fee-table th {
+    color: var(--pure-white);
+
+    background: var(--midnight-navy);
+
+    font-weight: 600;
+}
+
+.fee-table td {
+    color: var(--charcoal);
+}
+
+.fee-table tr:hover td {
+    background: var(--warm-ivory);
+}
+
+
+/* ==========================================================
+   19. CONTACT PAGE
+   ========================================================== */
+
+.contact-card {
+    height: 100%;
+
+    padding: 35px;
+
+    background: var(--pure-white);
+
+    border:
+        1px solid rgba(197, 164, 90, 0.22);
+
+    box-shadow:
+        var(--shadow-sm);
+}
+
+.contact-card i,
+.contact-icon {
+    color: var(--champagne-gold);
+}
+
+.contact-card h3 {
+    color: var(--midnight-navy);
+
+    font-size: 1.8rem;
+
+    font-weight: 500;
+}
+
+.contact-card p {
+    color: var(--muted-gray);
+}
+
+.contact-card a {
+    color: var(--midnight-navy);
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease;
+}
+
+.contact-card a:hover {
+    color: var(--champagne-gold);
+}
+
+
+/* ==========================================================
+   20. GOOGLE MAP / MAP CONTAINER
+   ========================================================== */
+
+.map-container {
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(197, 164, 90, 0.25);
+
+    box-shadow:
+        var(--shadow-md);
+}
+
+.map-container iframe {
+    display: block;
+
+    width: 100%;
+
+    min-height: 450px;
+
+    border: 0;
+}
+
+
+/* ==========================================================
+   21. FAQ
+   ========================================================== */
+
+.accordion-item {
+    margin-bottom: 10px;
+
+    border:
+        1px solid rgba(197, 164, 90, 0.20) !important;
+
+    border-radius: 0 !important;
+
+    overflow: hidden;
+}
+
+.accordion-button {
+    padding: 20px 24px;
+
+    color: var(--midnight-navy);
+
+    background: var(--pure-white);
+
+    font-family:
+        "Inter", sans-serif;
+
+    font-weight: 600;
+
+    box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--midnight-navy);
+
+    background: var(--warm-ivory);
+}
+
+.accordion-button::after {
+    filter: none;
+}
+
+.accordion-body {
+    padding: 22px 24px;
+
+    color: var(--muted-gray);
+
+    background: var(--pure-white);
+
+    line-height: 1.8;
+}
+
+
+/* ==========================================================
+   22. FOOTER
+   ========================================================== */
+
+footer.site-footer,
+.school-footer {
+    position: relative;
+
+    color: var(--pure-white);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--midnight-navy),
+            #04111D
+        );
+}
+
+footer.site-footer a,
+.school-footer a {
+    color: rgba(255, 255, 255, 0.78);
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease;
+}
+
+footer.site-footer a:hover,
+.school-footer a:hover {
+    color: var(--champagne-gold);
+}
+
+footer.site-footer h5,
+footer.site-footer h4,
+.school-footer h5,
+.school-footer h4 {
+    color: var(--pure-white);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-weight: 500;
+}
+
+.footer-logo {
+    max-width: 180px;
+    height: auto;
+}
+
+.footer-divider {
+    width: 100%;
+
+    height: 1px;
+
+    margin: 30px 0;
+
+    background:
+        rgba(197, 164, 90, 0.22);
+}
+
+
+/* ==========================================================
+   23. SCHOOL FOOTER MAP
+   ========================================================== */
+
+.school-footer .footer-map,
+footer.site-footer .footer-map {
+    width: 100%;
+
+    overflow: hidden;
+
+    border-top:
+        1px solid rgba(197, 164, 90, 0.20);
+
+    border-bottom:
+        1px solid rgba(197, 164, 90, 0.20);
+}
+
+.school-footer .footer-map iframe,
+footer.site-footer .footer-map iframe {
+    display: block;
+
+    width: 100%;
+    min-height: 300px;
+
+    border: 0;
+}
+
+
+/* ==========================================================
+   24. UTILITY SECTIONS
+   ========================================================== */
+
+.gold-line {
+    width: 65px;
+    height: 2px;
+
+    margin: 18px 0;
+
+    background: var(--champagne-gold);
+}
+
+.gold-line-center {
+    width: 65px;
+    height: 2px;
+
+    margin: 18px auto;
+
+    background: var(--champagne-gold);
+}
+
+.text-muted-custom {
+    color: var(--muted-gray);
+}
+
+.bg-soft-ivory {
+    background: #F9F6EF;
+}
+
+.no-decoration {
+    text-decoration: none !important;
+}
+
+
+/* ==========================================================
+   25. TABLET — HERO
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+    .cinematic-hero {
+        height: 760px;
+        min-height: 760px;
+    }
+
+    .hero-content {
+        left: 7%;
+
+        width: 86%;
+    }
+
+    .hero-content-left {
+        left: 7%;
+    }
+
+    .hero-content-right {
+        left: 7%;
+        right: auto;
+    }
+
+    .hero-content h1 {
+        font-size:
+            clamp(58px, 10vw, 90px);
+    }
+
+    .hero-controls {
+        right: 6%;
+        bottom: 35px;
+    }
+
+    .hero-scroll {
+        display: none;
+    }
+
+    .depth-two {
+        right: 5%;
+
+        width: 160px;
+        height: 160px;
+    }
+
+    .page-section,
+    .overview-section {
+        padding: 75px 0;
+    }
+}
+
+
+/* ==========================================================
+   26. MOBILE — HERO
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    .cinematic-hero {
+        height: 720px;
+        min-height: 720px;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(3, 15, 27, 0.91),
+                rgba(3, 15, 27, 0.56)
+            );
+    }
+
+    .hero-content {
+        top: 45%;
+
+        left: 7%;
+
+        width: 86%;
+    }
+
+    .hero-content-right {
+        left: 7%;
+        right: auto;
+    }
+
+    .hero-eyebrow {
+        gap: 10px;
+
+        margin-bottom: 20px;
+
+        font-size: 9px;
+
+        letter-spacing: 2.5px;
+    }
+
+    .hero-eyebrow::before {
+        width: 28px;
+    }
+
+    .hero-content h1 {
+        font-size: 54px;
+
+        line-height: 0.9;
+
+        letter-spacing: -1px;
+    }
+
+    .hero-content p {
+        margin-top: 24px;
+
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+    .hero-location {
+        font-size: 9px;
+
+        letter-spacing: 2px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+
+        margin-top: 28px;
+    }
+
+    .hero-btn {
+        min-height: 48px;
+
+        padding:
+            0 20px;
+    }
+
+    .hero-controls {
+        left: 7%;
+        right: auto;
+        bottom: 25px;
+
+        gap: 10px;
+    }
+
+    .hero-arrow {
+        width: 42px;
+        height: 42px;
+    }
+
+    .hero-counter {
+        font-size: 9px;
+    }
+
+    .hero-counter-line {
+        width: 55px;
+    }
+
+    .depth-one,
+    .depth-two {
+        display: none;
+    }
+
+    .page-section,
+    .overview-section {
+        padding: 60px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+        font-size: 2.7rem;
+    }
+
+    .page-hero {
+        min-height: 350px;
+
+        padding: 75px 0;
+    }
+
+    .page-hero-content h1 {
+        font-size: 3.5rem;
+    }
+
+    .map-container iframe {
+        min-height: 350px;
+    }
+}
+
+
+/* ==========================================================
+   27. EXTRA SMALL DEVICES
+   ========================================================== */
+
+@media (max-width: 400px) {
+
+    .cinematic-hero {
+        height: 680px;
+        min-height: 680px;
+    }
+
+    .hero-content h1 {
+        font-size: 46px;
+    }
+
+    .hero-content p {
+        font-size: 13px;
+    }
+
+    .hero-btn {
+        font-size: 9px;
+
+        min-height: 45px;
+
+        padding: 0 16px;
+    }
+
+    .hero-controls {
+        bottom: 20px;
+    }
+}
+
+
+/* ==========================================================
+   28. REDUCED MOTION ACCESSIBILITY
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ==========================================================
+   29. PRINT
+   ========================================================== */
+
+@media print {
+
+    header,
+    nav,
+    .hero-controls,
+    .hero-scroll,
+    footer {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+    }
+}

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Teacher Registration | St. Martin's High School
+    </title>
+
+    <link rel="icon"
+          type="image/png"
+          href="/images/logo.png">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #173954,
+                    transparent 40%
+                ),
+                #06131f;
+            font-family: Arial, sans-serif;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .eyebrow {
+            color: #c5a45a;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .header h1 {
+            font-family: Georgia, serif;
+            font-size: 40px;
+            margin: 12px 0;
+        }
+
+        .header p {
+            color: #bdc8d2;
+            line-height: 1.7;
+        }
+
+        .card {
+            background: #f7f3ea;
+            color: #172635;
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: 0 30px 80px rgba(0,0,0,.4);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .group {
+            margin-bottom: 20px;
+        }
+
+        .group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 11px;
+            border: 1px solid #d3cec4;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #c5a45a;
+            box-shadow: 0 0 0 3px rgba(197,164,90,.12);
+        }
+
+        .info {
+            background: #e9eef2;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            color: #465564;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .button {
+            width: 100%;
+            border: 0;
+            padding: 16px;
+            border-radius: 12px;
+            background: #102b43;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #c5a45a;
+            color: #10202e;
+        }
+
+        .message {
+            display: none;
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .message.error {
+            display: block;
+            background: #f9e6e6;
+            color: #9a2929;
+        }
+
+        .message.success {
+            display: block;
+            background: #e3f5e9;
+            color: #25663a;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .footer-links a {
+            color: #c5a45a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media(max-width:700px) {
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .group.full {
+                grid-column: auto;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <img
+            src="/images/logo.png"
+            alt="St. Martin's High School"
+        >
+
+        <div class="eyebrow">
+            Faculty Registration
+        </div>
+
+        <h1>
+            Teacher Registration
+        </h1>
+
+        <p>
+            Create your faculty account for
+            St. Martin's High School.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="info">
+
+            <strong>Important:</strong>
+
+            Teacher registrations are not
+            activated immediately.
+
+            Your account will remain
+            <strong>Pending</strong> until the
+            Principal reviews and approves it.
+
+        </div>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <form id="signupForm">
+
+            <div class="grid">
+
+                <div class="group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="full_name"
+                        required
+                        placeholder="Enter your full name"
+                    >
+
+                </div>
+
+
+                <div class="group">
+
+                    <label>
+                        Employee ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="employee_id"
+                        required
+                        placeholder="Example: SMHS-T001"
+                    >
+
+                </div>
+
+
+                <div class="group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        required
+                        minlength="4"
+                        placeholder="Create a username"
+                    >
+
+                </div>
+
+
+                <div class="group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        placeholder="teacher@example.com"
+                    >
+
+                </div>
+
+
+                <div class="group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        minlength="8"
+                        placeholder="Minimum 8 characters"
+                    >
+
+                </div>
+
+
+                <div class="group">
+
+                    <label>
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        required
+                        minlength="8"
+                        placeholder="Enter password again"
+                    >
+
+                </div>
+
+
+                <div class="group full">
+
+                    <button
+                        type="submit"
+                        class="button"
+                    >
+                        Submit Registration
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <div class="footer-links">
+
+            Already have an account?
+
+            <a href="/teacher-login">
+                Teacher Login
+            </a>
+
+            <br><br>
+
+            <a href="/">
+                ← Return to School Website
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const form =
+    document.getElementById("signupForm");
+
+const message =
+    document.getElementById("message");
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        message.className = "message";
+        message.textContent = "";
+
+        const full_name =
+            document.getElementById("full_name").value.trim();
+
+        const employee_id =
+            document.getElementById("employee_id").value.trim();
+
+        const username =
+            document.getElementById("username").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirm_password =
+            document.getElementById("confirm_password").value;
+
+
+        if (password !== confirm_password) {
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                "Passwords do not match.";
+
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/teacher/signup",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            full_name,
+                            employee_id,
+                            username,
+                            email,
+                            password,
+                            confirm_password
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!data.success) {
+
+                message.className =
+                    "message error";
+
+                message.textContent =
+                    data.error ||
+                    "Registration failed.";
+
+                return;
+            }
+
+
+            message.className =
+                "message success";
+
+            message.textContent =
+                data.message;
+
+
+            form.reset();
+
+
+            setTimeout(
+                () => {
+                    window.location.href =
+                        "/teacher-login";
+                },
+                2500
+            );
+
+
+        } catch (error) {
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                "Unable to connect to the server.";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

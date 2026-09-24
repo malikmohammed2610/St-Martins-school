@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Principal & Management | St. Martin's High School, Balanagar</title>
+
+    <meta name="description"
+        content="Meet the Principal and Management of St. Martin's High School, Balanagar, Hyderabad.">
+
+    <link rel="icon" type="image/png" href="/images/logo.png">
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =========================================================
+         FONT AWESOME
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =========================================================
+         BOOTSTRAP
+    ========================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- =========================================================
+         PAGE STYLES
+    ========================================================== -->
+
+    <style>
+
+        :root {
+
+            --navy: #071A2B;
+            --navy-light: #10283D;
+
+            --gold: #C5A45A;
+            --gold-light: #DFC982;
+
+            --ivory: #F7F3EB;
+            --white: #FFFFFF;
+
+            --text: #303944;
+            --muted: #727C86;
+
+            --border: rgba(7, 26, 43, 0.10);
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 0;
+
+            font-family: 'Inter', sans-serif;
+
+            color: var(--text);
+
+            background: var(--ivory);
+
+            overflow-x: hidden;
+
+        }
+
+
+        a {
+            transition: all 0.3s ease;
+        }
+
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .school-header {
+
+            background: rgba(255,255,255,0.98);
+
+            border-bottom: 1px solid var(--border);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1050;
+
+            backdrop-filter: blur(12px);
+
+        }
+
+
+        .header-container {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 15px 22px;
+
+        }
+
+
+        .school-brand {
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+
+        .school-logo {
+
+            width: 62px;
+
+            height: 62px;
+
+            object-fit: contain;
+
+            margin-right: 15px;
+
+        }
+
+
+        .school-name {
+
+            margin: 0;
+
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 1.35rem;
+
+            font-weight: 700;
+
+            letter-spacing: 0.02em;
+
+        }
+
+
+        .school-location {
+
+            color: #737B84;
+
+            font-size: 0.68rem;
+
+            letter-spacing: 0.17em;
+
+            margin-top: 2px;
+
+        }
+
+
+        .header-phone {
+
+            color: #68737D;
+
+            font-size: 0.84rem;
+
+        }
+
+
+        .header-phone i {
+
+            color: var(--gold);
+
+        }
+
+
+        .teacher-login {
+
+            border: 1px solid var(--navy);
+
+            color: var(--navy);
+
+            text-decoration: none;
+
+            padding: 9px 17px;
+
+            font-size: 0.72rem;
+
+            letter-spacing: 0.10em;
+
+            text-transform: uppercase;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+        .teacher-login:hover {
+
+            background: var(--navy);
+
+            color: white;
+
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .main-nav {
+
+            background: var(--navy);
+
+            padding: 0;
+
+            position: relative;
+
+            z-index: 1040;
+
+        }
+
+
+        .main-nav .container {
+
+            max-width: 1200px;
+
+        }
+
+
+        .main-nav .navbar-nav {
+
+            width: 100%;
+
+            justify-content: center;
+
+        }
+
+
+        .main-nav .nav-link {
+
+            color: rgba(255,255,255,0.86) !important;
+
+            font-size: 0.72rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.08em;
+
+            padding: 15px 11px !important;
+
+        }
+
+
+        .main-nav .nav-link:hover,
+
+        .main-nav .nav-link.active {
+
+            color: var(--gold-light) !important;
+
+        }
+
+
+        .navbar-toggler {
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            border-radius: 0;
+
+        }
+
+
+        .navbar-toggler:focus {
+
+            box-shadow: none;
+
+        }
+
+
+        /* =====================================================
+           PAGE HERO
+        ===================================================== */
+
+        .page-hero {
+
+            position: relative;
+
+            min-height: 430px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    rgba(7,26,43,0.90),
+                    rgba(7,26,43,0.94)
+                ),
+
+                url('/images/school-campus.jpg');
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+
+        .page-hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: 0;
+
+            transform: translateX(-50%);
+
+            width: 120px;
+
+            height: 3px;
+
+            background: var(--gold);
+
+        }
+
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 900px;
+
+            padding: 70px 20px;
+
+        }
+
+
+        .hero-eyebrow {
+
+            color: var(--gold-light);
+
+            font-size: 0.75rem;
+
+            letter-spacing: 0.25em;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .hero-title {
+
+            color: white;
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: clamp(3.4rem, 7vw, 6rem);
+
+            line-height: 0.95;
+
+            font-weight: 500;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .hero-description {
+
+            color: rgba(255,255,255,0.75);
+
+            max-width: 720px;
+
+            margin: auto;
+
+            font-size: 0.95rem;
+
+            line-height: 1.9;
+
+            font-weight: 300;
+
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .section {
+
+            padding: 100px 0;
+
+        }
+
+
+        .section-heading {
+
+            text-align: center;
+
+            max-width: 780px;
+
+            margin: 0 auto 60px;
+
+        }
+
+
+        .section-label {
+
+            color: var(--gold);
+
+            font-size: 0.70rem;
+
+            letter-spacing: 0.25em;
+
+            text-transform: uppercase;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .section-title {
+
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 3.5rem;
+
+            line-height: 1;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .section-description {
+
+            color: var(--muted);
+
+            line-height: 1.9;
+
+            font-size: 0.92rem;
+
+        }
+
+
+        /* =====================================================
+           PRINCIPAL
+        ===================================================== */
+
+        .principal-section {
+
+            background: var(--white);
+
+        }
+
+
+        .principal-wrapper {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+        }
+
+
+        .principal-image-wrapper {
+
+            position: relative;
+
+            padding: 14px;
+
+            background: var(--ivory);
+
+        }
+
+
+        .principal-image-wrapper::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -10px;
+
+            left: -10px;
+
+            width: 75px;
+
+            height: 75px;
+
+            border-top: 2px solid var(--gold);
+
+            border-left: 2px solid var(--gold);
+
+        }
+
+
+        .principal-image-wrapper::after {
+
+            content: "";
+
+            position: absolute;
+
+            right: -10px;
+
+            bottom: -10px;
+
+            width: 75px;
+
+            height: 75px;
+
+            border-right: 2px solid var(--gold);
+
+            border-bottom: 2px solid var(--gold);
+
+        }
+
+
+        .principal-image {
+
+            width: 100%;
+
+            height: 570px;
+
+            object-fit: cover;
+
+            display: block;
+
+            background: #e9e4d9;
+
+        }
+
+
+        .principal-content {
+
+            padding: 25px 10px 25px 35px;
+
+        }
+
+
+        .principal-role {
+
+            color: var(--gold);
+
+            font-size: 0.72rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.22em;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .principal-name {
+
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 3.4rem;
+
+            line-height: 1;
+
+            margin-bottom: 25px;
+
+            font-weight: 600;
+
+        }
+
+
+        .gold-line {
+
+            width: 60px;
+
+            height: 2px;
+
+            background: var(--gold);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .principal-message {
+
+            color: #59636D;
+
+            font-size: 0.95rem;
+
+            line-height: 2;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .principal-note {
+
+            padding: 22px 25px;
+
+            background: var(--ivory);
+
+            border-left: 3px solid var(--gold);
+
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 1.25rem;
+
+            font-style: italic;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =====================================================
+           MANAGEMENT SECTION
+        ===================================================== */
+
+        .management-section {
+
+            background: var(--ivory);
+
+        }
+
+
+        .management-grid {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+        }
+
+
+        .management-card {
+
+            height: 100%;
+
+            background: white;
+
+            border: 1px solid rgba(7,26,43,0.07);
+
+            transition: all 0.4s ease;
+
+            overflow: hidden;
+
+            position: relative;
+
+        }
+
+
+        .management-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow: 0 20px 50px rgba(7,26,43,0.12);
+
+        }
+
+
+        .management-photo-wrapper {
+
+            position: relative;
+
+            background: #eee9df;
+
+            overflow: hidden;
+
+        }
+
+
+        .management-photo {
+
+            width: 100%;
+
+            height: 390px;
+
+            object-fit: cover;
+
+            object-position: center top;
+
+            display: block;
+
+            transition: transform 0.6s ease;
+
+        }
+
+
+        .management-card:hover .management-photo {
+
+            transform: scale(1.035);
+
+        }
+
+
+        .management-photo-wrapper::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            height: 35%;
+
+            background: linear-gradient(
+                transparent,
+                rgba(7,26,43,0.20)
+            );
+
+            pointer-events: none;
+
+        }
+
+
+        .management-body {
+
+            padding: 30px 30px 35px;
+
+        }
+
+
+        .management-role {
+
+            color: var(--gold);
+
+            font-size: 0.66rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.18em;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .management-name {
+
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 2rem;
+
+            line-height: 1.05;
+
+            font-weight: 600;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .management-divider {
+
+            width: 42px;
+
+            height: 2px;
+
+            background: var(--gold);
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .management-bio {
+
+            color: #68727C;
+
+            font-size: 0.83rem;
+
+            line-height: 1.85;
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           LEADERSHIP STATEMENT
+        ===================================================== */
+
+        .leadership-statement {
+
+            background: var(--navy);
+
+            color: white;
+
+            text-align: center;
+
+            padding: 90px 20px;
+
+        }
+
+
+        .statement-inner {
+
+            max-width: 850px;
+
+            margin: auto;
+
+        }
+
+
+        .statement-mark {
+
+            color: var(--gold);
+
+            font-family: Georgia, serif;
+
+            font-size: 4rem;
+
+            line-height: 0.5;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .statement-text {
+
+            color: rgba(255,255,255,0.85);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 2rem;
+
+            line-height: 1.45;
+
+            font-weight: 400;
+
+        }
+
+
+        .statement-caption {
+
+            color: var(--gold-light);
+
+            font-size: 0.67rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.22em;
+
+            margin-top: 25px;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .school-footer {
+
+            background: #05131F;
+
+            color: white;
+
+            padding: 75px 0 25px;
+
+        }
+
+
+        .footer-container {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+        }
+
+
+        .footer-brand {
+
+            font-family: 'Cormorant Garamond', serif;
+
+            color: white;
+
+            font-size: 1.65rem;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .footer-description {
+
+            color: #8E9BA7;
+
+            font-size: 0.82rem;
+
+            line-height: 1.9;
+
+            max-width: 350px;
+
+        }
+
+
+        .footer-heading {
+
+            color: white;
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 1.35rem;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .footer-links {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+
+        }
+
+
+        .footer-links li {
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .footer-links a {
+
+            color: #8E9BA7;
+
+            text-decoration: none;
+
+            font-size: 0.78rem;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color: var(--gold-light);
+
+            padding-left: 4px;
+
+        }
+
+
+        .footer-contact {
+
+            color: #8E9BA7;
+
+            font-size: 0.80rem;
+
+            line-height: 1.8;
+
+        }
+
+
+        .footer-contact i {
+
+            color: var(--gold);
+
+            width: 22px;
+
+        }
+
+
+        .footer-divider {
+
+            border: 0;
+
+            border-top: 1px solid rgba(255,255,255,0.09);
+
+            margin: 45px 0 22px;
+
+        }
+
+
+        .footer-bottom {
+
+            color: #697682;
+
+            font-size: 0.70rem;
+
+        }
+
+
+        .footer-bottom a {
+
+            color: var(--gold-light);
+
+            text-decoration: none;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 991px) {
+
+            .main-nav .nav-link {
+
+                padding: 12px 15px !important;
+
+            }
+
+
+            .principal-content {
+
+                padding: 40px 0 0;
+
+            }
+
+
+            .principal-image {
+
+                height: 500px;
+
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .header-container {
+
+                padding: 12px 15px;
+
+            }
+
+
+            .school-logo {
+
+                width: 52px;
+
+                height: 52px;
+
+                margin-right: 10px;
+
+            }
+
+
+            .school-name {
+
+                font-size: 1.05rem;
+
+            }
+
+
+            .school-location {
+
+                font-size: 0.55rem;
+
+            }
+
+
+            .page-hero {
+
+                min-height: 390px;
+
+            }
+
+
+            .hero-title {
+
+                font-size: 3.5rem;
+
+            }
+
+
+            .section {
+
+                padding: 70px 0;
+
+            }
+
+
+            .section-title {
+
+                font-size: 2.8rem;
+
+            }
+
+
+            .principal-image {
+
+                height: 430px;
+
+            }
+
+
+            .principal-name {
+
+                font-size: 2.8rem;
+
+            }
+
+
+            .management-photo {
+
+                height: 420px;
+
+            }
+
+
+            .statement-text {
+
+                font-size: 1.55rem;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================== -->
+
+<header class="school-header">
+
+    <div class="header-container">
+
+        <div class="d-flex align-items-center justify-content-between">
+
+            <!-- SCHOOL BRAND -->
+
+            <a href="/" class="school-brand">
+
+                <img
+                    src="/images/logo.png"
+                    alt="St. Martin's High School Logo"
+                    class="school-logo"
+                    onerror="this.style.display='none';">
+
+                <div>
+
+                    <h1 class="school-name">
+                        ST. MARTIN'S HIGH SCHOOL
+                    </h1>
+
+                    <div class="school-location">
+                        BALANAGAR • HYDERABAD
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="d-none d-lg-flex align-items-center gap-4">
+
+                <div class="header-phone">
+
+                    <i class="fas fa-phone-alt me-2"></i>
+
+                    040 - 4020 4839
+
+                </div>
+
+
+                <a
+                    href="/teacher-login"
+                    class="teacher-login">
+
+                    Teacher Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================== -->
+
+<nav class="navbar navbar-expand-lg navbar-dark main-nav">
+
+    <div class="container">
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar">
+
+            <ul class="navbar-nav mx-auto">
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="/">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="/about">
+
+                        About
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="/principal">
+
+                        Principal & Management
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/disclosure">
+
+                        Disclosure
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/facilities">
+
+                        Facilities
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                        Academics
+
+                    </a>
+
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/primary">
+
+                                Primary
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/middle">
+
+                                Middle School
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/secondary">
+
+                                Secondary
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/academics/curriculum">
+
+                                Curriculum
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/student-life">
+
+                        Student Life
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/admissions">
+
+                        Admissions
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/fee-structure">
+
+                        Fees
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/gallery">
+
+                        Gallery
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/contact">
+
+                        Contact
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================== -->
+
+<section class="page-hero">
+
+    <div class="hero-content">
+
+        <div class="hero-eyebrow">
+
+            Leadership • Vision • Excellence
+
+        </div>
+
+
+        <h1 class="hero-title">
+
+            Principal & Management
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            The strength of an institution lies in the vision,
+            dedication and leadership of those who guide it.
+            Meet the individuals who help shape the educational
+            journey of St. Martin's High School.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PRINCIPAL
+========================================================== -->
+
+<section class="section principal-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+
+                The Principal
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                Leadership Begins<br>
+                With Purpose
+
+            </h2>
+
+
+            <p class="section-description">
+
+                At St. Martin's High School, the Principal plays
+                a central role in creating an environment where
+                students are encouraged to learn, grow and
+                develop into responsible individuals.
+
+            </p>
+
+        </div>
+
+
+        <div class="principal-wrapper">
+
+            <div class="row align-items-center g-5">
+
+
+                <!-- PRINCIPAL PHOTO -->
+
+                <div class="col-lg-6">
+
+                    <div class="principal-image-wrapper">
+
+                        <!--
+                            IMPORTANT:
+                            Put the Principal's photograph here:
+
+                            public/images/principal.jpg
+
+                            If your image has a different name,
+                            simply change the src below.
+                        -->
+
+                        <img
+                            src="/images/principal.jpg"
+                            alt="Principal of St. Martin's High School"
+                            class="principal-image"
+                            onerror="this.src='/images/logo.png';">
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRINCIPAL INFORMATION -->
+
+                <div class="col-lg-6">
+
+                    <div class="principal-content">
+
+                        <div class="principal-role">
+
+                            Principal
+
+                        </div>
+
+
+                        <h2 class="principal-name">
+
+                            Our Principal
+
+                        </h2>
+
+
+                        <div class="gold-line"></div>
+
+
+                        <p class="principal-message">
+
+                            The Principal provides academic and
+                            administrative leadership while
+                            working closely with teachers,
+                            students and parents to maintain
+                            a positive and purposeful school
+                            environment.
+
+                        </p>
+
+
+                        <p class="principal-message">
+
+                            With a commitment to academic
+                            excellence, discipline, character
+                            development and the overall
+                            wellbeing of students, the school
+                            leadership strives to prepare every
+                            learner for the opportunities and
+                            responsibilities of the future.
+
+                        </p>
+
+
+                        <div class="principal-note">
+
+                            "Education is not only about what
+                            students learn, but also about
+                            who they become."
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MANAGEMENT
+========================================================== -->
+
+<section class="section management-section">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div class="section-label">
+
+                The Management
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                The People Behind<br>
+                The Vision
+
+            </h2>
+
+
+            <p class="section-description">
+
+                St. Martin's High School is guided by a
+                committed management team whose experience,
+                vision and dedication continue to contribute
+                to the development of the institution.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4 management-grid">
+
+
+            <!-- =================================================
+                 MALLA REDDY
+            ================================================== -->
+
+            <div class="col-lg-6">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/a09ec53a6_Malla-Reddy-Sir.jpg"
+                            alt="Sri CH. Malla Reddy"
+                            class="management-photo"
+                            loading="lazy">
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+
+                            Secretary & Correspondent
+
+                        </div>
+
+
+                        <h3 class="management-name">
+
+                            Sri CH. Malla Reddy
+
+                        </h3>
+
+
+                        <div class="management-divider"></div>
+
+
+                        <p class="management-bio">
+
+                            A visionary leader and Hon'ble MLA of
+                            Medchal Constituency, Sri CH. Malla
+                            Reddy has been associated with
+                            education for over three decades.
+
+                            <br><br>
+
+                            He is a founder member of St. Martin's
+                            Educational Society and the Founder
+                            Chairman of the Malla Reddy Group of
+                            Institutions.
+
+                            <br><br>
+
+                            With an extensive educational network
+                            and a mission of making quality
+                            education accessible, his journey
+                            reflects the values of an educationist,
+                            entrepreneur and philanthropist.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LAXMAN REDDY
+            ================================================== -->
+
+            <div class="col-lg-6">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/6438cfd8f_lakshmanreddy.jpg"
+                            alt="Sri M. Laxman Reddy"
+                            class="management-photo"
+                            loading="lazy">
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+
+                            Chairman
+
+                        </div>
+
+
+                        <h3 class="management-name">
+
+                            Sri M. Laxman Reddy
+
+                        </h3>
+
+
+                        <div class="management-divider"></div>
+
+
+                        <p class="management-bio">
+
+                            As Chairperson, Sri M. Laxman Reddy
+                            encourages students to understand the
+                            importance of a healthy lifestyle,
+                            including a good diet and regular
+                            exercise.
+
+                            <br><br>
+
+                            His association with sports and
+                            achievements through sports awards
+                            reflect his belief in developing
+                            balanced and healthy individuals.
+
+                            <br><br>
+
+                            <strong>
+                                "Health is the key to happiness
+                                and growth both on and off the
+                                field."
+                            </strong>
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CHANDRA SEKHAR YADAV
+            ================================================== -->
+
+            <div class="col-lg-4">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/92c737e17_ChnadrashekarYadav.jpg"
+                            alt="Sri Chandra Sekhar Yadav"
+                            class="management-photo"
+                            loading="lazy">
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+
+                            Vice-President
+
+                        </div>
+
+
+                        <h3 class="management-name">
+
+                            Sri Chandra Sekhar Yadav
+
+                        </h3>
+
+
+                        <div class="management-divider"></div>
+
+
+                        <p class="management-bio">
+
+                            Vice President of St. Martin's
+                            Education Society, Sri Chandra
+                            Sekhar Yadav is a respected
+                            educationist and entrepreneur.
+
+                            <br><br>
+
+                            He believes that quality education
+                            is the foundation of a progressive
+                            society and guides young minds
+                            towards academic excellence and
+                            personal growth.
+
+                            <br><br>
+
+                            His vision is to empower youth with
+                            knowledge, values and practical
+                            skills for the future.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 JAY KISHAN YADAV
+            ================================================== -->
+
+            <div class="col-lg-4">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/a4d8f496c_Jaykishansir.png"
+                            alt="Sri Jay Kishan Yadav"
+                            class="management-photo"
+                            loading="lazy">
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+
+                            Director
+
+                        </div>
+
+
+                        <h3 class="management-name">
+
+                            Sri Jay Kishan Yadav
+
+                        </h3>
+
+
+                        <div class="management-divider"></div>
+
+
+                        <p class="management-bio">
+
+                            A young and dynamic educationist and
+                            entrepreneur, Sri Jay Kishan Yadav
+                            is dedicated to transforming
+                            education to meet the demands of
+                            the modern world.
+
+                            <br><br>
+
+                            He leads several schools with a focus
+                            on creating spacious, safe and
+                            well-equipped environments for
+                            students.
+
+                            <br><br>
+
+                            His approach emphasizes holistic
+                            development through academics,
+                            creativity, values and essential
+                            life skills.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RAJASHEKHAR YADAV
+            ================================================== -->
+
+            <div class="col-lg-4">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/6ef0af693_IMG_3385.jpeg"
+                            alt="Sri Rajashekhar Yadav"
+                            class="management-photo"
+                            loading="lazy">
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+
+                            Assistant Secretary
+
+                        </div>
+
+
+                        <h3 class="management-name">
+
+                            Sri Rajashekhar Yadav
+
+                        </h3>
+
+
+                        <div class="management-divider"></div>
+
+
+                        <p class="management-bio">
+
+                            An Executive Member of St. Martin's
+                            Group of Institutions, Sri
+                            Rajashekhar Yadav encourages
+                            students with the philosophy of
+                            not being afraid to give up the good
+                            to go for the great.
+
+                            <br><br>
+
+                            He emphasizes spiritual thoughts
+                            and encourages young people to
+                            become responsible, compassionate
+                            and disciplined individuals.
+
+                            <br><br>
+
+                            His approach combines spiritual
+                            beliefs with updated technical
+                            knowledge and the skills required
+                            for the 21st century.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     LEADERSHIP STATEMENT
+========================================================== -->
+
+<section class="leadership-statement">
+
+    <div class="statement-inner">
+
+        <div class="statement-mark">
+
+            “
+
+        </div>
+
+
+        <p class="statement-text">
+
+            Together, strong leadership and a shared
+            educational vision create an environment where
+            every student can discover their potential,
+            develop character and prepare for a meaningful
+            future.
+
+        </p>
+
+
+        <div class="statement-caption">
+
+            St. Martin's High School • Balanagar
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="school-footer">
+
+    <div class="container footer-container">
+
+
+        <div class="row g-5">
+
+
+            <!-- BRAND -->
+
+            <div class="col-lg-5">
+
+                <div class="footer-brand">
+
+                    ST. MARTIN'S HIGH SCHOOL
+
+                </div>
+
+
+                <p class="footer-description">
+
+                    A distinguished educational institution
+                    committed to academic excellence,
+                    character development and the holistic
+                    growth of every student.
+
+                </p>
+
+
+                <div class="footer-contact mt-4">
+
+                    <div class="mb-2">
+
+                        <i class="fas fa-location-dot"></i>
+
+                        Balanagar, Hyderabad, Telangana
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fas fa-phone"></i>
+
+                        040 - 4020 4839
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- EXPLORE -->
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-heading">
+
+                    Explore
+
+                </div>
+
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/about">
+                            About School
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/principal">
+                            Leadership
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/facilities">
+                            Facilities
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/gallery">
+                            Gallery
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- INFORMATION -->
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-heading">
+
+                    Information
+
+                </div>
+
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/admissions">
+                            Admissions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/fee-structure">
+                            Fee Structure
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/student-life">
+                            Student Life
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/disclosure">
+                            Disclosure
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/teacher-login">
+                            Teacher Login
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+
+            <div class="col-lg-3">
+
+                <div class="footer-heading">
+
+                    Contact
+
+                </div>
+
+
+                <div class="footer-contact">
+
+                    <div class="mb-3">
+
+                        <i class="fas fa-map-marker-alt"></i>
+
+                        St. Martin's High School,
+                        Balanagar, Hyderabad
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <i class="fas fa-phone-alt"></i>
+
+                        040 - 4020 4839
+
+                    </div>
+
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=St+Martins+High+School+Balanagar+Hyderabad"
+                        target="_blank"
+                        style="
+                            color:#DFC982;
+                            text-decoration:none;
+                            font-size:0.75rem;
+                            letter-spacing:0.08em;
+                            text-transform:uppercase;
+                        ">
+
+                        <i class="fas fa-location-arrow"></i>
+
+                        Open in Google Maps →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <hr class="footer-divider">
+
+
+        <div class="row align-items-center">
+
+            <div class="col-md-7">
+
+                <p class="footer-bottom mb-0">
+
+                    © 2026 St. Martin's High School,
+                    Balanagar, Hyderabad.
+                    All Rights Reserved.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-5 text-md-end mt-3 mt-md-0">
+
+                <span class="footer-bottom">
+
+                    Admissions Open 2026–2027
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<!-- =========================================================
+     ACTIVE NAVIGATION
+========================================================== -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const currentPath = window.location.pathname;
+
+        const navLinks =
+            document.querySelectorAll(".main-nav .nav-link");
+
+        navLinks.forEach(function (link) {
+
+            const href = link.getAttribute("href");
+
+            if (
+                href &&
+                href !== "#" &&
+                href === currentPath
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

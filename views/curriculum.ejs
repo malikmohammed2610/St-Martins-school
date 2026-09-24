@@ -1,0 +1,5066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Curriculum | St. Martin's High School | Balanagar</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <style>
+
+        /* ============================================================
+           ST. MARTIN'S HIGH SCHOOL
+           CURRICULUM — PREMIUM PAGE
+        ============================================================ */
+
+        :root {
+
+            --curr-navy: #071426;
+            --curr-navy-2: #0d1d32;
+            --curr-navy-3: #142842;
+
+            --curr-ivory: #f7f4ed;
+            --curr-white: #ffffff;
+
+            --curr-gold: #c6a45c;
+            --curr-gold-light: #dfc98f;
+
+            --curr-text: #273244;
+            --curr-muted: #6e7887;
+
+            --curr-border: rgba(20,40,66,0.10);
+
+            --curr-shadow:
+                0 18px 50px rgba(7,20,38,0.10);
+
+            --curr-shadow-heavy:
+                0 25px 70px rgba(7,20,38,0.16);
+        }
+
+
+        /* ============================================================
+           GLOBAL
+        ============================================================ */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+
+            background: var(--curr-ivory);
+            color: var(--curr-text);
+
+            font-family: "Inter", sans-serif;
+            line-height: 1.7;
+
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        /* ============================================================
+           TOP BAR
+        ============================================================ */
+
+        .academic-topbar {
+
+            width: 100%;
+
+            background: var(--curr-navy);
+
+            color: rgba(255,255,255,0.82);
+
+            /* FIXED — old code had 900px */
+            padding: 9px 0;
+
+            font-size: 12px;
+
+            letter-spacing: 0.3px;
+
+            position: relative;
+            z-index: 1100;
+        }
+
+        .academic-topbar-inner {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+        .topbar-left,
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .topbar-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+        .topbar-item i {
+            color: var(--curr-gold-light);
+        }
+
+
+        /* ============================================================
+           MAIN HEADER
+        ============================================================ */
+
+        .main-header {
+
+            width: 100%;
+
+            position: relative;
+
+            z-index: 1000;
+
+            background: rgba(255,255,255,0.98);
+
+            border-bottom:
+                1px solid rgba(198,164,92,0.28);
+
+            box-shadow:
+                0 8px 30px rgba(7,20,38,0.06);
+        }
+
+        .header-inner {
+
+            min-height: 94px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+        .school-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            color: var(--curr-navy);
+
+            flex-shrink: 0;
+        }
+
+        .school-brand:hover {
+            color: var(--curr-navy);
+        }
+
+        .school-logo {
+
+            width: 64px;
+            height: 64px;
+
+            object-fit: contain;
+        }
+
+        .brand-text {
+            line-height: 1.05;
+        }
+
+        .brand-title {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+        }
+
+        .brand-subtitle {
+
+            margin-top: 5px;
+
+            color: #777;
+
+            font-size: 10px;
+
+            letter-spacing: 2.4px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* ============================================================
+           NAVIGATION
+        ============================================================ */
+
+        .main-navigation {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            white-space: nowrap;
+        }
+
+        .main-navigation a {
+
+            position: relative;
+
+            color: #273244;
+
+            padding: 12px 13px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition:
+                color .25s ease,
+                transform .25s ease;
+        }
+
+        .main-navigation a::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 13px;
+            right: 13px;
+
+            bottom: 4px;
+
+            height: 1px;
+
+            background: var(--curr-gold);
+
+            transform: scaleX(0);
+
+            transform-origin: center;
+
+            transition:
+                transform .25s ease;
+        }
+
+        .main-navigation a:hover,
+        .main-navigation a.active {
+
+            color: #9c7b36;
+        }
+
+        .main-navigation a:hover::after,
+        .main-navigation a.active::after {
+
+            transform: scaleX(1);
+        }
+
+        .header-admission-btn {
+
+            background: var(--curr-navy);
+
+            color: white !important;
+
+            padding:
+                12px 19px !important;
+
+            margin-left: 8px;
+
+            border:
+                1px solid var(--curr-navy);
+
+            transition:
+                .25s ease;
+        }
+
+        .header-admission-btn:hover {
+
+            background:
+                var(--curr-gold);
+
+            border-color:
+                var(--curr-gold);
+
+            color:
+                var(--curr-navy) !important;
+
+            transform:
+                translateY(-1px);
+        }
+
+        .header-admission-btn::after {
+            display: none;
+        }
+
+
+        /* ============================================================
+           PAGE WRAPPER
+           IMPORTANT FIX FOR HEADER / INTRO OVERLAP
+        ============================================================ */
+
+        .curriculum-page {
+
+            position: relative;
+
+            width: 100%;
+
+            clear: both;
+
+            overflow: hidden;
+        }
+
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+
+        .curriculum-hero {
+
+            position: relative;
+
+            width: 100%;
+
+            min-height: 590px;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(7,20,38,0.97) 0%,
+                    rgba(7,20,38,0.91) 43%,
+                    rgba(7,20,38,0.60) 72%,
+                    rgba(7,20,38,0.78) 100%
+                ),
+
+                url("/images/curriculum.jpg")
+                center / cover
+                no-repeat;
+
+            display: flex;
+
+            align-items: center;
+
+            clear: both;
+        }
+
+        .curriculum-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 560px;
+            height: 560px;
+
+            border:
+                1px solid
+                rgba(198,164,92,0.20);
+
+            border-radius: 50%;
+
+            right: -250px;
+            top: -180px;
+
+            pointer-events: none;
+        }
+
+        .curriculum-hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border:
+                1px solid
+                rgba(198,164,92,0.15);
+
+            border-radius: 50%;
+
+            right: 60px;
+            bottom: -190px;
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 3;
+
+            max-width: 850px;
+
+            color: white;
+
+            padding:
+                95px 0;
+        }
+
+        .hero-kicker {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color:
+                var(--curr-gold-light);
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+        }
+
+        .hero-kicker::before {
+
+            content: "";
+
+            width: 42px;
+
+            height: 1px;
+
+            background:
+                var(--curr-gold);
+        }
+
+        .hero-title {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(54px, 7vw, 88px);
+
+            line-height: .96;
+
+            font-weight: 600;
+
+            margin:
+                0 0 25px;
+        }
+
+        .hero-title span {
+            color:
+                var(--curr-gold-light);
+        }
+
+        .hero-description {
+
+            max-width: 720px;
+
+            color:
+                rgba(255,255,255,0.82);
+
+            font-size: 16px;
+
+            line-height: 1.9;
+
+            font-weight: 300;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-actions {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .hero-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            padding:
+                14px 22px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: .6px;
+
+            text-transform: uppercase;
+
+            transition:
+                .25s ease;
+        }
+
+        .hero-btn-primary {
+
+            background:
+                var(--curr-gold);
+
+            color:
+                var(--curr-navy);
+        }
+
+        .hero-btn-primary:hover {
+
+            background:
+                #d7b96f;
+
+            color:
+                var(--curr-navy);
+
+            transform:
+                translateY(-2px);
+        }
+
+        .hero-btn-outline {
+
+            color: white;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+        }
+
+        .hero-btn-outline:hover {
+
+            color: white;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            border-color:
+                rgba(255,255,255,0.65);
+        }
+
+
+        /* ============================================================
+           SECTION SYSTEM
+        ============================================================ */
+
+        .section {
+
+            position: relative;
+
+            width: 100%;
+
+            padding:
+                100px 0;
+
+            clear: both;
+        }
+
+        .section-small {
+            padding:
+                75px 0;
+        }
+
+        .section-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color:
+                #a18443;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 2.5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 14px;
+        }
+
+        .section-label::before {
+
+            content: "";
+
+            width: 32px;
+
+            height: 1px;
+
+            background:
+                var(--curr-gold);
+        }
+
+        .section-title {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(40px, 5vw, 62px);
+
+            line-height: 1.05;
+
+            font-weight: 600;
+
+            color:
+                var(--curr-navy);
+
+            margin-bottom: 20px;
+        }
+
+        .section-title span {
+            color:
+                #a3833e;
+        }
+
+        .section-description {
+
+            color:
+                var(--curr-muted);
+
+            font-size: 15px;
+
+            line-height: 1.9;
+
+            max-width: 750px;
+        }
+
+
+        /* ============================================================
+           INTRODUCTION
+        ============================================================ */
+
+        .intro-section {
+
+            background:
+                var(--curr-ivory);
+
+            position: relative;
+
+            z-index: 2;
+
+            padding-top: 105px;
+        }
+
+        .intro-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(198,164,92,.4),
+                    transparent
+                );
+        }
+
+        .intro-panel {
+
+            position: relative;
+
+            background:
+                white;
+
+            box-shadow:
+                var(--curr-shadow);
+
+            padding:
+                55px;
+
+            border-top:
+                3px solid
+                var(--curr-gold);
+
+            overflow: hidden;
+        }
+
+        .intro-panel::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.16);
+
+            border-radius: 50%;
+
+            right: -95px;
+            bottom: -95px;
+
+            pointer-events: none;
+        }
+
+        .intro-panel p {
+
+            position: relative;
+
+            z-index: 2;
+
+            color:
+                #596474;
+
+            font-size: 15px;
+
+            line-height: 1.95;
+
+            margin-bottom: 18px;
+        }
+
+        .intro-panel p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-highlight {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 14px;
+
+            margin-top: 28px;
+        }
+
+        .intro-highlight-item {
+
+            padding:
+                18px;
+
+            background:
+                #fbfaf7;
+
+            border:
+                1px solid
+                var(--curr-border);
+        }
+
+        .intro-highlight-item i {
+
+            color:
+                var(--curr-gold);
+
+            font-size: 17px;
+
+            margin-bottom: 10px;
+        }
+
+        .intro-highlight-item strong {
+
+            display: block;
+
+            color:
+                var(--curr-navy);
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 20px;
+
+            line-height: 1.1;
+        }
+
+        .intro-highlight-item span {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color:
+                var(--curr-muted);
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ============================================================
+           CURRICULUM AT A GLANCE
+        ============================================================ */
+
+        .glance-section {
+
+            background:
+                white;
+        }
+
+        .glance-card {
+
+            height: 100%;
+
+            padding:
+                34px 30px;
+
+            border:
+                1px solid
+                var(--curr-border);
+
+            background:
+                #fbfaf7;
+
+            transition:
+                .3s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .glance-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 90px;
+            height: 90px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.18);
+
+            border-radius: 50%;
+
+            right: -40px;
+            top: -40px;
+        }
+
+        .glance-card:hover {
+
+            transform:
+                translateY(-7px);
+
+            box-shadow:
+                var(--curr-shadow);
+
+            border-color:
+                rgba(198,164,92,.38);
+        }
+
+        .glance-number {
+
+            color:
+                var(--curr-gold);
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 42px;
+
+            line-height: 1;
+
+            margin-bottom: 17px;
+        }
+
+        .glance-card h3 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 27px;
+
+            color:
+                var(--curr-navy);
+
+            margin-bottom: 9px;
+        }
+
+        .glance-card p {
+
+            color:
+                var(--curr-muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            margin: 0;
+        }
+
+
+        /* ============================================================
+           PRINCIPLES
+        ============================================================ */
+
+        .principles-section {
+            background:
+                white;
+        }
+
+        .principle-card {
+
+            height: 100%;
+
+            padding:
+                34px 30px;
+
+            border:
+                1px solid
+                var(--curr-border);
+
+            background:
+                #fff;
+
+            transition:
+                .3s ease;
+        }
+
+        .principle-card:hover {
+
+            transform:
+                translateY(-7px);
+
+            box-shadow:
+                var(--curr-shadow);
+
+            border-color:
+                rgba(198,164,92,.4);
+        }
+
+        .principle-number {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            color:
+                var(--curr-gold);
+
+            font-size: 46px;
+
+            line-height: 1;
+
+            margin-bottom: 18px;
+        }
+
+        .principle-icon {
+
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                var(--curr-navy);
+
+            color:
+                var(--curr-gold-light);
+
+            font-size: 18px;
+
+            margin-bottom: 22px;
+        }
+
+        .principle-card h3 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 27px;
+
+            color:
+                var(--curr-navy);
+
+            margin-bottom: 12px;
+        }
+
+        .principle-card p {
+
+            color:
+                var(--curr-muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            margin: 0;
+        }
+
+
+        /* ============================================================
+           ACADEMIC STAGES
+        ============================================================ */
+
+        .stages-section {
+
+            background:
+                var(--curr-ivory);
+        }
+
+        .stage-card {
+
+            position: relative;
+
+            height: 100%;
+
+            background:
+                white;
+
+            padding:
+                38px;
+
+            border:
+                1px solid
+                var(--curr-border);
+
+            overflow: hidden;
+
+            transition:
+                .3s ease;
+        }
+
+        .stage-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                var(--curr-shadow);
+        }
+
+        .stage-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(198,164,92,.18);
+
+            right: -45px;
+            top: -45px;
+        }
+
+        .stage-index {
+
+            color:
+                var(--curr-gold);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .stage-card h3 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            color:
+                var(--curr-navy);
+
+            font-size: 34px;
+
+            margin:
+                10px 0 7px;
+        }
+
+        .stage-subtitle {
+
+            color:
+                #9c7b36;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 20px;
+        }
+
+        .stage-card p {
+
+            color:
+                var(--curr-muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .stage-list {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin:
+                22px 0 0;
+        }
+
+        .stage-list li {
+
+            position: relative;
+
+            padding-left: 22px;
+
+            color:
+                #4f5968;
+
+            font-size: 13px;
+
+            margin-bottom: 9px;
+        }
+
+        .stage-list li::before {
+
+            content:
+                "\f00c";
+
+            font-family:
+                "Font Awesome 6 Free";
+
+            font-weight: 900;
+
+            position: absolute;
+
+            left: 0;
+            top: 1px;
+
+            color:
+                var(--curr-gold);
+
+            font-size: 11px;
+        }
+
+
+        /* ============================================================
+           SUBJECTS
+        ============================================================ */
+
+        .subjects-section {
+            background:
+                white;
+        }
+
+        .subject-box {
+
+            height: 100%;
+
+            padding:
+                32px;
+
+            background:
+                #fbfaf7;
+
+            border:
+                1px solid
+                rgba(20,40,66,.08);
+
+            transition:
+                .3s ease;
+        }
+
+        .subject-box:hover {
+
+            background:
+                var(--curr-navy);
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                var(--curr-shadow);
+        }
+
+        .subject-icon {
+
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(198,164,92,.14);
+
+            color:
+                #a3833e;
+
+            font-size: 19px;
+
+            margin-bottom: 22px;
+        }
+
+        .subject-box:hover .subject-icon {
+
+            background:
+                rgba(198,164,92,.16);
+
+            color:
+                var(--curr-gold-light);
+        }
+
+        .subject-box h3 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            color:
+                var(--curr-navy);
+
+            font-size: 29px;
+
+            margin-bottom: 12px;
+
+            transition:
+                .3s ease;
+        }
+
+        .subject-box p {
+
+            color:
+                var(--curr-muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            margin-bottom: 16px;
+
+            transition:
+                .3s ease;
+        }
+
+        .subject-box ul {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+        }
+
+        .subject-box li {
+
+            color:
+                #5b6573;
+
+            font-size: 12px;
+
+            margin-bottom: 7px;
+
+            transition:
+                .3s ease;
+        }
+
+        .subject-box li i {
+
+            color:
+                var(--curr-gold);
+
+            width: 17px;
+        }
+
+        .subject-box:hover h3,
+        .subject-box:hover p,
+        .subject-box:hover li {
+
+            color:
+                white;
+        }
+
+
+        /* ============================================================
+           LEARNING MODEL
+        ============================================================ */
+
+        .learning-section {
+
+            background:
+                var(--curr-navy);
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .learning-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.12);
+
+            border-radius: 50%;
+
+            left: -260px;
+            top: -180px;
+        }
+
+        .learning-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.10);
+
+            border-radius: 50%;
+
+            right: -120px;
+            bottom: -100px;
+        }
+
+        .learning-section .section-title {
+            color: white;
+        }
+
+        .learning-section .section-description {
+
+            color:
+                rgba(255,255,255,.68);
+        }
+
+        .learning-item {
+
+            display: flex;
+
+            gap: 22px;
+
+            padding:
+                25px 0;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.10);
+        }
+
+        .learning-item:last-child {
+            border-bottom: 0;
+        }
+
+        .learning-icon {
+
+            flex:
+                0 0 52px;
+
+            width: 52px;
+            height: 52px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.5);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color:
+                var(--curr-gold-light);
+        }
+
+        .learning-item h3 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 27px;
+
+            margin:
+                0 0 6px;
+        }
+
+        .learning-item p {
+
+            margin: 0;
+
+            color:
+                rgba(255,255,255,.62);
+
+            font-size: 13px;
+
+            line-height: 1.75;
+        }
+
+        .learning-statement {
+
+            position: relative;
+
+            z-index: 2;
+
+            padding:
+                48px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.25);
+
+            background:
+                rgba(255,255,255,.035);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.12);
+        }
+
+        .learning-statement i {
+
+            color:
+                var(--curr-gold);
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+        }
+
+        .learning-statement h3 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 37px;
+
+            line-height: 1.2;
+
+            margin-bottom: 16px;
+        }
+
+        .learning-statement p {
+
+            color:
+                rgba(255,255,255,.65);
+
+            font-size: 14px;
+
+            line-height: 1.85;
+        }
+
+
+        /* ============================================================
+           ASSESSMENT
+        ============================================================ */
+
+        .assessment-section {
+
+            background:
+                var(--curr-ivory);
+        }
+
+        .assessment-card {
+
+            background:
+                white;
+
+            padding:
+                35px;
+
+            height: 100%;
+
+            border:
+                1px solid
+                var(--curr-border);
+
+            transition:
+                .3s ease;
+        }
+
+        .assessment-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                var(--curr-shadow);
+        }
+
+        .assessment-card h3 {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 28px;
+
+            color:
+                var(--curr-navy);
+
+            margin-bottom: 14px;
+        }
+
+        .assessment-card h3 i {
+
+            color:
+                var(--curr-gold);
+
+            font-size: 18px;
+        }
+
+        .assessment-card p {
+
+            color:
+                var(--curr-muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            margin: 0;
+        }
+
+
+        /* ============================================================
+           HOLISTIC DEVELOPMENT
+        ============================================================ */
+
+        .co-curricular-section {
+
+            background:
+                white;
+        }
+
+        .development-panel {
+
+            background:
+                var(--curr-navy);
+
+            color: white;
+
+            padding:
+                55px;
+
+            height: 100%;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .development-panel::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+            height: 240px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.15);
+
+            border-radius: 50%;
+
+            right: -120px;
+            bottom: -100px;
+        }
+
+        .development-panel .section-label {
+
+            color:
+                var(--curr-gold-light);
+        }
+
+        .development-panel h2 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 46px;
+
+            line-height: 1.1;
+
+            margin-bottom: 18px;
+        }
+
+        .development-panel p {
+
+            color:
+                rgba(255,255,255,.67);
+
+            font-size: 14px;
+
+            line-height: 1.85;
+        }
+
+        .development-list {
+
+            margin:
+                30px 0 0;
+
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .development-list li {
+
+            display: flex;
+
+            gap: 13px;
+
+            align-items: flex-start;
+
+            color:
+                rgba(255,255,255,.82);
+
+            font-size: 13px;
+
+            padding:
+                12px 0;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.09);
+        }
+
+        .development-list i {
+
+            color:
+                var(--curr-gold-light);
+
+            margin-top: 5px;
+        }
+
+        .development-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 15px;
+
+            height: 100%;
+        }
+
+        .development-tile {
+
+            min-height: 160px;
+
+            padding:
+                28px;
+
+            background:
+                #fbfaf7;
+
+            border:
+                1px solid
+                var(--curr-border);
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-end;
+
+            transition:
+                .25s ease;
+        }
+
+        .development-tile:hover {
+
+            background:
+                #f3eee3;
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                var(--curr-shadow);
+        }
+
+        .development-tile i {
+
+            color:
+                #a3833e;
+
+            font-size: 20px;
+
+            margin-bottom: auto;
+        }
+
+        .development-tile h4 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            color:
+                var(--curr-navy);
+
+            font-size: 25px;
+
+            margin:
+                25px 0 0;
+        }
+
+
+        /* ============================================================
+           ACADEMIC JOURNEY
+        ============================================================ */
+
+        .journey-section {
+
+            background:
+                var(--curr-ivory);
+        }
+
+        .journey {
+
+            position: relative;
+
+            max-width: 900px;
+
+            margin:
+                45px auto 0;
+        }
+
+        .journey::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 28px;
+
+            top: 0;
+
+            bottom: 0;
+
+            width: 1px;
+
+            background:
+                rgba(198,164,92,.45);
+        }
+
+        .journey-item {
+
+            position: relative;
+
+            display: flex;
+
+            gap: 30px;
+
+            margin-bottom: 35px;
+        }
+
+        .journey-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .journey-number {
+
+            position: relative;
+
+            z-index: 2;
+
+            flex:
+                0 0 57px;
+
+            width: 57px;
+            height: 57px;
+
+            border-radius: 50%;
+
+            background:
+                var(--curr-navy);
+
+            border:
+                4px solid
+                var(--curr-ivory);
+
+            box-shadow:
+                0 0 0 1px
+                rgba(198,164,92,.5);
+
+            color:
+                var(--curr-gold-light);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 23px;
+        }
+
+        .journey-content {
+
+            background:
+                white;
+
+            padding:
+                25px 30px;
+
+            flex: 1;
+
+            border:
+                1px solid
+                var(--curr-border);
+
+            transition:
+                .25s ease;
+        }
+
+        .journey-content:hover {
+
+            transform:
+                translateX(5px);
+
+            box-shadow:
+                var(--curr-shadow);
+        }
+
+        .journey-content h3 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 29px;
+
+            color:
+                var(--curr-navy);
+
+            margin-bottom: 7px;
+        }
+
+        .journey-content p {
+
+            color:
+                var(--curr-muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            margin: 0;
+        }
+
+
+        /* ============================================================
+           CTA
+        ============================================================ */
+
+        .curriculum-cta {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(7,20,38,.98),
+                    rgba(18,39,65,.98)
+                );
+
+            padding:
+                85px 0;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .curriculum-cta::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 550px;
+            height: 550px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.10);
+
+            border-radius: 50%;
+
+            left: -330px;
+            top: -250px;
+        }
+
+        .curriculum-cta::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            border:
+                1px solid
+                rgba(198,164,92,.14);
+
+            border-radius: 50%;
+
+            right: -190px;
+            top: -150px;
+        }
+
+        .cta-inner {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+
+            max-width: 820px;
+
+            margin: auto;
+        }
+
+        .cta-inner .section-label {
+
+            color:
+                var(--curr-gold-light);
+        }
+
+        .cta-title {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            color:
+                white;
+
+            font-size:
+                clamp(40px,5vw,61px);
+
+            line-height: 1.05;
+
+            margin-bottom: 18px;
+        }
+
+        .cta-text {
+
+            color:
+                rgba(255,255,255,.66);
+
+            font-size: 14px;
+
+            max-width: 680px;
+
+            margin:
+                0 auto 28px;
+        }
+
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+
+        .site-footer {
+
+            background:
+                #050e1a;
+
+            color:
+                rgba(255,255,255,.70);
+        }
+
+        .footer-main {
+
+            padding:
+                75px 0 55px;
+        }
+
+        .footer-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+        .footer-logo {
+
+            width: 62px;
+            height: 62px;
+
+            object-fit: contain;
+        }
+
+        .footer-school-name {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            color:
+                white;
+
+            font-size: 28px;
+
+            line-height: 1;
+        }
+
+        .footer-school-subtitle {
+
+            color:
+                var(--curr-gold-light);
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            font-size: 9px;
+
+            margin-top: 6px;
+        }
+
+        .footer-description {
+
+            max-width: 420px;
+
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 13px;
+
+            line-height: 1.9;
+        }
+
+        .footer-heading {
+
+            color:
+                white;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 20px;
+
+            font-weight: 700;
+        }
+
+        .footer-links {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 13px;
+
+            transition:
+                .2s ease;
+        }
+
+        .footer-links a:hover {
+
+            color:
+                var(--curr-gold-light);
+
+            padding-left: 4px;
+        }
+
+        .footer-contact {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+        }
+
+        .footer-contact li {
+
+            display: flex;
+
+            gap: 11px;
+
+            margin-bottom: 13px;
+
+            font-size: 13px;
+
+            color:
+                rgba(255,255,255,.55);
+        }
+
+        .footer-contact i {
+
+            color:
+                var(--curr-gold-light);
+
+            width: 16px;
+
+            margin-top: 5px;
+        }
+
+        .footer-bottom {
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.09);
+
+            padding:
+                20px 0;
+        }
+
+        .footer-bottom-inner {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .footer-copyright {
+
+            font-size: 11px;
+
+            color:
+                rgba(255,255,255,.42);
+        }
+
+        .footer-social {
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+        .footer-social a {
+
+            width: 34px;
+            height: 34px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.13);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color:
+                rgba(255,255,255,.60);
+
+            font-size: 13px;
+
+            transition:
+                .25s ease;
+        }
+
+        .footer-social a:hover {
+
+            color:
+                var(--curr-gold-light);
+
+            border-color:
+                var(--curr-gold);
+        }
+
+
+        /* ============================================================
+           BACK TO TOP
+        ============================================================ */
+
+        .back-to-top {
+
+            position: fixed;
+
+            right: 24px;
+            bottom: 24px;
+
+            width: 43px;
+            height: 43px;
+
+            background:
+                var(--curr-gold);
+
+            color:
+                var(--curr-navy);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 9999;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform:
+                translateY(15px);
+
+            transition:
+                .3s ease;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,.18);
+        }
+
+        .back-to-top.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform:
+                translateY(0);
+        }
+
+        .back-to-top:hover {
+
+            background:
+                var(--curr-navy);
+
+            color:
+                white;
+        }
+
+
+        /* ============================================================
+           SCROLL ANIMATION
+        ============================================================ */
+
+        .reveal {
+
+            opacity: 0;
+
+            transform:
+                translateY(28px);
+
+            transition:
+                opacity .75s ease,
+                transform .75s ease;
+        }
+
+        .reveal.visible {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* ============================================================
+           RESPONSIVE — 1100px
+        ============================================================ */
+
+        @media (max-width:1100px) {
+
+            .main-navigation {
+                gap: 0;
+            }
+
+            .main-navigation a {
+
+                padding:
+                    10px 8px;
+
+                font-size: 12px;
+            }
+
+            .header-admission-btn {
+                margin-left: 3px;
+            }
+
+            .brand-title {
+                font-size: 24px;
+            }
+        }
+
+
+        /* ============================================================
+           RESPONSIVE — TABLET
+        ============================================================ */
+
+        @media (max-width:991px) {
+
+            .academic-topbar {
+                display: none;
+            }
+
+            .header-inner {
+
+                min-height: 78px;
+
+                padding:
+                    0 10px;
+            }
+
+            .school-logo {
+
+                width: 53px;
+                height: 53px;
+            }
+
+            .brand-title {
+                font-size: 23px;
+            }
+
+            .brand-subtitle {
+
+                font-size: 8px;
+
+                letter-spacing: 1.5px;
+            }
+
+            .main-navigation {
+                display: none;
+            }
+
+            .curriculum-hero {
+
+                min-height:
+                    520px;
+            }
+
+            .hero-content {
+
+                padding:
+                    75px 20px;
+            }
+
+            .section {
+
+                padding:
+                    75px 0;
+            }
+
+            .intro-section {
+
+                padding-top:
+                    80px;
+            }
+
+            .intro-panel,
+            .development-panel {
+
+                padding:
+                    35px;
+            }
+        }
+
+
+        /* ============================================================
+           RESPONSIVE — MOBILE
+        ============================================================ */
+
+        @media (max-width:767px) {
+
+            .container {
+
+                padding-left:
+                    20px;
+
+                padding-right:
+                    20px;
+            }
+
+            .header-inner {
+
+                min-height:
+                    74px;
+            }
+
+            .school-logo {
+
+                width: 49px;
+                height: 49px;
+            }
+
+            .brand-title {
+
+                font-size:
+                    21px;
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .curriculum-hero {
+
+                min-height:
+                    540px;
+
+                background-position:
+                    65% center;
+            }
+
+            .hero-content {
+
+                padding:
+                    75px 0;
+            }
+
+            .hero-title {
+
+                font-size:
+                    54px;
+            }
+
+            .hero-description {
+
+                font-size:
+                    14px;
+            }
+
+            .hero-actions {
+
+                align-items:
+                    flex-start;
+            }
+
+            .hero-btn {
+
+                width:
+                    auto;
+            }
+
+            .section {
+
+                padding:
+                    65px 0;
+            }
+
+            .intro-section {
+
+                padding-top:
+                    65px;
+            }
+
+            .section-title {
+
+                font-size:
+                    43px;
+            }
+
+            .intro-panel {
+
+                padding:
+                    28px;
+            }
+
+            .intro-highlight {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .development-grid {
+
+                margin-top:
+                    20px;
+            }
+
+            .journey::before {
+
+                left:
+                    23px;
+            }
+
+            .journey-item {
+
+                gap:
+                    18px;
+            }
+
+            .journey-number {
+
+                flex:
+                    0 0 47px;
+
+                width:
+                    47px;
+
+                height:
+                    47px;
+            }
+
+            .journey-content {
+
+                padding:
+                    20px;
+            }
+
+            .learning-statement {
+
+                padding:
+                    30px;
+            }
+
+            .footer-main {
+
+                padding:
+                    55px 0 35px;
+            }
+
+            .footer-bottom-inner {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+        }
+
+
+        /* ============================================================
+           RESPONSIVE — SMALL MOBILE
+        ============================================================ */
+
+        @media (max-width:480px) {
+
+            .brand-title {
+                font-size: 19px;
+            }
+
+            .curriculum-hero {
+
+                min-height:
+                    560px;
+            }
+
+            .hero-title {
+
+                font-size:
+                    47px;
+            }
+
+            .hero-actions {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+            }
+
+            .hero-btn {
+
+                width:
+                    100%;
+            }
+
+            .development-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .learning-statement {
+
+                padding:
+                    27px;
+            }
+
+            .learning-statement h3 {
+
+                font-size:
+                    31px;
+            }
+
+            .intro-panel {
+
+                padding:
+                    24px;
+            }
+
+            .stage-card {
+
+                padding:
+                    30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================================================
+     MAIN HEADER
+================================================================ -->
+
+<header class="main-header">
+
+    <div class="container">
+
+        <div class="header-inner">
+
+            <a href="/" class="school-brand">
+
+                <img
+                    src="/images/logo.png"
+                    alt="St. Martin's High School Logo"
+                    class="school-logo"
+                >
+
+                <div class="brand-text">
+
+                    <div class="brand-title">
+                        St. Martin's High School
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Balanagar • Hyderabad
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <nav class="main-navigation">
+
+                <a href="/">
+                    Home
+                </a>
+
+                <a href="/about">
+                    About
+                </a>
+
+                <a href="/principal-message">
+                    Principal
+                </a>
+
+                <a href="/management">
+                    Management
+                </a>
+
+                <a href="/facilities">
+                    Facilities
+                </a>
+
+                <a href="/curriculum" class="active">
+                    Curriculum
+                </a>
+
+                <a href="/gallery">
+                    Gallery
+                </a>
+
+                <a href="/contact">
+                    Contact
+                </a>
+
+                <a
+                    href="/admissions"
+                    class="header-admission-btn"
+                >
+                    Admissions
+                </a>
+
+            </nav>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================================================================
+     PAGE WRAPPER
+================================================================ -->
+
+<main class="curriculum-page">
+
+
+<!-- ================================================================
+     HERO
+================================================================ -->
+
+<section class="curriculum-hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="hero-kicker">
+                Academic Programme
+            </div>
+
+            <h1 class="hero-title">
+
+                Learning with
+                <br>
+
+                <span>Purpose.</span>
+
+            </h1>
+
+            <p class="hero-description">
+
+                At St. Martin's High School, the curriculum is designed
+                to provide students with a strong academic foundation
+                while nurturing curiosity, creativity, discipline,
+                communication, confidence and a lifelong love of learning.
+
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    href="#academic-stages"
+                    class="hero-btn hero-btn-primary"
+                >
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Explore Curriculum
+
+                </a>
+
+                <a
+                    href="#learning-approach"
+                    class="hero-btn hero-btn-outline"
+                >
+
+                    Our Learning Approach
+
+                    <i class="fa-solid fa-arrow-down"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     INTRODUCTION
+================================================================ -->
+
+<section class="section intro-section">
+
+    <div class="container">
+
+        <div class="row g-5 align-items-center">
+
+            <div class="col-lg-5 reveal">
+
+                <div class="section-label">
+                    Our Academic Philosophy
+                </div>
+
+                <h2 class="section-title">
+
+                    Education that builds
+                    <span>more than marks.</span>
+
+                </h2>
+
+                <p class="section-description">
+
+                    A meaningful education should prepare young people
+                    not only for examinations, but also for the choices,
+                    responsibilities and opportunities that lie beyond
+                    the classroom.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-lg-7 reveal">
+
+                <div class="intro-panel">
+
+                    <p>
+
+                        The academic programme at St. Martin's High School
+                        is structured to encourage students to understand
+                        concepts deeply, communicate ideas confidently and
+                        apply classroom learning to real situations.
+
+                    </p>
+
+                    <p>
+
+                        Classroom instruction is complemented by practical
+                        activities, discussions, projects, collaborative
+                        learning, creative expression, sports and
+                        co-curricular experiences.
+
+                    </p>
+
+                    <p>
+
+                        Our approach seeks to develop disciplined,
+                        independent and responsible learners who are
+                        prepared to approach new challenges with confidence
+                        and intellectual curiosity.
+
+                    </p>
+
+
+                    <div class="intro-highlight">
+
+                        <div class="intro-highlight-item">
+
+                            <i class="fa-solid fa-brain"></i>
+
+                            <strong>
+                                Deep Understanding
+                            </strong>
+
+                            <span>
+                                Learning concepts rather than simply
+                                memorising information.
+                            </span>
+
+                        </div>
+
+
+                        <div class="intro-highlight-item">
+
+                            <i class="fa-solid fa-lightbulb"></i>
+
+                            <strong>
+                                Curious Thinking
+                            </strong>
+
+                            <span>
+                                Encouraging questions, exploration
+                                and independent thought.
+                            </span>
+
+                        </div>
+
+
+                        <div class="intro-highlight-item">
+
+                            <i class="fa-solid fa-people-group"></i>
+
+                            <strong>
+                                Collaboration
+                            </strong>
+
+                            <span>
+                                Learning through discussion,
+                                teamwork and shared experiences.
+                            </span>
+
+                        </div>
+
+
+                        <div class="intro-highlight-item">
+
+                            <i class="fa-solid fa-compass"></i>
+
+                            <strong>
+                                Future Readiness
+                            </strong>
+
+                            <span>
+                                Building confidence and skills for
+                                future academic challenges.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     CURRICULUM AT A GLANCE
+================================================================ -->
+
+<section class="section glance-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5 reveal">
+
+            <div class="section-label justify-content-center">
+                Curriculum at a Glance
+            </div>
+
+            <h2 class="section-title">
+
+                Four dimensions of
+                <span>meaningful learning.</span>
+
+            </h2>
+
+            <p class="section-description mx-auto">
+
+                The curriculum brings together academic knowledge,
+                practical application, communication and personal
+                development to create a balanced learning experience.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Strong Foundations
+                    </h3>
+
+                    <p>
+
+                        Students build secure foundations in literacy,
+                        numeracy, language, scientific thinking and
+                        essential academic habits.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Deeper Thinking
+                    </h3>
+
+                    <p>
+
+                        Learning progressively develops reasoning,
+                        analysis, questioning and the ability to
+                        understand relationships between ideas.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Practical Learning
+                    </h3>
+
+                    <p>
+
+                        Projects, activities, demonstrations and
+                        collaborative tasks help students connect
+                        knowledge with practical situations.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="glance-card">
+
+                    <div class="glance-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Future Readiness
+                    </h3>
+
+                    <p>
+
+                        Students develop communication, confidence,
+                        responsibility and independent learning habits
+                        for the years ahead.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     CURRICULUM PRINCIPLES
+================================================================ -->
+
+<section class="section principles-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5 reveal">
+
+            <div class="section-label justify-content-center">
+                The Foundation
+            </div>
+
+            <h2 class="section-title">
+
+                Four principles behind
+                <span>every classroom.</span>
+
+            </h2>
+
+            <p class="section-description mx-auto">
+
+                Our curriculum balances academic rigour with the
+                intellectual, emotional, social and physical development
+                of every learner.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="principle-card">
+
+                    <div class="principle-number">
+                        01
+                    </div>
+
+                    <div class="principle-icon">
+
+                        <i class="fa-solid fa-lightbulb"></i>
+
+                    </div>
+
+                    <h3>
+                        Conceptual Understanding
+                    </h3>
+
+                    <p>
+
+                        Students are encouraged to understand ideas,
+                        principles and relationships rather than simply
+                        memorising information.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="principle-card">
+
+                    <div class="principle-number">
+                        02
+                    </div>
+
+                    <div class="principle-icon">
+
+                        <i class="fa-solid fa-comments"></i>
+
+                    </div>
+
+                    <h3>
+                        Communication
+                    </h3>
+
+                    <p>
+
+                        Reading, writing, speaking, listening and
+                        presentation skills are developed progressively
+                        across the academic journey.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="principle-card">
+
+                    <div class="principle-number">
+                        03
+                    </div>
+
+                    <div class="principle-icon">
+
+                        <i class="fa-solid fa-puzzle-piece"></i>
+
+                    </div>
+
+                    <h3>
+                        Application
+                    </h3>
+
+                    <p>
+
+                        Students are encouraged to connect academic
+                        concepts with practical situations, activities
+                        and problem-solving exercises.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="principle-card">
+
+                    <div class="principle-number">
+                        04
+                    </div>
+
+                    <div class="principle-icon">
+
+                        <i class="fa-solid fa-seedling"></i>
+
+                    </div>
+
+                    <h3>
+                        Character
+                    </h3>
+
+                    <p>
+
+                        Discipline, responsibility, respect, integrity
+                        and empathy remain important parts of the wider
+                        educational experience.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     ACADEMIC STAGES
+================================================================ -->
+
+<section
+    class="section stages-section"
+    id="academic-stages"
+>
+
+    <div class="container">
+
+        <div class="row align-items-end mb-5">
+
+            <div class="col-lg-7 reveal">
+
+                <div class="section-label">
+                    Academic Stages
+                </div>
+
+                <h2 class="section-title">
+
+                    A structured journey
+                    <span>through school.</span>
+
+                </h2>
+
+            </div>
+
+
+            <div class="col-lg-5 reveal">
+
+                <p class="section-description mb-0">
+
+                    Learning experiences become progressively more
+                    challenging as students develop greater independence,
+                    subject knowledge and responsibility.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- PRIMARY -->
+
+            <div class="col-lg-4 reveal">
+
+                <article class="stage-card">
+
+                    <div class="stage-index">
+                        Stage 01
+                    </div>
+
+                    <h3>
+                        Primary Years
+                    </h3>
+
+                    <div class="stage-subtitle">
+                        Building Strong Foundations
+                    </div>
+
+                    <p>
+
+                        The primary years focus on curiosity, foundational
+                        literacy and numeracy, communication and the
+                        development of positive learning habits.
+
+                    </p>
+
+                    <ul class="stage-list">
+
+                        <li>
+                            Language and literacy development
+                        </li>
+
+                        <li>
+                            Mathematical thinking
+                        </li>
+
+                        <li>
+                            Environmental awareness
+                        </li>
+
+                        <li>
+                            Creative expression
+                        </li>
+
+                        <li>
+                            Personal and social development
+                        </li>
+
+                    </ul>
+
+                </article>
+
+            </div>
+
+
+            <!-- MIDDLE -->
+
+            <div class="col-lg-4 reveal">
+
+                <article class="stage-card">
+
+                    <div class="stage-index">
+                        Stage 02
+                    </div>
+
+                    <h3>
+                        Middle School
+                    </h3>
+
+                    <div class="stage-subtitle">
+                        Exploring & Connecting
+                    </div>
+
+                    <p>
+
+                        Students encounter greater subject depth while
+                        learning to analyse information, communicate
+                        clearly and work independently.
+
+                    </p>
+
+                    <ul class="stage-list">
+
+                        <li>
+                            Scientific inquiry
+                        </li>
+
+                        <li>
+                            Mathematical reasoning
+                        </li>
+
+                        <li>
+                            Language proficiency
+                        </li>
+
+                        <li>
+                            Social science understanding
+                        </li>
+
+                        <li>
+                            Project-based learning
+                        </li>
+
+                    </ul>
+
+                </article>
+
+            </div>
+
+
+            <!-- SECONDARY -->
+
+            <div class="col-lg-4 reveal">
+
+                <article class="stage-card">
+
+                    <div class="stage-index">
+                        Stage 03
+                    </div>
+
+                    <h3>
+                        Secondary Years
+                    </h3>
+
+                    <div class="stage-subtitle">
+                        Preparing for the Future
+                    </div>
+
+                    <p>
+
+                        The secondary years place increased emphasis on
+                        subject mastery, analytical thinking, academic
+                        discipline and examination readiness.
+
+                    </p>
+
+                    <ul class="stage-list">
+
+                        <li>
+                            Advanced subject understanding
+                        </li>
+
+                        <li>
+                            Analytical and critical thinking
+                        </li>
+
+                        <li>
+                            Examination preparation
+                        </li>
+
+                        <li>
+                            Research and presentation
+                        </li>
+
+                        <li>
+                            Academic planning and guidance
+                        </li>
+
+                    </ul>
+
+                </article>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     SUBJECT AREAS
+================================================================ -->
+
+<section class="section subjects-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5 reveal">
+
+            <div class="section-label justify-content-center">
+                Areas of Learning
+            </div>
+
+            <h2 class="section-title">
+
+                Knowledge across
+                <span>disciplines.</span>
+
+            </h2>
+
+            <p class="section-description mx-auto">
+
+                Students experience a broad academic programme that
+                develops knowledge, language, reasoning, creativity and
+                awareness of the world around them.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- LANGUAGES -->
+
+            <div class="col-md-6 col-lg-4 reveal">
+
+                <div class="subject-box">
+
+                    <div class="subject-icon">
+
+                        <i class="fa-solid fa-language"></i>
+
+                    </div>
+
+                    <h3>
+                        Languages
+                    </h3>
+
+                    <p>
+
+                        Language learning strengthens communication,
+                        comprehension, vocabulary and confident expression.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Reading
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Writing
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Grammar & Vocabulary
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Speaking & Listening
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATHEMATICS -->
+
+            <div class="col-md-6 col-lg-4 reveal">
+
+                <div class="subject-box">
+
+                    <div class="subject-icon">
+
+                        <i class="fa-solid fa-calculator"></i>
+
+                    </div>
+
+                    <h3>
+                        Mathematics
+                    </h3>
+
+                    <p>
+
+                        Mathematics develops logical reasoning,
+                        quantitative understanding and structured
+                        problem-solving.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Number Sense
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Algebraic Thinking
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Geometry
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Problem Solving
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- SCIENCE -->
+
+            <div class="col-md-6 col-lg-4 reveal">
+
+                <div class="subject-box">
+
+                    <div class="subject-icon">
+
+                        <i class="fa-solid fa-flask"></i>
+
+                    </div>
+
+                    <h3>
+                        Science
+                    </h3>
+
+                    <p>
+
+                        Scientific learning encourages observation,
+                        questioning, experimentation and understanding
+                        of the natural world.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Scientific Inquiry
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Observation
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Experimentation
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Scientific Reasoning
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- SOCIAL SCIENCE -->
+
+            <div class="col-md-6 col-lg-4 reveal">
+
+                <div class="subject-box">
+
+                    <div class="subject-icon">
+
+                        <i class="fa-solid fa-earth-asia"></i>
+
+                    </div>
+
+                    <h3>
+                        Social Sciences
+                    </h3>
+
+                    <p>
+
+                        Students develop awareness of society, history,
+                        geography, communities and the world around them.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            History
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Geography
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Society & Communities
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            World Awareness
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- DIGITAL -->
+
+            <div class="col-md-6 col-lg-4 reveal">
+
+                <div class="subject-box">
+
+                    <div class="subject-icon">
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                    </div>
+
+                    <h3>
+                        Digital Learning
+                    </h3>
+
+                    <p>
+
+                        Digital literacy helps students become confident,
+                        responsible and purposeful users of technology.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Digital Literacy
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Computer Skills
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Information Research
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Responsible Technology Use
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- ARTS -->
+
+            <div class="col-md-6 col-lg-4 reveal">
+
+                <div class="subject-box">
+
+                    <div class="subject-icon">
+
+                        <i class="fa-solid fa-palette"></i>
+
+                    </div>
+
+                    <h3>
+                        Arts & Creativity
+                    </h3>
+
+                    <p>
+
+                        Creative activities provide opportunities for
+                        imagination, expression, appreciation and
+                        confidence.
+
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Visual Arts
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Music
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Cultural Expression
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Creative Projects
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     LEARNING APPROACH
+================================================================ -->
+
+<section
+    class="section learning-section"
+    id="learning-approach"
+>
+
+    <div class="container position-relative">
+
+        <div class="row g-5 align-items-center">
+
+
+            <div class="col-lg-6 reveal">
+
+                <div class="section-label">
+                    How Learning Happens
+                </div>
+
+                <h2 class="section-title">
+
+                    Beyond the
+                    <span>textbook.</span>
+
+                </h2>
+
+                <p class="section-description">
+
+                    Effective learning takes place when students are
+                    actively involved in the process. Our classroom
+                    approach encourages questioning, discussion,
+                    application and reflection.
+
+                </p>
+
+
+                <div class="learning-item">
+
+                    <div class="learning-icon">
+
+                        <i class="fa-solid fa-comments"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Discussion & Dialogue
+                        </h3>
+
+                        <p>
+
+                            Students are encouraged to ask questions,
+                            exchange ideas and communicate their reasoning.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="learning-item">
+
+                    <div class="learning-icon">
+
+                        <i class="fa-solid fa-flask"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Practical Exploration
+                        </h3>
+
+                        <p>
+
+                            Activities and demonstrations help students
+                            connect theoretical concepts with practical
+                            understanding.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="learning-item">
+
+                    <div class="learning-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Collaborative Learning
+                        </h3>
+
+                        <p>
+
+                            Group tasks and projects develop cooperation,
+                            leadership, communication and responsibility.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6 reveal">
+
+                <div class="learning-statement">
+
+                    <i class="fa-solid fa-quote-left"></i>
+
+                    <h3>
+
+                        "The goal is not simply to know more,
+                        but to learn how to think."
+
+                    </h3>
+
+                    <p>
+
+                        Students are gradually guided towards becoming
+                        independent learners who can interpret information,
+                        evaluate ideas, solve problems and make thoughtful
+                        decisions.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     ASSESSMENT
+================================================================ -->
+
+<section class="section assessment-section">
+
+    <div class="container">
+
+        <div class="row align-items-end mb-5">
+
+            <div class="col-lg-7 reveal">
+
+                <div class="section-label">
+                    Monitoring Progress
+                </div>
+
+                <h2 class="section-title">
+
+                    Assessment with
+                    <span>purpose.</span>
+
+                </h2>
+
+            </div>
+
+            <div class="col-lg-5 reveal">
+
+                <p class="section-description mb-0">
+
+                    Assessment is used not only to measure achievement,
+                    but also to identify strengths, address learning gaps
+                    and guide future progress.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="assessment-card">
+
+                    <h3>
+
+                        <i class="fa-solid fa-clipboard-check"></i>
+
+                        Classwork
+
+                    </h3>
+
+                    <p>
+
+                        Regular classroom activities provide teachers
+                        with opportunities to observe understanding,
+                        participation and application.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="assessment-card">
+
+                    <h3>
+
+                        <i class="fa-solid fa-file-pen"></i>
+
+                        Tests
+
+                    </h3>
+
+                    <p>
+
+                        Periodic assessments help students consolidate
+                        learning and develop familiarity with academic
+                        evaluation.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="assessment-card">
+
+                    <h3>
+
+                        <i class="fa-solid fa-folder-open"></i>
+
+                        Projects
+
+                    </h3>
+
+                    <p>
+
+                        Projects encourage research, planning, creativity,
+                        teamwork and the practical application of concepts.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="assessment-card">
+
+                    <h3>
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        Progress
+
+                    </h3>
+
+                    <p>
+
+                        Academic progress is reviewed to help students
+                        strengthen areas that require additional attention.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     HOLISTIC DEVELOPMENT
+================================================================ -->
+
+<section class="section co-curricular-section">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-6 reveal">
+
+                <div class="development-panel">
+
+                    <div class="section-label">
+                        Beyond Academics
+                    </div>
+
+                    <h2>
+                        Developing the whole student.
+                    </h2>
+
+                    <p>
+
+                        Academic success is only one part of a meaningful
+                        school experience. Students are encouraged to
+                        discover interests, develop confidence and learn
+                        the importance of teamwork, discipline and
+                        responsible participation.
+
+                    </p>
+
+                    <ul class="development-list">
+
+                        <li>
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Sports and physical development
+
+                        </li>
+
+                        <li>
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Cultural and creative activities
+
+                        </li>
+
+                        <li>
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Leadership opportunities
+
+                        </li>
+
+                        <li>
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Clubs, events and school programmes
+
+                        </li>
+
+                        <li>
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Social responsibility and values
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6 reveal">
+
+                <div class="development-grid">
+
+
+                    <div class="development-tile">
+
+                        <i class="fa-solid fa-person-running"></i>
+
+                        <h4>
+                            Sports
+                        </h4>
+
+                    </div>
+
+
+                    <div class="development-tile">
+
+                        <i class="fa-solid fa-music"></i>
+
+                        <h4>
+                            Music & Arts
+                        </h4>
+
+                    </div>
+
+
+                    <div class="development-tile">
+
+                        <i class="fa-solid fa-people-group"></i>
+
+                        <h4>
+                            Leadership
+                        </h4>
+
+                    </div>
+
+
+                    <div class="development-tile">
+
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+
+                        <h4>
+                            Values & Service
+                        </h4>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     ACADEMIC JOURNEY
+================================================================ -->
+
+<section class="section journey-section">
+
+    <div class="container">
+
+        <div class="text-center reveal">
+
+            <div class="section-label justify-content-center">
+                The Student Journey
+            </div>
+
+            <h2 class="section-title">
+
+                From curiosity to
+                <span>confidence.</span>
+
+            </h2>
+
+            <p class="section-description mx-auto">
+
+                Each stage of education contributes to the development
+                of knowledge, habits, skills and character.
+
+            </p>
+
+        </div>
+
+
+        <div class="journey">
+
+
+            <div class="journey-item reveal">
+
+                <div class="journey-number">
+                    01
+                </div>
+
+                <div class="journey-content">
+
+                    <h3>
+                        Discover
+                    </h3>
+
+                    <p>
+
+                        Students develop curiosity and learn to observe,
+                        ask questions and explore the world around them.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-item reveal">
+
+                <div class="journey-number">
+                    02
+                </div>
+
+                <div class="journey-content">
+
+                    <h3>
+                        Understand
+                    </h3>
+
+                    <p>
+
+                        Foundational knowledge develops into deeper
+                        conceptual understanding across academic subjects.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-item reveal">
+
+                <div class="journey-number">
+                    03
+                </div>
+
+                <div class="journey-content">
+
+                    <h3>
+                        Apply
+                    </h3>
+
+                    <p>
+
+                        Students begin connecting knowledge with practical
+                        situations, projects, discussions and problem-solving.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-item reveal">
+
+                <div class="journey-number">
+                    04
+                </div>
+
+                <div class="journey-content">
+
+                    <h3>
+                        Lead
+                    </h3>
+
+                    <p>
+
+                        Confidence, responsibility, communication and
+                        independent thinking prepare students for future
+                        academic and personal challenges.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================================
+     CALL TO ACTION
+================================================================ -->
+
+<section class="curriculum-cta">
+
+    <div class="container">
+
+        <div class="cta-inner">
+
+            <div class="section-label justify-content-center">
+                Discover St. Martin's
+            </div>
+
+            <h2 class="cta-title">
+
+                A school experience designed
+                for the years ahead.
+
+            </h2>
+
+            <p class="cta-text">
+
+                Explore our facilities, admissions information and
+                wider school experience to learn more about life at
+                St. Martin's High School.
+
+            </p>
+
+            <div class="hero-actions justify-content-center">
+
+                <a
+                    href="/admissions"
+                    class="hero-btn hero-btn-primary"
+                >
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    Admissions
+
+                </a>
+
+                <a
+                    href="/contact"
+                    class="hero-btn hero-btn-outline"
+                >
+
+                    Contact School
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+
+<footer class="site-footer">
+
+
+    <div class="footer-main">
+
+        <div class="container">
+
+            <div class="row g-5">
+
+
+                <!-- BRAND -->
+
+                <div class="col-lg-5">
+
+                    <div class="footer-brand">
+
+                        <img
+                            src="/images/logo.png"
+                            alt="St. Martin's High School Logo"
+                            class="footer-logo"
+                        >
+
+                        <div>
+
+                            <div class="footer-school-name">
+                                St. Martin's High School
+                            </div>
+
+                            <div class="footer-school-subtitle">
+                                Balanagar • Hyderabad
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="footer-description">
+
+                        St. Martin's High School is committed to creating
+                        a purposeful educational environment where students
+                        are encouraged to learn with curiosity, act with
+                        integrity and grow with confidence.
+
+                    </p>
+
+                </div>
+
+
+                <!-- EXPLORE -->
+
+                <div class="col-6 col-lg-2">
+
+                    <div class="footer-heading">
+                        Explore
+                    </div>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="/">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/about">
+                                About School
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/principal-message">
+                                Principal's Message
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/management">
+                                Management
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/facilities">
+                                Facilities
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- ACADEMICS -->
+
+                <div class="col-6 col-lg-2">
+
+                    <div class="footer-heading">
+                        Academics
+                    </div>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="/curriculum">
+                                Curriculum
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admissions">
+                                Admissions
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/gallery">
+                                Gallery
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/contact">
+                                Contact
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/teacher-login">
+                                Teacher Portal
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="col-lg-3">
+
+                    <div class="footer-heading">
+                        Contact
+                    </div>
+
+                    <ul class="footer-contact">
+
+                        <li>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+
+                                St. Martin's High School
+                                <br>
+
+                                Balanagar, Hyderabad,
+                                <br>
+
+                                Telangana, India
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            <span>
+                                040 - 4020 4839
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <span>
+                                School Administration
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="fa-solid fa-clock"></i>
+
+                            <span>
+                                School Working Hours
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <div class="footer-bottom-inner">
+
+                <div class="footer-copyright">
+
+                    ©
+                    <span id="footerYear"></span>
+
+                    St. Martin's High School.
+
+                    All Rights Reserved.
+
+                </div>
+
+
+                <div class="footer-social">
+
+                    <a
+                        href="#"
+                        aria-label="Facebook"
+                    >
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="Instagram"
+                    >
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="YouTube"
+                    >
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ================================================================
+     BACK TO TOP
+================================================================ -->
+
+<div
+    class="back-to-top"
+    id="backToTop"
+    aria-label="Back to top"
+    title="Back to top"
+>
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</div>
+
+
+
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
+
+<script>
+
+
+    /* ============================================================
+       FOOTER YEAR
+    ============================================================ */
+
+    const footerYear =
+        document.getElementById("footerYear");
+
+    if (footerYear) {
+
+        footerYear.textContent =
+            new Date().getFullYear();
+
+    }
+
+
+
+    /* ============================================================
+       BACK TO TOP
+    ============================================================ */
+
+    const backToTop =
+        document.getElementById("backToTop");
+
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            if (
+                window.scrollY > 450
+            ) {
+
+                backToTop.classList.add("show");
+
+            } else {
+
+                backToTop.classList.remove("show");
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    if (backToTop) {
+
+        backToTop.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
+    }
+
+
+
+    /* ============================================================
+       PREMIUM SCROLL REVEAL
+    ============================================================ */
+
+    const revealItems =
+        document.querySelectorAll(".reveal");
+
+
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
+
+        const revealObserver =
+            new IntersectionObserver(
+
+                function (entries) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+                                revealObserver.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: 0.10,
+
+                    rootMargin:
+                        "0px 0px -40px 0px"
+                }
+
+            );
+
+
+        revealItems.forEach(
+            function (item) {
+
+                revealObserver.observe(item);
+
+            }
+        );
+
+    } else {
+
+        revealItems.forEach(
+            function (item) {
+
+                item.classList.add(
+                    "visible"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* ============================================================
+       PREVENT EMPTY SOCIAL LINKS FROM JUMPING
+    ============================================================ */
+
+    document
+        .querySelectorAll('.footer-social a[href="#"]')
+        .forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+                    }
+                );
+
+            }
+        );
+
+
+</script>
+
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>
