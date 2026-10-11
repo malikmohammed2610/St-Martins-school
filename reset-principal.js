@@ -1,56 +1,82 @@
-const mysql = require("mysql2/promise");
+const path = require("path");
+const Database = require("better-sqlite3");
 const bcrypt = require("bcryptjs");
-require("dotenv").config();
 
-const db = mysql.createPool({
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT || 3306),
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 5
-});
+const dbPath = path.join(__dirname, "school.db");
+
+const db = new Database(dbPath);
+
+const username = "st.martins@principal";
+const password = "St.Martins@Principal";
 
 async function resetPrincipal() {
-    const username = String(
-        process.env.PRINCIPAL_USERNAME || "st.martins@principal"
-    ).trim().toLowerCase();
+    console.log("==========================================");
+    console.log("RESETTING PRINCIPAL LOGIN");
+    console.log("==========================================");
 
-    const password = process.env.PRINCIPAL_PASSWORD;
-
-    if (!password) {
-        throw new Error("Set PRINCIPAL_PASSWORD in .env before running reset-principal.js");
-    }
+    console.log("Database:");
+    console.log(dbPath);
 
     const passwordHash = await bcrypt.hash(password, 12);
 
-    const [existingRows] = await db.execute(
-        "SELECT id FROM principals LIMIT 1"
-    );
+    const existing = db.prepare(`
+        SELECT id
+        FROM principals
+        LIMIT 1
+    `).get();
 
-    if (existingRows.length) {
-        await db.execute(
-            `UPDATE principals
-             SET username = ?, password_hash = ?
-             WHERE id = ?`,
-            [username, passwordHash, existingRows[0].id]
+    if (existing) {
+        db.prepare(`
+            UPDATE principals
+            SET username = ?,
+                password_hash = ?
+            WHERE id = ?
+        `).run(
+            username,
+            passwordHash,
+            existing.id
         );
-        console.log("Principal account updated.");
+
+        console.log("Existing principal account updated.");
     } else {
-        await db.execute(
-            `INSERT INTO principals (username, password_hash)
-             VALUES (?, ?)`,
-            [username, passwordHash]
+        db.prepare(`
+            INSERT INTO principals (
+                username,
+                password_hash
+            )
+            VALUES (?, ?)
+        `).run(
+            username,
+            passwordHash
         );
-        console.log("Principal account created.");
+
+        console.log("New principal account created.");
     }
 
-    await db.end();
+    const principal = db.prepare(`
+        SELECT id, username
+        FROM principals
+        LIMIT 1
+    `).get();
+
+    console.log("");
+    console.log("Principal account:");
+    console.log(principal);
+
+    console.log("");
+    console.log("LOGIN CREDENTIALS");
+    console.log("------------------------------------------");
+    console.log("Username: St.Martins@Principal");
+    console.log("Password: St.Martins@Principal");
+    console.log("------------------------------------------");
+    console.log("Principal password reset successfully.");
+    console.log("==========================================");
+
+    db.close();
 }
 
-resetPrincipal().catch(async error => {
-    console.error("ERROR:", error.message);
-    await db.end().catch(() => {});
-    process.exit(1);
+resetPrincipal().catch((error) => {
+    console.error("RESET FAILED:");
+    console.error(error);
+    db.close();
 });
