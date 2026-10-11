@@ -386,8 +386,8 @@ app.get("/calendar", (req, res) => {
 
 app.get("/news", (req, res) => {
     res.render("news", {
-        title:
-            "News & Updates | St. Martin's High School"
+        updates: [],
+        events: []
     });
 });
 
