@@ -1,918 +1,145 @@
+```ejs
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>News, Events & School Guidelines | St. Martin's High School</title>
-
-    <meta name="description"
-        content="Discover school announcements, academic events, school guidelines and important information from St. Martin's High School, Balanagar, Hyderabad.">
-
+    <meta name="description" content="Read the latest announcements, school news and upcoming events from St. Martin's High School, Balanagar, Hyderabad.">
+    <title>News & Updates | St. Martin's High School</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="/css/style.css">
 
     <style>
-        .news-page {
-            --news-navy: #071a2b;
-            --news-blue: #102c44;
-            --news-gold: #c5a45a;
-            --news-cream: #f6f1e7;
-            --news-muted: #687580;
-            background: var(--news-cream);
-            color: var(--news-navy);
-        }
-
-        .news-page *,
-        .news-page *::before,
-        .news-page *::after {
-            box-sizing: border-box;
-        }
-
-        .news-hero {
-            padding: 100px 5% 75px;
-            background: linear-gradient(130deg, #071a2b, #17374d);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .news-hero::after {
-            content: "";
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            right: -100px;
-            top: -150px;
-            border: 1px solid rgba(197,164,90,.3);
-            border-radius: 50%;
-            box-shadow: 0 0 0 35px rgba(197,164,90,.04),
-                        0 0 0 70px rgba(197,164,90,.03);
-        }
-
-        .news-hero-inner,
-        .news-content {
-            max-width: 1180px;
-            margin: auto;
-            position: relative;
-        }
-
-        .news-hero-inner {
-            z-index: 1;
-        }
-
-        .news-eyebrow {
-            color: var(--news-gold);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .news-hero h1 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(43px, 6vw, 76px);
-            line-height: 1.05;
-            color: white;
-            margin: 0;
-        }
-
-        .news-hero h1 span {
-            color: var(--news-gold);
-        }
-
-        .news-hero-text {
-            color: #d0d9e0;
-            max-width: 680px;
-            line-height: 1.9;
-            margin: 22px 0 0;
-        }
-
-        .news-content {
-            padding: 55px 24px 85px;
-        }
-
-        .news-section {
-            margin-bottom: 65px;
-            scroll-margin-top: 30px;
-        }
-
-        .section-heading {
-            margin-bottom: 25px;
-        }
-
-        .section-heading h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(28px, 4vw, 40px);
-            line-height: 1.2;
-            margin: 0 0 10px;
-        }
-
-        .section-heading p {
-            color: var(--news-muted);
-            max-width: 720px;
-            line-height: 1.8;
-            margin: 0;
-        }
-
-        .gold-line {
-            height: 3px;
-            width: 52px;
-            background: var(--news-gold);
-            margin-bottom: 18px;
-        }
-
-        .news-notice {
-            display: flex;
-            align-items: flex-start;
-            gap: 18px;
-            padding: 23px;
-            background: white;
-            border-left: 4px solid var(--news-gold);
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(7,26,43,.04);
-            margin-bottom: 45px;
-        }
-
-        .notice-icon {
-            width: 44px;
-            height: 44px;
-            flex-shrink: 0;
-            display: grid;
-            place-items: center;
-            background: #f6f0e1;
-            border-radius: 12px;
-            font-size: 21px;
-        }
-
-        .news-notice h3 {
-            margin: 0 0 6px;
-            font-size: 17px;
-        }
-
-        .news-notice p {
-            margin: 0;
-            color: var(--news-muted);
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 22px;
-        }
-
-        .news-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(7,26,43,.06);
-            box-shadow: 0 10px 30px rgba(7,26,43,.04);
-            transition: transform .25s, box-shadow .25s;
-        }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 17px 38px rgba(7,26,43,.09);
-        }
-
-        .news-card-banner {
-            min-height: 115px;
-            padding: 22px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 12px;
-            background: linear-gradient(135deg, #071a2b, #1b4059);
-            color: white;
-        }
-
-        .news-card-banner .banner-symbol {
-            font-size: 30px;
-        }
-
-        .news-category {
-            display: inline-block;
-            background: #f6f0e1;
-            color: #775b22;
-            border-radius: 30px;
-            padding: 6px 11px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: .8px;
-            text-transform: uppercase;
-        }
-
-        .news-card-body {
-            padding: 24px;
-        }
-
-        .news-date {
-            color: #8a7546;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: .7px;
-            text-transform: uppercase;
-        }
-
-        .news-card h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 22px;
-            line-height: 1.3;
-            margin: 12px 0;
-        }
-
-        .news-card p {
-            color: var(--news-muted);
-            font-size: 14px;
-            line-height: 1.8;
-            white-space: pre-line;
-            overflow-wrap: anywhere;
-        }
-
-        .news-card-image {
-            width: 100%;
-            height: 190px;
-            display: block;
-            object-fit: cover;
-            background: #e8e2d4;
-        }
-
-        .text-link {
-            display: inline-block;
-            margin-top: 10px;
-            color: #806321;
-            font-size: 12px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .text-link:hover {
-            text-decoration: underline;
-        }
-
-        .empty-state {
-            padding: 35px 25px;
-            text-align: center;
-            background: rgba(255,255,255,.75);
-            border: 1px dashed #d4c7a6;
-            border-radius: 14px;
-        }
-
-        .empty-state .empty-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .empty-state h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 22px;
-            margin: 0 0 8px;
-        }
-
-        .empty-state p {
-            color: var(--news-muted);
-            font-size: 14px;
-            line-height: 1.8;
-            margin: 0;
-        }
-
-        .events-list {
-            border-top: 1px solid #ded8ca;
-        }
-
-        .event-row {
-            display: grid;
-            grid-template-columns: 80px minmax(0, 1fr) auto;
-            gap: 22px;
-            align-items: center;
-            padding: 24px 10px;
-            border-bottom: 1px solid #ded8ca;
-            transition: background .2s;
-        }
-
-        .event-row:hover {
-            background: rgba(255,255,255,.6);
-        }
-
-        .event-date-box {
-            text-align: center;
-            padding: 12px 5px;
-            border-right: 1px solid #d5bd7d;
-        }
-
-        .event-date-box strong {
-            display: block;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 32px;
-            line-height: 1.1;
-        }
-
-        .event-date-box span {
-            display: block;
-            color: #866927;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-top: 6px;
-            text-transform: uppercase;
-        }
-
-        .event-info h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 22px;
-            margin: 0 0 7px;
-        }
-
-        .event-info p {
-            margin: 0;
-            color: var(--news-muted);
-            font-size: 13px;
-            line-height: 1.8;
-            overflow-wrap: anywhere;
-        }
-
-        .event-meta {
-            color: #806321;
-            font-size: 12px;
-            font-weight: 700;
-            margin-top: 8px;
-        }
-
-        .event-tag {
-            display: inline-block;
-            background: white;
-            border: 1px solid #e5ddca;
-            padding: 7px 10px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .guidelines-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
-        }
-
-        .guideline-card {
-            background: white;
-            border-radius: 13px;
-            padding: 24px;
-            border: 1px solid rgba(7,26,43,.06);
-        }
-
-        .guideline-number {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 28px;
-            color: var(--news-gold);
-            margin-bottom: 12px;
-        }
-
-        .guideline-card h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 20px;
-            margin: 0 0 9px;
-        }
-
-        .guideline-card p {
-            color: var(--news-muted);
-            font-size: 13px;
-            line-height: 1.85;
-            margin: 0;
-        }
-
-        .guidelines-note {
-            margin-top: 20px;
-            padding: 18px 20px;
-            background: #eee6d5;
-            border-radius: 10px;
-            color: #5f553f;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 15px;
-        }
-
-        .quick-link {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            min-height: 85px;
-            padding: 18px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid #e8e1d2;
-            color: var(--news-navy);
-            text-decoration: none;
-            transition: .25s;
-        }
-
-        .quick-link:hover {
-            border-color: var(--news-gold);
-            transform: translateY(-3px);
-        }
-
-        .quick-link span {
-            font-size: 23px;
-        }
-
-        .quick-link strong {
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .news-cta {
-            text-align: center;
-            background: linear-gradient(135deg, #071a2b, #15354c);
-            padding: 55px 25px;
-            border-radius: 18px;
-            color: white;
-        }
-
-        .news-cta h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(28px, 4vw, 39px);
-            margin: 0 0 12px;
-        }
-
-        .news-cta p {
-            color: #d0d9e0;
-            max-width: 650px;
-            margin: 0 auto 25px;
-            line-height: 1.8;
-            font-size: 14px;
-        }
-
-        .news-button {
-            display: inline-block;
-            background: var(--news-gold);
-            color: #071a2b;
-            text-decoration: none;
-            padding: 13px 22px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: background .2s, transform .2s;
-        }
-
-        .news-button:hover {
-            background: #e0c67b;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 900px) {
-            .news-grid,
-            .guidelines-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .quick-links {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 600px) {
-            .news-hero {
-                padding: 75px 22px 55px;
-            }
-
-            .news-content {
-                padding: 40px 16px 60px;
-            }
-
-            .news-grid,
-            .guidelines-grid,
-            .quick-links {
-                grid-template-columns: 1fr;
-            }
-
-            .news-section {
-                margin-bottom: 48px;
-            }
-
-            .news-notice {
-                padding: 17px;
-            }
-
-            .event-row {
-                grid-template-columns: 65px minmax(0, 1fr);
-                gap: 13px;
-                padding: 20px 3px;
-            }
-
-            .event-date-box strong {
-                font-size: 27px;
-            }
-
-            .event-tag {
-                grid-column: 2;
-                justify-self: start;
-            }
-
-            .news-cta {
-                padding: 40px 20px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .news-page *,
-            .news-page *::before,
-            .news-page *::after {
-                transition: none !important;
-            }
-        }
+        .news-page{background:#f8f7f3;color:#263448;min-height:70vh}
+        .news-hero{background:linear-gradient(120deg,#071a2b,#123d55);color:white;text-align:center;padding:85px 22px}
+        .news-hero span{color:#e0c67b;font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:700}
+        .news-hero h1{font-size:clamp(36px,5vw,60px);margin:16px 0}
+        .news-hero p{max-width:720px;margin:auto;color:#e0e7ed;line-height:1.8}
+        .news-container{width:min(1150px,92%);margin:auto;padding:55px 0}
+        .news-heading{font-size:clamp(26px,3vw,36px);color:#102b42;margin-bottom:12px}
+        .news-subheading{color:#657181;line-height:1.8;margin-bottom:30px}
+        .news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+        .news-card{background:#fff;border:1px solid #e8e3d8;border-radius:12px;overflow:hidden}
+        .news-card img{width:100%;height:220px;object-fit:cover;display:block}
+        .news-content{padding:24px}
+        .news-category{display:inline-block;background:#f3ead4;color:#735c24;padding:6px 10px;border-radius:30px;font-size:12px;font-weight:700}
+        .news-content h3{font-size:22px;color:#102b42;margin:15px 0 10px;line-height:1.4}
+        .news-content p{line-height:1.8;color:#66717e;white-space:pre-line}
+        .news-date{font-size:13px;color:#8a7440;margin-top:15px}
+        .news-empty{padding:26px;background:white;border:1px dashed #d7d2c7;border-radius:10px;color:#66717e;line-height:1.8}
+        .news-link{display:inline-block;margin-top:16px;padding:12px 20px;border-radius:5px;background:#c5a45a;color:#071a2b;text-decoration:none;font-weight:700}
+        .news-section{margin-bottom:60px}
+        @media(max-width:600px){.news-hero{padding:60px 20px}.news-container{padding:38px 0}}
     </style>
 </head>
+<body>
 
-<body class="news-page">
+<%- include('partials/header') %>
 
-    <%- include('partials/header') %>
+<%
+    const pageUpdates = typeof updates !== 'undefined' && Array.isArray(updates) ? updates : [];
+    const pageEvents = typeof events !== 'undefined' && Array.isArray(events) ? events : [];
+%>
 
+<main class="news-page">
     <section class="news-hero">
-        <div class="news-hero-inner">
-            <div class="news-eyebrow">St. Martin's High School · Balanagar</div>
-
-            <h1>News <span>&amp;</span><br>Events</h1>
-
-            <p class="news-hero-text">
-                Stay informed about school announcements, academic
-                activities, important dates and the guidelines that
-                help our school community learn and grow together.
-            </p>
-        </div>
+        <span>What's Happening at SMHS</span>
+        <h1>News & Updates</h1>
+        <p>
+            Stay connected with school announcements, important notices,
+            student activities and upcoming events at St. Martin's High School.
+        </p>
     </section>
 
-    <main class="news-content">
+    <div class="news-container">
+        <section class="news-section">
+            <h2 class="news-heading">Latest School Announcements</h2>
+            <p class="news-subheading">
+                Official updates and announcements published by the school.
+            </p>
 
-        <!-- IMPORTANT SCHOOL NOTICE -->
-
-        <section class="news-notice">
-            <div class="notice-icon">📌</div>
-            <div>
-                <h3>Stay Updated with Official School Information</h3>
-                <p>
-                    Check this page regularly for announcements and
-                    upcoming events. For changes to schedules, holidays
-                    or examinations, always follow the latest official
-                    communication from the school.
-                </p>
-            </div>
-        </section>
-
-        <!-- TEACHER ANNOUNCEMENTS -->
-
-        <section class="news-section" id="latest-news">
-
-            <div class="section-heading">
-                <div class="gold-line"></div>
-                <div class="news-eyebrow">From Our School Community</div>
-                <h2>Latest Announcements</h2>
-                <p>
-                    School notices, academic announcements, activities
-                    and achievements shared by the school.
-                </p>
-            </div>
-
-            <% if (typeof updates !== 'undefined' && updates && updates.length) { %>
-
+            <% if (pageUpdates.length > 0) { %>
                 <div class="news-grid">
-
-                    <% updates.forEach(function(item) { %>
-
+                    <% pageUpdates.forEach(function(item) { %>
                         <article class="news-card">
-
                             <% if (item.image_url) { %>
-                                <img
-                                    class="news-card-image"
-                                    src="<%= item.image_url %>"
-                                    alt="School announcement"
-                                    loading="lazy"
-                                >
-                            <% } else { %>
-                                <div class="news-card-banner">
-                                    <span class="banner-symbol">✦</span>
-                                    <span class="news-category">
-                                        <%= item.category || 'School Notice' %>
-                                    </span>
-                                </div>
+                                <img src="<%= item.image_url %>" alt="<%= item.title %>" loading="lazy">
                             <% } %>
-
-                            <div class="news-card-body">
-
-                                <span class="news-date">
-                                    <%= item.date
-                                        ? new Date(item.date).toLocaleDateString('en-IN', {
-                                            day: 'numeric',
-                                            month: 'short',
-                                            year: 'numeric',
-                                            timeZone: 'UTC'
-                                        })
-                                        : 'School Announcement' %>
-                                </span>
-
+                            <div class="news-content">
+                                <span class="news-category"><%= item.category || 'Announcement' %></span>
                                 <h3><%= item.title %></h3>
-
-                                <p><%= item.description %></p>
-
+                                <p><%= item.description || '' %></p>
+                                <% if (item.created_at) { %>
+                                    <div class="news-date">
+                                        Published:
+                                        <%= new Date(item.created_at).toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'}) %>
+                                    </div>
+                                <% } %>
                             </div>
-
                         </article>
-
                     <% }); %>
-
                 </div>
-
             <% } else { %>
-
-                <div class="empty-state">
-                    <div class="empty-icon">📢</div>
-                    <h3>School Announcements</h3>
-                    <p>
-                        New announcements will appear here when they
-                        are published by the school administration.
-                        Please check back for the latest updates.
-                    </p>
+                <div class="news-empty">
+                    <strong>No announcements have been published yet.</strong>
+                    <br>
+                    New school announcements will appear here after approval.
+                    Please check again soon.
                 </div>
-
             <% } %>
-
         </section>
 
-        <!-- ACADEMIC CALENDAR EVENTS -->
+        <section class="news-section">
+            <h2 class="news-heading">Upcoming Events</h2>
+            <p class="news-subheading">
+                Keep track of important school dates, celebrations and activities.
+            </p>
 
-        <section class="news-section" id="upcoming-events">
-
-            <div class="section-heading">
-                <div class="gold-line"></div>
-                <div class="news-eyebrow">Plan Ahead</div>
-                <h2>Upcoming Events</h2>
-                <p>
-                    Important academic dates, school programmes and
-                    activities published to the school calendar.
-                </p>
-            </div>
-
-            <% if (typeof events !== 'undefined' && events && events.length) { %>
-
-                <div class="events-list">
-
-                    <% events.forEach(function(event) {
-                        const rawDate = event.event_date || event.date;
-                        const parsedDate = rawDate ? new Date(rawDate) : null;
-                        const validDate = parsedDate && !isNaN(parsedDate.getTime());
-                    %>
-
-                        <article class="event-row">
-
-                            <div class="event-date-box">
-
-                                <% if (validDate) { %>
-                                    <strong>
-                                        <%= parsedDate.toLocaleDateString('en-IN', {
-                                            day: '2-digit',
-                                            timeZone: 'UTC'
-                                        }) %>
-                                    </strong>
-
-                                    <span>
-                                        <%= parsedDate.toLocaleDateString('en-IN', {
-                                            month: 'short',
-                                            timeZone: 'UTC'
-                                        }) %>
-                                    </span>
-                                <% } else { %>
-                                    <strong>—</strong>
-                                    <span>Date TBA</span>
-                                <% } %>
-
-                            </div>
-
-                            <div class="event-info">
-
+            <% if (pageEvents.length > 0) { %>
+                <div class="news-grid">
+                    <% pageEvents.forEach(function(event) { %>
+                        <article class="news-card">
+                            <div class="news-content">
+                                <span class="news-category"><%= event.category || 'School Event' %></span>
                                 <h3><%= event.title %></h3>
-
-                                <p>
-                                    <%= event.description || 'Please refer to the official school notice for details.' %>
-                                </p>
-
-                                <% if (event.location) { %>
-                                    <p class="event-meta">
-                                        📍 <%= event.location %>
-                                    </p>
-                                <% } %>
-
+                                <p><%= event.description || 'Further details will be announced by the school.' %></p>
+                                <div class="news-date">
+                                    <strong>Date:</strong>
+                                    <%= event.event_date || event.date || 'To be announced' %>
+                                </div>
                                 <% if (event.start_time) { %>
-                                    <p class="event-meta">
-                                        🕒 <%= event.start_time %>
-                                        <% if (event.end_time) { %>
-                                            – <%= event.end_time %>
-                                        <% } %>
-                                    </p>
+                                    <p><strong>Time:</strong> <%= event.start_time %><%= event.end_time ? ' – ' + event.end_time : '' %></p>
                                 <% } %>
-
+                                <% if (event.location) { %>
+                                    <p><strong>Venue:</strong> <%= event.location %></p>
+                                <% } %>
                             </div>
-
-                            <span class="event-tag">
-                                <%= event.category || 'School Event' %>
-                            </span>
-
                         </article>
-
                     <% }); %>
-
                 </div>
-
             <% } else { %>
-
-                <div class="empty-state">
-                    <div class="empty-icon">🗓️</div>
-                    <h3>No Upcoming Events Listed</h3>
-                    <p>
-                        The school calendar will display upcoming
-                        events once they have been published.
-                        Please consult official school notices
-                        for confirmed dates.
-                    </p>
+                <div class="news-empty">
+                    There are no upcoming events published at this time.
+                    <br>
+                    <a href="/calendar" class="news-link">View Academic Calendar</a>
                 </div>
-
             <% } %>
+        </section>
 
-            <p style="margin-top:22px;">
-                <a href="/calendar" class="news-button">
-                    View Academic Calendar →
-                </a>
+        <section class="news-section">
+            <h2 class="news-heading">Stay Connected</h2>
+            <p class="news-subheading">
+                Visit our student life page to learn more about school activities
+                and the experiences that make learning meaningful.
             </p>
-
+            <a href="/student-life" class="news-link">Explore Student Life</a>
+            <a href="/contact" class="news-link" style="margin-left:8px">Contact the School</a>
         </section>
+    </div>
+</main>
 
-        <!-- SCHOOL GUIDELINES -->
-
-        <section class="news-section" id="school-guidelines">
-
-            <div class="section-heading">
-                <div class="gold-line"></div>
-                <div class="news-eyebrow">A Responsible School Community</div>
-                <h2>School Guidelines</h2>
-                <p>
-                    These general reminders encourage punctuality,
-                    respect, responsible behaviour and a positive
-                    learning environment.
-                </p>
-            </div>
-
-            <div class="guidelines-grid">
-
-                <article class="guideline-card">
-                    <div class="guideline-number">01</div>
-                    <h3>Attendance &amp; Punctuality</h3>
-                    <p>
-                        Students should attend classes regularly and
-                        arrive on time. Parents or guardians should
-                        inform the school about absences through
-                        the appropriate school communication channel.
-                    </p>
-                </article>
-
-                <article class="guideline-card">
-                    <div class="guideline-number">02</div>
-                    <h3>Uniform &amp; Presentation</h3>
-                    <p>
-                        Students should follow the school's prescribed
-                        uniform and personal presentation guidelines.
-                        Please refer to the official school handbook
-                        for specific uniform requirements.
-                    </p>
-                </article>
-
-                <article class="guideline-card">
-                    <div class="guideline-number">03</div>
-                    <h3>Respect &amp; Discipline</h3>
-                    <p>
-                        Treat teachers, staff and fellow students
-                        respectfully. Bullying, harassment, intimidation
-                        and disruptive behaviour should be reported
-                        to a responsible member of school staff.
-                    </p>
-                </article>
-
-                <article class="guideline-card">
-                    <div class="guideline-number">04</div>
-                    <h3>Learning Responsibilities</h3>
-                    <p>
-                        Attend lessons prepared, complete assigned
-                        work on time, care for school learning
-                        materials and follow teachers' instructions
-                        during classroom activities.
-                    </p>
-                </article>
-
-                <article class="guideline-card">
-                    <div class="guideline-number">05</div>
-                    <h3>Safety &amp; School Property</h3>
-                    <p>
-                        Follow safety instructions, keep classrooms
-                        clean and handle school property responsibly.
-                        Inform a teacher or authorised staff member
-                        about hazards or unsafe situations.
-                    </p>
-                </article>
-
-                <article class="guideline-card">
-                    <div class="guideline-number">06</div>
-                    <h3>Parent Communication</h3>
-                    <p>
-                        Parents and guardians should check official
-                        school communications for announcements,
-                        meeting schedules, examination information
-                        and other important notices.
-                    </p>
-                </article>
-
-            </div>
-
-            <div class="guidelines-note">
-                <strong>Important:</strong>
-                These are general school-community guidelines,
-                not a substitute for the school's formally approved
-                rules. Please follow the latest official handbook,
-                circulars and instructions issued by school management.
-            </div>
-
-        </section>
-
-        <!-- BASIC SCHOOL INFORMATION -->
-
-        <section class="news-section" id="school-information">
-
-            <div class="section-heading">
-                <div class="gold-line"></div>
-                <div class="news-eyebrow">Useful Information</div>
-                <h2>School Essentials</h2>
-                <p>
-                    Find the right page for admissions, academic
-                    dates, school activities and enquiries.
-                </p>
-            </div>
-
-            <div class="quick-links">
-
-                <a href="/admissions" class="quick-link">
-                    <span>🎓</span>
-                    <strong>Admissions Information</strong>
-                </a>
-
-                <a href="/calendar" class="quick-link">
-                    <span>📅</span>
-                    <strong>Academic Calendar</strong>
-                </a>
-
-                <a href="/student-life" class="quick-link">
-                    <span>🏫</span>
-                    <strong>Student &amp; Campus Life</strong>
-                </a>
-
-                <a href="/contact" class="quick-link">
-                    <span>✉️</span>
-                    <strong>Contact the School</strong>
-                </a>
-
-            </div>
-
-        </section>
-
-        <!-- CLOSING CTA -->
-
-        <section class="news-cta">
-
-            <h2>Stay Connected With St. Martin's</h2>
-
-            <p>
-                Keep up with official school announcements and
-                upcoming activities. For enquiries or clarification
-                about a school notice, please contact the school
-                through its official communication channels.
-            </p>
-
-            <a href="/contact" class="news-button">
-                Contact the School
-            </a>
-
-        </section>
-
-    </main>
-
-    <%- include('partials/footer') %>
-
-    <script src="/js/script.js"></script>
-    <script src="/js/premium-effects.js"></script>
+<%- include('partials/footer') %>
 
 </body>
 </html>
+```
