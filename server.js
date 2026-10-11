@@ -1,22 +1,30 @@
+```js
 // ============================================================
 // ST. MARTIN'S HIGH SCHOOL — BALANAGAR, HYDERABAD
 // COMPLETE EXPRESS SERVER
 // Teacher + Principal Authentication
-// SQLite Database + bcrypt Password Hashing
+// SQLite + bcrypt + Content Management + Academic Calendar
 // ============================================================
 
 const express = require("express");
 const session = require("express-session");
-const bodyParser = require("body-parser");
 const path = require("path");
 const bcrypt = require("bcryptjs");
 const Database = require("better-sqlite3");
-
 require("dotenv").config();
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
+
+// ============================================================
+// PRODUCTION SETTINGS
+// ============================================================
+
+app.disable("x-powered-by");
+
+if (process.env.NODE_ENV === "production") {
+    app.set("trust proxy", 1);
+}
 
 // ============================================================
 // DATABASE
@@ -26,6 +34,7 @@ const dbPath = path.join(__dirname, "school.db");
 const db = new Database(dbPath);
 
 db.pragma("journal_mode = WAL");
+db.pragma("foreign_keys = ON");
 
 // ============================================================
 // TEACHERS TABLE
@@ -39,7 +48,8 @@ db.prepare(`
         username TEXT NOT NULL UNIQUE,
         email TEXT NOT NULL UNIQUE,
         password_hash TEXT NOT NULL,
-        status TEXT NOT NULL DEFAULT 'pending',
+        status TEXT NOT NULL DEFAULT 'pending'
+            CHECK (status IN ('pending', 'approved', 'rejected', 'disabled')),
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         approved_at TEXT
     )
@@ -59,24 +69,207 @@ db.prepare(`
 `).run();
 
 // ============================================================
+// SCHOOL CONTENT TABLE
+// Student Life and News submissions
+// ============================================================
+
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS school_content (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        teacher_id INTEGER NOT NULL,
+        content_type TEXT NOT NULL
+            CHECK (content_type IN ('student-life', 'news')),
+        title TEXT NOT NULL,
+        summary TEXT NOT NULL DEFAULT '',
+        content TEXT NOT NULL,
+        image_url TEXT NOT NULL DEFAULT '',
+        status TEXT NOT NULL DEFAULT 'pending'
+            CHECK (status IN ('pending', 'approved', 'rejected')),
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        approved_at TEXT,
+        FOREIGN KEY (teacher_id) REFERENCES teachers(id)
+    )
+`).run();
+
+// ============================================================
+// ACADEMIC CALENDAR EVENTS TABLE
+// ============================================================
+
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS calendar_events (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        teacher_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT NOT NULL DEFAULT '',
+        event_date TEXT NOT NULL,
+        start_time TEXT NOT NULL DEFAULT '',
+        end_time TEXT NOT NULL DEFAULT '',
+        location TEXT NOT NULL DEFAULT '',
+        category TEXT NOT NULL DEFAULT 'School Event',
+        status TEXT NOT NULL DEFAULT 'pending'
+            CHECK (status IN ('pending', 'approved', 'rejected')),
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        approved_at TEXT,
+        FOREIGN KEY (teacher_id) REFERENCES teachers(id)
+    )
+`).run();
+
+// ============================================================
+// REVIEWS TABLE
+// Reviews are saved as pending until approved
+// ============================================================
+
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS school_reviews (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        parent_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+        review TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'pending'
+            CHECK (status IN ('pending', 'approved', 'rejected')),
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        approved_at TEXT
+    )
+`).run();
+
+// ============================================================
+// MIDDLEWARE
+// ============================================================
+
+app.use(express.urlencoded({
+    extended: true,
+    limit: "1mb"
+}));
+
+app.use(express.json({
+    limit: "1mb"
+}));
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+app.use(session({
+    name: "stmartins.sid",
+
+    secret:
+        process.env.SESSION_SECRET ||
+        "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET_BEFORE_DEPLOYMENT",
+
+    resave: false,
+    saveUninitialized: false,
+
+    cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 4
+    }
+}));
+
+// ============================================================
+// GLOBAL EJS VARIABLES
+// ============================================================
+
+app.use((req, res, next) => {
+    res.locals.currentPath = req.path;
+    res.locals.teacher = req.session.teacher || null;
+    res.locals.principal = req.session.principal || null;
+
+    res.locals.isTeacherLoggedIn =
+        Boolean(req.session.teacher);
+
+    res.locals.isPrincipalLoggedIn =
+        Boolean(req.session.principal);
+
+    next();
+});
+
+// ============================================================
+// HELPER FUNCTIONS
+// ============================================================
+
+function cleanString(value) {
+    return typeof value === "string" ? value.trim() : "";
+}
+
+function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validISODate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        return false;
+    }
+
+    const date = new Date(`${value}T00:00:00Z`);
+
+    return (
+        !Number.isNaN(date.getTime()) &&
+        date.toISOString().slice(0, 10) === value
+    );
+}
+
+function requireTeacher(req, res, next) {
+    if (!req.session.teacher) {
+        if (req.path.startsWith("/api/")) {
+            return res.status(401).json({
+                success: false,
+                error: "Please log in as a teacher first."
+            });
+        }
+
+        return res.redirect("/teacher-login");
+    }
+
+    next();
+}
+
+function requirePrincipal(req, res, next) {
+    if (!req.session.principal) {
+        if (req.path.startsWith("/api/")) {
+            return res.status(401).json({
+                success: false,
+                error: "Please log in as Principal first."
+            });
+        }
+
+        return res.redirect("/principal-login");
+    }
+
+    next();
+}
+
+function render404(req, res) {
+    return res.status(404).render("404", {
+        title: "Page Not Found | St. Martin's High School"
+    });
+}
+
+function databaseError(res, message, error) {
+    console.error(message, error);
+
+    if (res.headersSent) {
+        return;
+    }
+
+    return res.status(500).json({
+        success: false,
+        error: "A server error occurred. Please try again."
+    });
+}
+
+// ============================================================
 // PRINCIPAL CREDENTIAL SYNCHRONIZATION
-//
-// IMPORTANT:
-// The credentials in .env become the active Principal
-// credentials every time the server starts.
-//
-// Example:
-//
-// PRINCIPAL_USERNAME=St.Martins@Principal
-// PRINCIPAL_PASSWORD=St.Martins@Principal
+// Configure PRINCIPAL_USERNAME and PRINCIPAL_PASSWORD in .env
 // ============================================================
 
 async function syncPrincipalCredentials() {
     const username = String(
         process.env.PRINCIPAL_USERNAME || "principal"
-    )
-        .trim()
-        .toLowerCase();
+    ).trim().toLowerCase();
 
     const password =
         process.env.PRINCIPAL_PASSWORD ||
@@ -84,136 +277,44 @@ async function syncPrincipalCredentials() {
 
     if (!username || !password) {
         throw new Error(
-            "PRINCIPAL_USERNAME and PRINCIPAL_PASSWORD must not be empty."
+            "Principal username and password must not be empty."
         );
     }
 
-    if (password.length < 8) {
+    if (password.length < 12) {
         throw new Error(
-            "PRINCIPAL_PASSWORD must contain at least 8 characters."
+            "Set PRINCIPAL_PASSWORD to at least 12 characters."
         );
     }
 
     const passwordHash = await bcrypt.hash(password, 12);
 
-    const existingPrincipal = db
-        .prepare(`
-            SELECT id
-            FROM principals
-            ORDER BY id ASC
-            LIMIT 1
-        `)
-        .get();
+    const existingPrincipal = db.prepare(`
+        SELECT id
+        FROM principals
+        ORDER BY id ASC
+        LIMIT 1
+    `).get();
 
     if (existingPrincipal) {
         db.prepare(`
             UPDATE principals
-            SET
-                username = ?,
-                password_hash = ?
+            SET username = ?, password_hash = ?
             WHERE id = ?
         `).run(
             username,
             passwordHash,
             existingPrincipal.id
         );
-
-        console.log("");
-        console.log("==================================================");
-        console.log(" PRINCIPAL CREDENTIALS SYNCHRONIZED");
-        console.log(" Username:", username);
-        console.log(" Password: Updated from .env");
-        console.log("==================================================");
-        console.log("");
     } else {
         db.prepare(`
-            INSERT INTO principals
-            (
-                username,
-                password_hash
-            )
+            INSERT INTO principals (username, password_hash)
             VALUES (?, ?)
-        `).run(
-            username,
-            passwordHash
-        );
-
-        console.log("");
-        console.log("==================================================");
-        console.log(" INITIAL PRINCIPAL ACCOUNT CREATED");
-        console.log(" Username:", username);
-        console.log(" Password: Loaded from .env");
-        console.log("==================================================");
-        console.log("");
+        `).run(username, passwordHash);
     }
+
+    console.log("Principal credentials synchronized from .env.");
 }
-
-// ============================================================
-// MIDDLEWARE
-// ============================================================
-
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.use(bodyParser.json());
-
-app.use(
-    express.static(
-        path.join(__dirname, "public")
-    )
-);
-
-app.set("view engine", "ejs");
-
-app.set(
-    "views",
-    path.join(__dirname, "views")
-);
-
-// ============================================================
-// SESSION
-// ============================================================
-
-app.use(
-    session({
-        secret:
-            process.env.SESSION_SECRET ||
-            "st-martins-balanagar-super-secret-key",
-
-        resave: false,
-
-        saveUninitialized: false,
-
-        cookie: {
-            httpOnly: true,
-            secure: false,
-            maxAge: 1000 * 60 * 60 * 4
-        }
-    })
-);
-
-// ============================================================
-// GLOBAL VIEW VARIABLES
-// ============================================================
-
-app.use((req, res, next) => {
-    res.locals.currentPath = req.path;
-
-    res.locals.teacher =
-        req.session.teacher || null;
-
-    res.locals.principal =
-        req.session.principal || null;
-
-    res.locals.isTeacherLoggedIn =
-        !!req.session.teacher;
-
-    res.locals.isPrincipalLoggedIn =
-        !!req.session.principal;
-
-    next();
-});
 
 // ============================================================
 // PUBLIC SCHOOL PAGES
@@ -221,61 +322,49 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
     res.render("index", {
-        title:
-            "St. Martin's High School | Balanagar, Hyderabad"
+        title: "St. Martin's High School | Balanagar, Hyderabad"
     });
 });
 
 app.get("/about", (req, res) => {
     res.render("about", {
-        title:
-            "School Overview | St. Martin's High School"
+        title: "School Overview | St. Martin's High School"
     });
 });
 
 app.get("/principal", (req, res) => {
     res.render("principal", {
-        title:
-            "Principal & Management | St. Martin's High School"
+        title: "Principal & Management | St. Martin's High School"
     });
 });
 
 app.get("/management", (req, res) => {
     res.render("management", {
-        title:
-            "Management | St. Martin's High School"
+        title: "Management | St. Martin's High School"
     });
 });
 
 app.get("/educational-society", (req, res) => {
     res.render("educational-society", {
-        title:
-            "Educational Society | St. Martin's High School"
+        title: "Educational Society | St. Martin's High School"
     });
 });
 
 app.get("/disclosure", (req, res) => {
     res.render("disclosure", {
-        title:
-            "Mandatory Disclosure | St. Martin's High School"
+        title: "Mandatory Disclosure | St. Martin's High School"
     });
 });
 
 app.get("/facilities", (req, res) => {
     res.render("facilities", {
-        title:
-            "Our Facilities | St. Martin's High School"
+        title: "Our Facilities | St. Martin's High School"
     });
 });
 
-// ============================================================
-// ACADEMICS
-// ============================================================
-
 app.get("/academics", (req, res) => {
     res.render("academics", {
-        title:
-            "Academics | St. Martin's High School"
+        title: "Academics | St. Martin's High School"
     });
 });
 
@@ -291,42 +380,34 @@ app.get("/academics/:level", (req, res) => {
     const academicPages = {
         primary: {
             view: "academics-primary",
-            title:
-                "Primary School | St. Martin's High School"
+            title: "Primary School | St. Martin's High School"
         },
 
         middle: {
             view: "academics-middle",
-            title:
-                "Middle School | St. Martin's High School"
+            title: "Middle School | St. Martin's High School"
         },
 
         secondary: {
             view: "academics-secondary",
-            title:
-                "Secondary School | St. Martin's High School"
+            title: "Secondary School | St. Martin's High School"
         },
 
         curriculum: {
             view: "curriculum",
-            title:
-                "Curriculum & Academic Programme | St. Martin's High School"
+            title: "Curriculum & Academic Programme | St. Martin's High School"
         },
 
         approach: {
             view: "academics-approach",
-            title:
-                "Academic Approach | St. Martin's High School"
+            title: "Academic Approach | St. Martin's High School"
         }
     };
 
     const page = academicPages[level];
 
     if (!page) {
-        return res.status(404).render("404", {
-            title:
-                "Page Not Found | St. Martin's High School"
-        });
+        return render404(req, res);
     }
 
     res.render(page.view, {
@@ -334,404 +415,378 @@ app.get("/academics/:level", (req, res) => {
     });
 });
 
-// ============================================================
-// DIRECT CURRICULUM ROUTE
-// ============================================================
-
 app.get("/curriculum", (req, res) => {
     res.render("curriculum", {
-        title:
-            "Curriculum & Academic Programme | St. Martin's High School"
+        title: "Curriculum & Academic Programme | St. Martin's High School"
     });
 });
 
-// ============================================================
-// OTHER SCHOOL PAGES
-// ============================================================
-
 app.get("/admissions", (req, res) => {
     res.render("admissions", {
-        title:
-            "Admissions | St. Martin's High School"
+        title: "Admissions | St. Martin's High School"
     });
 });
 
 app.get("/fee-structure", (req, res) => {
     res.render("fee-structure", {
-        title:
-            "Fee Structure | St. Martin's High School"
+        title: "Fee Structure | St. Martin's High School"
     });
 });
 
+// ============================================================
+// STUDENT LIFE
+// Only Principal-approved updates appear publicly
+// ============================================================
+
 app.get("/student-life", (req, res) => {
-    res.render("student-life", {
-        title:
-            "Student Life | St. Martin's High School"
-    });
+    try {
+        const updates = db.prepare(`
+            SELECT
+                id,
+                title,
+                summary,
+                content,
+                image_url,
+                created_at
+            FROM school_content
+            WHERE content_type = 'student-life'
+              AND status = 'approved'
+            ORDER BY created_at DESC
+        `).all();
+
+        res.render("student-life", {
+            title: "Student Life | St. Martin's High School",
+            updates
+        });
+    } catch (error) {
+        console.error("Student Life route error:", error);
+        res.status(500).send(
+            "Unable to load Student Life updates. Check the server terminal."
+        );
+    }
 });
+
+// ============================================================
+// GALLERY
+// ============================================================
 
 app.get("/gallery", (req, res) => {
     res.render("gallery", {
-        title:
-            "Gallery | St. Martin's High School"
+        title: "Gallery | St. Martin's High School"
     });
 });
+
+// ============================================================
+// ACADEMIC CALENDAR
+// Only approved events appear publicly
+// ============================================================
 
 app.get("/calendar", (req, res) => {
-    res.render("calendar", {
-        title:
-            "School Calendar | St. Martin's High School"
-    });
+    try {
+        const events = db.prepare(`
+            SELECT
+                id,
+                title,
+                description,
+                event_date,
+                start_time,
+                end_time,
+                location,
+                category,
+                created_at
+            FROM calendar_events
+            WHERE status = 'approved'
+            ORDER BY event_date ASC, start_time ASC
+        `).all();
+
+        res.render("calendar", {
+            title: "School Calendar | St. Martin's High School",
+            events
+        });
+    } catch (error) {
+        console.error("Calendar route error:", error);
+        res.status(500).send(
+            "Unable to load the Academic Calendar. Check the server terminal."
+        );
+    }
 });
 
+// ============================================================
+// NEWS & UPDATES
+// Approved news and approved school events
+// ============================================================
+
 app.get("/news", (req, res) => {
-    res.render("news", {
-        updates: [],
-        events: []
-    });
+    try {
+        const updates = db.prepare(`
+            SELECT
+                id,
+                title,
+                summary,
+                content,
+                image_url,
+                created_at
+            FROM school_content
+            WHERE content_type = 'news'
+              AND status = 'approved'
+            ORDER BY created_at DESC
+        `).all();
+
+        const events = db.prepare(`
+            SELECT
+                id,
+                title,
+                description,
+                event_date,
+                start_time,
+                end_time,
+                location,
+                category
+            FROM calendar_events
+            WHERE status = 'approved'
+            ORDER BY event_date ASC, start_time ASC
+        `).all();
+
+        res.render("news", {
+            title: "News & Updates | St. Martin's High School",
+            updates,
+            events
+        });
+    } catch (error) {
+        console.error("News route error:", error);
+        res.status(500).send(
+            "Unable to load News & Updates. Check the server terminal."
+        );
+    }
 });
 
 app.get("/resources", (req, res) => {
     res.render("resources", {
-        title:
-            "Resources | St. Martin's High School"
+        title: "Resources | St. Martin's High School"
     });
 });
 
 app.get("/contact", (req, res) => {
     res.render("contact", {
-        title:
-            "Contact Us | St. Martin's High School"
+        title: "Contact Us | St. Martin's High School"
     });
 });
 
 // ============================================================
-// TEACHER AUTHENTICATION
+// TEACHER LOGIN + SIGNUP PAGES
+// Supports both /teacher-login and /teacher/login
 // ============================================================
 
-// ============================================================
-// TEACHER LOGIN PAGE
-// ============================================================
-
-app.get("/teacher-login", (req, res) => {
+function renderTeacherLogin(req, res) {
     if (req.session.teacher) {
-        return res.redirect(
-            "/teacher-dashboard"
-        );
+        return res.redirect("/teacher-dashboard");
     }
 
     res.render("teacher-login", {
-        title:
-            "Teacher Login | St. Martin's High School",
+        title: "Teacher Login | St. Martin's High School",
         error: null
     });
-});
+}
 
-// ============================================================
-// TEACHER SIGNUP PAGE
-// ============================================================
+app.get("/teacher-login", renderTeacherLogin);
+app.get("/teacher/login", renderTeacherLogin);
 
 app.get("/teacher-signup", (req, res) => {
     if (req.session.teacher) {
-        return res.redirect(
-            "/teacher-dashboard"
-        );
+        return res.redirect("/teacher-dashboard");
     }
 
     res.render("teacher-signup", {
-        title:
-            "Teacher Registration | St. Martin's High School",
+        title: "Teacher Registration | St. Martin's High School",
         error: null
     });
 });
 
 // ============================================================
-// TEACHER SIGNUP API
+// TEACHER REGISTRATION API
 // ============================================================
 
-app.post(
-    "/api/teacher/signup",
-    async (req, res) => {
-        try {
-            const {
+app.post("/api/teacher/signup", async (req, res, next) => {
+    try {
+        const fullName = cleanString(req.body.full_name);
+        const employeeId = cleanString(req.body.employee_id);
+        const username = cleanString(req.body.username).toLowerCase();
+        const email = cleanString(req.body.email).toLowerCase();
+
+        const password =
+            typeof req.body.password === "string"
+                ? req.body.password
+                : "";
+
+        const confirmPassword =
+            typeof req.body.confirm_password === "string"
+                ? req.body.confirm_password
+                : "";
+
+        if (
+            !fullName ||
+            !employeeId ||
+            !username ||
+            !email ||
+            !password ||
+            !confirmPassword
+        ) {
+            return res.status(400).json({
+                success: false,
+                error: "All fields are required."
+            });
+        }
+
+        if (fullName.length < 2 || employeeId.length < 2) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter a valid name and Employee ID."
+            });
+        }
+
+        if (username.length < 4) {
+            return res.status(400).json({
+                success: false,
+                error: "Username must contain at least 4 characters."
+            });
+        }
+
+        if (!validEmail(email)) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter a valid email address."
+            });
+        }
+
+        if (password.length < 8) {
+            return res.status(400).json({
+                success: false,
+                error: "Password must contain at least 8 characters."
+            });
+        }
+
+        if (password !== confirmPassword) {
+            return res.status(400).json({
+                success: false,
+                error: "Passwords do not match."
+            });
+        }
+
+        const existing = db.prepare(`
+            SELECT username, employee_id, email
+            FROM teachers
+            WHERE username = ?
+               OR employee_id = ?
+               OR email = ?
+            LIMIT 1
+        `).get(username, employeeId, email);
+
+        if (existing) {
+            let message = "Teacher details are already registered.";
+
+            if (existing.username === username) {
+                message = "That username is already registered.";
+            } else if (existing.employee_id === employeeId) {
+                message = "That Employee ID is already registered.";
+            } else if (existing.email === email) {
+                message = "That email address is already registered.";
+            }
+
+            return res.status(409).json({
+                success: false,
+                error: message
+            });
+        }
+
+        const passwordHash = await bcrypt.hash(password, 12);
+
+        db.prepare(`
+            INSERT INTO teachers (
                 full_name,
                 employee_id,
                 username,
                 email,
-                password,
-                confirm_password
-            } = req.body;
+                password_hash,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, 'pending')
+        `).run(
+            fullName,
+            employeeId,
+            username,
+            email,
+            passwordHash
+        );
 
-            if (
-                !full_name ||
-                !employee_id ||
-                !username ||
-                !email ||
-                !password ||
-                !confirm_password
-            ) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "All fields are required."
-                });
-            }
-
-            const cleanName =
-                String(full_name).trim();
-
-            const cleanEmployeeId =
-                String(employee_id).trim();
-
-            const cleanUsername =
-                String(username)
-                    .trim()
-                    .toLowerCase();
-
-            const cleanEmail =
-                String(email)
-                    .trim()
-                    .toLowerCase();
-
-            if (password !== confirm_password) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Passwords do not match."
-                });
-            }
-
-            if (cleanName.length < 2) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter your full name."
-                });
-            }
-
-            if (cleanEmployeeId.length < 2) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter a valid Employee ID."
-                });
-            }
-
-            if (cleanUsername.length < 4) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Username must contain at least 4 characters."
-                });
-            }
-
-            if (password.length < 8) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Password must contain at least 8 characters."
-                });
-            }
-
-            const emailRegex =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!emailRegex.test(cleanEmail)) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter a valid email address."
-                });
-            }
-
-            // =================================================
-            // CHECK USERNAME
-            // =================================================
-
-            const usernameExists =
-                db.prepare(`
-                    SELECT id
-                    FROM teachers
-                    WHERE username = ?
-                `).get(cleanUsername);
-
-            if (usernameExists) {
-                return res.status(409).json({
-                    success: false,
-                    error:
-                        "That username is already registered."
-                });
-            }
-
-            // =================================================
-            // CHECK EMPLOYEE ID
-            // =================================================
-
-            const employeeExists =
-                db.prepare(`
-                    SELECT id
-                    FROM teachers
-                    WHERE employee_id = ?
-                `).get(cleanEmployeeId);
-
-            if (employeeExists) {
-                return res.status(409).json({
-                    success: false,
-                    error:
-                        "That Employee ID is already registered."
-                });
-            }
-
-            // =================================================
-            // CHECK EMAIL
-            // =================================================
-
-            const emailExists =
-                db.prepare(`
-                    SELECT id
-                    FROM teachers
-                    WHERE email = ?
-                `).get(cleanEmail);
-
-            if (emailExists) {
-                return res.status(409).json({
-                    success: false,
-                    error:
-                        "That email address is already registered."
-                });
-            }
-
-            // =================================================
-            // HASH PASSWORD
-            // =================================================
-
-            const passwordHash =
-                await bcrypt.hash(
-                    password,
-                    12
-                );
-
-            // =================================================
-            // CREATE PENDING TEACHER
-            // =================================================
-
-            db.prepare(`
-                INSERT INTO teachers
-                (
-                    full_name,
-                    employee_id,
-                    username,
-                    email,
-                    password_hash,
-                    status
-                )
-                VALUES (?, ?, ?, ?, ?, 'pending')
-            `).run(
-                cleanName,
-                cleanEmployeeId,
-                cleanUsername,
-                cleanEmail,
-                passwordHash
-            );
-
-            return res.status(201).json({
-                success: true,
-                message:
-                    "Registration submitted successfully. Please wait for Principal approval."
-            });
-
-        } catch (error) {
-            console.error(
-                "Teacher signup error:",
-                error
-            );
-
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to complete registration."
-            });
-        }
+        res.status(201).json({
+            success: true,
+            message: "Registration submitted. Please wait for Principal approval."
+        });
+    } catch (error) {
+        next(error);
     }
-);
+});
 
 // ============================================================
 // TEACHER LOGIN API
 // ============================================================
 
-app.post(
-    "/api/teacher-login",
-    async (req, res) => {
-        try {
-            const {
-                username,
-                password
-            } = req.body;
+app.post("/api/teacher-login", async (req, res, next) => {
+    try {
+        const username = cleanString(req.body.username).toLowerCase();
 
-            if (!username || !password) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Username and password are required."
-                });
-            }
+        const password =
+            typeof req.body.password === "string"
+                ? req.body.password
+                : "";
 
-            const cleanUsername =
-                String(username)
-                    .trim()
-                    .toLowerCase();
+        if (!username || !password) {
+            return res.status(400).json({
+                success: false,
+                error: "Username and password are required."
+            });
+        }
 
-            const teacher =
-                db.prepare(`
-                    SELECT *
-                    FROM teachers
-                    WHERE username = ?
-                `).get(cleanUsername);
+        const teacher = db.prepare(`
+            SELECT *
+            FROM teachers
+            WHERE username = ?
+        `).get(username);
 
-            if (!teacher) {
-                return res.status(401).json({
-                    success: false,
-                    error:
-                        "Invalid username or password."
-                });
-            }
+        if (
+            !teacher ||
+            !(await bcrypt.compare(password, teacher.password_hash))
+        ) {
+            return res.status(401).json({
+                success: false,
+                error: "Invalid username or password."
+            });
+        }
 
-            const passwordMatches =
-                await bcrypt.compare(
-                    password,
-                    teacher.password_hash
-                );
+        if (teacher.status === "pending") {
+            return res.status(403).json({
+                success: false,
+                error: "Your account is waiting for Principal approval."
+            });
+        }
 
-            if (!passwordMatches) {
-                return res.status(401).json({
-                    success: false,
-                    error:
-                        "Invalid username or password."
-                });
-            }
+        if (teacher.status === "rejected") {
+            return res.status(403).json({
+                success: false,
+                error: "Your teacher registration has been rejected."
+            });
+        }
 
-            if (teacher.status === "pending") {
-                return res.status(403).json({
-                    success: false,
-                    error:
-                        "Your account is waiting for Principal approval."
-                });
-            }
+        if (teacher.status === "disabled") {
+            return res.status(403).json({
+                success: false,
+                error: "Your account has been disabled. Contact the Principal."
+            });
+        }
 
-            if (teacher.status === "rejected") {
-                return res.status(403).json({
-                    success: false,
-                    error:
-                        "Your teacher registration has been rejected."
-                });
-            }
-
-            if (teacher.status === "disabled") {
-                return res.status(403).json({
-                    success: false,
-                    error:
-                        "Your teacher account has been disabled. Please contact the Principal."
-                });
+        req.session.regenerate((error) => {
+            if (error) {
+                return next(error);
             }
 
             req.session.teacher = {
@@ -743,67 +798,262 @@ app.post(
                 role: "Teacher"
             };
 
-            return res.json({
-                success: true,
-                message:
-                    "Login successful.",
-                redirect:
-                    "/teacher-dashboard"
+            req.session.save((saveError) => {
+                if (saveError) {
+                    return next(saveError);
+                }
+
+                res.json({
+                    success: true,
+                    message: "Login successful.",
+                    redirect: "/teacher-dashboard"
+                });
             });
-
-        } catch (error) {
-            console.error(
-                "Teacher login error:",
-                error
-            );
-
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to process login."
-            });
-        }
+        });
+    } catch (error) {
+        next(error);
     }
-);
-
-// ============================================================
-// TEACHER PROTECTION
-// ============================================================
-
-function requireTeacher(req, res, next) {
-    if (!req.session.teacher) {
-        return res.redirect(
-            "/teacher-login"
-        );
-    }
-
-    next();
-}
+});
 
 // ============================================================
 // TEACHER DASHBOARD
+// Includes the logged-in teacher's own submissions
 // ============================================================
 
-app.get(
-    "/teacher-dashboard",
-    requireTeacher,
-    (req, res) => {
-        res.render(
-            "teacher-dashboard",
-            {
-                title:
-                    "Teacher Dashboard | St. Martin's High School",
+app.get("/teacher-dashboard", requireTeacher, (req, res) => {
+    try {
+        const teacherId = req.session.teacher.id;
 
-                teacher:
-                    req.session.teacher
-            }
+        const content = db.prepare(`
+            SELECT *
+            FROM school_content
+            WHERE teacher_id = ?
+            ORDER BY created_at DESC
+        `).all(teacherId);
+
+        const events = db.prepare(`
+            SELECT *
+            FROM calendar_events
+            WHERE teacher_id = ?
+            ORDER BY event_date ASC, start_time ASC
+        `).all(teacherId);
+
+        res.render("teacher-dashboard", {
+            title: "Teacher Dashboard | St. Martin's High School",
+            teacher: req.session.teacher,
+            content,
+            events
+        });
+    } catch (error) {
+        console.error("Teacher dashboard error:", error);
+        res.status(500).send(
+            "Unable to load Teacher Dashboard. Check the server terminal."
         );
     }
-);
+});
 
 // ============================================================
-// PRINCIPAL AUTHENTICATION
+// TEACHER CONTENT API
+// GET: own submissions
+// POST: submit Student Life or News
 // ============================================================
+
+app.get("/api/teacher/content", requireTeacher, (req, res) => {
+    try {
+        const items = db.prepare(`
+            SELECT *
+            FROM school_content
+            WHERE teacher_id = ?
+            ORDER BY created_at DESC
+        `).all(req.session.teacher.id);
+
+        res.json({
+            success: true,
+            items
+        });
+    } catch (error) {
+        databaseError(res, "Teacher content list error:", error);
+    }
+});
+
+app.post("/api/teacher/content", requireTeacher, (req, res) => {
+    try {
+        const contentType = cleanString(req.body.content_type);
+        const title = cleanString(req.body.title);
+        const summary = cleanString(req.body.summary);
+        const content = cleanString(req.body.content);
+        const imageUrl = cleanString(req.body.image_url);
+
+        if (!["student-life", "news"].includes(contentType)) {
+            return res.status(400).json({
+                success: false,
+                error: "Choose Student Life or News."
+            });
+        }
+
+        if (!title || !content) {
+            return res.status(400).json({
+                success: false,
+                error: "Title and content are required."
+            });
+        }
+
+        if (
+            title.length > 180 ||
+            summary.length > 500 ||
+            content.length > 10000
+        ) {
+            return res.status(400).json({
+                success: false,
+                error: "One or more fields exceed the allowed length."
+            });
+        }
+
+        if (
+            imageUrl &&
+            !/^https?:\/\/[^\s]+$/i.test(imageUrl) &&
+            !/^\/[A-Za-z0-9/_\-.%]+$/.test(imageUrl)
+        ) {
+            return res.status(400).json({
+                success: false,
+                error: "Use an HTTP(S) image URL or a local path beginning with /."
+            });
+        }
+
+        const result = db.prepare(`
+            INSERT INTO school_content (
+                teacher_id,
+                content_type,
+                title,
+                summary,
+                content,
+                image_url,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, ?, 'pending')
+        `).run(
+            req.session.teacher.id,
+            contentType,
+            title,
+            summary,
+            content,
+            imageUrl
+        );
+
+        res.status(201).json({
+            success: true,
+            id: result.lastInsertRowid,
+            message: "Submitted successfully. The Principal must approve it before publication."
+        });
+    } catch (error) {
+        databaseError(res, "Teacher content submission error:", error);
+    }
+});
+
+// ============================================================
+// TEACHER CALENDAR API
+// GET: own event submissions
+// POST: submit event for approval
+// ============================================================
+
+app.get("/api/teacher/events", requireTeacher, (req, res) => {
+    try {
+        const events = db.prepare(`
+            SELECT *
+            FROM calendar_events
+            WHERE teacher_id = ?
+            ORDER BY event_date ASC, start_time ASC
+        `).all(req.session.teacher.id);
+
+        res.json({
+            success: true,
+            events
+        });
+    } catch (error) {
+        databaseError(res, "Teacher event list error:", error);
+    }
+});
+
+app.post("/api/teacher/events", requireTeacher, (req, res) => {
+    try {
+        const title = cleanString(req.body.title);
+        const description = cleanString(req.body.description);
+        const eventDate = cleanString(req.body.event_date);
+        const startTime = cleanString(req.body.start_time);
+        const endTime = cleanString(req.body.end_time);
+        const location = cleanString(req.body.location);
+        const category = cleanString(req.body.category) || "School Event";
+
+        if (!title || !eventDate) {
+            return res.status(400).json({
+                success: false,
+                error: "Event title and date are required."
+            });
+        }
+
+        if (!validISODate(eventDate)) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter a valid date in YYYY-MM-DD format."
+            });
+        }
+
+        const timePattern = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+        if (
+            (startTime && !timePattern.test(startTime)) ||
+            (endTime && !timePattern.test(endTime))
+        ) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter times in 24-hour HH:MM format."
+            });
+        }
+
+        if (
+            title.length > 180 ||
+            description.length > 5000 ||
+            location.length > 250 ||
+            category.length > 80
+        ) {
+            return res.status(400).json({
+                success: false,
+                error: "One or more event fields are too long."
+            });
+        }
+
+        db.prepare(`
+            INSERT INTO calendar_events (
+                teacher_id,
+                title,
+                description,
+                event_date,
+                start_time,
+                end_time,
+                location,
+                category,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')
+        `).run(
+            req.session.teacher.id,
+            title,
+            description,
+            eventDate,
+            startTime,
+            endTime,
+            location,
+            category
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Event submitted. It will appear after Principal approval."
+        });
+    } catch (error) {
+        databaseError(res, "Teacher event submission error:", error);
+    }
+});
 
 // ============================================================
 // PRINCIPAL LOGIN PAGE
@@ -811,15 +1061,11 @@ app.get(
 
 app.get("/principal-login", (req, res) => {
     if (req.session.principal) {
-        return res.redirect(
-            "/principal-dashboard"
-        );
+        return res.redirect("/principal-dashboard");
     }
 
     res.render("principal-login", {
-        title:
-            "Principal Login | St. Martin's High School",
-
+        title: "Principal Login | St. Martin's High School",
         error: null
     });
 });
@@ -828,55 +1074,41 @@ app.get("/principal-login", (req, res) => {
 // PRINCIPAL LOGIN API
 // ============================================================
 
-app.post(
-    "/api/principal/login",
-    async (req, res) => {
-        try {
-            const {
-                username,
-                password
-            } = req.body;
+app.post("/api/principal/login", async (req, res, next) => {
+    try {
+        const username = cleanString(req.body.username).toLowerCase();
 
-            if (!username || !password) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Username and password are required."
-                });
-            }
+        const password =
+            typeof req.body.password === "string"
+                ? req.body.password
+                : "";
 
-            const cleanUsername =
-                String(username)
-                    .trim()
-                    .toLowerCase();
+        if (!username || !password) {
+            return res.status(400).json({
+                success: false,
+                error: "Username and password are required."
+            });
+        }
 
-            const principal =
-                db.prepare(`
-                    SELECT *
-                    FROM principals
-                    WHERE username = ?
-                `).get(cleanUsername);
+        const principal = db.prepare(`
+            SELECT *
+            FROM principals
+            WHERE username = ?
+        `).get(username);
 
-            if (!principal) {
-                return res.status(401).json({
-                    success: false,
-                    error:
-                        "Invalid Principal credentials."
-                });
-            }
+        if (
+            !principal ||
+            !(await bcrypt.compare(password, principal.password_hash))
+        ) {
+            return res.status(401).json({
+                success: false,
+                error: "Invalid Principal credentials."
+            });
+        }
 
-            const passwordMatches =
-                await bcrypt.compare(
-                    password,
-                    principal.password_hash
-                );
-
-            if (!passwordMatches) {
-                return res.status(401).json({
-                    success: false,
-                    error:
-                        "Invalid Principal credentials."
-                });
+        req.session.regenerate((error) => {
+            if (error) {
+                return next(error);
             }
 
             req.session.principal = {
@@ -885,585 +1117,646 @@ app.post(
                 role: "Principal"
             };
 
-            return res.json({
-                success: true,
-                message:
-                    "Principal login successful.",
-                redirect:
-                    "/principal-dashboard"
+            req.session.save((saveError) => {
+                if (saveError) {
+                    return next(saveError);
+                }
+
+                res.json({
+                    success: true,
+                    message: "Principal login successful.",
+                    redirect: "/principal-dashboard"
+                });
             });
-
-        } catch (error) {
-            console.error(
-                "Principal login error:",
-                error
-            );
-
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to process Principal login."
-            });
-        }
+        });
+    } catch (error) {
+        next(error);
     }
-);
-
-// ============================================================
-// PRINCIPAL PROTECTION
-// ============================================================
-
-function requirePrincipal(req, res, next) {
-    if (!req.session.principal) {
-        return res.redirect(
-            "/principal-login"
-        );
-    }
-
-    next();
-}
+});
 
 // ============================================================
 // PRINCIPAL DASHBOARD
+// Supplies teachers, content and events for the dashboard
 // ============================================================
 
-app.get(
-    "/principal-dashboard",
-    requirePrincipal,
-    (req, res) => {
-        res.render(
-            "principal-dashboard",
-            {
-                title:
-                    "Principal Dashboard | St. Martin's High School",
+app.get("/principal-dashboard", requirePrincipal, (req, res) => {
+    try {
+        const pendingTeachers = db.prepare(`
+            SELECT id, full_name, employee_id, username, email,
+                   status, created_at, approved_at
+            FROM teachers
+            WHERE status = 'pending'
+            ORDER BY created_at ASC
+        `).all();
 
-                principal:
-                    req.session.principal
-            }
+        const teachers = db.prepare(`
+            SELECT id, full_name, employee_id, username, email,
+                   status, created_at, approved_at
+            FROM teachers
+            ORDER BY created_at DESC
+        `).all();
+
+        const content = db.prepare(`
+            SELECT c.*, t.full_name AS teacher_name
+            FROM school_content c
+            JOIN teachers t ON t.id = c.teacher_id
+            ORDER BY
+                CASE c.status WHEN 'pending' THEN 0 ELSE 1 END,
+                c.created_at DESC
+        `).all();
+
+        const events = db.prepare(`
+            SELECT e.*, t.full_name AS teacher_name
+            FROM calendar_events e
+            JOIN teachers t ON t.id = e.teacher_id
+            ORDER BY
+                CASE e.status WHEN 'pending' THEN 0 ELSE 1 END,
+                e.event_date ASC
+        `).all();
+
+        const reviews = db.prepare(`
+            SELECT *
+            FROM school_reviews
+            ORDER BY
+                CASE status WHEN 'pending' THEN 0 ELSE 1 END,
+                created_at DESC
+        `).all();
+
+        res.render("principal-dashboard", {
+            title: "Principal Dashboard | St. Martin's High School",
+            principal: req.session.principal,
+            pendingTeachers,
+            teachers,
+            content,
+            events,
+            reviews
+        });
+    } catch (error) {
+        console.error("Principal dashboard error:", error);
+        res.status(500).send(
+            "Unable to load Principal Dashboard. Check the server terminal."
         );
     }
-);
+});
 
 // ============================================================
-// GET ALL TEACHERS
+// PRINCIPAL: LIST TEACHERS
 // ============================================================
 
-app.get(
-    "/api/principal/teachers",
-    requirePrincipal,
-    (req, res) => {
-        try {
-            const teachers =
-                db.prepare(`
-                    SELECT
-                        id,
-                        full_name,
-                        employee_id,
-                        username,
-                        email,
-                        status,
-                        created_at,
-                        approved_at
-                    FROM teachers
-                    ORDER BY created_at DESC
-                `).all();
+app.get("/api/principal/teachers", requirePrincipal, (req, res) => {
+    try {
+        const teachers = db.prepare(`
+            SELECT id, full_name, employee_id, username, email,
+                   status, created_at, approved_at
+            FROM teachers
+            ORDER BY created_at DESC
+        `).all();
 
-            return res.json({
-                success: true,
-                teachers
-            });
+        res.json({
+            success: true,
+            teachers
+        });
+    } catch (error) {
+        databaseError(res, "Teacher list error:", error);
+    }
+});
 
-        } catch (error) {
-            console.error(
-                "Teacher list error:",
-                error
-            );
+// ============================================================
+// PRINCIPAL: CREATE APPROVED TEACHER ACCOUNT
+// ============================================================
 
-            return res.status(500).json({
+app.post("/api/principal/teachers/create", requirePrincipal, async (req, res, next) => {
+    try {
+        const fullName = cleanString(req.body.full_name);
+        const employeeId = cleanString(req.body.employee_id);
+        const username = cleanString(req.body.username).toLowerCase();
+        const email = cleanString(req.body.email).toLowerCase();
+
+        const password =
+            typeof req.body.password === "string"
+                ? req.body.password
+                : "";
+
+        const confirmPassword =
+            typeof req.body.confirm_password === "string"
+                ? req.body.confirm_password
+                : "";
+
+        if (
+            !fullName ||
+            !employeeId ||
+            !username ||
+            !email ||
+            !password ||
+            !confirmPassword
+        ) {
+            return res.status(400).json({
                 success: false,
-                error:
-                    "Unable to load teacher accounts."
+                error: "All fields are required."
             });
         }
-    }
-);
 
-// ============================================================
-// PRINCIPAL CREATES TEACHER DIRECTLY
-// ============================================================
+        if (
+            fullName.length < 2 ||
+            employeeId.length < 2 ||
+            username.length < 4
+        ) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter a valid name, Employee ID and username."
+            });
+        }
 
-app.post(
-    "/api/principal/teachers/create",
-    requirePrincipal,
-    async (req, res) => {
-        try {
-            const {
+        if (!validEmail(email)) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter a valid email address."
+            });
+        }
+
+        if (password.length < 8) {
+            return res.status(400).json({
+                success: false,
+                error: "Password must contain at least 8 characters."
+            });
+        }
+
+        if (password !== confirmPassword) {
+            return res.status(400).json({
+                success: false,
+                error: "Passwords do not match."
+            });
+        }
+
+        const existing = db.prepare(`
+            SELECT username, employee_id, email
+            FROM teachers
+            WHERE username = ?
+               OR employee_id = ?
+               OR email = ?
+            LIMIT 1
+        `).get(username, employeeId, email);
+
+        if (existing) {
+            let message = "Teacher details already exist.";
+
+            if (existing.username === username) {
+                message = "That username is already in use.";
+            } else if (existing.employee_id === employeeId) {
+                message = "That Employee ID is already registered.";
+            } else if (existing.email === email) {
+                message = "That email address is already registered.";
+            }
+
+            return res.status(409).json({
+                success: false,
+                error: message
+            });
+        }
+
+        const passwordHash = await bcrypt.hash(password, 12);
+
+        db.prepare(`
+            INSERT INTO teachers (
                 full_name,
                 employee_id,
                 username,
                 email,
-                password,
-                confirm_password
-            } = req.body;
+                password_hash,
+                status,
+                approved_at
+            )
+            VALUES (?, ?, ?, ?, ?, 'approved', CURRENT_TIMESTAMP)
+        `).run(
+            fullName,
+            employeeId,
+            username,
+            email,
+            passwordHash
+        );
 
-            if (
-                !full_name ||
-                !employee_id ||
-                !username ||
-                !email ||
-                !password ||
-                !confirm_password
-            ) {
+        res.status(201).json({
+            success: true,
+            message: "Teacher created successfully. They can now log in."
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
+// ============================================================
+// PRINCIPAL: APPROVE, REJECT, DISABLE OR REACTIVATE TEACHERS
+// ============================================================
+
+function updateTeacherStatus(req, res, status) {
+    try {
+        const id = Number(req.params.id);
+
+        if (!Number.isInteger(id) || id <= 0) {
+            return res.status(400).json({
+                success: false,
+                error: "Invalid teacher ID."
+            });
+        }
+
+        let result;
+
+        if (status === "approved") {
+            result = db.prepare(`
+                UPDATE teachers
+                SET status = 'approved',
+                    approved_at = COALESCE(approved_at, CURRENT_TIMESTAMP)
+                WHERE id = ?
+            `).run(id);
+        } else {
+            result = db.prepare(`
+                UPDATE teachers
+                SET status = ?,
+                    approved_at = NULL
+                WHERE id = ?
+            `).run(status, id);
+        }
+
+        if (!result.changes) {
+            return res.status(404).json({
+                success: false,
+                error: "Teacher account not found."
+            });
+        }
+
+        res.json({
+            success: true,
+            message: `Teacher account ${status}.`
+        });
+    } catch (error) {
+        databaseError(res, "Teacher status update error:", error);
+    }
+}
+
+app.post("/api/principal/teachers/:id/approve", requirePrincipal, (req, res) => {
+    updateTeacherStatus(req, res, "approved");
+});
+
+app.post("/api/principal/teachers/:id/reject", requirePrincipal, (req, res) => {
+    updateTeacherStatus(req, res, "rejected");
+});
+
+app.post("/api/principal/teachers/:id/disable", requirePrincipal, (req, res) => {
+    updateTeacherStatus(req, res, "disabled");
+});
+
+app.post("/api/principal/teachers/:id/reactivate", requirePrincipal, (req, res) => {
+    updateTeacherStatus(req, res, "approved");
+});
+
+// ============================================================
+// PRINCIPAL: VIEW ALL CONTENT SUBMISSIONS
+// ============================================================
+
+app.get("/api/principal/content", requirePrincipal, (req, res) => {
+    try {
+        const items = db.prepare(`
+            SELECT c.*, t.full_name AS teacher_name
+            FROM school_content c
+            JOIN teachers t ON t.id = c.teacher_id
+            ORDER BY
+                CASE c.status WHEN 'pending' THEN 0 ELSE 1 END,
+                c.created_at DESC
+        `).all();
+
+        res.json({
+            success: true,
+            items
+        });
+    } catch (error) {
+        databaseError(res, "Principal content list error:", error);
+    }
+});
+
+// ============================================================
+// PRINCIPAL: VIEW ALL EVENT SUBMISSIONS
+// ============================================================
+
+app.get("/api/principal/events", requirePrincipal, (req, res) => {
+    try {
+        const events = db.prepare(`
+            SELECT e.*, t.full_name AS teacher_name
+            FROM calendar_events e
+            JOIN teachers t ON t.id = e.teacher_id
+            ORDER BY
+                CASE e.status WHEN 'pending' THEN 0 ELSE 1 END,
+                e.event_date ASC
+        `).all();
+
+        res.json({
+            success: true,
+            events
+        });
+    } catch (error) {
+        databaseError(res, "Principal event list error:", error);
+    }
+});
+
+// ============================================================
+// PRINCIPAL: APPROVE OR REJECT CONTENT
+// ============================================================
+
+app.post(
+    "/api/principal/content/:id/:action",
+    requirePrincipal,
+    (req, res) => {
+        try {
+            const id = Number(req.params.id);
+            const action = req.params.action;
+
+            if (!Number.isInteger(id) || id <= 0) {
                 return res.status(400).json({
                     success: false,
-                    error:
-                        "All fields are required."
+                    error: "Invalid content ID."
                 });
             }
 
-            const cleanName =
-                String(full_name).trim();
-
-            const cleanEmployeeId =
-                String(employee_id).trim();
-
-            const cleanUsername =
-                String(username)
-                    .trim()
-                    .toLowerCase();
-
-            const cleanEmail =
-                String(email)
-                    .trim()
-                    .toLowerCase();
-
-            if (password !== confirm_password) {
+            if (!["approve", "reject"].includes(action)) {
                 return res.status(400).json({
                     success: false,
-                    error:
-                        "Passwords do not match."
+                    error: "Action must be approve or reject."
                 });
             }
 
-            if (cleanName.length < 2) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter a valid teacher name."
-                });
-            }
+            const status =
+                action === "approve" ? "approved" : "rejected";
 
-            if (cleanEmployeeId.length < 2) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter a valid Employee ID."
-                });
-            }
-
-            if (cleanUsername.length < 4) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Username must contain at least 4 characters."
-                });
-            }
-
-            if (password.length < 8) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Password must contain at least 8 characters."
-                });
-            }
-
-            const emailRegex =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!emailRegex.test(cleanEmail)) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter a valid email address."
-                });
-            }
-
-            const usernameExists =
-                db.prepare(`
-                    SELECT id
-                    FROM teachers
-                    WHERE username = ?
-                `).get(cleanUsername);
-
-            if (usernameExists) {
-                return res.status(409).json({
-                    success: false,
-                    error:
-                        "That username is already in use."
-                });
-            }
-
-            const employeeExists =
-                db.prepare(`
-                    SELECT id
-                    FROM teachers
-                    WHERE employee_id = ?
-                `).get(cleanEmployeeId);
-
-            if (employeeExists) {
-                return res.status(409).json({
-                    success: false,
-                    error:
-                        "That Employee ID is already registered."
-                });
-            }
-
-            const emailExists =
-                db.prepare(`
-                    SELECT id
-                    FROM teachers
-                    WHERE email = ?
-                `).get(cleanEmail);
-
-            if (emailExists) {
-                return res.status(409).json({
-                    success: false,
-                    error:
-                        "That email address is already registered."
-                });
-            }
-
-            const passwordHash =
-                await bcrypt.hash(
-                    password,
-                    12
-                );
-
-            db.prepare(`
-                INSERT INTO teachers
-                (
-                    full_name,
-                    employee_id,
-                    username,
-                    email,
-                    password_hash,
-                    status,
-                    approved_at
-                )
-                VALUES (
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    ?,
-                    'approved',
-                    CURRENT_TIMESTAMP
-                )
+            const result = db.prepare(`
+                UPDATE school_content
+                SET status = ?, approved_at = ?
+                WHERE id = ?
             `).run(
-                cleanName,
-                cleanEmployeeId,
-                cleanUsername,
-                cleanEmail,
-                passwordHash
+                status,
+                status === "approved" ? new Date().toISOString() : null,
+                id
             );
 
-            return res.status(201).json({
+            if (!result.changes) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Content submission not found."
+                });
+            }
+
+            res.json({
                 success: true,
-                message:
-                    "Teacher profile created successfully. The teacher can now log in."
+                message: `Content ${status}.`
             });
-
         } catch (error) {
-            console.error(
-                "Principal teacher creation error:",
-                error
-            );
-
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to create teacher profile."
-            });
+            databaseError(res, "Content moderation error:", error);
         }
     }
 );
 
 // ============================================================
-// APPROVE TEACHER
+// PRINCIPAL: APPROVE OR REJECT CALENDAR EVENTS
 // ============================================================
 
 app.post(
-    "/api/principal/teachers/:id/approve",
+    "/api/principal/events/:id/:action",
     requirePrincipal,
     (req, res) => {
         try {
-            const id =
-                Number(req.params.id);
+            const id = Number(req.params.id);
+            const action = req.params.action;
 
-            if (!Number.isInteger(id)) {
+            if (!Number.isInteger(id) || id <= 0) {
                 return res.status(400).json({
                     success: false,
-                    error:
-                        "Invalid teacher ID."
+                    error: "Invalid event ID."
                 });
             }
 
-            const result =
-                db.prepare(`
-                    UPDATE teachers
-                    SET
-                        status = 'approved',
-                        approved_at = CURRENT_TIMESTAMP
-                    WHERE id = ?
-                `).run(id);
-
-            if (result.changes === 0) {
-                return res.status(404).json({
+            if (!["approve", "reject"].includes(action)) {
+                return res.status(400).json({
                     success: false,
-                    error:
-                        "Teacher account not found."
+                    error: "Action must be approve or reject."
                 });
             }
 
-            return res.json({
-                success: true,
-                message:
-                    "Teacher account approved."
-            });
+            const status =
+                action === "approve" ? "approved" : "rejected";
 
-        } catch (error) {
-            console.error(
-                "Teacher approval error:",
-                error
+            const result = db.prepare(`
+                UPDATE calendar_events
+                SET status = ?, approved_at = ?
+                WHERE id = ?
+            `).run(
+                status,
+                status === "approved" ? new Date().toISOString() : null,
+                id
             );
 
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to approve teacher."
+            if (!result.changes) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Calendar event not found."
+                });
+            }
+
+            res.json({
+                success: true,
+                message: `Event ${status}.`
             });
+        } catch (error) {
+            databaseError(res, "Event moderation error:", error);
         }
     }
 );
 
 // ============================================================
-// REJECT TEACHER
+// REVIEWS API
+// Save reviews as pending; do not publish automatically
 // ============================================================
+
+app.post("/api/reviews", (req, res) => {
+    try {
+        const parentName = cleanString(req.body.parent_name);
+        const email = cleanString(req.body.email).toLowerCase();
+        const rating = Number(req.body.rating);
+        const review = cleanString(req.body.review);
+
+        if (!parentName || !email || !req.body.rating || !review) {
+            return res.status(400).json({
+                success: false,
+                error: "All fields are required."
+            });
+        }
+
+        if (!validEmail(email)) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter a valid email address."
+            });
+        }
+
+        if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+            return res.status(400).json({
+                success: false,
+                error: "Rating must be between 1 and 5."
+            });
+        }
+
+        if (review.length < 5 || review.length > 3000) {
+            return res.status(400).json({
+                success: false,
+                error: "Review must be between 5 and 3000 characters."
+            });
+        }
+
+        db.prepare(`
+            INSERT INTO school_reviews (
+                parent_name, email, rating, review, status
+            )
+            VALUES (?, ?, ?, ?, 'pending')
+        `).run(parentName, email, rating, review);
+
+        res.status(201).json({
+            success: true,
+            message: "Thank you. Your review has been submitted for approval."
+        });
+    } catch (error) {
+        databaseError(res, "Review submission error:", error);
+    }
+});
+
+// ============================================================
+// PRINCIPAL: LIST AND MODERATE REVIEWS
+// ============================================================
+
+app.get("/api/principal/reviews", requirePrincipal, (req, res) => {
+    try {
+        const reviews = db.prepare(`
+            SELECT *
+            FROM school_reviews
+            ORDER BY
+                CASE status WHEN 'pending' THEN 0 ELSE 1 END,
+                created_at DESC
+        `).all();
+
+        res.json({
+            success: true,
+            reviews
+        });
+    } catch (error) {
+        databaseError(res, "Review list error:", error);
+    }
+});
 
 app.post(
-    "/api/principal/teachers/:id/reject",
+    "/api/principal/reviews/:id/:action",
     requirePrincipal,
     (req, res) => {
         try {
-            const id =
-                Number(req.params.id);
+            const id = Number(req.params.id);
+            const action = req.params.action;
 
-            if (!Number.isInteger(id)) {
+            if (!Number.isInteger(id) || id <= 0) {
                 return res.status(400).json({
                     success: false,
-                    error:
-                        "Invalid teacher ID."
+                    error: "Invalid review ID."
                 });
             }
 
-            const result =
-                db.prepare(`
-                    UPDATE teachers
-                    SET
-                        status = 'rejected',
-                        approved_at = NULL
-                    WHERE id = ?
-                `).run(id);
-
-            if (result.changes === 0) {
-                return res.status(404).json({
+            if (!["approve", "reject"].includes(action)) {
+                return res.status(400).json({
                     success: false,
-                    error:
-                        "Teacher account not found."
+                    error: "Action must be approve or reject."
                 });
             }
 
-            return res.json({
-                success: true,
-                message:
-                    "Teacher account rejected."
-            });
+            const status =
+                action === "approve" ? "approved" : "rejected";
 
-        } catch (error) {
-            console.error(
-                "Teacher rejection error:",
-                error
+            const result = db.prepare(`
+                UPDATE school_reviews
+                SET status = ?, approved_at = ?
+                WHERE id = ?
+            `).run(
+                status,
+                status === "approved" ? new Date().toISOString() : null,
+                id
             );
 
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to reject teacher."
+            if (!result.changes) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Review not found."
+                });
+            }
+
+            res.json({
+                success: true,
+                message: `Review ${status}.`
             });
+        } catch (error) {
+            databaseError(res, "Review moderation error:", error);
         }
     }
 );
 
 // ============================================================
-// DISABLE TEACHER
+// PUBLICLY APPROVED REVIEWS API
 // ============================================================
 
-app.post(
-    "/api/principal/teachers/:id/disable",
-    requirePrincipal,
-    (req, res) => {
-        try {
-            const id =
-                Number(req.params.id);
+app.get("/api/reviews", (req, res) => {
+    try {
+        const reviews = db.prepare(`
+            SELECT id, parent_name, rating, review, created_at
+            FROM school_reviews
+            WHERE status = 'approved'
+            ORDER BY created_at DESC
+        `).all();
 
-            if (!Number.isInteger(id)) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Invalid teacher ID."
-                });
-            }
-
-            const result =
-                db.prepare(`
-                    UPDATE teachers
-                    SET status = 'disabled'
-                    WHERE id = ?
-                `).run(id);
-
-            if (result.changes === 0) {
-                return res.status(404).json({
-                    success: false,
-                    error:
-                        "Teacher account not found."
-                });
-            }
-
-            return res.json({
-                success: true,
-                message:
-                    "Teacher account disabled."
-            });
-
-        } catch (error) {
-            console.error(
-                "Teacher disable error:",
-                error
-            );
-
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to disable teacher."
-            });
-        }
+        res.json({
+            success: true,
+            reviews
+        });
+    } catch (error) {
+        databaseError(res, "Public review list error:", error);
     }
-);
-
-// ============================================================
-// REACTIVATE TEACHER
-// ============================================================
-
-app.post(
-    "/api/principal/teachers/:id/reactivate",
-    requirePrincipal,
-    (req, res) => {
-        try {
-            const id =
-                Number(req.params.id);
-
-            if (!Number.isInteger(id)) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Invalid teacher ID."
-                });
-            }
-
-            const result =
-                db.prepare(`
-                    UPDATE teachers
-                    SET
-                        status = 'approved',
-                        approved_at =
-                            COALESCE(
-                                approved_at,
-                                CURRENT_TIMESTAMP
-                            )
-                    WHERE id = ?
-                `).run(id);
-
-            if (result.changes === 0) {
-                return res.status(404).json({
-                    success: false,
-                    error:
-                        "Teacher account not found."
-                });
-            }
-
-            return res.json({
-                success: true,
-                message:
-                    "Teacher account reactivated."
-            });
-
-        } catch (error) {
-            console.error(
-                "Teacher reactivation error:",
-                error
-            );
-
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Unable to reactivate teacher."
-            });
-        }
-    }
-);
+});
 
 // ============================================================
 // LOGOUT
 // ============================================================
 
-app.get("/teacher-logout", (req, res) => {
+function destroySession(req, res, redirectTo) {
     req.session.destroy((error) => {
         if (error) {
-            console.error(
-                "Teacher logout error:",
-                error
-            );
+            console.error("Logout error:", error);
         }
 
-        res.clearCookie("connect.sid");
-
-        res.redirect(
-            "/teacher-login"
-        );
+        res.clearCookie("stmartins.sid");
+        res.redirect(redirectTo);
     });
+}
+
+app.get("/teacher-logout", (req, res) => {
+    destroySession(req, res, "/teacher-login");
 });
 
 app.get("/principal-logout", (req, res) => {
-    req.session.destroy((error) => {
-        if (error) {
-            console.error(
-                "Principal logout error:",
-                error
-            );
-        }
-
-        res.clearCookie("connect.sid");
-
-        res.redirect(
-            "/principal-login"
-        );
-    });
+    destroySession(req, res, "/principal-login");
 });
 
 app.get("/api/logout", (req, res) => {
-    req.session.destroy(() => {
-        res.clearCookie(
-            "connect.sid"
-        );
+    req.session.destroy((error) => {
+        if (error) {
+            console.error("Logout error:", error);
+
+            return res.status(500).json({
+                success: false,
+                error: "Unable to log out."
+            });
+        }
+
+        res.clearCookie("stmartins.sid");
 
         res.json({
             success: true,
@@ -1473,124 +1766,11 @@ app.get("/api/logout", (req, res) => {
 });
 
 // ============================================================
-// REVIEWS API
-// ============================================================
-
-app.post(
-    "/api/reviews",
-    async (req, res) => {
-        try {
-            const {
-                parent_name,
-                email,
-                rating,
-                review
-            } = req.body;
-
-            if (
-                !parent_name ||
-                !email ||
-                !rating ||
-                !review
-            ) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "All fields are required."
-                });
-            }
-
-            const cleanParentName =
-                String(parent_name).trim();
-
-            const cleanEmail =
-                String(email)
-                    .trim()
-                    .toLowerCase();
-
-            const numericRating =
-                Number(rating);
-
-            const cleanReview =
-                String(review).trim();
-
-            const emailRegex =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!emailRegex.test(cleanEmail)) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter a valid email address."
-                });
-            }
-
-            if (
-                numericRating < 1 ||
-                numericRating > 5
-            ) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Rating must be between 1 and 5."
-                });
-            }
-
-            if (cleanReview.length < 5) {
-                return res.status(400).json({
-                    success: false,
-                    error:
-                        "Please enter a meaningful review."
-                });
-            }
-
-            console.log(
-                "New parent review:",
-                {
-                    parent_name:
-                        cleanParentName,
-
-                    email:
-                        cleanEmail,
-
-                    rating:
-                        numericRating,
-
-                    review:
-                        cleanReview
-                }
-            );
-
-            return res.status(200).json({
-                success: true,
-                message:
-                    "Thank you for sharing your experience with St. Martin's High School. Your review has been submitted for approval."
-            });
-
-        } catch (error) {
-            console.error(
-                "Review submission error:",
-                error
-            );
-
-            return res.status(500).json({
-                success: false,
-                error:
-                    "Internal server error. Please try again later."
-            });
-        }
-    }
-);
-
-// ============================================================
 // 404 HANDLER
 // ============================================================
 
 app.use((req, res) => {
-    res.status(404).render("404", {
-        title:
-            "Page Not Found | St. Martin's High School"
-    });
+    render404(req, res);
 });
 
 // ============================================================
@@ -1598,77 +1778,54 @@ app.use((req, res) => {
 // ============================================================
 
 app.use((err, req, res, next) => {
-    console.error(
-        "SERVER ERROR:",
-        err
-    );
+    console.error("SERVER ERROR:", err);
+
+    if (res.headersSent) {
+        return next(err);
+    }
+
+    if (req.path.startsWith("/api/")) {
+        return res.status(500).json({
+            success: false,
+            error: "An unexpected server error occurred."
+        });
+    }
 
     res.status(500).send(`
         <!DOCTYPE html>
-
-        <html>
-
+        <html lang="en">
         <head>
-
             <meta charset="UTF-8">
-
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            >
-
-            <title>
-                Server Error
-            </title>
-
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Server Error | St. Martin's High School</title>
             <style>
-
                 body {
                     margin: 0;
-                    padding: 40px;
-                    background: #071827;
-                    color: #ff6b6b;
-                    font-family: monospace;
+                    padding: 32px;
+                    background: #071A2B;
+                    color: #F6F1E7;
+                    font-family: Arial, sans-serif;
                 }
-
-                pre {
-                    background: #030c14;
-                    padding: 20px;
-                    border-radius: 10px;
-                    overflow-x: auto;
-                    color: #f8f9fa;
-                    font-size: 14px;
+                main {
+                    max-width: 720px;
+                    margin: 8vh auto;
+                    padding: 32px;
+                    border: 1px solid #C5A45A;
+                    border-radius: 16px;
                 }
-
-                h1 {
-                    font-family: sans-serif;
-                }
-
-                p {
-                    color: #b9c4d0;
-                    font-family: sans-serif;
-                }
-
+                h1 { color: #C5A45A; }
+                p { line-height: 1.7; }
+                a { color: #C5A45A; }
             </style>
-
         </head>
-
         <body>
-
-            <h1>
-                🚨 Express Server Error
-            </h1>
-
-            <pre>${err.stack || err.message}</pre>
-
-            <p>
-                Check the error above to identify
-                the view, route, or variable causing
-                the problem.
-            </p>
-
+            <main>
+                <h1>Something went wrong</h1>
+                <p>The page could not be loaded.</p>
+                <p>Check the terminal running your server for the error details.</p>
+                <p><a href="/">Return to the school website</a></p>
+            </main>
         </body>
-
         </html>
     `);
 });
@@ -1681,55 +1838,27 @@ async function startServer() {
     try {
         await syncPrincipalCredentials();
 
-        app.listen(
-            PORT,
-            () => {
-                console.log("");
-
-                console.log(
-                    "=================================================="
-                );
-
-                console.log(
-                    " ST. MARTIN'S HIGH SCHOOL"
-                );
-
-                console.log(
-                    " BALANAGAR, HYDERABAD"
-                );
-
-                console.log(
-                    "=================================================="
-                );
-
-                console.log(
-                    ` Server running at: http://localhost:${PORT}`
-                );
-
-                console.log(
-                    " Database: school.db"
-                );
-
-                console.log(
-                    " Principal credentials: synchronized from .env"
-                );
-
-                console.log(
-                    "=================================================="
-                );
-
-                console.log("");
-            }
-        );
-
+        app.listen(PORT, () => {
+            console.log("");
+            console.log("==================================================");
+            console.log(" ST. MARTIN'S HIGH SCHOOL");
+            console.log(" BALANAGAR, HYDERABAD");
+            console.log(` Server: http://localhost:${PORT}`);
+            console.log(` Database: ${dbPath}`);
+            console.log(" Teacher authentication: enabled");
+            console.log(" Principal authentication: enabled");
+            console.log(" Student Life submissions: enabled");
+            console.log(" News & Updates submissions: enabled");
+            console.log(" Academic Calendar submissions: enabled");
+            console.log(" Principal content approval: enabled");
+            console.log("==================================================");
+            console.log("");
+        });
     } catch (error) {
-        console.error(
-            "Failed to start server:",
-            error
-        );
-
+        console.error("Failed to start server:", error);
         process.exit(1);
     }
 }
 
 startServer();
+```
