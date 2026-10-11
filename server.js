@@ -1,4 +1,4 @@
-```js
+
 // ============================================================
 // ST. MARTIN'S HIGH SCHOOL, BALANAGAR
 // COMPLETE SERVER.JS
@@ -1456,4 +1456,3 @@ async function startServer() {
 }
 
 startServer();
-```
