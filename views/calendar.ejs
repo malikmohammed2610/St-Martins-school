@@ -1,850 +1,298 @@
-```ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="View academic events, examinations, holidays and school activities at St. Martin's High School, Balanagar, Hyderabad.">
-
-    <title><%= typeof title !== 'undefined' && title ? title : "Academic Calendar | St. Martin's High School" %></title>
-
-    <link rel="icon" type="image/png" href="/images/Logo.png">
+    <meta name="description" content="View the academic calendar, school events and important dates at St. Martin's High School, Balanagar, Hyderabad.">
+    <title>Academic Calendar | St. Martin's High School</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="/css/style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
     <style>
-        .academic-calendar {
-            --cal-navy: #071A2B;
-            --cal-navy-light: #0C2235;
-            --cal-gold: #C5A45A;
-            --cal-ivory: #F6F1E7;
-            --cal-muted: #738091;
-            --cal-border: #E9E3D8;
-
-            min-height: 75vh;
-            padding: 0 0 85px;
-            background: var(--cal-ivory);
-            color: var(--cal-navy);
-            font-family: Inter, Arial, sans-serif;
-        }
-
-        .cal-hero {
-            padding: 70px 6% 60px;
-            color: #fff;
-            background:
-                radial-gradient(circle at 85% 15%, rgba(197,164,90,.17), transparent 32%),
-                linear-gradient(130deg, var(--cal-navy), var(--cal-navy-light));
-        }
-
-        .cal-hero-inner,
-        .cal-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cal-eyebrow {
-            display: inline-block;
-            margin-bottom: 15px;
-            color: var(--cal-gold);
-            font-size: .76rem;
-            font-weight: 700;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-        }
-
-        .cal-hero h1 {
-            margin: 0 0 18px;
-            color: #fff;
-            font: 600 clamp(2.6rem, 5vw, 4.5rem)/1.08 "Cormorant Garamond", Georgia, serif;
-        }
-
-        .cal-hero p {
-            max-width: 680px;
-            margin: 0;
-            color: rgba(255,255,255,.78);
-            font-size: .96rem;
-            line-height: 1.9;
-        }
-
-        .cal-hero-rule {
-            width: 75px;
-            height: 3px;
-            margin: 25px 0;
-            background: var(--cal-gold);
-        }
-
-        .cal-container {
-            padding: 42px 24px 0;
-        }
-
-        .cal-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-        }
-
-        .cal-month-heading {
-            margin: 0;
-            color: var(--cal-navy);
-            font: 600 clamp(1.8rem, 4vw, 2.7rem)/1.2 "Cormorant Garamond", Georgia, serif;
-        }
-
-        .cal-controls {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .cal-btn {
-            display: inline-flex;
-            min-height: 42px;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 15px;
-            border: 1px solid rgba(7,26,43,.17);
-            border-radius: 5px;
-            background: #fffdf8;
-            color: var(--cal-navy);
-            font: 600 .8rem Inter, sans-serif;
-            cursor: pointer;
-            transition: .2s ease;
-        }
-
-        .cal-btn:hover {
-            border-color: var(--cal-gold);
-            background: var(--cal-navy);
-            color: #fff;
-        }
-
-        .cal-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 310px;
-            align-items: start;
-            gap: 24px;
-        }
-
-        .cal-calendar-card,
-        .cal-sidebar-card {
-            min-width: 0;
-            overflow: hidden;
-            border: 1px solid rgba(197,164,90,.28);
-            border-radius: 12px;
-            background: #fffdf8;
-            box-shadow: 0 15px 40px rgba(7,26,43,.055);
-        }
-
-        .cal-weekdays,
-        .cal-grid {
-            display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
-        }
-
-        .cal-weekdays {
-            border-bottom: 1px solid var(--cal-border);
-            background: #F0E9DC;
-        }
-
-        .cal-weekday {
-            padding: 16px 3px;
-            color: #586575;
-            font-size: .69rem;
-            font-weight: 700;
-            letter-spacing: .04em;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .cal-day {
-            position: relative;
-            display: flex;
-            min-width: 0;
-            min-height: 112px;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 6px;
-            padding: 9px 7px;
-            border: 0;
-            border-right: 1px solid #F0EBE2;
-            border-bottom: 1px solid #F0EBE2;
-            background: transparent;
-            color: var(--cal-navy);
-            text-align: left;
-            cursor: pointer;
-            transition: background .18s ease;
-        }
-
-        .cal-day:nth-child(7n) {
-            border-right: 0;
-        }
-
-        .cal-day:hover {
-            background: #F7F0E2;
-        }
-
-        .cal-day.is-outside {
-            background: #F9F7F1;
-            color: #ADB3BA;
-        }
-
-        .cal-day.is-today .cal-day-number {
-            display: grid;
-            width: 29px;
-            height: 29px;
-            place-items: center;
-            border-radius: 50%;
-            background: var(--cal-navy);
-            color: #fff;
-        }
-
-        .cal-day.is-selected {
-            background: #F3E9D3;
-            box-shadow: inset 0 0 0 2px var(--cal-gold);
-        }
-
-        .cal-day-number {
-            display: grid;
-            width: 29px;
-            height: 29px;
-            place-items: center;
-            font-size: .82rem;
-            font-weight: 700;
-        }
-
-        .cal-event-chip {
-            display: block;
-            overflow: hidden;
-            padding: 5px 6px;
-            border-left: 3px solid var(--event-color, #C5A45A);
-            border-radius: 3px;
-            background: var(--event-bg, #F4EBD8);
-            color: #293746;
-            font-size: .65rem;
-            font-weight: 600;
-            line-height: 1.4;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .cal-more {
-            color: #687585;
-            font-size: .65rem;
-            font-weight: 600;
-        }
-
-        .cal-sidebar-card {
-            padding: 23px;
-        }
-
-        .cal-sidebar-title {
-            margin: 0 0 7px;
-            color: var(--cal-navy);
-            font: 600 1.65rem "Cormorant Garamond", Georgia, serif;
-        }
-
-        .cal-sidebar-subtitle {
-            margin: 0 0 20px;
-            color: var(--cal-muted);
-            font-size: .8rem;
-            line-height: 1.7;
-        }
-
-        .cal-legend {
-            display: grid;
-            gap: 12px;
-            padding: 17px 0 20px;
-            border-bottom: 1px solid var(--cal-border);
-        }
-
-        .cal-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #536071;
-            font-size: .79rem;
-        }
-
-        .cal-legend-dot {
-            width: 10px;
-            height: 10px;
-            flex: 0 0 10px;
-            border-radius: 3px;
-            background: var(--dot-color);
-        }
-
-        .cal-upcoming-heading {
-            margin: 22px 0 15px;
-            color: var(--cal-navy);
-            font-size: .9rem;
-            font-weight: 700;
-        }
-
-        .cal-event-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .cal-event-item {
-            padding: 13px;
-            border: 1px solid #EEE8DD;
-            border-left: 3px solid var(--event-color, var(--cal-gold));
-            border-radius: 5px;
-            background: #fff;
-        }
-
-        .cal-event-date {
-            margin-bottom: 5px;
-            color: #8A6A2C;
-            font-size: .69rem;
-            font-weight: 700;
-            letter-spacing: .05em;
-            text-transform: uppercase;
-        }
-
-        .cal-event-title {
-            margin: 0 0 6px;
-            color: var(--cal-navy);
-            font-size: .85rem;
-            font-weight: 700;
-            line-height: 1.5;
-        }
-
-        .cal-event-description {
-            margin: 0;
-            color: #657182;
-            font-size: .77rem;
-            line-height: 1.7;
-            overflow-wrap: anywhere;
-        }
-
-        .cal-event-meta {
-            margin-top: 8px;
-            color: #657182;
-            font-size: .72rem;
-        }
-
-        .cal-empty {
-            padding: 22px 14px;
-            border: 1px dashed #D9D0C0;
-            border-radius: 6px;
-            color: #7A8491;
-            font-size: .82rem;
-            line-height: 1.7;
-            text-align: center;
-        }
-
-        .cal-empty i {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--cal-gold);
-            font-size: 1.5rem;
-        }
-
-        .cal-status {
-            margin-top: 22px;
-            padding: 15px 17px;
-            border-left: 3px solid var(--cal-gold);
-            background: #F1E9D9;
-            color: #596575;
-            font-size: .8rem;
-            line-height: 1.8;
-        }
-
-        .cal-status strong {
-            color: var(--cal-navy);
-        }
-
-        @media (max-width: 980px) {
-            .cal-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .cal-sidebar-card {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                column-gap: 25px;
-            }
-
-            .cal-sidebar-title,
-            .cal-sidebar-subtitle {
-                grid-column: 1 / -1;
-            }
-
-            .cal-legend {
-                align-content: start;
-            }
-
-            .cal-upcoming-heading {
-                margin-top: 0;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .cal-hero {
-                padding: 52px 22px;
-            }
-
-            .cal-container {
-                padding: 28px 10px 0;
-            }
-
-            .cal-toolbar {
-                padding: 0 7px;
-            }
-
-            .cal-btn {
-                min-height: 38px;
-                padding: 8px 10px;
-                font-size: .72rem;
-            }
-
-            .cal-weekday {
-                padding: 12px 0;
-                font-size: .58rem;
-            }
-
-            .cal-day {
-                min-height: 78px;
-                padding: 5px 3px;
-                gap: 4px;
-            }
-
-            .cal-day-number {
-                width: 24px;
-                height: 24px;
-                font-size: .73rem;
-            }
-
-            .cal-event-chip {
-                padding: 4px 3px;
-                font-size: .56rem;
-            }
-
-            .cal-more {
-                font-size: .55rem;
-            }
-
-            .cal-sidebar-card {
-                display: block;
-                padding: 18px;
-            }
-
-            .cal-upcoming-heading {
-                margin-top: 22px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .cal-day,
-            .cal-btn {
-                transition: none;
-            }
+        .calendar-page{background:#f8f7f3;color:#263448;min-height:70vh}
+        .calendar-hero{background:linear-gradient(120deg,#071a2b,#123d55);color:white;text-align:center;padding:82px 22px}
+        .calendar-hero span{color:#e0c67b;font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:700}
+        .calendar-hero h1{font-size:clamp(36px,5vw,60px);margin:16px 0}
+        .calendar-hero p{max-width:720px;margin:auto;color:#e0e7ed;line-height:1.8}
+        .calendar-container{width:min(1150px,94%);margin:auto;padding:50px 0}
+        .calendar-heading{font-size:clamp(25px,3vw,36px);color:#102b42;margin-bottom:12px}
+        .calendar-intro{color:#657181;line-height:1.8;margin-bottom:28px}
+        .calendar-panel{background:#fff;border:1px solid #e7e3da;border-radius:12px;padding:25px;margin-bottom:45px}
+        .calendar-controls{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+        .calendar-controls h2{margin:0;color:#102b42;font-size:23px}
+        .calendar-controls button{border:0;background:#102b42;color:#fff;border-radius:5px;padding:11px 15px;cursor:pointer;font-size:15px}
+        .calendar-controls button:hover{background:#244a63}
+        .calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+        .calendar-weekday{text-align:center;padding:10px 2px;color:#735c24;font-weight:700;font-size:13px}
+        .calendar-day{position:relative;min-height:86px;border:1px solid #eee9df;border-radius:7px;padding:9px;background:#fcfbf8;color:#263448}
+        .calendar-day.is-empty{background:transparent;border-color:transparent}
+        .calendar-day.today{border:2px solid #c5a45a}
+        .calendar-day.has-event{background:#f5edd9}
+        .calendar-day-number{font-weight:700}
+        .calendar-event-dot{display:block;margin-top:8px;font-size:11px;line-height:1.3;color:#735c24;font-weight:700;overflow-wrap:anywhere}
+        .calendar-events{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+        .calendar-event-card{background:#fff;border:1px solid #e8e3d8;border-radius:10px;padding:23px}
+        .calendar-event-card h3{color:#102b42;margin:12px 0;font-size:21px}
+        .calendar-event-card p{color:#66717e;line-height:1.7;white-space:pre-line}
+        .calendar-tag{display:inline-block;padding:6px 10px;background:#f3ead4;color:#735c24;border-radius:30px;font-size:12px;font-weight:700}
+        .calendar-date{color:#8a7440;font-weight:700;font-size:14px}
+        .calendar-empty{padding:25px;border:1px dashed #d7d2c7;border-radius:10px;background:#fff;color:#66717e;line-height:1.8}
+        .calendar-link{display:inline-block;margin-top:15px;padding:12px 20px;background:#c5a45a;color:#071a2b;text-decoration:none;border-radius:5px;font-weight:700}
+        @media(max-width:650px){
+            .calendar-hero{padding:60px 18px}
+            .calendar-container{padding:35px 0}
+            .calendar-panel{padding:12px}
+            .calendar-grid{gap:3px}
+            .calendar-day{min-height:59px;padding:5px 3px;font-size:12px}
+            .calendar-weekday{font-size:10px;padding:8px 0}
+            .calendar-event-dot{font-size:9px;margin-top:5px}
+            .calendar-controls h2{font-size:19px}
         }
     </style>
 </head>
-
 <body>
 
 <%- include('partials/header') %>
 
-<main class="academic-calendar">
+<%
+    const pageEvents = typeof events !== 'undefined' && Array.isArray(events) ? events : [];
+%>
 
-    <section class="cal-hero">
-        <div class="cal-hero-inner">
-            <span class="cal-eyebrow">School Life · Events & Activities</span>
-            <h1>Academic Calendar</h1>
-            <div class="cal-hero-rule"></div>
-            <p>
-                Stay up to date with examinations, school holidays,
-                celebrations, parent meetings and other important events
-                published by the school.
+<main class="calendar-page">
+    <section class="calendar-hero">
+        <span>Plan Ahead</span>
+        <h1>Academic Calendar</h1>
+        <p>
+            Keep track of published school events, important dates and activities
+            at St. Martin's High School, Balanagar, Hyderabad.
+        </p>
+    </section>
+
+    <div class="calendar-container">
+        <section>
+            <h2 class="calendar-heading">Monthly View</h2>
+            <p class="calendar-intro">
+                Use the arrows to browse months. Dates with published school events
+                are highlighted in the calendar.
             </p>
-        </div>
-    </section>
 
-    <section class="cal-container">
+            <div class="calendar-panel">
+                <div class="calendar-controls">
+                    <button type="button" id="previousMonth" aria-label="Previous month">&#8592; Previous</button>
+                    <h2 id="monthHeading">Academic Calendar</h2>
+                    <button type="button" id="nextMonth" aria-label="Next month">Next &#8594;</button>
+                </div>
 
-        <div class="cal-toolbar">
-            <h2 class="cal-month-heading" id="calMonthHeading">Academic Year</h2>
-
-            <div class="cal-controls">
-                <button class="cal-btn" type="button" id="calPrev" aria-label="Previous month">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-
-                <button class="cal-btn" type="button" id="calToday">
-                    Today
-                </button>
-
-                <button class="cal-btn" type="button" id="calNext" aria-label="Next month">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
+                <div class="calendar-grid" id="calendarGrid">
+                    <div class="calendar-empty" style="grid-column:1/-1">
+                        Published events are listed below.
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="cal-layout">
+        <section>
+            <h2 class="calendar-heading">Published School Events</h2>
+            <p class="calendar-intro">
+                Event information is displayed here after it has been approved for publication.
+            </p>
 
-            <section class="cal-calendar-card" aria-label="Monthly academic calendar">
-                <div class="cal-weekdays">
-                    <div class="cal-weekday">Sun</div>
-                    <div class="cal-weekday">Mon</div>
-                    <div class="cal-weekday">Tue</div>
-                    <div class="cal-weekday">Wed</div>
-                    <div class="cal-weekday">Thu</div>
-                    <div class="cal-weekday">Fri</div>
-                    <div class="cal-weekday">Sat</div>
+            <% if (pageEvents.length > 0) { %>
+                <div class="calendar-events">
+                    <% pageEvents.forEach(function(event) { %>
+                        <article class="calendar-event-card">
+                            <span class="calendar-tag"><%= event.category || 'School Event' %></span>
+                            <h3><%= event.title %></h3>
+                            <div class="calendar-date">
+                                <%= event.event_date || event.date || 'Date to be announced' %>
+                            </div>
+
+                            <% if (event.description) { %>
+                                <p><%= event.description %></p>
+                            <% } %>
+
+                            <% if (event.start_time) { %>
+                                <p>
+                                    <strong>Time:</strong>
+                                    <%= event.start_time %><%= event.end_time ? ' – ' + event.end_time : '' %>
+                                </p>
+                            <% } %>
+
+                            <% if (event.location) { %>
+                                <p><strong>Venue:</strong> <%= event.location %></p>
+                            <% } %>
+                        </article>
+                    <% }); %>
                 </div>
-
-                <div class="cal-grid" id="calGrid"></div>
-            </section>
-
-            <aside class="cal-sidebar-card">
-
-                <h2 class="cal-sidebar-title">School Events</h2>
-                <p class="cal-sidebar-subtitle">
-                    Events and announcements published by authorised school staff.
-                </p>
-
-                <div class="cal-legend">
-                    <div class="cal-legend-item">
-                        <span class="cal-legend-dot" style="--dot-color:#B94747"></span>
-                        Examinations
-                    </div>
-
-                    <div class="cal-legend-item">
-                        <span class="cal-legend-dot" style="--dot-color:#3C7A63"></span>
-                        Holidays
-                    </div>
-
-                    <div class="cal-legend-item">
-                        <span class="cal-legend-dot" style="--dot-color:#4877A8"></span>
-                        School Activities
-                    </div>
-
-                    <div class="cal-legend-item">
-                        <span class="cal-legend-dot" style="--dot-color:#C5A45A"></span>
-                        Meetings & Other Events
-                    </div>
+            <% } else { %>
+                <div class="calendar-empty">
+                    <strong>No published events yet.</strong>
+                    <br>
+                    Upcoming school events will appear here after approval.
+                    Please revisit this page for updates.
                 </div>
+            <% } %>
+        </section>
 
-                <h3 class="cal-upcoming-heading" id="calEventsHeading">
-                    Upcoming Events
-                </h3>
-
-                <div class="cal-event-list" id="calEventList"></div>
-
-            </aside>
-
-        </div>
-
-        <div class="cal-status">
-            <strong>Calendar information:</strong>
-            Dates and events displayed here are based on the information
-            published by the school. Please confirm important schedule
-            changes with the school office.
-        </div>
-
-    </section>
-
+        <section style="margin-top:45px">
+            <a href="/news" class="calendar-link">Read School News</a>
+            <a href="/student-life" class="calendar-link" style="margin-left:8px">Explore Student Life</a>
+        </section>
+    </div>
 </main>
 
-<%- include('partials/footer') %>
-
 <script>
-(() => {
-    "use strict";
+(function () {
+    const events = <%- JSON.stringify(pageEvents).replace(/</g, '\\u003c') %>;
 
-    /*
-      The /calendar route should pass an array named "events".
-      Each event should include:
-      title, event_date, category, description, start_time,
-      end_time and location where available.
-    */
-    const rawEvents = <%- JSON.stringify(
-        typeof events !== "undefined" && Array.isArray(events) ? events : []
-    ).replace(/</g, "\\u003c") %>;
+    const grid = document.getElementById("calendarGrid");
+    const heading = document.getElementById("monthHeading");
+    const previous = document.getElementById("previousMonth");
+    const next = document.getElementById("nextMonth");
 
-    const palette = {
-        exam:     { color: "#B94747", background: "#F9E9E7" },
-        holiday:  { color: "#3C7A63", background: "#E7F2EC" },
-        activity: { color: "#4877A8", background: "#E8EFF8" },
-        other:    { color: "#B28B3F", background: "#F4EBD8" }
-    };
+    if (!grid || !heading || !previous || !next) return;
 
-    function safeText(value) {
-        return String(value ?? "");
-    }
+    const now = new Date();
+    let displayedYear = now.getFullYear();
+    let displayedMonth = now.getMonth();
 
-    function eventCategory(event) {
-        const category = safeText(event.category).toLowerCase();
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-        if (category.includes("exam") || category.includes("test")) {
-            return "exam";
-        }
+    function getEventDate(event) {
+        const value = event.event_date || event.date || "";
 
-        if (category.includes("holiday") || category.includes("vacation")) {
-            return "holiday";
-        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+
+        const parts = value.split("-").map(Number);
+        const date = new Date(parts[0], parts[1] - 1, parts[2]);
 
         if (
-            category.includes("activity") ||
-            category.includes("sports") ||
-            category.includes("celebration") ||
-            category.includes("cultural")
+            date.getFullYear() !== parts[0] ||
+            date.getMonth() !== parts[1] - 1 ||
+            date.getDate() !== parts[2]
         ) {
-            return "activity";
+            return null;
         }
 
-        return "other";
-    }
-
-    function localDateKey(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-
-        return `${year}-${month}-${day}`;
-    }
-
-    function normaliseDate(value) {
-        if (!value) return "";
-
-        const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})/);
-
-        if (match) {
-            return `${match[1]}-${match[2]}-${match[3]}`;
-        }
-
-        const parsed = new Date(value);
-
-        if (Number.isNaN(parsed.getTime())) return "";
-
-        return localDateKey(parsed);
-    }
-
-    function escapeHtml(value) {
-        return safeText(value).replace(/[&<>"']/g, character => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
-        })[character]);
-    }
-
-    const events = rawEvents
-        .filter(event => event && event.title && normaliseDate(event.event_date || event.date))
-        .map((event, index) => ({
-            ...event,
-            _id: event.id ?? index,
-            _date: normaliseDate(event.event_date || event.date),
-            _category: eventCategory(event)
-        }))
-        .sort((a, b) => a._date.localeCompare(b._date));
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    let visibleMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    let selectedDate = localDateKey(today);
-
-    const grid = document.getElementById("calGrid");
-    const heading = document.getElementById("calMonthHeading");
-    const eventList = document.getElementById("calEventList");
-    const eventsHeading = document.getElementById("calEventsHeading");
-
-    const monthFormatter = new Intl.DateTimeFormat("en-IN", {
-        month: "long",
-        year: "numeric"
-    });
-
-    const dateFormatter = new Intl.DateTimeFormat("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric"
-    });
-
-    function eventsForDate(dateKey) {
-        return events.filter(event => event._date === dateKey);
-    }
-
-    function makeEventChip(event) {
-        const style = palette[event._category];
-
-        return `
-            <span class="cal-event-chip"
-                  style="--event-color:${style.color};--event-bg:${style.background}"
-                  title="${escapeHtml(event.title)}">
-                ${escapeHtml(event.title)}
-            </span>
-        `;
+        return date;
     }
 
     function renderCalendar() {
-        heading.textContent = monthFormatter.format(visibleMonth);
-        grid.innerHTML = "";
+        grid.replaceChildren();
 
-        const year = visibleMonth.getFullYear();
-        const month = visibleMonth.getMonth();
-        const firstDay = new Date(year, month, 1).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const previousMonthDays = new Date(year, month, 0).getDate();
+        heading.textContent = new Date(
+            displayedYear,
+            displayedMonth,
+            1
+        ).toLocaleDateString("en-IN", {
+            month: "long",
+            year: "numeric"
+        });
 
-        for (let cell = 0; cell < 42; cell++) {
-            let date;
-            let outside = false;
+        weekdays.forEach(function (day) {
+            const label = document.createElement("div");
+            label.className = "calendar-weekday";
+            label.textContent = day;
+            grid.appendChild(label);
+        });
 
-            if (cell < firstDay) {
-                date = new Date(year, month - 1, previousMonthDays - firstDay + cell + 1);
-                outside = true;
-            } else if (cell >= firstDay + daysInMonth) {
-                date = new Date(year, month + 1, cell - firstDay - daysInMonth + 1);
-                outside = true;
-            } else {
-                date = new Date(year, month, cell - firstDay + 1);
+        const firstDay = new Date(
+            displayedYear,
+            displayedMonth,
+            1
+        ).getDay();
+
+        const daysInMonth = new Date(
+            displayedYear,
+            displayedMonth + 1,
+            0
+        ).getDate();
+
+        for (let i = 0; i < firstDay; i++) {
+            const empty = document.createElement("div");
+            empty.className = "calendar-day is-empty";
+            grid.appendChild(empty);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const cell = document.createElement("div");
+            cell.className = "calendar-day";
+
+            if (
+                day === now.getDate() &&
+                displayedMonth === now.getMonth() &&
+                displayedYear === now.getFullYear()
+            ) {
+                cell.classList.add("today");
             }
 
-            const key = localDateKey(date);
-            const dayEvents = eventsForDate(key);
-            const dayButton = document.createElement("button");
+            const number = document.createElement("div");
+            number.className = "calendar-day-number";
+            number.textContent = day;
+            cell.appendChild(number);
 
-            dayButton.type = "button";
-            dayButton.className = "cal-day";
+            const matchingEvents = events.filter(function (event) {
+                const date = getEventDate(event);
 
-            if (outside) dayButton.classList.add("is-outside");
-            if (key === localDateKey(today)) dayButton.classList.add("is-today");
-            if (key === selectedDate) dayButton.classList.add("is-selected");
-
-            dayButton.setAttribute("aria-label",
-                `${dateFormatter.format(date)}${dayEvents.length ? `, ${dayEvents.length} event(s)` : ""}`);
-
-            let chips = dayEvents.slice(0, 2).map(makeEventChip).join("");
-
-            if (dayEvents.length > 2) {
-                chips += `<span class="cal-more">+${dayEvents.length - 2} more</span>`;
-            }
-
-            dayButton.innerHTML = `
-                <span class="cal-day-number">${date.getDate()}</span>
-                ${chips}
-            `;
-
-            dayButton.addEventListener("click", () => {
-                selectedDate = key;
-                renderCalendar();
-                renderSelectedDateEvents();
+                return date &&
+                    date.getFullYear() === displayedYear &&
+                    date.getMonth() === displayedMonth &&
+                    date.getDate() === day;
             });
 
-            grid.appendChild(dayButton);
+            if (matchingEvents.length > 0) {
+                cell.classList.add("has-event");
+
+                matchingEvents.slice(0, 2).forEach(function (event) {
+                    const label = document.createElement("span");
+                    label.className = "calendar-event-dot";
+                    label.textContent = event.title || "School Event";
+                    cell.appendChild(label);
+                });
+
+                if (matchingEvents.length > 2) {
+                    const more = document.createElement("span");
+                    more.className = "calendar-event-dot";
+                    more.textContent = "+" + (matchingEvents.length - 2) + " more";
+                    cell.appendChild(more);
+                }
+
+                cell.title = matchingEvents
+                    .map(function (event) { return event.title; })
+                    .join(", ");
+            }
+
+            grid.appendChild(cell);
         }
     }
 
-    function renderEventCard(event) {
-        const style = palette[event._category];
-        const timeParts = [];
+    previous.addEventListener("click", function () {
+        displayedMonth--;
 
-        if (event.start_time) timeParts.push(safeText(event.start_time));
-        if (event.end_time) timeParts.push(safeText(event.end_time));
-
-        const meta = [
-            event.category,
-            timeParts.length ? timeParts.join(" – ") : "",
-            event.location || ""
-        ].filter(Boolean).map(escapeHtml).join(" · ");
-
-        return `
-            <article class="cal-event-item" style="--event-color:${style.color}">
-                <div class="cal-event-date">${escapeHtml(dateFormatter.format(new Date(`${event._date}T12:00:00`)))}</div>
-                <h4 class="cal-event-title">${escapeHtml(event.title)}</h4>
-                ${event.description
-                    ? `<p class="cal-event-description">${escapeHtml(event.description)}</p>`
-                    : ""}
-                ${meta ? `<div class="cal-event-meta">${meta}</div>` : ""}
-            </article>
-        `;
-    }
-
-    function renderSelectedDateEvents() {
-        const selectedEvents = eventsForDate(selectedDate);
-        const date = new Date(`${selectedDate}T12:00:00`);
-
-        eventsHeading.textContent = dateFormatter.format(date);
-
-        if (!selectedEvents.length) {
-            eventList.innerHTML = `
-                <div class="cal-empty">
-                    <i class="fa-regular fa-calendar"></i>
-                    No events have been published for this date.
-                    Select another day or check the upcoming events.
-                </div>
-            `;
-            return;
+        if (displayedMonth < 0) {
+            displayedMonth = 11;
+            displayedYear--;
         }
 
-        eventList.innerHTML = selectedEvents.map(renderEventCard).join("");
-    }
-
-    function renderUpcomingEvents() {
-        const upcoming = events.filter(event => event._date >= localDateKey(today)).slice(0, 5);
-
-        if (!upcoming.length) {
-            eventList.innerHTML = `
-                <div class="cal-empty">
-                    <i class="fa-regular fa-calendar-check"></i>
-                    No upcoming events have been published yet.
-                </div>
-            `;
-            eventsHeading.textContent = "Upcoming Events";
-            return;
-        }
-
-        eventsHeading.textContent = "Upcoming Events";
-        eventList.innerHTML = upcoming.map(renderEventCard).join("");
-    }
-
-    document.getElementById("calPrev").addEventListener("click", () => {
-        visibleMonth = new Date(
-            visibleMonth.getFullYear(),
-            visibleMonth.getMonth() - 1,
-            1
-        );
         renderCalendar();
     });
 
-    document.getElementById("calNext").addEventListener("click", () => {
-        visibleMonth = new Date(
-            visibleMonth.getFullYear(),
-            visibleMonth.getMonth() + 1,
-            1
-        );
-        renderCalendar();
-    });
+    next.addEventListener("click", function () {
+        displayedMonth++;
 
-    document.getElementById("calToday").addEventListener("click", () => {
-        visibleMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        selectedDate = localDateKey(today);
+        if (displayedMonth > 11) {
+            displayedMonth = 0;
+            displayedYear++;
+        }
+
         renderCalendar();
-        renderSelectedDateEvents();
     });
 
     renderCalendar();
-    renderUpcomingEvents();
 })();
 </script>
 
-<script src="/js/script.js" defer></script>
-<script src="/js/premium-effects.js" defer></script>
+<%- include('partials/footer') %>
 
 </body>
 </html>
-```
