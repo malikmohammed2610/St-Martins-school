@@ -1,651 +1,479 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Gallery | St. Martin's High School</title>
-
     <meta name="description"
-        content="Explore the campus, academic activities, sports, events and student life at St. Martin's High School, Balanagar, Hyderabad.">
+          content="View academic events, examinations, holidays and school activities at St. Martin's High School, Balanagar, Hyderabad.">
 
-    <meta name="theme-color" content="#071A2B">
+    <title><%= typeof title !== 'undefined' && title ? title : "Academic Calendar | St. Martin's High School" %></title>
 
-    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="/images/Logo.png">
-
-    <!-- GOOGLE FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- BOOTSTRAP -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-    <!-- FONT AWESOME -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- GLOBAL WEBSITE CSS -->
     <link rel="stylesheet" href="/css/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
     <style>
-        :root {
-            --navy-midnight: #071A2B;
-            --navy-light: #10283d;
-            --gold: #C5A45A;
-            --gold-light: #dfc982;
-            --ivory: #F6F1E7;
-            --cream: #faf7f0;
-            --charcoal: #20252A;
-            --muted: #6c757d;
+        .academic-calendar {
+            --cal-navy: #071A2B;
+            --cal-navy-light: #0C2235;
+            --cal-gold: #C5A45A;
+            --cal-ivory: #F6F1E7;
+            --cal-muted: #738091;
+            --cal-border: #E9E3D8;
+
+            min-height: 75vh;
+            padding: 0 0 85px;
+            background: var(--cal-ivory);
+            color: var(--cal-navy);
+            font-family: Inter, Arial, sans-serif;
         }
 
-        .gallery-page {
-            overflow: hidden;
-            background: var(--ivory);
-            color: var(--charcoal);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .gallery-page *,
-        .gallery-page *::before,
-        .gallery-page *::after {
+        .academic-calendar *,
+        .academic-calendar *::before,
+        .academic-calendar *::after {
             box-sizing: border-box;
         }
 
-        .gallery-page img {
-            max-width: 100%;
-        }
-
-        .gallery-page a {
-            transition: color 0.3s ease, background 0.3s ease;
-        }
-
-        /* =========================================
-           HERO
-        ========================================= */
-
-        .gallery-hero {
+        .cal-hero {
             position: relative;
-            isolation: isolate;
-            padding: 105px 20px 90px;
+            overflow: hidden;
+            padding: 70px 6% 60px;
+            color: #fff;
             background:
-                linear-gradient(
-                    rgba(7, 26, 43, 0.94),
-                    rgba(7, 26, 43, 0.97)
-                ),
-                url('/images/story-image.png') center / cover no-repeat;
-            color: #ffffff;
-            text-align: center;
-            overflow: hidden;
+                radial-gradient(circle at 85% 15%, rgba(197,164,90,.17), transparent 32%),
+                linear-gradient(130deg, var(--cal-navy), var(--cal-navy-light));
         }
 
-        .gallery-hero::before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            width: 340px;
-            height: 340px;
-            left: -210px;
-            bottom: -220px;
-            border: 1px solid rgba(197, 164, 90, 0.35);
-            transform: rotate(45deg);
-        }
-
-        .gallery-hero::after {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            width: 180px;
-            height: 180px;
-            border: 1px solid rgba(197, 164, 90, 0.35);
-            right: 8%;
-            top: 25%;
-            transform: rotate(45deg);
-        }
-
-        .gallery-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: auto;
-        }
-
-        .gallery-eyebrow {
-            display: inline-block;
-            color: var(--gold-light);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.22em;
-            margin-bottom: 15px;
-        }
-
-        .gallery-hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            line-height: 0.98;
-            font-weight: 500;
-            margin-bottom: 25px;
-            color: #ffffff;
-        }
-
-        .gallery-hero-line {
-            width: 70px;
-            height: 1px;
-            background: var(--gold);
-            margin: 0 auto 25px;
-        }
-
-        .gallery-hero p {
-            max-width: 650px;
-            margin: auto;
-            color: rgba(255, 255, 255, 0.78);
-            font-size: 1rem;
-            line-height: 1.9;
-        }
-
-        /* =========================================
-           INTRODUCTION
-        ========================================= */
-
-        .gallery-introduction {
-            max-width: 1050px;
-            margin: auto;
-            padding: 90px 20px 50px;
-            text-align: center;
-        }
-
-        .gallery-section-eyebrow {
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
-
-        .gallery-introduction h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.3rem, 5vw, 3rem);
-            color: var(--navy-midnight);
-            font-weight: 600;
-            margin: 12px 0 20px;
-        }
-
-        .gallery-gold-rule {
-            width: 60px;
-            height: 2px;
-            background: var(--gold);
-            margin: 0 auto 25px;
-        }
-
-        .gallery-introduction p {
-            max-width: 760px;
-            margin: auto;
-            color: #5d6873;
-            line-height: 1.9;
-            font-size: 0.96rem;
-        }
-
-        /* =========================================
-           FILTER BUTTONS
-        ========================================= */
-
-        .gallery-filters {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 30px auto 55px;
-            padding: 0 20px;
-        }
-
-        .gallery-filter-btn {
-            border: 1px solid rgba(7, 26, 43, 0.2);
-            background: transparent;
-            color: var(--navy-midnight);
-            padding: 10px 20px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .gallery-filter-btn:hover,
-        .gallery-filter-btn.active {
-            background: var(--navy-midnight);
-            color: #ffffff;
-            border-color: var(--navy-midnight);
-        }
-
-        .gallery-filter-btn:focus-visible,
-        .gallery-card:focus-visible {
-            outline: 2px solid var(--gold);
-            outline-offset: 4px;
-        }
-
-        /* =========================================
-           GALLERY GRID
-        ========================================= */
-
-        .gallery-section {
-            max-width: 1150px;
-            margin: auto;
-            padding: 0 20px 100px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 25px;
-        }
-
-        .gallery-card {
-            position: relative;
-            min-width: 0;
-            min-height: 310px;
-            overflow: hidden;
-            background: var(--navy-midnight);
-            border: 1px solid rgba(197, 164, 90, 0.25);
-            isolation: isolate;
-            animation: galleryFadeIn 0.5s ease both;
-        }
-
-        .gallery-card.large {
-            grid-column: span 2;
-        }
-
-        .gallery-card[hidden] {
-            display: none !important;
-        }
-
-        .gallery-image {
-            position: absolute;
-            inset: 0;
+        .cal-hero-inner,
+        .cal-container {
             width: 100%;
-            height: 100%;
-            min-height: 310px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.7s ease;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .gallery-card:hover .gallery-image {
-            transform: scale(1.055);
-        }
-
-        .gallery-placeholder {
-            min-height: 310px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-light);
-            text-align: center;
-            padding: 30px;
-            background:
-                radial-gradient(
-                    circle at 50% 35%,
-                    rgba(197, 164, 90, 0.10),
-                    transparent 50%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--navy-midnight),
-                    var(--navy-light)
-                );
-        }
-
-        .gallery-placeholder i {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            display: block;
-            color: var(--gold);
-        }
-
-        .gallery-placeholder strong {
-            display: block;
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-        }
-
-        .gallery-placeholder small {
-            display: block;
-            margin-top: 8px;
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 0.7rem;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            inset: auto 0 0;
-            padding: 65px 24px 22px;
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                rgba(7, 26, 43, 0.96)
-            );
-            color: #ffffff;
-            pointer-events: none;
-        }
-
-        .gallery-category {
-            color: var(--gold-light);
-            text-transform: uppercase;
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-        }
-
-        .gallery-overlay h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.65rem;
-            margin: 4px 0 0;
-            font-weight: 500;
-            color: #ffffff;
-        }
-
-        .gallery-overlay p {
-            margin: 5px 0 0;
-            font-size: 0.75rem;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.72);
-        }
-
-        @keyframes galleryFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* =========================================
-           DETAILS SECTION
-        ========================================= */
-
-        .gallery-details {
-            background: #ffffff;
-            padding: 90px 20px;
-        }
-
-        .gallery-details-container {
-            max-width: 1050px;
-            margin: auto;
-        }
-
-        .gallery-details-heading {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .gallery-details-heading h2 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--navy-midnight);
-            font-size: clamp(2.3rem, 5vw, 3rem);
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
-        .gallery-detail-box {
-            height: 100%;
-            padding: 35px;
-            border: 1px solid rgba(7, 26, 43, 0.1);
-            background: var(--cream);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-detail-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(7, 26, 43, 0.08);
-        }
-
-        .gallery-detail-icon {
-            width: 50px;
-            height: 50px;
-            border: 1px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-
-        .gallery-detail-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--navy-midnight);
-            font-size: 1.7rem;
-            font-weight: 600;
-        }
-
-        .gallery-detail-box p {
-            color: #68727c;
-            line-height: 1.8;
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
-
-        /* =========================================
-           CALL TO ACTION
-        ========================================= */
-
-        .gallery-cta {
-            padding: 90px 20px;
-            background: var(--navy-midnight);
-            text-align: center;
-            color: #ffffff;
-        }
-
-        .gallery-cta h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 5vw, 3.2rem);
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .gallery-cta p {
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.8;
-        }
-
-        .gallery-cta-button {
+        .cal-eyebrow {
             display: inline-block;
-            background: var(--gold);
-            color: var(--navy-midnight);
-            text-decoration: none;
-            padding: 13px 27px;
-            font-size: 0.75rem;
+            margin-bottom: 15px;
+            color: var(--cal-gold);
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .2em;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
         }
 
-        .gallery-cta-button:hover {
-            background: #ffffff;
-            color: var(--navy-midnight);
+        .cal-hero h1 {
+            margin: 0 0 18px;
+            color: #fff;
+            font: 600 clamp(2.6rem, 5vw, 4.5rem)/1.08 "Cormorant Garamond", Georgia, serif;
         }
 
-        /* =========================================
-           GALLERY FOOTER
-           Retained from the original page.
-        ========================================= */
-
-        .gallery-page-footer {
-            background: #04111d;
-            color: #ffffff;
-            padding: 70px 20px 25px;
-            border-top: 1px solid rgba(197, 164, 90, 0.25);
-        }
-
-        .gallery-footer-container {
-            max-width: 1140px;
-            margin: auto;
-        }
-
-        .gallery-footer-logo {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-            margin-bottom: 18px;
-        }
-
-        .gallery-footer-school-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-
-        .gallery-footer-description {
-            color: rgba(255, 255, 255, 0.58);
-            line-height: 1.8;
-            font-size: 0.85rem;
-            max-width: 330px;
-        }
-
-        .gallery-footer-title {
-            color: var(--gold-light);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-size: 0.7rem;
-            margin-bottom: 22px;
-        }
-
-        .gallery-footer-links {
-            list-style: none;
-            padding: 0;
+        .cal-hero p {
+            max-width: 680px;
             margin: 0;
-        }
-
-        .gallery-footer-links li {
-            margin-bottom: 11px;
-        }
-
-        .gallery-footer-links a {
-            color: rgba(255, 255, 255, 0.65);
-            text-decoration: none;
-            font-size: 0.82rem;
-        }
-
-        .gallery-footer-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .gallery-footer-contact {
-            color: rgba(255, 255, 255, 0.65);
-            font-size: 0.82rem;
+            color: rgba(255,255,255,.78);
+            font-size: .96rem;
             line-height: 1.9;
         }
 
-        .gallery-footer-contact i {
-            width: 20px;
-            color: var(--gold);
+        .cal-hero-rule {
+            width: 75px;
+            height: 3px;
+            margin: 25px 0;
+            background: var(--cal-gold);
         }
 
-        .gallery-footer-bottom {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        .cal-container {
+            padding: 42px 24px 0;
+        }
+
+        .cal-toolbar {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             gap: 20px;
-            color: rgba(255, 255, 255, 0.42);
-            font-size: 0.7rem;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
         }
 
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
+        .cal-month-heading {
+            margin: 0;
+            color: var(--cal-navy);
+            font: 600 clamp(1.8rem, 4vw, 2.7rem)/1.2 "Cormorant Garamond", Georgia, serif;
+        }
 
-        @media (max-width: 991px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+        .cal-controls {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .cal-btn {
+            display: inline-flex;
+            min-height: 42px;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 1px solid rgba(7,26,43,.17);
+            border-radius: 5px;
+            background: #fffdf8;
+            color: var(--cal-navy);
+            font: 600 .8rem Inter, sans-serif;
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease, border-color .2s ease;
+        }
+
+        .cal-btn:hover {
+            border-color: var(--cal-gold);
+            background: var(--cal-navy);
+            color: #fff;
+        }
+
+        .cal-btn:focus-visible,
+        .cal-day:focus-visible {
+            outline: 3px solid var(--cal-gold);
+            outline-offset: 2px;
+        }
+
+        .cal-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 310px;
+            align-items: start;
+            gap: 24px;
+        }
+
+        .cal-calendar-card,
+        .cal-sidebar-card {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid rgba(197,164,90,.28);
+            border-radius: 12px;
+            background: #fffdf8;
+            box-shadow: 0 15px 40px rgba(7,26,43,.055);
+        }
+
+        .cal-weekdays,
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+        }
+
+        .cal-weekdays {
+            border-bottom: 1px solid var(--cal-border);
+            background: #F0E9DC;
+        }
+
+        .cal-weekday {
+            padding: 16px 3px;
+            color: #586575;
+            font-size: .69rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .cal-day {
+            position: relative;
+            display: flex;
+            min-width: 0;
+            min-height: 112px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 6px;
+            padding: 9px 7px;
+            border: 0;
+            border-right: 1px solid #F0EBE2;
+            border-bottom: 1px solid #F0EBE2;
+            border-radius: 0;
+            background: transparent;
+            color: var(--cal-navy);
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: background .18s ease;
+        }
+
+        .cal-day:nth-child(7n) {
+            border-right: 0;
+        }
+
+        .cal-day:hover {
+            background: #F7F0E2;
+        }
+
+        .cal-day.is-outside {
+            background: #F9F7F1;
+            color: #ADB3BA;
+        }
+
+        .cal-day.is-today .cal-day-number {
+            display: grid;
+            width: 29px;
+            height: 29px;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--cal-navy);
+            color: #fff;
+        }
+
+        .cal-day.is-selected {
+            background: #F3E9D3;
+            box-shadow: inset 0 0 0 2px var(--cal-gold);
+        }
+
+        .cal-day-number {
+            display: grid;
+            width: 29px;
+            height: 29px;
+            flex: 0 0 auto;
+            place-items: center;
+            font-size: .82rem;
+            font-weight: 700;
+        }
+
+        .cal-event-chip {
+            display: block;
+            overflow: hidden;
+            padding: 5px 6px;
+            border-left: 3px solid var(--event-color, #C5A45A);
+            border-radius: 3px;
+            background: var(--event-bg, #F4EBD8);
+            color: #293746;
+            font-size: .65rem;
+            font-weight: 600;
+            line-height: 1.4;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cal-more {
+            color: #687585;
+            font-size: .65rem;
+            font-weight: 600;
+        }
+
+        .cal-sidebar-card {
+            padding: 23px;
+        }
+
+        .cal-sidebar-title {
+            margin: 0 0 7px;
+            color: var(--cal-navy);
+            font: 600 1.65rem "Cormorant Garamond", Georgia, serif;
+        }
+
+        .cal-sidebar-subtitle {
+            margin: 0 0 20px;
+            color: var(--cal-muted);
+            font-size: .8rem;
+            line-height: 1.7;
+        }
+
+        .cal-legend {
+            display: grid;
+            gap: 12px;
+            padding: 17px 0 20px;
+            border-bottom: 1px solid var(--cal-border);
+        }
+
+        .cal-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #536071;
+            font-size: .79rem;
+        }
+
+        .cal-legend-dot {
+            width: 10px;
+            height: 10px;
+            flex: 0 0 10px;
+            border-radius: 3px;
+            background: var(--dot-color);
+        }
+
+        .cal-upcoming-heading {
+            margin: 22px 0 15px;
+            color: var(--cal-navy);
+            font-size: .9rem;
+            font-weight: 700;
+        }
+
+        .cal-event-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .cal-event-item {
+            padding: 13px;
+            border: 1px solid #EEE8DD;
+            border-left: 3px solid var(--event-color, var(--cal-gold));
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .cal-event-date {
+            margin-bottom: 5px;
+            color: #8A6A2C;
+            font-size: .69rem;
+            font-weight: 700;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+        .cal-event-title {
+            margin: 0 0 6px;
+            color: var(--cal-navy);
+            font-size: .85rem;
+            font-weight: 700;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .cal-event-description {
+            margin: 0;
+            color: #657182;
+            font-size: .77rem;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .cal-event-meta {
+            margin-top: 8px;
+            color: #657182;
+            font-size: .72rem;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .cal-empty {
+            padding: 22px 14px;
+            border: 1px dashed #D9D0C0;
+            border-radius: 6px;
+            color: #7A8491;
+            font-size: .82rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .cal-empty i {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--cal-gold);
+            font-size: 1.5rem;
+        }
+
+        .cal-status {
+            margin-top: 22px;
+            padding: 15px 17px;
+            border-left: 3px solid var(--cal-gold);
+            background: #F1E9D9;
+            color: #596575;
+            font-size: .8rem;
+            line-height: 1.8;
+        }
+
+        .cal-status strong {
+            color: var(--cal-navy);
+        }
+
+        @media (max-width: 980px) {
+            .cal-layout {
+                grid-template-columns: 1fr;
             }
 
-            .gallery-card.large {
-                grid-column: span 2;
+            .cal-sidebar-card {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                column-gap: 25px;
+            }
+
+            .cal-sidebar-title,
+            .cal-sidebar-subtitle {
+                grid-column: 1 / -1;
+            }
+
+            .cal-legend {
+                align-content: start;
+            }
+
+            .cal-upcoming-heading {
+                margin-top: 0;
             }
         }
 
-        @media (max-width: 767px) {
-            .gallery-hero {
-                padding: 80px 20px 70px;
+        @media (max-width: 600px) {
+            .cal-hero {
+                padding: 52px 22px;
             }
 
-            .gallery-hero::after {
-                width: 110px;
-                height: 110px;
-                right: -30px;
+            .cal-container {
+                padding: 28px 10px 0;
             }
 
-            .gallery-introduction {
-                padding-top: 65px;
+            .cal-toolbar {
+                padding: 0 7px;
             }
 
-            .gallery-grid {
-                grid-template-columns: minmax(0, 1fr);
-                gap: 18px;
+            .cal-controls {
+                gap: 6px;
             }
 
-            .gallery-card,
-            .gallery-card.large {
-                grid-column: span 1;
-                min-height: 310px;
+            .cal-btn {
+                min-height: 38px;
+                padding: 8px 10px;
+                font-size: .72rem;
             }
 
-            .gallery-placeholder {
-                min-height: 310px;
+            .cal-weekday {
+                padding: 12px 0;
+                font-size: .58rem;
             }
 
-            .gallery-filters {
-                gap: 8px;
-                margin-bottom: 40px;
+            .cal-day {
+                min-height: 78px;
+                padding: 5px 3px;
+                gap: 4px;
             }
 
-            .gallery-filter-btn {
-                padding: 9px 13px;
-                font-size: 0.67rem;
+            .cal-day-number {
+                width: 24px;
+                height: 24px;
+                font-size: .73rem;
             }
 
-            .gallery-details {
-                padding: 65px 20px;
+            .cal-event-chip {
+                padding: 4px 3px;
+                font-size: .56rem;
             }
 
-            .gallery-detail-box {
-                padding: 28px;
+            .cal-more {
+                font-size: .55rem;
             }
 
-            .gallery-footer-bottom {
-                flex-direction: column;
-                text-align: center;
+            .cal-sidebar-card {
+                display: block;
+                padding: 18px;
+            }
+
+            .cal-upcoming-heading {
+                margin-top: 22px;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .gallery-page *,
-            .gallery-page *::before,
-            .gallery-page *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                scroll-behavior: auto !important;
-                transition-duration: 0.01ms !important;
+            .cal-day,
+            .cal-btn {
+                transition: none;
             }
         }
     </style>
@@ -653,652 +481,528 @@
 
 <body>
 
-    <div class="gallery-page">
+<!-- GLOBAL HEADER: shared across the website -->
+<%- include('partials/header') %>
 
-        <!-- =========================================
-             SHARED GLOBAL HEADER
-             Uses views/partials/header.ejs
-        ========================================= -->
+<main class="academic-calendar">
 
-        <%- include('partials/header') %>
+    <section class="cal-hero">
+        <div class="cal-hero-inner">
+            <span class="cal-eyebrow">School Life · Events & Activities</span>
 
+            <h1>Academic Calendar</h1>
 
-        <!-- =========================================
-             GALLERY HERO
-        ========================================= -->
-
-        <section class="gallery-hero">
-
-            <div class="gallery-hero-content">
-
-                <span class="gallery-eyebrow">
-                    Visual Archive
-                </span>
-
-                <h1>Campus &amp; Student Life</h1>
-
-                <div class="gallery-hero-line"></div>
-
-                <p>
-                    Explore the people, places, experiences and moments
-                    that form the vibrant educational community of
-                    St. Martin's High School, Balanagar.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================================
-             INTRODUCTION
-        ========================================= -->
-
-        <section class="gallery-introduction">
-
-            <span class="gallery-section-eyebrow">
-                The St. Martin's Experience
-            </span>
-
-            <h2>Moments That Define Our School</h2>
-
-            <div class="gallery-gold-rule"></div>
+            <div class="cal-hero-rule"></div>
 
             <p>
-                From the classrooms where curiosity begins to the
-                playgrounds where teamwork develops, every part of
-                St. Martin's High School contributes to the growth
-                of our students. Our gallery offers a glimpse into
-                academic life, sporting activities, celebrations,
-                facilities and the everyday moments that make our
-                school community special.
+                Stay up to date with examinations, school holidays,
+                celebrations, parent meetings and other important events
+                published by the school.
             </p>
+        </div>
+    </section>
 
-        </section>
+    <section class="cal-container">
 
+        <div class="cal-toolbar">
+            <h2 class="cal-month-heading" id="calMonthHeading">Academic Year</h2>
 
-        <!-- =========================================
-             FILTER BUTTONS
-        ========================================= -->
+            <div class="cal-controls">
+                <button class="cal-btn"
+                        type="button"
+                        id="calPrev"
+                        aria-label="Previous month">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
 
-        <div class="gallery-filters" role="group" aria-label="Filter gallery">
+                <button class="cal-btn" type="button" id="calToday">
+                    Today
+                </button>
 
-            <button type="button"
-                class="gallery-filter-btn active"
-                data-filter="all"
-                aria-pressed="true">
-                All
-            </button>
+                <button class="cal-btn"
+                        type="button"
+                        id="calNext"
+                        aria-label="Next month">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
 
-            <button type="button"
-                class="gallery-filter-btn"
-                data-filter="campus"
-                aria-pressed="false">
-                Campus
-            </button>
+        <div class="cal-layout">
 
-            <button type="button"
-                class="gallery-filter-btn"
-                data-filter="academics"
-                aria-pressed="false">
-                Academics
-            </button>
+            <section class="cal-calendar-card"
+                     aria-label="Monthly academic calendar">
 
-            <button type="button"
-                class="gallery-filter-btn"
-                data-filter="sports"
-                aria-pressed="false">
-                Sports
-            </button>
+                <div class="cal-weekdays" aria-hidden="true">
+                    <div class="cal-weekday">Sun</div>
+                    <div class="cal-weekday">Mon</div>
+                    <div class="cal-weekday">Tue</div>
+                    <div class="cal-weekday">Wed</div>
+                    <div class="cal-weekday">Thu</div>
+                    <div class="cal-weekday">Fri</div>
+                    <div class="cal-weekday">Sat</div>
+                </div>
 
-            <button type="button"
-                class="gallery-filter-btn"
-                data-filter="events"
-                aria-pressed="false">
-                Events
-            </button>
+                <div class="cal-grid" id="calGrid"></div>
+            </section>
 
-            <button type="button"
-                class="gallery-filter-btn"
-                data-filter="student-life"
-                aria-pressed="false">
-                Student Life
-            </button>
+            <aside class="cal-sidebar-card">
+
+                <h2 class="cal-sidebar-title">School Events</h2>
+
+                <p class="cal-sidebar-subtitle">
+                    Events and announcements published by authorised school staff.
+                </p>
+
+                <div class="cal-legend">
+                    <div class="cal-legend-item">
+                        <span class="cal-legend-dot" style="--dot-color:#B94747"></span>
+                        Examinations
+                    </div>
+
+                    <div class="cal-legend-item">
+                        <span class="cal-legend-dot" style="--dot-color:#3C7A63"></span>
+                        Holidays
+                    </div>
+
+                    <div class="cal-legend-item">
+                        <span class="cal-legend-dot" style="--dot-color:#4877A8"></span>
+                        School Activities
+                    </div>
+
+                    <div class="cal-legend-item">
+                        <span class="cal-legend-dot" style="--dot-color:#C5A45A"></span>
+                        Meetings & Other Events
+                    </div>
+                </div>
+
+                <h3 class="cal-upcoming-heading" id="calEventsHeading">
+                    Upcoming Events
+                </h3>
+
+                <div class="cal-event-list" id="calEventList" aria-live="polite"></div>
+
+            </aside>
 
         </div>
 
-
-        <!-- =========================================
-             GALLERY GRID
-
-             Replace each placeholder with your real photo.
-
-             Example:
-             <img src="/images/gallery/campus.jpg"
-                  alt="St. Martin's school campus"
-                  class="gallery-image">
-        ========================================= -->
-
-        <section class="gallery-section" aria-label="School photo gallery">
-
-            <div class="gallery-grid">
-
-                <!-- CAMPUS -->
-
-                <article class="gallery-card large" data-category="campus">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-school" aria-hidden="true"></i>
-                            <strong>ADD CAMPUS PHOTO</strong>
-                            <small>/images/story-image.png</small>
-                        </div>
-                    </div>
-
-                    <!-- To display a photo, replace the placeholder above with:
-                    <img src="/images/story-image.png"
-                         alt="St. Martin's High School campus"
-                         class="gallery-image">
-                    -->
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Campus</span>
-                        <h3>Our School Campus</h3>
-                        <p>
-                            A welcoming environment designed for learning,
-                            growth and discovery.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <!-- SPORTS -->
-
-                <article class="gallery-card" data-category="sports">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-futbol" aria-hidden="true"></i>
-                            <strong>ADD SPORTS PHOTO</strong>
-                            <small>/images/gallery/sports.jpg</small>
-                        </div>
-                    </div>
-
-                    <!-- Replace the placeholder with your sports image. -->
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Sports</span>
-                        <h3>Sports &amp; Athletics</h3>
-                        <p>
-                            Building teamwork, discipline and confidence.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <!-- ACADEMICS -->
-
-                <article class="gallery-card" data-category="academics">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-book-open" aria-hidden="true"></i>
-                            <strong>ADD CLASSROOM PHOTO</strong>
-                            <small>/images/gallery/classroom.jpg</small>
-                        </div>
-                    </div>
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Academics</span>
-                        <h3>Learning Spaces</h3>
-                        <p>
-                            Classrooms that encourage curiosity and participation.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <!-- EVENTS -->
-
-                <article class="gallery-card" data-category="events">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-calendar-days" aria-hidden="true"></i>
-                            <strong>ADD EVENT PHOTO</strong>
-                            <small>/images/gallery/events.jpg</small>
-                        </div>
-                    </div>
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Events</span>
-                        <h3>School Celebrations</h3>
-                        <p>
-                            Important occasions and memorable celebrations.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <!-- STUDENT LIFE -->
-
-                <article class="gallery-card large" data-category="student-life">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-users" aria-hidden="true"></i>
-                            <strong>ADD STUDENT LIFE PHOTO</strong>
-                            <small>/images/gallery/student-life.jpg</small>
-                        </div>
-                    </div>
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Student Life</span>
-                        <h3>Life Beyond the Classroom</h3>
-                        <p>
-                            Experiences that help students discover their
-                            interests, talents and potential.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <!-- FACILITIES -->
-
-                <article class="gallery-card" data-category="campus">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-building" aria-hidden="true"></i>
-                            <strong>ADD FACILITY PHOTO</strong>
-                            <small>/images/gallery/facilities.jpg</small>
-                        </div>
-                    </div>
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Campus</span>
-                        <h3>School Facilities</h3>
-                        <p>
-                            Purpose-built spaces supporting modern education.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <!-- CULTURAL ACTIVITIES -->
-
-                <article class="gallery-card" data-category="events">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-masks-theater" aria-hidden="true"></i>
-                            <strong>ADD CULTURAL PHOTO</strong>
-                            <small>/images/gallery/cultural.jpg</small>
-                        </div>
-                    </div>
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Events</span>
-                        <h3>Cultural Activities</h3>
-                        <p>
-                            Celebrating creativity, expression and talent.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <!-- STUDENT ACTIVITIES -->
-
-                <article class="gallery-card" data-category="student-life">
-
-                    <div class="gallery-placeholder">
-                        <div>
-                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                            <strong>ADD ACTIVITY PHOTO</strong>
-                            <small>/images/gallery/activities.jpg</small>
-                        </div>
-                    </div>
-
-                    <div class="gallery-overlay">
-                        <span class="gallery-category">Student Life</span>
-                        <h3>Student Activities</h3>
-                        <p>
-                            Opportunities to explore interests beyond academics.
-                        </p>
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================================
-             GALLERY DETAILS
-        ========================================= -->
-
-        <section class="gallery-details">
-
-            <div class="gallery-details-container">
-
-                <div class="gallery-details-heading">
-
-                    <span class="gallery-section-eyebrow">
-                        More Than a Photograph
-                    </span>
-
-                    <h2>A School Full of Experiences</h2>
-
-                    <div class="gallery-gold-rule"></div>
-
-                </div>
-
-                <div class="row g-4">
-
-                    <!-- ACADEMIC LIFE -->
-
-                    <div class="col-lg-4 col-md-6">
-
-                        <div class="gallery-detail-box">
-
-                            <div class="gallery-detail-icon">
-                                <i class="fas fa-graduation-cap"
-                                    aria-hidden="true"></i>
-                            </div>
-
-                            <h3>Academic Life</h3>
-
-                            <p>
-                                Our classrooms and learning spaces encourage
-                                students to ask questions, develop knowledge
-                                and build the confidence required for lifelong
-                                learning.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- SPORTS -->
-
-                    <div class="col-lg-4 col-md-6">
-
-                        <div class="gallery-detail-box">
-
-                            <div class="gallery-detail-icon">
-                                <i class="fas fa-trophy"
-                                    aria-hidden="true"></i>
-                            </div>
-
-                            <h3>Sports &amp; Activities</h3>
-
-                            <p>
-                                Sports and co-curricular activities give
-                                students opportunities to develop discipline,
-                                teamwork, leadership and resilience.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- COMMUNITY -->
-
-                    <div class="col-lg-4 col-md-6">
-
-                        <div class="gallery-detail-box">
-
-                            <div class="gallery-detail-icon">
-                                <i class="fas fa-heart"
-                                    aria-hidden="true"></i>
-                            </div>
-
-                            <h3>Community</h3>
-
-                            <p>
-                                School life is built around relationships,
-                                participation and a strong sense of belonging
-                                among students, teachers and families.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================================
-             CALL TO ACTION
-        ========================================= -->
-
-        <section class="gallery-cta">
-
-            <h2>Discover St. Martin's</h2>
-
-            <p>
-                Explore our school, learn about our academic approach
-                and discover the environment in which our students grow.
-            </p>
-
-            <a href="/about" class="gallery-cta-button">
-                Discover Our School
-                <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
-            </a>
-
-        </section>
-
-
-        <!-- =========================================
-             FOOTER
-
-             This retains the original Gallery footer.
-             If your project uses a shared global footer,
-             replace this entire footer with:
-             <%- include('partials/footer') %>
-        ========================================= -->
-
-        <footer class="gallery-page-footer">
-
-            <div class="gallery-footer-container">
-
-                <div class="row g-5">
-
-                    <!-- SCHOOL INFORMATION -->
-
-                    <div class="col-lg-5">
-
-                        <img
-                            src="/images/Logo.png"
-                            alt="St. Martin's High School logo"
-                            class="gallery-footer-logo"
-                            onerror="this.style.display='none';">
-
-                        <h2 class="gallery-footer-school-name">
-                            St. Martin's High School
-                        </h2>
-
-                        <p class="gallery-footer-description">
-                            A school committed to academic excellence,
-                            character development and the holistic growth
-                            of every student.
-                        </p>
-
-                    </div>
-
-
-                    <!-- QUICK LINKS -->
-
-                    <div class="col-lg-3 col-md-6">
-
-                        <h3 class="gallery-footer-title">
-                            Quick Links
-                        </h3>
-
-                        <ul class="gallery-footer-links">
-
-                            <li>
-                                <a href="/">Home</a>
-                            </li>
-
-                            <li>
-                                <a href="/about">About the School</a>
-                            </li>
-
-                            <li>
-                                <a href="/academics">Academics</a>
-                            </li>
-
-                            <li>
-                                <a href="/admissions">Admissions</a>
-                            </li>
-
-                            <li>
-                                <a href="/gallery">Gallery</a>
-                            </li>
-
-                            <li>
-                                <a href="/contact">Contact Us</a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <!-- CONTACT INFORMATION -->
-
-                    <div class="col-lg-4 col-md-6">
-
-                        <h3 class="gallery-footer-title">
-                            Contact
-                        </h3>
-
-                        <div class="gallery-footer-contact">
-
-                            <div>
-                                <i class="fas fa-location-dot"
-                                    aria-hidden="true"></i>
-                                Balanagar, Hyderabad, Telangana
-                            </div>
-
-                            <div>
-                                <i class="fas fa-phone"
-                                    aria-hidden="true"></i>
-                                040 - 4020 4839
-                            </div>
-
-                            <div>
-                                <i class="fas fa-envelope"
-                                    aria-hidden="true"></i>
-                                St. Martin's High School
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- FOOTER BOTTOM -->
-
-                <div class="gallery-footer-bottom">
-
-                    <span>
-                        &copy; <span id="currentYear"></span>
-                        St. Martin's High School. All Rights Reserved.
-                    </span>
-
-                    <span>
-                        Balanagar &bull; Hyderabad
-                    </span>
-
-                </div>
-
-            </div>
-
-        </footer>
-
-    </div>
-
-
-    <!-- BOOTSTRAP JAVASCRIPT -->
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
-    </script>
-
-
-    <!-- GALLERY FILTER SCRIPT -->
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const buttons = document.querySelectorAll(".gallery-filter-btn");
-            const cards = document.querySelectorAll(".gallery-card");
-
-            buttons.forEach(function (button) {
-
-                button.addEventListener("click", function () {
-
-                    buttons.forEach(function (btn) {
-                        btn.classList.remove("active");
-                        btn.setAttribute("aria-pressed", "false");
-                    });
-
-                    this.classList.add("active");
-                    this.setAttribute("aria-pressed", "true");
-
-                    const filter = this.getAttribute("data-filter");
-
-                    cards.forEach(function (card) {
-
-                        const category = card.getAttribute("data-category");
-
-                        if (filter === "all" || category === filter) {
-                            card.hidden = false;
-                        } else {
-                            card.hidden = true;
-                        }
-
-                    });
-
-                });
-
-            });
-
-
-            // AUTOMATIC COPYRIGHT YEAR
-
-            const yearElement = document.getElementById("currentYear");
-
-            if (yearElement) {
-                yearElement.textContent = new Date().getFullYear();
+        <div class="cal-status">
+            <strong>Calendar information:</strong>
+            Dates and events displayed here are based on the information
+            published by the school. Please confirm important schedule
+            changes with the school office.
+        </div>
+
+    </section>
+
+</main>
+
+<!-- GLOBAL FOOTER: shared across the website -->
+<%- include('partials/footer') %>
+
+<script>
+(() => {
+    "use strict";
+
+    /*
+      The /calendar route should pass an array named "events".
+
+      Supported event fields:
+      title, event_date (or date), category, description,
+      start_time, end_time and location.
+    */
+
+    const rawEvents = <%- JSON.stringify(
+        typeof events !== "undefined" && Array.isArray(events) ? events : []
+    ).replace(/</g, "\\u003c") %>;
+
+    const palette = {
+        exam: {
+            color: "#B94747",
+            background: "#F9E9E7"
+        },
+        holiday: {
+            color: "#3C7A63",
+            background: "#E7F2EC"
+        },
+        activity: {
+            color: "#4877A8",
+            background: "#E8EFF8"
+        },
+        other: {
+            color: "#B28B3F",
+            background: "#F4EBD8"
+        }
+    };
+
+    function safeText(value) {
+        return String(value ?? "");
+    }
+
+    function escapeHtml(value) {
+        return safeText(value).replace(/[&<>"']/g, character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        })[character]);
+    }
+
+    function eventCategory(event) {
+        const category = safeText(event.category).toLowerCase();
+
+        if (category.includes("exam") || category.includes("test")) {
+            return "exam";
+        }
+
+        if (
+            category.includes("holiday") ||
+            category.includes("vacation")
+        ) {
+            return "holiday";
+        }
+
+        if (
+            category.includes("activity") ||
+            category.includes("sports") ||
+            category.includes("celebration") ||
+            category.includes("cultural")
+        ) {
+            return "activity";
+        }
+
+        return "other";
+    }
+
+    function localDateKey(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
+    function normaliseDate(value) {
+        if (!value) return "";
+
+        const input = String(value);
+        const match = input.match(/^(\d{4})-(\d{2})-(\d{2})(?:$|T|\s)/);
+
+        if (match) {
+            const year = Number(match[1]);
+            const month = Number(match[2]);
+            const day = Number(match[3]);
+            const checkDate = new Date(year, month - 1, day);
+
+            if (
+                checkDate.getFullYear() !== year ||
+                checkDate.getMonth() !== month - 1 ||
+                checkDate.getDate() !== day
+            ) {
+                return "";
             }
 
-        });
-    </script>
+            return `${match[1]}-${match[2]}-${match[3]}`;
+        }
 
+        const parsed = new Date(value);
 
-    <!-- GLOBAL PREMIUM EFFECTS -->
+        if (Number.isNaN(parsed.getTime())) return "";
 
-    <script src="/js/premium-effects.js"></script>
+        return localDateKey(parsed);
+    }
+
+    const events = rawEvents
+        .filter(event =>
+            event &&
+            event.title &&
+            normaliseDate(event.event_date || event.date)
+        )
+        .map((event, index) => ({
+            ...event,
+            _id: event.id ?? index,
+            _date: normaliseDate(event.event_date || event.date),
+            _category: eventCategory(event)
+        }))
+        .sort((a, b) => a._date.localeCompare(b._date));
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let visibleMonth = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+    );
+
+    let selectedDate = localDateKey(today);
+    let showingUpcoming = true;
+
+    const grid = document.getElementById("calGrid");
+    const heading = document.getElementById("calMonthHeading");
+    const eventList = document.getElementById("calEventList");
+    const eventsHeading = document.getElementById("calEventsHeading");
+
+    const monthFormatter = new Intl.DateTimeFormat("en-IN", {
+        month: "long",
+        year: "numeric"
+    });
+
+    const dateFormatter = new Intl.DateTimeFormat("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    });
+
+    function eventsForDate(dateKey) {
+        return events.filter(event => event._date === dateKey);
+    }
+
+    function makeEventChip(event) {
+        const style = palette[event._category];
+
+        return `
+            <span class="cal-event-chip"
+                  style="--event-color:${style.color};--event-bg:${style.background}"
+                  title="${escapeHtml(event.title)}">
+                ${escapeHtml(event.title)}
+            </span>
+        `;
+    }
+
+    function renderCalendar() {
+        heading.textContent = monthFormatter.format(visibleMonth);
+        grid.innerHTML = "";
+
+        const year = visibleMonth.getFullYear();
+        const month = visibleMonth.getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const previousMonthDays = new Date(year, month, 0).getDate();
+
+        for (let cell = 0; cell < 42; cell++) {
+            let date;
+            let outside = false;
+
+            if (cell < firstDay) {
+                date = new Date(
+                    year,
+                    month - 1,
+                    previousMonthDays - firstDay + cell + 1
+                );
+                outside = true;
+            } else if (cell >= firstDay + daysInMonth) {
+                date = new Date(
+                    year,
+                    month + 1,
+                    cell - firstDay - daysInMonth + 1
+                );
+                outside = true;
+            } else {
+                date = new Date(year, month, cell - firstDay + 1);
+            }
+
+            const key = localDateKey(date);
+            const dayEvents = eventsForDate(key);
+            const dayButton = document.createElement("button");
+
+            dayButton.type = "button";
+            dayButton.className = "cal-day";
+
+            if (outside) {
+                dayButton.classList.add("is-outside");
+            }
+
+            if (key === localDateKey(today)) {
+                dayButton.classList.add("is-today");
+            }
+
+            if (key === selectedDate) {
+                dayButton.classList.add("is-selected");
+            }
+
+            dayButton.setAttribute(
+                "aria-label",
+                `${dateFormatter.format(date)}${dayEvents.length ? `, ${dayEvents.length} event(s)` : ""}`
+            );
+
+            dayButton.setAttribute(
+                "aria-pressed",
+                key === selectedDate ? "true" : "false"
+            );
+
+            let chips = dayEvents
+                .slice(0, 2)
+                .map(makeEventChip)
+                .join("");
+
+            if (dayEvents.length > 2) {
+                chips += `
+                    <span class="cal-more">
+                        +${dayEvents.length - 2} more
+                    </span>
+                `;
+            }
+
+            dayButton.innerHTML = `
+                <span class="cal-day-number">${date.getDate()}</span>
+                ${chips}
+            `;
+
+            dayButton.addEventListener("click", () => {
+                selectedDate = key;
+                showingUpcoming = false;
+
+                renderCalendar();
+                renderSelectedDateEvents();
+            });
+
+            grid.appendChild(dayButton);
+        }
+    }
+
+    function renderEventCard(event) {
+        const style = palette[event._category];
+        const timeParts = [];
+
+        if (event.start_time) {
+            timeParts.push(safeText(event.start_time));
+        }
+
+        if (event.end_time) {
+            timeParts.push(safeText(event.end_time));
+        }
+
+        const meta = [
+            event.category,
+            timeParts.length ? timeParts.join(" – ") : "",
+            event.location || ""
+        ]
+            .filter(Boolean)
+            .map(escapeHtml)
+            .join(" · ");
+
+        const eventDate = new Date(`${event._date}T12:00:00`);
+
+        return `
+            <article class="cal-event-item"
+                     style="--event-color:${style.color}">
+                <div class="cal-event-date">
+                    ${escapeHtml(dateFormatter.format(eventDate))}
+                </div>
+
+                <h4 class="cal-event-title">
+                    ${escapeHtml(event.title)}
+                </h4>
+
+                ${
+                    event.description
+                        ? `<p class="cal-event-description">${escapeHtml(event.description)}</p>`
+                        : ""
+                }
+
+                ${
+                    meta
+                        ? `<div class="cal-event-meta">${meta}</div>`
+                        : ""
+                }
+            </article>
+        `;
+    }
+
+    function renderSelectedDateEvents() {
+        const selectedEvents = eventsForDate(selectedDate);
+        const date = new Date(`${selectedDate}T12:00:00`);
+
+        eventsHeading.textContent = dateFormatter.format(date);
+
+        if (!selectedEvents.length) {
+            eventList.innerHTML = `
+                <div class="cal-empty">
+                    <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                    No events have been published for this date.
+                    Select another day or check the upcoming events.
+                </div>
+            `;
+
+            return;
+        }
+
+        eventList.innerHTML = selectedEvents
+            .map(renderEventCard)
+            .join("");
+    }
+
+    function renderUpcomingEvents() {
+        const todayKey = localDateKey(today);
+
+        const upcoming = events
+            .filter(event => event._date >= todayKey)
+            .slice(0, 5);
+
+        showingUpcoming = true;
+
+        if (!upcoming.length) {
+            eventList.innerHTML = `
+                <div class="cal-empty">
+                    <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+                    No upcoming events have been published yet.
+                </div>
+            `;
+
+            eventsHeading.textContent = "Upcoming Events";
+            return;
+        }
+
+        eventsHeading.textContent = "Upcoming Events";
+
+        eventList.innerHTML = upcoming
+            .map(renderEventCard)
+            .join("");
+    }
+
+    document.getElementById("calPrev").addEventListener("click", () => {
+        visibleMonth = new Date(
+            visibleMonth.getFullYear(),
+            visibleMonth.getMonth() - 1,
+            1
+        );
+
+        renderCalendar();
+    });
+
+    document.getElementById("calNext").addEventListener("click", () => {
+        visibleMonth = new Date(
+            visibleMonth.getFullYear(),
+            visibleMonth.getMonth() + 1,
+            1
+        );
+
+        renderCalendar();
+    });
+
+    document.getElementById("calToday").addEventListener("click", () => {
+        visibleMonth = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            1
+        );
+
+        selectedDate = localDateKey(today);
+
+        renderCalendar();
+        renderSelectedDateEvents();
+    });
+
+    renderCalendar();
+    renderUpcomingEvents();
+})();
+</script>
+
+<script src="/js/script.js" defer></script>
+<script src="/js/premium-effects.js" defer></script>
 
 </body>
-
 </html>
+```
