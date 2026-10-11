@@ -1,175 +1,1310 @@
+```ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover student life, campus activities, school celebrations and achievements at St. Martin's High School, Balanagar, Hyderabad.">
+
+    <meta name="description"
+          content="Discover student life at St. Martin's High School, Balanagar, Hyderabad — sports, creativity, student wellness, academic mentorship and school activities.">
+
     <title>Student Life | St. Martin's High School</title>
+
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="/css/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        .life-page { color:#253247; background:#f8f7f3; min-height:70vh; }
-        .life-hero { padding:90px 24px; color:#fff; text-align:center; background:linear-gradient(120deg,#071a2b,#123d55); }
-        .life-hero .eyebrow { color:#e0c67b; letter-spacing:4px; text-transform:uppercase; font-size:12px; font-weight:700; }
-        .life-hero h1 { margin:16px 0; font-size:clamp(36px,5vw,62px); }
-        .life-hero p { max-width:700px; margin:0 auto; color:#e1e8ef; line-height:1.8; }
-        .life-container { width:min(1150px,92%); margin:auto; padding:60px 0; }
-        .life-section-title { margin-bottom:12px; color:#102b42; font-size:clamp(26px,3vw,38px); }
-        .life-intro { max-width:760px; line-height:1.8; color:#637080; margin-bottom:32px; }
-        .life-highlights { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin:35px 0 65px; }
-        .life-highlight { background:#fff; padding:26px; border:1px solid #e9e4d9; border-radius:12px; }
-        .life-highlight .symbol { font-size:30px; }
-        .life-highlight h3 { color:#102b42; margin:14px 0 9px; }
-        .life-highlight p { color:#66717e; line-height:1.7; margin:0; }
-        .life-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
-        .life-card { background:#fff; border:1px solid #e8e5dd; border-radius:12px; overflow:hidden; }
-        .life-card img { display:block; width:100%; height:210px; object-fit:cover; }
-        .life-card-content { padding:23px; }
-        .life-tag { display:inline-block; padding:6px 10px; border-radius:30px; background:#f3ead4; color:#735c24; font-size:12px; font-weight:700; }
-        .life-card h3 { margin:14px 0 10px; color:#102b42; font-size:21px; }
-        .life-card p { color:#66717e; line-height:1.75; white-space:pre-line; }
-        .life-date { color:#8a7440; font-size:13px; }
-        .life-empty { padding:25px; background:#fff; border:1px dashed #d7d2c7; border-radius:10px; color:#66717e; }
-        .life-button { display:inline-block; padding:13px 23px; background:#c5a45a; color:#071a2b; text-decoration:none; font-weight:700; border-radius:5px; margin-top:18px; }
-        @media(max-width:600px) { .life-hero{padding:65px 20px}.life-container{padding:40px 0} }
+        :root {
+            --life-navy: #071A2B;
+            --life-blue: #102B42;
+            --life-wine: #581722;
+            --life-gold: #C5A45A;
+            --life-gold-light: #E0C67B;
+            --life-ivory: #F6F1E7;
+            --life-white: #FFFFFF;
+            --life-muted: #66717E;
+            --life-border: rgba(7, 26, 43, 0.12);
+        }
+
+        .student-life-page,
+        .student-life-page * {
+            box-sizing: border-box;
+        }
+
+        .student-life-page {
+            font-family: 'Inter', sans-serif;
+            color: var(--life-navy);
+            background: var(--life-ivory);
+            overflow: hidden;
+        }
+
+        .student-life-page img {
+            max-width: 100%;
+        }
+
+        .life-container {
+            width: min(1200px, 91%);
+            margin: 0 auto;
+        }
+
+        /* HERO */
+
+        .life-hero {
+            position: relative;
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            isolation: isolate;
+            overflow: hidden;
+            background: var(--life-navy);
+        }
+
+        .life-hero-photo {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .life-hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.63;
+        }
+
+        .life-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(90deg,
+                    rgba(7, 26, 43, 0.96) 0%,
+                    rgba(7, 26, 43, 0.83) 48%,
+                    rgba(7, 26, 43, 0.28) 100%),
+                linear-gradient(0deg,
+                    rgba(7, 26, 43, 0.42),
+                    transparent 55%);
+        }
+
+        .life-hero-content {
+            width: min(1200px, 91%);
+            margin: 0 auto;
+            padding: 100px 0;
+            color: white;
+        }
+
+        .life-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: var(--life-gold-light);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .life-eyebrow::before {
+            content: "";
+            width: 38px;
+            height: 1px;
+            background: var(--life-gold);
+        }
+
+        .life-hero h1 {
+            max-width: 800px;
+            margin: 25px 0 22px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(52px, 7.5vw, 94px);
+            font-weight: 600;
+            line-height: 0.98;
+            letter-spacing: -1.5px;
+        }
+
+        .life-hero h1 em {
+            color: var(--life-gold-light);
+            font-weight: 500;
+        }
+
+        .life-hero-description {
+            max-width: 650px;
+            color: rgba(255,255,255,0.85);
+            font-size: 15px;
+            line-height: 1.95;
+        }
+
+        .life-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 32px;
+        }
+
+        .life-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 48px;
+            padding: 13px 22px;
+            border: 1px solid var(--life-gold);
+            border-radius: 3px;
+            background: var(--life-gold);
+            color: var(--life-navy);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            transition: transform .25s ease, background .25s ease;
+        }
+
+        .life-button:hover {
+            transform: translateY(-3px);
+            background: var(--life-gold-light);
+        }
+
+        .life-button-outline {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.55);
+        }
+
+        .life-button-outline:hover {
+            color: var(--life-navy);
+            border-color: var(--life-gold);
+        }
+
+        /* INTRODUCTION */
+
+        .life-introduction {
+            padding: 100px 0 85px;
+            background: var(--life-ivory);
+        }
+
+        .life-intro-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 75px;
+            align-items: center;
+        }
+
+        .life-section-label {
+            color: #91753B;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .life-section-title {
+            margin: 16px 0 22px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(37px, 4.4vw, 59px);
+            font-weight: 600;
+            line-height: 1.08;
+            color: var(--life-navy);
+        }
+
+        .life-section-title em {
+            color: var(--life-wine);
+            font-weight: 500;
+        }
+
+        .life-copy {
+            color: var(--life-muted);
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .life-intro-photo {
+            position: relative;
+            min-height: 420px;
+        }
+
+        .life-intro-photo img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+
+        .life-photo-caption {
+            position: absolute;
+            bottom: -18px;
+            left: -22px;
+            max-width: 250px;
+            padding: 22px 25px;
+            background: var(--life-navy);
+            color: white;
+            box-shadow: 0 12px 35px rgba(7,26,43,0.15);
+        }
+
+        .life-photo-caption strong {
+            display: block;
+            color: var(--life-gold-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .life-photo-caption span {
+            font-size: 11px;
+            line-height: 1.7;
+            color: rgba(255,255,255,.78);
+        }
+
+        /* VALUES STRIP */
+
+        .life-values {
+            padding: 36px 0;
+            background: var(--life-navy);
+            color: white;
+        }
+
+        .life-values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .life-value {
+            padding: 8px 20px;
+            border-left: 1px solid rgba(224,198,123,.45);
+        }
+
+        .life-value:first-child {
+            border-left: 0;
+        }
+
+        .life-value strong {
+            display: block;
+            margin-bottom: 7px;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--life-gold-light);
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .life-value span {
+            color: rgba(255,255,255,.76);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* ACTIVITY SECTIONS */
+
+        .life-activities {
+            padding: 95px 0;
+            background: white;
+        }
+
+        .life-section-header {
+            max-width: 750px;
+            margin-bottom: 44px;
+        }
+
+        .life-section-header .life-copy {
+            max-width: 670px;
+        }
+
+        .life-activity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 24px;
+        }
+
+        .life-activity-card {
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--life-border);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .life-activity-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 42px rgba(7,26,43,.09);
+        }
+
+        .life-activity-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: #d9d7cf;
+        }
+
+        .life-activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s ease;
+        }
+
+        .life-activity-card:hover .life-activity-image img {
+            transform: scale(1.05);
+        }
+
+        .life-activity-content {
+            padding: 27px 25px 30px;
+        }
+
+        .life-activity-number {
+            color: #9a7b3b;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .life-activity-content h3 {
+            margin: 12px 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--life-navy);
+        }
+
+        .life-activity-content p {
+            margin: 0;
+            color: var(--life-muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        /* WELLNESS */
+
+        .life-wellness {
+            padding: 95px 0;
+            background: var(--life-ivory);
+        }
+
+        .life-wellness-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 75px;
+            align-items: center;
+        }
+
+        .life-wellness-image {
+            min-height: 480px;
+            overflow: hidden;
+            background: #d8d4ca;
+        }
+
+        .life-wellness-image img {
+            width: 100%;
+            height: 100%;
+            min-height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .life-check-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .life-check-list li {
+            display: flex;
+            gap: 13px;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(7,26,43,.1);
+            color: #435365;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .life-check-list li::before {
+            content: "✓";
+            flex-shrink: 0;
+            color: #8b6c2e;
+            font-weight: 700;
+        }
+
+        /* SPORTS */
+
+        .life-sports {
+            padding: 95px 0;
+            background: var(--life-navy);
+            color: white;
+        }
+
+        .life-sports .life-section-title {
+            color: white;
+        }
+
+        .life-sports .life-copy {
+            color: rgba(255,255,255,.74);
+        }
+
+        .life-sports-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 65px;
+            align-items: center;
+        }
+
+        .life-sports-photo {
+            height: 480px;
+            overflow: hidden;
+            background: #1a3446;
+        }
+
+        .life-sports-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .life-sports-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .life-sports-list span {
+            padding: 10px 13px;
+            border: 1px solid rgba(224,198,123,.35);
+            color: #f3e6c4;
+            font-size: 12px;
+        }
+
+        .life-quote {
+            margin-top: 28px;
+            padding-left: 20px;
+            border-left: 2px solid var(--life-gold);
+            color: var(--life-gold-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 25px;
+            line-height: 1.45;
+        }
+
+        /* MENTORSHIP */
+
+        .life-mentorship {
+            padding: 95px 0;
+            background: white;
+        }
+
+        .life-mentorship-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .life-mentorship-image {
+            height: 430px;
+            overflow: hidden;
+            background: #e3dfd6;
+        }
+
+        .life-mentorship-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* NEWS AND EVENTS */
+
+        .life-school-updates {
+            padding: 90px 0;
+            background: #f5f0e6;
+        }
+
+        .life-updates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 22px;
+        }
+
+        .life-update-card {
+            padding: 25px;
+            background: white;
+            border: 1px solid var(--life-border);
+        }
+
+        .life-update-label {
+            display: inline-block;
+            padding: 6px 10px;
+            background: #f4ead1;
+            color: #755d28;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .life-update-card h3 {
+            margin: 17px 0 10px;
+            color: var(--life-navy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 27px;
+            line-height: 1.15;
+        }
+
+        .life-update-card p {
+            color: var(--life-muted);
+            font-size: 13px;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .life-update-date {
+            margin-top: 15px;
+            color: #91753b;
+            font-size: 11px;
+        }
+
+        .life-empty {
+            padding: 25px;
+            border: 1px dashed #d3c9b6;
+            background: rgba(255,255,255,.7);
+            color: var(--life-muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* FINAL CTA */
+
+        .life-final-cta {
+            padding: 85px 20px;
+            background: var(--life-wine);
+            color: white;
+            text-align: center;
+        }
+
+        .life-final-cta .life-section-title {
+            color: white;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .life-final-cta p {
+            max-width: 660px;
+            margin: 0 auto;
+            color: rgba(255,255,255,.8);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .life-final-cta .life-button {
+            margin-top: 28px;
+        }
+
+        /* REVEAL EFFECT */
+
+        .life-reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .life-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .life-reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            .life-activity-card,
+            .life-activity-image img {
+                transition: none;
+            }
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .life-intro-grid,
+            .life-wellness-grid,
+            .life-sports-layout,
+            .life-mentorship-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .life-activity-grid,
+            .life-updates-grid {
+                grid-template-columns: repeat(2, minmax(0,1fr));
+            }
+
+            .life-values-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .life-intro-photo {
+                min-height: 380px;
+            }
+
+            .life-photo-caption {
+                left: 12px;
+            }
+
+            .life-sports-photo {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .life-hero {
+                min-height: 510px;
+            }
+
+            .life-hero-content {
+                padding: 75px 0;
+            }
+
+            .life-hero h1 {
+                font-size: 54px;
+            }
+
+            .life-introduction,
+            .life-activities,
+            .life-wellness,
+            .life-sports,
+            .life-mentorship,
+            .life-school-updates {
+                padding: 62px 0;
+            }
+
+            .life-activity-grid,
+            .life-updates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .life-values-grid {
+                gap: 22px 12px;
+            }
+
+            .life-value {
+                padding-left: 12px;
+            }
+
+            .life-value strong {
+                font-size: 22px;
+            }
+
+            .life-intro-photo {
+                min-height: 310px;
+            }
+
+            .life-wellness-image,
+            .life-wellness-image img {
+                min-height: 330px;
+            }
+
+            .life-sports-photo {
+                height: 320px;
+            }
+
+            .life-mentorship-image {
+                height: 320px;
+            }
+
+            .life-hero-actions {
+                align-items: stretch;
+                flex-direction: column;
+                max-width: 260px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
 <%- include('partials/header') %>
 
 <%
-    const pageUpdates = typeof updates !== 'undefined' && Array.isArray(updates) ? updates : [];
-    const pageEvents = typeof events !== 'undefined' && Array.isArray(events) ? events : [];
+    const pageUpdates =
+        typeof updates !== 'undefined' && Array.isArray(updates)
+            ? updates
+            : [];
+
+    const pageEvents =
+        typeof events !== 'undefined' && Array.isArray(events)
+            ? events
+            : [];
 %>
 
-<main class="life-page">
+<main class="student-life-page">
+
+    <!-- HERO -->
     <section class="life-hero">
-        <div class="eyebrow">Beyond the Classroom</div>
-        <h1>Discover Student Life</h1>
-        <p>
-            Every school day is an opportunity to learn, participate,
-            build friendships and discover new possibilities at
-            St. Martin's High School, Balanagar.
-        </p>
+        <div class="life-hero-photo">
+            <img
+                src="https://stmartinshighschool.in/public/assets/images/Legacy.png"
+                alt="St. Martin's High School campus"
+                fetchpriority="high"
+                onerror="this.style.display='none';"
+            >
+        </div>
+
+        <div class="life-hero-content">
+            <div class="life-eyebrow">Life at St. Martin's</div>
+
+            <h1>
+                Where learning<br>
+                becomes <em>experience.</em>
+            </h1>
+
+            <p class="life-hero-description">
+                At St. Martin's High School, learning doesn't end when the
+                bell rings. It continues on the playground, in the art room,
+                on stage, and in the moments where friendships are built
+                and confidence is discovered.
+            </p>
+
+            <div class="life-hero-actions">
+                <a href="#student-experiences" class="life-button">
+                    EXPLORE STUDENT LIFE
+                </a>
+
+                <a href="/gallery" class="life-button life-button-outline">
+                    VIEW SCHOOL GALLERY
+                </a>
+            </div>
+        </div>
     </section>
 
-    <div class="life-container">
-        <section>
-            <h2 class="life-section-title">A Journey of Learning and Growth</h2>
-            <p class="life-intro">
-                We believe education extends beyond textbooks. School activities,
-                celebrations, collaborative learning and responsible participation
-                help students develop confidence, creativity and character.
-            </p>
+    <!-- INTRODUCTION -->
+    <section class="life-introduction">
+        <div class="life-container life-intro-grid">
+            <div class="life-reveal">
+                <div class="life-section-label">The St. Martin's Experience</div>
 
-            <div class="life-highlights">
-                <article class="life-highlight">
-                    <div class="symbol">📚</div>
-                    <h3>Learning Together</h3>
-                    <p>Classroom activities encourage curiosity, communication and a lifelong love of learning.</p>
-                </article>
-                <article class="life-highlight">
-                    <div class="symbol">🏆</div>
-                    <h3>Activities & Achievement</h3>
-                    <p>Students are encouraged to explore their interests, practise their skills and celebrate progress.</p>
-                </article>
-                <article class="life-highlight">
-                    <div class="symbol">🎨</div>
-                    <h3>Creativity & Expression</h3>
-                    <p>Creative activities give students opportunities to express ideas and develop individual talents.</p>
-                </article>
-                <article class="life-highlight">
-                    <div class="symbol">🤝</div>
-                    <h3>Values & Community</h3>
-                    <p>Respect, teamwork, responsibility and kindness are important parts of school life.</p>
-                </article>
+                <h2 class="life-section-title">
+                    Every child has<br>
+                    a place to <em>shine.</em>
+                </h2>
+
+                <p class="life-copy">
+                    We believe that a child grows best when academics,
+                    creativity, fitness and emotional well-being work
+                    together in harmony.
+                </p>
+
+                <p class="life-copy">
+                    Our school experience encourages students to discover
+                    their strengths, develop meaningful friendships, respect
+                    others and build the confidence to take on new challenges.
+                    Every space has a purpose. Every experience is an
+                    opportunity to grow.
+                </p>
+
+                <a href="/academics" class="life-button">
+                    DISCOVER OUR ACADEMICS
+                </a>
             </div>
-        </section>
 
-        <section>
-            <h2 class="life-section-title">Student Life News & Announcements</h2>
-            <p class="life-intro">
-                Stay informed about school announcements and activities approved for publication.
-            </p>
+            <div class="life-intro-photo life-reveal">
+                <img
+                    src="https://stmartinshighschool.in/public/assets/images/classroom.png"
+                    alt="Learning and classroom experiences at St. Martin's"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                >
+
+                <div class="life-photo-caption">
+                    <strong>Learn. Grow. Belong.</strong>
+                    <span>A school experience shaped by learning, values and discovery.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="life-values">
+        <div class="life-container life-values-grid">
+            <div class="life-value">
+                <strong>Curiosity</strong>
+                <span>Ask questions, explore ideas and discover new possibilities.</span>
+            </div>
+
+            <div class="life-value">
+                <strong>Creativity</strong>
+                <span>Express ideas through arts, activities and independent thinking.</span>
+            </div>
+
+            <div class="life-value">
+                <strong>Character</strong>
+                <span>Practise respect, honesty, kindness and responsibility.</span>
+            </div>
+
+            <div class="life-value">
+                <strong>Community</strong>
+                <span>Build friendships and learn the value of working together.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDENT EXPERIENCES -->
+    <section class="life-activities" id="student-experiences">
+        <div class="life-container">
+            <div class="life-section-header life-reveal">
+                <div class="life-section-label">Discover Your Potential</div>
+
+                <h2 class="life-section-title">
+                    More than a classroom.<br>
+                    A world of <em>possibilities.</em>
+                </h2>
+
+                <p class="life-copy">
+                    A well-rounded school experience gives children opportunities
+                    to develop academic skills, creativity, physical fitness
+                    and confidence through different kinds of learning.
+                </p>
+            </div>
+
+            <div class="life-activity-grid">
+
+                <article class="life-activity-card life-reveal">
+                    <div class="life-activity-image">
+                        <img
+                            src="https://stmartinshighschool.in/public/assets/images/library.png"
+                            alt="Library and reading"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                        >
+                    </div>
+
+                    <div class="life-activity-content">
+                        <div class="life-activity-number">01 / LEARNING</div>
+                        <h3>A Culture of Discovery</h3>
+                        <p>
+                            Reading, research, classroom discussions and
+                            independent exploration help students develop
+                            curiosity, understanding and a lasting interest
+                            in learning.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="life-activity-card life-reveal">
+                    <div class="life-activity-image">
+                        <img
+                            src="https://stmartinshighschool.in/public/assets/images/skating.png"
+                            alt="Students' skating and physical activities"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                        >
+                    </div>
+
+                    <div class="life-activity-content">
+                        <div class="life-activity-number">02 / MOVEMENT</div>
+                        <h3>Sports & Physical Education</h3>
+                        <p>
+                            Physical activities encourage fitness, coordination,
+                            perseverance and teamwork while teaching students
+                            the value of practice and fair play.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="life-activity-card life-reveal">
+                    <div class="life-activity-image">
+                        <img
+                            src="https://stmartinshighschool.in/public/assets/images/laboratory.png"
+                            alt="Practical science learning"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                        >
+                    </div>
+
+                    <div class="life-activity-content">
+                        <div class="life-activity-number">03 / EXPLORATION</div>
+                        <h3>Learning by Doing</h3>
+                        <p>
+                            Practical activities and guided exploration help
+                            students connect classroom concepts with real-world
+                            questions and develop problem-solving skills.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="life-activity-card life-reveal">
+                    <div class="life-activity-image">
+                        <img
+                            src="https://stmartinshighschool.in/public/assets/images/computerlab.png"
+                            alt="Digital learning and computer education"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                        >
+                    </div>
+
+                    <div class="life-activity-content">
+                        <div class="life-activity-number">04 / INNOVATION</div>
+                        <h3>Digital Exploration</h3>
+                        <p>
+                            Technology-supported learning helps students
+                            practise digital skills, investigate information
+                            and engage with new ways of understanding ideas.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="life-activity-card life-reveal">
+                    <div class="life-activity-image">
+                        <img
+                            src="https://stmartinshighschool.in/public/assets/images/dance.png"
+                            alt="Creative expression through dance and performing arts"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                        >
+                    </div>
+
+                    <div class="life-activity-content">
+                        <div class="life-activity-number">05 / EXPRESSION</div>
+                        <h3>Arts, Music & Expression</h3>
+                        <p>
+                            Creative activities offer students ways to express
+                            themselves, appreciate different forms of art
+                            and develop confidence in sharing their talents.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="life-activity-card life-reveal">
+                    <div class="life-activity-image">
+                        <img
+                            src="https://stmartinshighschool.in/public/assets/images/Legacy.png"
+                            alt="St. Martin's High School and its learning community"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="life-activity-content">
+                        <div class="life-activity-number">06 / COMMUNITY</div>
+                        <h3>Friendship & Belonging</h3>
+                        <p>
+                            Shared activities, classroom collaboration and
+                            school celebrations help students build positive
+                            relationships and learn to value one another.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- WELLNESS -->
+    <section class="life-wellness">
+        <div class="life-container life-wellness-grid">
+            <div class="life-wellness-image life-reveal">
+                <img
+                    src="https://stmartinshighschool.in/public/assets/images/Legacy.png"
+                    alt="School environment at St. Martin's High School"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="life-reveal">
+                <div class="life-section-label">Physical & Emotional Wellness</div>
+
+                <h2 class="life-section-title">
+                    A safe and caring<br>
+                    environment to <em>grow.</em>
+                </h2>
+
+                <p class="life-copy">
+                    Children learn best when they feel secure, supported
+                    and respected. Positive relationships and a caring
+                    school environment help students develop confidence
+                    and a healthy approach to challenges.
+                </p>
+
+                <ul class="life-check-list">
+                    <li>Emotional resilience and self-awareness</li>
+                    <li>Positive peer relationships and mutual respect</li>
+                    <li>Opportunities for self-expression and participation</li>
+                    <li>Responsible decision-making and personal discipline</li>
+                    <li>Healthy routines and constructive learning habits</li>
+                </ul>
+
+                <p class="life-copy">
+                    Daily interactions, classroom discussions and shared
+                    activities can help children practise empathy, develop
+                    social skills and become thoughtful members of their
+                    community.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPORTS -->
+    <section class="life-sports">
+        <div class="life-container life-sports-layout">
+            <div class="life-reveal">
+                <div class="life-section-label">Sports & Physical Education</div>
+
+                <h2 class="life-section-title">
+                    Strong in body.<br>
+                    Confident in <em>spirit.</em>
+                </h2>
+
+                <p class="life-copy">
+                    Sports are not just activities. They offer opportunities
+                    to practise discipline, teamwork, courage and perseverance.
+                    Physical education also helps children appreciate the
+                    importance of effort, consistency and fair play.
+                </p>
+
+                <p class="life-copy">
+                    Through structured physical training and participation
+                    in different activities, students can develop fitness,
+                    balance, coordination and a stronger sense of teamwork.
+                </p>
+
+                <div class="life-sports-list">
+                    <span>Football</span>
+                    <span>Athletics</span>
+                    <span>Volleyball</span>
+                    <span>Throwball</span>
+                    <span>Badminton</span>
+                    <span>Yoga</span>
+                    <span>Indoor Games</span>
+                    <span>Skating</span>
+                    <span>Mass Drill</span>
+                </div>
+
+                <div class="life-quote">
+                    “A healthy body builds a healthy mind.”
+                </div>
+            </div>
+
+            <div class="life-sports-photo life-reveal">
+                <img
+                    src="https://stmartinshighschool.in/public/assets/images/skating.png"
+                    alt="Sports and physical activity at St. Martin's"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                >
+            </div>
+        </div>
+    </section>
+
+    <!-- ACADEMIC MENTORSHIP -->
+    <section class="life-mentorship">
+        <div class="life-container life-mentorship-grid">
+            <div class="life-reveal">
+                <div class="life-section-label">Academic Mentorship & Guidance</div>
+
+                <h2 class="life-section-title">
+                    Every learner<br>
+                    deserves the chance<br>
+                    to <em>flourish.</em>
+                </h2>
+
+                <p class="life-copy">
+                    Teachers are more than instructors. They guide students
+                    as they discover their strengths, work through challenges
+                    and develop independent thinking.
+                </p>
+
+                <p class="life-copy">
+                    Academic guidance, constructive feedback and collaboration
+                    help students recognise their progress and identify
+                    areas where they can continue to improve.
+                </p>
+
+                <p class="life-copy">
+                    Parents are important partners in this journey. Through
+                    communication and cooperation between home and school,
+                    children receive support as they work towards their
+                    individual potential.
+                </p>
+
+                <a href="/academics" class="life-button">
+                    EXPLORE OUR LEARNING APPROACH
+                </a>
+            </div>
+
+            <div class="life-mentorship-image life-reveal">
+                <img
+                    src="https://stmartinshighschool.in/public/assets/images/classroom.png"
+                    alt="Classroom learning and academic guidance"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='https://stmartinshighschool.in/public/assets/images/Legacy.png';"
+                >
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHOOL NEWS -->
+    <section class="life-school-updates">
+        <div class="life-container">
+            <div class="life-section-header life-reveal">
+                <div class="life-section-label">Life Around Our School</div>
+
+                <h2 class="life-section-title">
+                    Stories, updates &<br>
+                    <em>what's coming next.</em>
+                </h2>
+
+                <p class="life-copy">
+                    Catch up on school announcements and discover upcoming
+                    activities published by the school.
+                </p>
+            </div>
+
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:31px;margin:0 0 22px;">
+                School Announcements
+            </h3>
 
             <% if (pageUpdates.length > 0) { %>
-                <div class="life-grid">
+                <div class="life-updates-grid">
                     <% pageUpdates.forEach(function(item) { %>
-                        <article class="life-card">
-                            <% if (item.image_url) { %>
-                                <img src="<%= item.image_url %>" alt="<%= item.title %>" loading="lazy">
+                        <article class="life-update-card life-reveal">
+                            <span class="life-update-label">
+                                <%= item.category || 'Announcement' %>
+                            </span>
+
+                            <h3><%= item.title %></h3>
+
+                            <p><%= item.description || '' %></p>
+
+                            <% if (item.created_at) { %>
+                                <div class="life-update-date">
+                                    <%= new Date(item.created_at).toLocaleDateString('en-IN', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    }) %>
+                                </div>
                             <% } %>
-                            <div class="life-card-content">
-                                <span class="life-tag"><%= item.category || 'Announcement' %></span>
-                                <h3><%= item.title %></h3>
-                                <p><%= item.description || '' %></p>
-                                <% if (item.created_at) { %>
-                                    <div class="life-date">
-                                        <%= new Date(item.created_at).toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'}) %>
-                                    </div>
-                                <% } %>
-                            </div>
                         </article>
                     <% }); %>
                 </div>
             <% } else { %>
                 <div class="life-empty">
-                    <strong>New updates coming soon.</strong>
-                    <p>School announcements and student activity updates will appear here when published.</p>
+                    School announcements will appear here after they have
+                    been approved for publication.
+                    <br>
+                    <a href="/news">Visit News & Updates →</a>
                 </div>
             <% } %>
-        </section>
 
-        <section style="margin-top:60px">
-            <h2 class="life-section-title">Upcoming School Events</h2>
-            <p class="life-intro">Explore upcoming activities and important dates from the school calendar.</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:31px;margin:55px 0 22px;">
+                Upcoming Events
+            </h3>
 
             <% if (pageEvents.length > 0) { %>
-                <div class="life-grid">
+                <div class="life-updates-grid">
                     <% pageEvents.forEach(function(event) { %>
-                        <article class="life-card">
-                            <div class="life-card-content">
-                                <span class="life-tag"><%= event.category || 'School Event' %></span>
-                                <h3><%= event.title %></h3>
-                                <p><%= event.description || 'More details will be shared by the school.' %></p>
-                                <div class="life-date">
-                                    <strong>Date:</strong>
-                                    <%= event.event_date || event.date || 'To be announced' %>
-                                </div>
-                                <% if (event.start_time) { %>
-                                    <p><strong>Time:</strong> <%= event.start_time %><%= event.end_time ? ' – ' + event.end_time : '' %></p>
-                                <% } %>
-                                <% if (event.location) { %>
-                                    <p><strong>Location:</strong> <%= event.location %></p>
-                                <% } %>
+                        <article class="life-update-card life-reveal">
+                            <span class="life-update-label">
+                                <%= event.category || 'School Event' %>
+                            </span>
+
+                            <h3><%= event.title %></h3>
+
+                            <p><%= event.description || 'Further details will be announced by the school.' %></p>
+
+                            <div class="life-update-date">
+                                Date: <%= event.event_date || event.date || 'To be announced' %>
                             </div>
+
+                            <% if (event.start_time) { %>
+                                <p>
+                                    Time: <%= event.start_time %>
+                                    <%= event.end_time ? ' – ' + event.end_time : '' %>
+                                </p>
+                            <% } %>
+
+                            <% if (event.location) { %>
+                                <p>Venue: <%= event.location %></p>
+                            <% } %>
                         </article>
                     <% }); %>
                 </div>
             <% } else { %>
                 <div class="life-empty">
                     There are no published upcoming events at the moment.
-                    Please check the academic calendar for future updates.
                     <br>
-                    <a class="life-button" href="/calendar">View Academic Calendar</a>
+                    <a href="/calendar">View the Academic Calendar →</a>
                 </div>
             <% } %>
-        </section>
+        </div>
+    </section>
 
-        <section style="margin-top:60px;text-align:center">
-            <h2 class="life-section-title">Every Day Is an Opportunity</h2>
-            <p class="life-intro" style="margin-left:auto;margin-right:auto">
-                Explore our academic programmes, facilities and school activities.
-            </p>
-            <a class="life-button" href="/academics">Explore Academics</a>
-            <a class="life-button" href="/gallery" style="margin-left:8px">Visit Gallery</a>
-        </section>
-    </div>
+    <!-- FINAL CALL TO ACTION -->
+    <section class="life-final-cta">
+        <div class="life-eyebrow" style="justify-content:center;">
+            The Journey Ahead
+        </div>
+
+        <h2 class="life-section-title">
+            Learning today.<br>
+            Preparing for <em>tomorrow.</em>
+        </h2>
+
+        <p>
+            At St. Martin's High School, we aim to help every student think
+            critically, act responsibly and dream fearlessly. Through a
+            balanced blend of learning, ethics and empathy, we encourage
+            children to prepare not just to score well, but to live well.
+        </p>
+
+        <a href="/admissions" class="life-button">
+            EXPLORE ADMISSIONS
+        </a>
+
+        <a href="/gallery"
+           class="life-button"
+           style="margin-left:10px;background:transparent;color:white;border-color:rgba(255,255,255,.6);">
+            VIEW OUR GALLERY
+        </a>
+    </section>
+
 </main>
 
 <%- include('partials/footer') %>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".life-reveal");
+
+    if (!("IntersectionObserver" in window)) {
+        elements.forEach(function (element) {
+            element.classList.add("is-visible");
+        });
+        return;
+    }
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12
+    });
+
+    elements.forEach(function (element) {
+        observer.observe(element);
+    });
+});
+</script>
+
 </body>
 </html>
+```
