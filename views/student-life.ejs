@@ -1,4 +1,4 @@
-
+```ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +8,9 @@
     <title>Student Life | St. Martin's High School, Balanagar</title>
 
     <meta name="description"
-          content="Discover student life at St. Martin's High School, Balanagar, Hyderabad — sports, academics, creativity, emotional wellness and experiences that shape confident learners.">
+          content="Discover student life at St. Martin's High School, Balanagar, Hyderabad — sports, academics, creativity, leadership, and holistic development.">
 
-    <meta name="theme-color" content="#071A2B">
+    <meta name="theme-color" content="#071a2b">
 
     <link rel="icon" type="image/png" href="/images/logo.png">
 
@@ -26,36 +26,37 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        :root {
-            --sl-navy: #071A2B;
-            --sl-navy-light: #0C2235;
-            --sl-burgundy: #581722;
-            --sl-gold: #C5A45A;
-            --sl-gold-light: #E0C67B;
-            --sl-ivory: #F6F1E7;
-            --sl-white: #FFFFFF;
-            --sl-muted: #6D7781;
-            --sl-border: rgba(7, 26, 43, 0.12);
-            --sl-heading: "Cormorant Garamond", Georgia, serif;
-            --sl-body: "Inter", Arial, sans-serif;
-        }
-
-        .student-life-page,
-        .student-life-page * {
-            box-sizing: border-box;
-        }
+        /* =========================================
+           STUDENT LIFE PAGE
+           Styles are scoped to prevent conflicts
+           with the global header and footer.
+        ========================================= */
 
         .student-life-page {
-            overflow: hidden;
+            --sl-navy: #071a2b;
+            --sl-navy-light: #102c43;
+            --sl-burgundy: #581722;
+            --sl-gold: #c5a45a;
+            --sl-gold-light: #e0c67b;
+            --sl-cream: #f6f1e7;
+            --sl-white: #ffffff;
+            --sl-text: #253341;
+            --sl-muted: #6c7882;
+
             background: var(--sl-white);
-            color: var(--sl-navy);
-            font-family: var(--sl-body);
-            line-height: 1.75;
+            color: var(--sl-text);
+            font-family: "Inter", sans-serif;
+            overflow: hidden;
+        }
+
+        .student-life-page *,
+        .student-life-page *::before,
+        .student-life-page *::after {
+            box-sizing: border-box;
         }
 
         .student-life-page img {
             display: block;
-            width: 100%;
             max-width: 100%;
         }
 
@@ -63,686 +64,624 @@
             text-decoration: none;
         }
 
-        .sl-container {
-            width: min(1180px, calc(100% - 48px));
-            margin-inline: auto;
+        .student-life-page .sl-container {
+            width: min(1180px, calc(100% - 44px));
+            margin: 0 auto;
         }
 
-        .sl-eyebrow {
+        .student-life-page .sl-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
+            gap: 10px;
             color: var(--sl-gold);
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 3px;
-            line-height: 1.5;
             text-transform: uppercase;
+            margin-bottom: 17px;
         }
 
-        .sl-eyebrow::before {
-            width: 32px;
+        .student-life-page .sl-eyebrow::before {
+            content: "";
+            width: 30px;
             height: 1px;
             background: currentColor;
-            content: "";
         }
 
-        .sl-section-title {
-            margin: 0 0 22px;
-            font-family: var(--sl-heading);
-            font-size: clamp(38px, 5vw, 60px);
-            font-weight: 500;
-            letter-spacing: -1.3px;
+        .student-life-page .sl-section-heading {
+            max-width: 760px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .student-life-page .sl-section-heading h2 {
+            color: var(--sl-navy);
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(36px, 5vw, 58px);
+            font-weight: 600;
             line-height: 1.08;
+            margin: 0 0 17px;
         }
 
-        .sl-section-title em {
-            color: var(--sl-burgundy);
-            font-weight: 500;
-        }
-
-        .sl-lead {
-            max-width: 720px;
+        .student-life-page .sl-section-heading p {
+            max-width: 680px;
+            margin: 0 auto;
             color: var(--sl-muted);
-            font-size: 15px;
-            line-height: 1.95;
+            font-size: 14px;
+            line-height: 1.9;
         }
 
         /* HERO */
 
-        .sl-hero {
+        .student-life-page .sl-hero {
+            min-height: 580px;
             position: relative;
             display: flex;
-            min-height: 590px;
             align-items: center;
-            overflow: hidden;
             background:
-                linear-gradient(
-                    90deg,
-                    rgba(7, 26, 43, 0.96) 0%,
-                    rgba(7, 26, 43, 0.84) 46%,
-                    rgba(7, 26, 43, 0.30) 100%
-                ),
-                url("/images/Legacy.png") center 45% / cover no-repeat;
-            color: var(--sl-white);
+                linear-gradient(90deg,
+                    rgba(4, 17, 29, .93) 0%,
+                    rgba(4, 17, 29, .76) 48%,
+                    rgba(4, 17, 29, .24) 100%),
+                url("/images/Legacy.png") center 42% / cover no-repeat,
+                var(--sl-navy);
         }
 
-        .sl-hero::after {
-            position: absolute;
-            right: -130px;
-            bottom: -220px;
-            width: 460px;
-            height: 460px;
-            border: 1px solid rgba(224, 198, 123, 0.25);
-            border-radius: 50%;
+        .student-life-page .sl-hero::after {
             content: "";
+            position: absolute;
+            inset: auto 0 0;
+            height: 90px;
+            background: linear-gradient(transparent, rgba(7, 26, 43, .35));
             pointer-events: none;
         }
 
-        .sl-hero-content {
+        .student-life-page .sl-hero-content {
             position: relative;
             z-index: 1;
-            width: min(760px, 100%);
-            padding: 100px 0 110px;
+            max-width: 780px;
+            padding: 105px 0 115px;
         }
 
-        .sl-hero .sl-eyebrow {
+        .student-life-page .sl-hero .sl-eyebrow {
             color: var(--sl-gold-light);
         }
 
-        .sl-hero h1 {
-            max-width: 760px;
-            margin: 0 0 24px;
+        .student-life-page .sl-hero h1 {
             color: var(--sl-white);
-            font-family: var(--sl-heading);
-            font-size: clamp(54px, 8vw, 92px);
-            font-weight: 500;
-            letter-spacing: -2px;
-            line-height: 0.98;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(50px, 7.2vw, 86px);
+            font-weight: 600;
+            letter-spacing: -.8px;
+            line-height: .98;
+            margin: 0 0 25px;
         }
 
-        .sl-hero h1 span {
+        .student-life-page .sl-hero h1 span {
             color: var(--sl-gold-light);
             font-style: italic;
         }
 
-        .sl-hero-description {
-            max-width: 590px;
-            margin: 0;
-            color: rgba(255, 255, 255, 0.82);
+        .student-life-page .sl-hero p {
+            max-width: 610px;
+            color: rgba(255, 255, 255, .83);
             font-size: 15px;
-            line-height: 1.95;
+            line-height: 2;
+            margin: 0 0 32px;
         }
 
-        .sl-hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 34px;
-        }
-
-        .sl-button {
+        .student-life-page .sl-button {
             display: inline-flex;
-            min-height: 49px;
             align-items: center;
             justify-content: center;
-            gap: 11px;
-            padding: 13px 22px;
-            border: 1px solid transparent;
-            font-family: var(--sl-body);
+            gap: 12px;
+            min-height: 50px;
+            padding: 14px 24px;
+            border: 1px solid var(--sl-gold);
+            background: var(--sl-gold);
+            color: var(--sl-navy);
             font-size: 11px;
             font-weight: 800;
-            letter-spacing: 1.1px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            transition: background 0.25s ease,
-                        color 0.25s ease,
-                        border-color 0.25s ease,
-                        transform 0.25s ease;
+            transition: background .25s ease, color .25s ease,
+                        transform .25s ease;
         }
 
-        .sl-button:hover {
+        .student-life-page .sl-button:hover {
+            background: transparent;
+            color: var(--sl-gold-light);
             transform: translateY(-2px);
         }
 
-        .sl-button-gold {
+        .student-life-page .sl-button-outline {
+            background: transparent;
+            color: var(--sl-white);
+        }
+
+        .student-life-page .sl-button-outline:hover {
             background: var(--sl-gold);
             color: var(--sl-navy);
         }
 
-        .sl-button-gold:hover {
-            background: var(--sl-gold-light);
-            color: var(--sl-navy);
-        }
-
-        .sl-button-outline {
-            border-color: rgba(255, 255, 255, 0.48);
-            color: var(--sl-white);
-        }
-
-        .sl-button-outline:hover {
-            border-color: var(--sl-gold);
-            color: var(--sl-gold-light);
-        }
-
-        .sl-hero-note {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 42px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 11px;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
-        }
-
-        .sl-hero-note i {
-            color: var(--sl-gold);
-        }
-
         /* INTRODUCTION */
 
-        .sl-intro {
-            padding: 105px 0;
-            background: var(--sl-ivory);
+        .student-life-page .sl-intro {
+            padding: 100px 0;
+            background: var(--sl-white);
         }
 
-        .sl-intro-grid {
+        .student-life-page .sl-intro-grid {
             display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            align-items: center;
+            grid-template-columns: 1fr 1fr;
             gap: 75px;
+            align-items: center;
         }
 
-        .sl-intro-image {
+        .student-life-page .sl-intro-image {
             position: relative;
-            min-height: 410px;
+            min-height: 440px;
         }
 
-        .sl-intro-image img {
-            height: 410px;
+        .student-life-page .sl-intro-image img {
+            width: 100%;
+            height: 440px;
             object-fit: cover;
-            object-position: center;
+            background: var(--sl-cream);
         }
 
-        .sl-image-caption {
+        .student-life-page .sl-image-label {
             position: absolute;
-            right: -20px;
-            bottom: -22px;
-            max-width: 250px;
-            padding: 22px 25px;
+            right: -18px;
+            bottom: 24px;
+            width: min(230px, 75%);
+            padding: 24px;
             background: var(--sl-navy);
+            border-bottom: 3px solid var(--sl-gold);
             color: var(--sl-white);
-            box-shadow: 0 14px 38px rgba(7, 26, 43, 0.16);
         }
 
-        .sl-image-caption strong {
+        .student-life-page .sl-image-label strong {
             display: block;
-            margin-bottom: 5px;
             color: var(--sl-gold-light);
-            font-family: var(--sl-heading);
+            font-family: "Cormorant Garamond", serif;
             font-size: 26px;
-            font-weight: 500;
-            line-height: 1.15;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
-        .sl-image-caption span {
+        .student-life-page .sl-image-label span {
             display: block;
-            color: rgba(255, 255, 255, 0.75);
             font-size: 11px;
             line-height: 1.7;
         }
 
-        .sl-intro-copy p {
-            margin: 0 0 18px;
+        .student-life-page .sl-intro-copy h2 {
+            color: var(--sl-navy);
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(37px, 4.4vw, 56px);
+            font-weight: 600;
+            line-height: 1.08;
+            margin: 0 0 22px;
+        }
+
+        .student-life-page .sl-intro-copy h2 span {
+            color: var(--sl-burgundy);
+            font-style: italic;
+        }
+
+        .student-life-page .sl-intro-copy p {
             color: var(--sl-muted);
             font-size: 14px;
             line-height: 2;
+            margin: 0 0 17px;
         }
 
-        .sl-inline-link {
-            display: inline-flex;
-            align-items: center;
+        .student-life-page .sl-intro-points {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+            margin-top: 28px;
+        }
+
+        .student-life-page .sl-intro-point {
+            display: flex;
+            align-items: flex-start;
             gap: 12px;
-            margin-top: 12px;
-            color: var(--sl-burgundy);
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1.1px;
-            text-transform: uppercase;
+            color: var(--sl-navy);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.6;
         }
 
-        .sl-inline-link i {
-            transition: transform 0.2s ease;
+        .student-life-page .sl-intro-point i {
+            margin-top: 3px;
+            color: var(--sl-gold);
         }
 
-        .sl-inline-link:hover i {
-            transform: translateX(5px);
-        }
+        /* CORE VALUES */
 
-        /* VALUES */
-
-        .sl-values {
+        .student-life-page .sl-values {
             padding: 90px 0;
-            background: var(--sl-white);
+            background: var(--sl-cream);
         }
 
-        .sl-centered-heading {
-            max-width: 760px;
-            margin: 0 auto 52px;
-            text-align: center;
-        }
-
-        .sl-centered-heading .sl-eyebrow {
-            justify-content: center;
-        }
-
-        .sl-centered-heading .sl-lead {
-            margin-inline: auto;
-        }
-
-        .sl-values-grid {
+        .student-life-page .sl-values-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
         }
 
-        .sl-value-card {
-            padding: 34px 30px;
-            border: 1px solid var(--sl-border);
+        .student-life-page .sl-value-card {
+            padding: 32px 24px;
             background: var(--sl-white);
-            transition: border-color 0.25s ease,
-                        transform 0.25s ease,
-                        box-shadow 0.25s ease;
+            border-bottom: 3px solid transparent;
+            transition: transform .25s ease, border-color .25s ease,
+                        box-shadow .25s ease;
         }
 
-        .sl-value-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(197, 164, 90, 0.7);
-            box-shadow: 0 18px 42px rgba(7, 26, 43, 0.07);
+        .student-life-page .sl-value-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--sl-gold);
+            box-shadow: 0 18px 35px rgba(7, 26, 43, .08);
         }
 
-        .sl-value-icon {
+        .student-life-page .sl-value-icon {
+            width: 53px;
+            height: 53px;
             display: grid;
-            width: 52px;
-            height: 52px;
-            margin-bottom: 24px;
             place-items: center;
-            background: var(--sl-ivory);
-            color: var(--sl-burgundy);
-            font-size: 19px;
+            background: var(--sl-navy);
+            color: var(--sl-gold-light);
+            font-size: 20px;
+            margin-bottom: 24px;
         }
 
-        .sl-value-card h3 {
-            margin: 0 0 12px;
-            font-family: var(--sl-heading);
-            font-size: 28px;
+        .student-life-page .sl-value-card h3 {
+            color: var(--sl-navy);
+            font-family: "Cormorant Garamond", serif;
+            font-size: 25px;
             font-weight: 600;
-            line-height: 1.2;
+            margin: 0 0 12px;
         }
 
-        .sl-value-card p {
-            margin: 0;
+        .student-life-page .sl-value-card p {
             color: var(--sl-muted);
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.9;
+            margin: 0;
         }
 
         /* SPORTS FEATURE */
 
-        .sl-sports {
-            padding: 100px 0;
+        .student-life-page .sl-sports {
+            padding: 105px 0;
             background: var(--sl-navy);
             color: var(--sl-white);
         }
 
-        .sl-sports-grid {
+        .student-life-page .sl-sports-grid {
             display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
+            grid-template-columns: 1.02fr .98fr;
+            gap: 70px;
             align-items: center;
-            gap: 75px;
         }
 
-        .sl-sports .sl-section-title {
-            color: var(--sl-white);
-        }
-
-        .sl-sports .sl-section-title em {
-            color: var(--sl-gold-light);
-        }
-
-        .sl-sports .sl-lead {
-            color: rgba(255, 255, 255, 0.72);
-        }
-
-        .sl-sports-copy > p {
-            margin: 0 0 18px;
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 14px;
-            line-height: 2;
-        }
-
-        .sl-sports-image {
+        .student-life-page .sl-sports-image {
             position: relative;
-            padding: 0 0 20px 20px;
+            min-height: 450px;
         }
 
-        .sl-sports-image::before {
-            position: absolute;
-            top: -17px;
-            left: 0;
-            width: 70%;
-            height: 70%;
-            border-top: 2px solid var(--sl-gold);
-            border-left: 2px solid var(--sl-gold);
+        .student-life-page .sl-sports-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            background: #102c43;
+        }
+
+        .student-life-page .sl-sports-image::after {
             content: "";
+            position: absolute;
+            inset: 15px -15px -15px 15px;
+            border: 1px solid rgba(197, 164, 90, .7);
+            pointer-events: none;
         }
 
-        .sl-sports-image img {
+        .student-life-page .sl-sports-copy {
             position: relative;
             z-index: 1;
-            height: 430px;
-            object-fit: cover;
-            object-position: center;
-            background: #132D42;
         }
 
-        .sl-sports-image figcaption {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 15px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 10px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+        .student-life-page .sl-sports-copy h2 {
+            color: var(--sl-white);
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(40px, 5vw, 62px);
+            font-weight: 600;
+            line-height: 1.04;
+            margin: 0 0 23px;
         }
 
-        .sl-sports-image figcaption i {
+        .student-life-page .sl-sports-copy h2 span {
             color: var(--sl-gold-light);
+            font-style: italic;
         }
 
-        .sl-sports-list {
+        .student-life-page .sl-sports-copy p {
+            color: rgba(255, 255, 255, .74);
+            font-size: 13px;
+            line-height: 2;
+            margin: 0 0 17px;
+        }
+
+        .student-life-page .sl-sports-list {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 13px 20px;
-            margin: 28px 0 32px;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px 20px;
             padding: 0;
+            margin: 28px 0 32px;
             list-style: none;
         }
 
-        .sl-sports-list li {
+        .student-life-page .sl-sports-list li {
             display: flex;
-            align-items: center;
             gap: 10px;
-            color: rgba(255, 255, 255, 0.86);
+            align-items: center;
+            color: rgba(255, 255, 255, .9);
             font-size: 12px;
         }
 
-        .sl-sports-list i {
+        .student-life-page .sl-sports-list i {
             color: var(--sl-gold-light);
-            font-size: 11px;
+            font-size: 12px;
         }
 
         /* STUDENT EXPERIENCES */
 
-        .sl-experiences {
-            padding: 105px 0;
-            background: #FBFAF7;
-        }
-
-        .sl-experience-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 24px;
-        }
-
-        .sl-experience-card {
-            overflow: hidden;
-            border: 1px solid var(--sl-border);
-            background: var(--sl-white);
-            transition: transform 0.25s ease,
-                        box-shadow 0.25s ease;
-        }
-
-        .sl-experience-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 18px 38px rgba(7, 26, 43, 0.09);
-        }
-
-        .sl-experience-image {
-            position: relative;
-            overflow: hidden;
-            background: #EAE6DE;
-        }
-
-        .sl-experience-image img {
-            height: 245px;
-            object-fit: cover;
-            transition: transform 0.55s ease;
-        }
-
-        .sl-experience-card:hover .sl-experience-image img {
-            transform: scale(1.04);
-        }
-
-        .sl-experience-content {
-            padding: 25px 24px 28px;
-        }
-
-        .sl-card-number {
-            display: block;
-            margin-bottom: 9px;
-            color: var(--sl-gold);
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
-
-        .sl-experience-content h3 {
-            margin: 0 0 11px;
-            font-family: var(--sl-heading);
-            font-size: 29px;
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        .sl-experience-content p {
-            margin: 0;
-            color: var(--sl-muted);
-            font-size: 12px;
-            line-height: 1.95;
-        }
-
-        /* WELLNESS */
-
-        .sl-wellness {
-            padding: 95px 0;
-            background: var(--sl-ivory);
-        }
-
-        .sl-wellness-grid {
-            display: grid;
-            grid-template-columns: 0.85fr 1.15fr;
-            align-items: center;
-            gap: 70px;
-        }
-
-        .sl-wellness-points {
-            display: grid;
-            gap: 24px;
-        }
-
-        .sl-wellness-point {
-            display: grid;
-            grid-template-columns: 48px 1fr;
-            gap: 17px;
-            align-items: start;
-        }
-
-        .sl-wellness-point > span {
-            display: grid;
-            width: 46px;
-            height: 46px;
-            place-items: center;
-            background: var(--sl-white);
-            color: var(--sl-burgundy);
-            font-size: 16px;
-        }
-
-        .sl-wellness-point h3 {
-            margin: 0 0 6px;
-            font-family: var(--sl-heading);
-            font-size: 25px;
-            font-weight: 600;
-            line-height: 1.25;
-        }
-
-        .sl-wellness-point p {
-            margin: 0;
-            color: var(--sl-muted);
-            font-size: 12px;
-            line-height: 1.9;
-        }
-
-        /* QUOTE */
-
-        .sl-quote {
-            position: relative;
-            padding: 86px 24px;
-            background: var(--sl-burgundy);
-            color: var(--sl-white);
-            text-align: center;
-        }
-
-        .sl-quote-mark {
-            display: block;
-            margin-bottom: 12px;
-            color: var(--sl-gold-light);
-            font-family: Georgia, serif;
-            font-size: 68px;
-            line-height: 0.8;
-        }
-
-        .sl-quote blockquote {
-            max-width: 850px;
-            margin: 0 auto;
-            font-family: var(--sl-heading);
-            font-size: clamp(30px, 4.6vw, 48px);
-            font-weight: 500;
-            line-height: 1.3;
-        }
-
-        .sl-quote p {
-            margin: 24px 0 0;
-            color: rgba(255, 255, 255, 0.72);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-        }
-
-        /* PHOTO GALLERY */
-
-        .sl-gallery {
+        .student-life-page .sl-experiences {
             padding: 100px 0;
             background: var(--sl-white);
         }
 
-        .sl-gallery-grid {
+        .student-life-page .sl-experience-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
         }
 
-        .sl-gallery-item {
-            position: relative;
-            min-width: 0;
-            overflow: hidden;
-            background: var(--sl-ivory);
+        .student-life-page .sl-experience-card {
+            background: var(--sl-white);
+            border: 1px solid #e9e7e1;
+            transition: transform .25s ease, box-shadow .25s ease;
         }
 
-        .sl-gallery-item img {
-            height: 250px;
+        .student-life-page .sl-experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(7, 26, 43, .09);
+        }
+
+        .student-life-page .sl-experience-card img {
+            width: 100%;
+            height: 230px;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            background: var(--sl-cream);
         }
 
-        .sl-gallery-item:hover img {
-            transform: scale(1.06);
+        .student-life-page .sl-experience-content {
+            padding: 25px;
         }
 
-        .sl-gallery-item figcaption {
-            padding: 14px 15px;
-            background: var(--sl-ivory);
+        .student-life-page .sl-experience-content span {
+            display: block;
+            color: var(--sl-gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 11px;
+        }
+
+        .student-life-page .sl-experience-content h3 {
             color: var(--sl-navy);
-            font-family: var(--sl-heading);
-            font-size: 21px;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 27px;
             font-weight: 600;
+            margin: 0 0 10px;
+        }
+
+        .student-life-page .sl-experience-content p {
+            color: var(--sl-muted);
+            font-size: 12px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        /* WELLNESS */
+
+        .student-life-page .sl-wellness {
+            padding: 85px 0;
+            background: #f8f6f0;
+        }
+
+        .student-life-page .sl-wellness-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 30px;
+        }
+
+        .student-life-page .sl-wellness-item {
+            padding: 10px 10px 10px 0;
+        }
+
+        .student-life-page .sl-wellness-item i {
+            display: inline-grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            background: var(--sl-burgundy);
+            color: var(--sl-white);
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .student-life-page .sl-wellness-item h3 {
+            color: var(--sl-navy);
+            font-family: "Cormorant Garamond", serif;
+            font-size: 27px;
+            font-weight: 600;
+            margin: 0 0 12px;
+        }
+
+        .student-life-page .sl-wellness-item p {
+            color: var(--sl-muted);
+            font-size: 12px;
+            line-height: 1.95;
+            margin: 0;
+        }
+
+        /* QUOTE */
+
+        .student-life-page .sl-quote {
+            position: relative;
+            padding: 85px 24px;
+            text-align: center;
+            background: var(--sl-burgundy);
+            color: var(--sl-white);
+        }
+
+        .student-life-page .sl-quote-icon {
+            color: var(--sl-gold-light);
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .student-life-page .sl-quote blockquote {
+            max-width: 850px;
+            margin: 0 auto 20px;
+            color: var(--sl-white);
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(30px, 4.5vw, 46px);
+            font-weight: 500;
             line-height: 1.25;
         }
 
-        /* CTA */
-
-        .sl-cta {
-            position: relative;
-            overflow: hidden;
-            padding: 90px 0;
-            background: var(--sl-navy);
-            color: var(--sl-white);
+        .student-life-page .sl-quote p {
+            color: rgba(255, 255, 255, .7);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
         }
 
-        .sl-cta::after {
+        /* PHOTO GALLERY */
+
+        .student-life-page .sl-gallery {
+            padding: 100px 0;
+            background: var(--sl-white);
+        }
+
+        .student-life-page .sl-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-auto-rows: 225px;
+            gap: 16px;
+        }
+
+        .student-life-page .sl-gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--sl-cream);
+        }
+
+        .student-life-page .sl-gallery-item:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .student-life-page .sl-gallery-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .student-life-page .sl-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+
+        .student-life-page .sl-gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .student-life-page .sl-gallery-overlay {
             position: absolute;
-            top: -170px;
-            right: -110px;
-            width: 400px;
-            height: 400px;
-            border: 1px solid rgba(197, 164, 90, 0.25);
-            border-radius: 50%;
-            content: "";
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 22px;
+            background: linear-gradient(transparent 35%, rgba(4, 17, 29, .85));
             pointer-events: none;
         }
 
-        .sl-cta-inner {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
+        .student-life-page .sl-gallery-overlay span {
+            color: var(--sl-white);
+            font-family: "Cormorant Garamond", serif;
+            font-size: 24px;
+            font-weight: 600;
         }
 
-        .sl-cta h2 {
-            max-width: 720px;
-            margin: 0 0 14px;
+        /* ADMISSIONS CTA */
+
+        .student-life-page .sl-cta {
+            position: relative;
+            padding: 85px 24px;
+            text-align: center;
+            background:
+                linear-gradient(rgba(7, 26, 43, .94), rgba(7, 26, 43, .94)),
+                url("/images/Legacy.png") center / cover no-repeat;
+        }
+
+        .student-life-page .sl-cta .sl-eyebrow {
+            justify-content: center;
+        }
+
+        .student-life-page .sl-cta h2 {
+            max-width: 760px;
+            margin: 0 auto 20px;
             color: var(--sl-white);
-            font-family: var(--sl-heading);
+            font-family: "Cormorant Garamond", serif;
             font-size: clamp(38px, 5vw, 58px);
-            font-weight: 500;
+            font-weight: 600;
             line-height: 1.1;
         }
 
-        .sl-cta p {
-            max-width: 620px;
-            margin: 0;
-            color: rgba(255, 255, 255, 0.72);
+        .student-life-page .sl-cta h2 span {
+            color: var(--sl-gold-light);
+            font-style: italic;
+        }
+
+        .student-life-page .sl-cta p {
+            max-width: 650px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, .76);
             font-size: 13px;
             line-height: 1.9;
         }
 
-        /* REVEAL ANIMATION */
+        /* REVEAL EFFECT */
 
-        .sl-reveal {
-            opacity: 0;
-            transform: translateY(22px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+        .student-life-page .sl-reveal {
+            opacity: 1;
+            transform: none;
         }
 
-        .sl-reveal.sl-visible {
+        .student-life-page.sl-js .sl-reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .student-life-page.sl-js .sl-reveal.sl-visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -750,145 +689,152 @@
         /* RESPONSIVE */
 
         @media (max-width: 1000px) {
-            .sl-intro-grid,
-            .sl-sports-grid,
-            .sl-wellness-grid {
+            .student-life-page .sl-values-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .student-life-page .sl-intro-grid,
+            .student-life-page .sl-sports-grid {
                 gap: 42px;
             }
 
-            .sl-gallery-grid {
+            .student-life-page .sl-experience-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .sl-experience-grid {
+            .student-life-page .sl-gallery-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .sl-values-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .sl-cta-inner {
-                align-items: flex-start;
-                flex-direction: column;
             }
         }
 
         @media (max-width: 700px) {
-            .sl-container {
-                width: min(100% - 36px, 560px);
+            .student-life-page .sl-container {
+                width: min(100% - 34px, 560px);
             }
 
-            .sl-hero {
-                min-height: 540px;
-                background-position: 60% center;
+            .student-life-page .sl-hero {
+                min-height: 500px;
+                background-position: center, 58% center, center;
             }
 
-            .sl-hero-content {
-                padding: 80px 0;
+            .student-life-page .sl-hero-content {
+                padding: 85px 0;
             }
 
-            .sl-hero h1 {
-                font-size: clamp(48px, 13vw, 72px);
-                letter-spacing: -1px;
+            .student-life-page .sl-hero h1 {
+                font-size: clamp(48px, 13vw, 70px);
             }
 
-            .sl-hero-description {
-                font-size: 13px;
-            }
-
-            .sl-intro,
-            .sl-values,
-            .sl-experiences,
-            .sl-gallery {
+            .student-life-page .sl-intro,
+            .student-life-page .sl-experiences,
+            .student-life-page .sl-gallery {
                 padding: 70px 0;
             }
 
-            .sl-sports,
-            .sl-wellness {
-                padding: 75px 0;
-            }
-
-            .sl-intro-grid,
-            .sl-sports-grid,
-            .sl-wellness-grid {
+            .student-life-page .sl-intro-grid,
+            .student-life-page .sl-sports-grid {
                 grid-template-columns: 1fr;
-                gap: 45px;
+                gap: 42px;
             }
 
-            .sl-intro-image {
-                margin-right: 12px;
+            .student-life-page .sl-intro-image {
+                min-height: 320px;
+                margin-right: 10px;
             }
 
-            .sl-intro-image img {
-                height: 310px;
-            }
-
-            .sl-image-caption {
-                right: -12px;
-                max-width: 220px;
-            }
-
-            .sl-values-grid,
-            .sl-experience-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .sl-centered-heading {
-                margin-bottom: 35px;
-            }
-
-            .sl-sports-image img {
+            .student-life-page .sl-intro-image img {
                 height: 320px;
             }
 
-            .sl-sports-list {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+            .student-life-page .sl-image-label {
+                right: -8px;
             }
 
-            .sl-experience-image img {
-                height: 250px;
+            .student-life-page .sl-values {
+                padding: 70px 0;
             }
 
-            .sl-gallery-grid {
-                gap: 12px;
+            .student-life-page .sl-values-grid {
+                gap: 14px;
             }
 
-            .sl-gallery-item img {
-                height: 165px;
+            .student-life-page .sl-value-card {
+                padding: 24px 18px;
             }
 
-            .sl-gallery-item figcaption {
-                padding: 11px;
-                font-size: 18px;
+            .student-life-page .sl-value-card h3 {
+                font-size: 23px;
             }
 
-            .sl-quote {
+            .student-life-page .sl-sports {
+                padding: 75px 0;
+            }
+
+            .student-life-page .sl-sports-image {
+                min-height: 300px;
+                margin-right: 10px;
+            }
+
+            .student-life-page .sl-sports-image img {
+                height: 300px;
+            }
+
+            .student-life-page .sl-experience-grid,
+            .student-life-page .sl-wellness-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .student-life-page .sl-experience-card img {
+                height: 245px;
+            }
+
+            .student-life-page .sl-wellness {
+                padding: 70px 0;
+            }
+
+            .student-life-page .sl-wellness-grid {
+                gap: 30px;
+            }
+
+            .student-life-page .sl-gallery-grid {
+                grid-auto-rows: 170px;
+                gap: 10px;
+            }
+
+            .student-life-page .sl-gallery-item:first-child {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .student-life-page .sl-gallery-item:nth-child(4) {
+                grid-column: span 2;
+            }
+
+            .student-life-page .sl-gallery-overlay {
+                padding: 12px;
+            }
+
+            .student-life-page .sl-gallery-overlay span {
+                font-size: 19px;
+            }
+
+            .student-life-page .sl-quote {
                 padding: 65px 22px;
             }
 
-            .sl-cta {
-                padding: 70px 0;
+            .student-life-page .sl-cta {
+                padding: 70px 20px;
             }
         }
 
         @media (max-width: 400px) {
-            .sl-gallery-grid {
+            .student-life-page .sl-intro-points,
+            .student-life-page .sl-sports-list {
                 grid-template-columns: 1fr;
             }
 
-            .sl-gallery-item img {
-                height: 230px;
-            }
-
-            .sl-hero-actions {
-                align-items: stretch;
-                flex-direction: column;
-            }
-
-            .sl-button {
-                width: 100%;
+            .student-life-page .sl-gallery-grid {
+                grid-auto-rows: 145px;
             }
         }
 
@@ -897,14 +843,8 @@
             .student-life-page *::before,
             .student-life-page *::after {
                 scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            .sl-reveal {
-                opacity: 1;
-                transform: none;
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
             }
         }
     </style>
@@ -921,35 +861,24 @@
         <section class="sl-hero">
             <div class="sl-container">
                 <div class="sl-hero-content sl-reveal">
-                    <span class="sl-eyebrow">Life at St. Martin's</span>
+                    <span class="sl-eyebrow">Life Beyond the Classroom</span>
 
                     <h1>
-                        More Than<br>
-                        <span>Classrooms.</span><br>
-                        A Way of Life.
+                        Where Young Minds<br>
+                        <span>Find Their Wings.</span>
                     </h1>
 
-                    <p class="sl-hero-description">
-                        Where learning becomes experience, friendships grow into
-                        lasting memories, and every student discovers new ways
-                        to learn, lead, create and achieve.
+                    <p>
+                        At St. Martin's High School, student life is a journey of
+                        discovery, friendship, creativity and achievement. Every
+                        experience helps our students develop confidence, character
+                        and a lifelong love of learning.
                     </p>
 
-                    <div class="sl-hero-actions">
-                        <a href="#student-experiences" class="sl-button sl-button-gold">
-                            Discover Student Life
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                        <a href="#student-gallery" class="sl-button sl-button-outline">
-                            Explore Our Moments
-                        </a>
-                    </div>
-
-                    <div class="sl-hero-note">
-                        <i class="fa-solid fa-location-dot"></i>
-                        Balanagar, Hyderabad
-                    </div>
+                    <a href="#student-experiences" class="sl-button">
+                        Discover Student Life
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
                 </div>
             </div>
         </section>
@@ -962,73 +891,79 @@
                     <div class="sl-intro-image sl-reveal">
                         <img
                             src="/images/Legacy.png"
-                            alt="Students and school life at St. Martin's High School"
+                            alt="School life and student experiences at St. Martin's High School"
                             loading="lazy"
-                            onerror="this.onerror=null;this.src='/images/The-Spirit-Of-Sport.png';"
+                            onerror="this.onerror=null;this.src='/images/classroom.png';"
                         >
 
-                        <div class="sl-image-caption">
+                        <div class="sl-image-label">
                             <strong>Growing Together</strong>
-                            <span>Building knowledge, confidence, character and lifelong friendships.</span>
+                            <span>A supportive environment where every student has the opportunity to thrive.</span>
                         </div>
                     </div>
 
                     <div class="sl-intro-copy sl-reveal">
-                        <span class="sl-eyebrow">The Student Experience</span>
+                        <span class="sl-eyebrow">The Martinian Experience</span>
 
-                        <h2 class="sl-section-title">
-                            Every Day Is an Opportunity to <em>Discover.</em>
+                        <h2>
+                            More Than a School.<br>
+                            <span>A Place to Belong.</span>
                         </h2>
 
                         <p>
-                            At St. Martin's High School, student life extends
-                            beyond textbooks and examinations. It is a journey
-                            of discovery in which curiosity is encouraged,
-                            talents are nurtured and individual potential is
-                            given room to grow.
+                            Education reaches its fullest potential when academic
+                            learning is complemented by meaningful experiences.
+                            Student life at St. Martin's brings together classroom
+                            learning, physical activity, creativity, teamwork and
+                            personal development.
                         </p>
 
                         <p>
-                            Through classroom learning, sports, creative
-                            activities, collaboration and guidance, students
-                            are encouraged to develop the confidence to
-                            participate, the discipline to persevere and the
-                            responsibility to contribute positively to their
-                            community.
+                            We encourage students to explore their interests,
+                            discover their strengths, respect others and approach
+                            new challenges with confidence. Every day presents an
+                            opportunity to learn something new and become a better
+                            version of oneself.
                         </p>
 
-                        <p>
-                            Our aim is to support the development of the whole
-                            child — intellectually, physically, socially and
-                            emotionally — in a learning environment where
-                            every experience can become an opportunity to grow.
-                        </p>
+                        <div class="sl-intro-points">
+                            <div class="sl-intro-point">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Learning through experience</span>
+                            </div>
 
-                        <a href="#student-values" class="sl-inline-link">
-                            What makes student life special
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
+                            <div class="sl-intro-point">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Confidence and leadership</span>
+                            </div>
+
+                            <div class="sl-intro-point">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Respect and responsibility</span>
+                            </div>
+
+                            <div class="sl-intro-point">
+                                <i class="fa-solid fa-check-circle"></i>
+                                <span>Balanced personal growth</span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- VALUES -->
-        <section class="sl-values" id="student-values">
+        <!-- CORE VALUES -->
+        <section class="sl-values">
             <div class="sl-container">
 
-                <div class="sl-centered-heading sl-reveal">
-                    <span class="sl-eyebrow">Beyond Academics</span>
-
-                    <h2 class="sl-section-title">
-                        Experiences That Shape <em>Character.</em>
-                    </h2>
-
-                    <p class="sl-lead">
-                        Meaningful school experiences help students develop
-                        the knowledge, personal qualities and practical skills
-                        they need for the world beyond the classroom.
+                <div class="sl-section-heading sl-reveal">
+                    <span class="sl-eyebrow">What Shapes Us</span>
+                    <h2>Values That Last a Lifetime</h2>
+                    <p>
+                        Beyond academic achievement, we nurture the qualities
+                        that help students grow into thoughtful, capable and
+                        responsible individuals.
                     </p>
                 </div>
 
@@ -1038,85 +973,43 @@
                         <div class="sl-value-icon">
                             <i class="fa-solid fa-book-open"></i>
                         </div>
-
-                        <h3>Curiosity & Learning</h3>
-
+                        <h3>Curiosity</h3>
                         <p>
-                            Students are encouraged to ask questions,
-                            exchange ideas, explore concepts and approach
-                            learning with curiosity, independence and
-                            confidence.
+                            Encouraging students to ask questions, explore ideas
+                            and develop a genuine interest in learning.
                         </p>
                     </article>
 
                     <article class="sl-value-card sl-reveal">
                         <div class="sl-value-icon">
-                            <i class="fa-solid fa-people-group"></i>
+                            <i class="fa-solid fa-handshake-angle"></i>
                         </div>
-
-                        <h3>Friendship & Teamwork</h3>
-
+                        <h3>Teamwork</h3>
                         <p>
-                            Shared activities and collaborative experiences
-                            help students learn cooperation, mutual respect,
-                            communication and the importance of supporting
-                            one another.
+                            Building cooperation, mutual respect and an
+                            appreciation for the strengths of others.
                         </p>
                     </article>
 
                     <article class="sl-value-card sl-reveal">
                         <div class="sl-value-icon">
-                            <i class="fa-solid fa-trophy"></i>
+                            <i class="fa-solid fa-medal"></i>
                         </div>
-
-                        <h3>Discipline & Achievement</h3>
-
+                        <h3>Discipline</h3>
                         <p>
-                            Students learn the value of commitment, consistent
-                            effort, perseverance and taking responsibility
-                            for their choices and goals.
+                            Developing perseverance, responsibility and the
+                            confidence to work towards meaningful goals.
                         </p>
                     </article>
 
                     <article class="sl-value-card sl-reveal">
                         <div class="sl-value-icon">
-                            <i class="fa-solid fa-palette"></i>
+                            <i class="fa-solid fa-lightbulb"></i>
                         </div>
-
-                        <h3>Creativity & Expression</h3>
-
+                        <h3>Creativity</h3>
                         <p>
-                            Opportunities for creative expression encourage
-                            students to explore their interests, communicate
-                            ideas and appreciate different perspectives.
-                        </p>
-                    </article>
-
-                    <article class="sl-value-card sl-reveal">
-                        <div class="sl-value-icon">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-
-                        <h3>Wellness & Belonging</h3>
-
-                        <p>
-                            A supportive school environment encourages
-                            consideration, empathy, positive relationships
-                            and awareness of personal and emotional well-being.
-                        </p>
-                    </article>
-
-                    <article class="sl-value-card sl-reveal">
-                        <div class="sl-value-icon">
-                            <i class="fa-solid fa-seedling"></i>
-                        </div>
-
-                        <h3>Growth & Responsibility</h3>
-
-                        <p>
-                            Everyday experiences help students build
-                            independence, leadership, good habits and an
-                            understanding of their responsibilities to others.
+                            Giving students opportunities to express themselves,
+                            experiment with ideas and discover their talents.
                         </p>
                     </article>
 
@@ -1124,70 +1017,57 @@
             </div>
         </section>
 
-        <!-- THE SPIRIT OF SPORT -->
-        <section class="sl-sports" id="sports">
+        <!-- SPORTS FEATURE: USES THE SPIRIT OF SPORT IMAGE -->
+        <section class="sl-sports">
             <div class="sl-container">
                 <div class="sl-sports-grid">
 
-                    <div class="sl-sports-copy sl-reveal">
-                        <span class="sl-eyebrow">Energy. Discipline. Teamwork.</span>
-
-                        <h2 class="sl-section-title">
-                            The <em>Spirit</em><br>of Sport.
-                        </h2>
-
-                        <p>
-                            Physical education is an important part of a
-                            balanced school experience. Through sporting
-                            activities and movement, students can develop
-                            coordination, fitness, resilience and confidence.
-                        </p>
-
-                        <p>
-                            Playing as a team teaches students to communicate,
-                            respect others, follow rules and work towards a
-                            shared goal. Individual effort also helps build
-                            patience, determination and a positive attitude
-                            towards improvement.
-                        </p>
-
-                        <p>
-                            From participation to personal achievement,
-                            sports provide valuable opportunities to learn
-                            lessons that extend well beyond the playing field.
-                        </p>
-
-                        <ul class="sl-sports-list">
-                            <li><i class="fa-solid fa-check"></i> Football</li>
-                            <li><i class="fa-solid fa-check"></i> Athletics</li>
-                            <li><i class="fa-solid fa-check"></i> Volleyball</li>
-                            <li><i class="fa-solid fa-check"></i> Throwball</li>
-                            <li><i class="fa-solid fa-check"></i> Badminton</li>
-                            <li><i class="fa-solid fa-check"></i> Yoga</li>
-                            <li><i class="fa-solid fa-check"></i> Indoor games</li>
-                            <li><i class="fa-solid fa-check"></i> Physical education</li>
-                        </ul>
-
-                        <a href="#student-gallery" class="sl-button sl-button-gold">
-                            Explore Student Moments
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-
-                    <figure class="sl-sports-image sl-reveal">
-                        <!-- REQUIRED SPORTS PHOTO -->
+                    <div class="sl-sports-image sl-reveal">
                         <img
                             src="/images/The-Spirit-Of-Sport.png"
                             alt="The Spirit of Sport at St. Martin's High School"
                             loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
                         >
+                    </div>
 
-                        <figcaption>
-                            <span>Move With Purpose</span>
-                            <i class="fa-solid fa-medal"></i>
-                            <span>Grow Through Teamwork</span>
-                        </figcaption>
-                    </figure>
+                    <div class="sl-sports-copy sl-reveal">
+                        <span class="sl-eyebrow">Strength. Spirit. Sportsmanship.</span>
+
+                        <h2>
+                            The Spirit<br>
+                            <span>of Sport.</span>
+                        </h2>
+
+                        <p>
+                            Sports and physical activities help students build
+                            resilience, discipline and respect. Participation
+                            teaches them how to work towards a common goal,
+                            celebrate progress and face setbacks with determination.
+                        </p>
+
+                        <p>
+                            Through structured physical activities and games,
+                            students have opportunities to strengthen their
+                            coordination, teamwork and sense of fair play.
+                        </p>
+
+                        <ul class="sl-sports-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Football</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Athletics</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Volleyball</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Badminton</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Throwball</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Yoga and fitness</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Skating</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Indoor games</li>
+                        </ul>
+
+                        <a href="#student-gallery" class="sl-button sl-button-outline">
+                            Explore Student Life
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -1197,156 +1077,122 @@
         <section class="sl-experiences" id="student-experiences">
             <div class="sl-container">
 
-                <div class="sl-centered-heading sl-reveal">
-                    <span class="sl-eyebrow">A World of Possibilities</span>
-
-                    <h2 class="sl-section-title">
-                        Learning in <em>Every Direction.</em>
-                    </h2>
-
-                    <p class="sl-lead">
-                        From academic exploration to creative expression,
-                        students have opportunities to discover interests,
-                        practise new skills and develop their individual strengths.
+                <div class="sl-section-heading sl-reveal">
+                    <span class="sl-eyebrow">Discover Your Potential</span>
+                    <h2>Experiences That Inspire</h2>
+                    <p>
+                        Every space and activity offers a chance to explore,
+                        practise new skills and develop a broader understanding
+                        of the world.
                     </p>
                 </div>
 
                 <div class="sl-experience-grid">
 
                     <article class="sl-experience-card sl-reveal">
-                        <div class="sl-experience-image">
-                            <img
-                                src="/images/classroom.png"
-                                alt="Classroom learning and student participation"
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='/images/Legacy.png';"
-                            >
-                        </div>
-
+                        <img
+                            src="/images/classroom.png"
+                            alt="Classroom learning and student participation"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
                         <div class="sl-experience-content">
-                            <span class="sl-card-number">01 / LEARN</span>
-
-                            <h3>Classroom Discovery</h3>
-
+                            <span>01 / Academics</span>
+                            <h3>Learning Together</h3>
                             <p>
-                                Lessons become opportunities to ask questions,
-                                share perspectives, strengthen understanding
-                                and build the foundations for lifelong learning.
+                                Classroom experiences encourage discussion,
+                                problem-solving, participation and the
+                                development of independent thinking.
                             </p>
                         </div>
                     </article>
 
                     <article class="sl-experience-card sl-reveal">
-                        <div class="sl-experience-image">
-                            <img
-                                src="/images/library.png"
-                                alt="Reading, research and independent learning"
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='/images/Legacy.png';"
-                            >
-                        </div>
-
+                        <img
+                            src="/images/library.png"
+                            alt="School library and reading"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
                         <div class="sl-experience-content">
-                            <span class="sl-card-number">02 / EXPLORE</span>
-
-                            <h3>Reading & Discovery</h3>
-
+                            <span>02 / Reading</span>
+                            <h3>A World of Ideas</h3>
                             <p>
-                                Reading and research encourage imagination,
-                                language development, independent thinking
-                                and a deeper understanding of the world.
+                                Reading and research help students expand their
+                                knowledge, strengthen language skills and
+                                discover new perspectives.
                             </p>
                         </div>
                     </article>
 
                     <article class="sl-experience-card sl-reveal">
-                        <div class="sl-experience-image">
-                            <img
-                                src="/images/laboratory.png"
-                                alt="Practical learning and scientific exploration"
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='/images/Legacy.png';"
-                            >
-                        </div>
-
+                        <img
+                            src="/images/laboratory.png"
+                            alt="Practical learning in a school laboratory"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
                         <div class="sl-experience-content">
-                            <span class="sl-card-number">03 / DISCOVER</span>
-
-                            <h3>Practical Exploration</h3>
-
+                            <span>03 / Discovery</span>
+                            <h3>Learning by Doing</h3>
                             <p>
-                                Hands-on learning encourages observation,
-                                logical reasoning, experimentation and
-                                an appreciation of how ideas work in practice.
+                                Practical activities help students connect
+                                classroom concepts with observation,
+                                experimentation and real-world thinking.
                             </p>
                         </div>
                     </article>
 
                     <article class="sl-experience-card sl-reveal">
-                        <div class="sl-experience-image">
-                            <img
-                                src="/images/computerlab.png"
-                                alt="Computer education and digital learning"
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='/images/Legacy.png';"
-                            >
-                        </div>
-
+                        <img
+                            src="/images/computerlab.png"
+                            alt="Students developing computer and technology skills"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
                         <div class="sl-experience-content">
-                            <span class="sl-card-number">04 / INNOVATE</span>
-
-                            <h3>Digital Learning</h3>
-
+                            <span>04 / Technology</span>
+                            <h3>Ready for Tomorrow</h3>
                             <p>
-                                Technology-based learning can help students
-                                build digital awareness, develop problem-solving
-                                skills and prepare for an increasingly connected world.
+                                Technology-based learning supports digital
+                                awareness, logical thinking and the skills
+                                students need for a changing world.
                             </p>
                         </div>
                     </article>
 
                     <article class="sl-experience-card sl-reveal">
-                        <div class="sl-experience-image">
-                            <img
-                                src="/images/dance.png"
-                                alt="Creative expression through dance and performance"
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='/images/Legacy.png';"
-                            >
-                        </div>
-
+                        <img
+                            src="/images/dance.png"
+                            alt="Dance, expression and creative activities"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
                         <div class="sl-experience-content">
-                            <span class="sl-card-number">05 / CREATE</span>
-
-                            <h3>Arts & Expression</h3>
-
+                            <span>05 / Creativity</span>
+                            <h3>Expression and Art</h3>
                             <p>
-                                Creative activities give students ways to
-                                express ideas, appreciate culture, build
-                                confidence and celebrate their individuality.
+                                Creative activities give students opportunities
+                                to express ideas, build confidence and
+                                appreciate artistic expression.
                             </p>
                         </div>
                     </article>
 
                     <article class="sl-experience-card sl-reveal">
-                        <div class="sl-experience-image">
-                            <img
-                                src="/images/skating.png"
-                                alt="Physical activity and sporting development"
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='/images/The-Spirit-Of-Sport.png';"
-                            >
-                        </div>
-
+                        <img
+                            src="/images/skating.png"
+                            alt="Skating and physical activities"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
                         <div class="sl-experience-content">
-                            <span class="sl-card-number">06 / ACHIEVE</span>
-
-                            <h3>Movement & Fitness</h3>
-
+                            <span>06 / Activity</span>
+                            <h3>Movement and Fitness</h3>
                             <p>
-                                Physical activities encourage healthy habits,
-                                coordination, self-discipline and the confidence
-                                to keep practising and improving.
+                                Physical activities encourage coordination,
+                                healthy habits, persistence and the joy of
+                                improving through practice.
                             </p>
                         </div>
                     </article>
@@ -1355,200 +1201,195 @@
             </div>
         </section>
 
-        <!-- WELLNESS AND GUIDANCE -->
+        <!-- WELLNESS AND MENTORSHIP -->
         <section class="sl-wellness">
             <div class="sl-container">
+
+                <div class="sl-section-heading sl-reveal">
+                    <span class="sl-eyebrow">Growing with Confidence</span>
+                    <h2>Every Student Matters</h2>
+                    <p>
+                        A positive school experience supports not only academic
+                        progress but also emotional development, friendships
+                        and a sense of belonging.
+                    </p>
+                </div>
+
                 <div class="sl-wellness-grid">
 
-                    <div class="sl-reveal">
-                        <span class="sl-eyebrow">Care & Guidance</span>
-
-                        <h2 class="sl-section-title">
-                            Helping Every Student <em>Flourish.</em>
-                        </h2>
-
-                        <p class="sl-lead">
-                            A positive educational experience supports more
-                            than academic progress. Students also benefit from
-                            encouragement, meaningful relationships and guidance
-                            as they navigate their school years.
+                    <article class="sl-wellness-item sl-reveal">
+                        <i class="fa-solid fa-people-group"></i>
+                        <h3>A Sense of Belonging</h3>
+                        <p>
+                            A respectful and inclusive school community helps
+                            students build friendships, appreciate differences
+                            and feel comfortable participating in school life.
                         </p>
-                    </div>
+                    </article>
 
-                    <div class="sl-wellness-points">
+                    <article class="sl-wellness-item sl-reveal">
+                        <i class="fa-solid fa-person-chalkboard"></i>
+                        <h3>Guidance and Mentorship</h3>
+                        <p>
+                            Guidance from teachers supports students as they
+                            work through challenges, strengthen their skills
+                            and take greater responsibility for their learning.
+                        </p>
+                    </article>
 
-                        <article class="sl-wellness-point sl-reveal">
-                            <span>
-                                <i class="fa-solid fa-hand-holding-heart"></i>
-                            </span>
+                    <article class="sl-wellness-item sl-reveal">
+                        <i class="fa-solid fa-heart"></i>
+                        <h3>Confidence and Well-being</h3>
+                        <p>
+                            Encouragement, positive relationships and balanced
+                            activities help students develop self-belief and
+                            approach everyday challenges constructively.
+                        </p>
+                    </article>
 
-                            <div>
-                                <h3>Emotional Well-being</h3>
-
-                                <p>
-                                    Encouraging kindness, respectful communication
-                                    and a sense of belonging helps students develop
-                                    confidence in themselves and consideration for others.
-                                </p>
-                            </div>
-                        </article>
-
-                        <article class="sl-wellness-point sl-reveal">
-                            <span>
-                                <i class="fa-solid fa-user-graduate"></i>
-                            </span>
-
-                            <div>
-                                <h3>Academic Mentorship</h3>
-
-                                <p>
-                                    Teacher guidance helps students strengthen
-                                    their understanding, recognise areas for
-                                    improvement and approach academic challenges
-                                    with greater confidence.
-                                </p>
-                            </div>
-                        </article>
-
-                        <article class="sl-wellness-point sl-reveal">
-                            <span>
-                                <i class="fa-solid fa-people-arrows-left-right"></i>
-                            </span>
-
-                            <div>
-                                <h3>Social Development</h3>
-
-                                <p>
-                                    Working with classmates gives students
-                                    opportunities to practise cooperation,
-                                    empathy, communication and respect for
-                                    different viewpoints.
-                                </p>
-                            </div>
-                        </article>
-
-                        <article class="sl-wellness-point sl-reveal">
-                            <span>
-                                <i class="fa-solid fa-compass"></i>
-                            </span>
-
-                            <div>
-                                <h3>Character & Responsibility</h3>
-
-                                <p>
-                                    Everyday school experiences help students
-                                    appreciate honesty, discipline, accountability
-                                    and the importance of making thoughtful choices.
-                                </p>
-                            </div>
-                        </article>
-
-                    </div>
                 </div>
             </div>
         </section>
 
         <!-- QUOTE -->
         <section class="sl-quote">
-            <div class="sl-container sl-reveal">
-                <span class="sl-quote-mark" aria-hidden="true">“</span>
+            <div class="sl-reveal">
+                <div class="sl-quote-icon">
+                    <i class="fa-solid fa-quote-left"></i>
+                </div>
 
                 <blockquote>
                     Education is not only about what students learn,
                     but also about who they become along the way.
                 </blockquote>
 
-                <p>Learning · Character · Confidence</p>
+                <p>The Martinian Spirit</p>
             </div>
         </section>
 
-        <!-- PHOTO GALLERY -->
+        <!-- PHOTO GALLERY: OTHER PHOTOS ONLY -->
+        <!-- The-Spirit-Of-Sport.png is intentionally excluded here. -->
         <section class="sl-gallery" id="student-gallery">
             <div class="sl-container">
 
-                <div class="sl-centered-heading sl-reveal">
+                <div class="sl-section-heading sl-reveal">
                     <span class="sl-eyebrow">Moments That Matter</span>
-
-                    <h2 class="sl-section-title">
-                        A Glimpse of <em>School Life.</em>
-                    </h2>
-
-                    <p class="sl-lead">
-                        Every activity, discovery and shared experience
-                        contributes to the memories and lessons students
-                        carry with them throughout their lives.
+                    <h2>A Glimpse of Student Life</h2>
+                    <p>
+                        A collection of learning spaces, activities and
+                        experiences that contribute to a vibrant school journey.
                     </p>
                 </div>
 
                 <div class="sl-gallery-grid">
 
-                    <figure class="sl-gallery-item sl-reveal">
-                        <img
-                            src="/images/The-Spirit-Of-Sport.png"
-                            alt="The spirit of sports and teamwork"
-                            loading="lazy"
-                        >
-                        <figcaption>The Spirit of Sport</figcaption>
-                    </figure>
-
-                    <figure class="sl-gallery-item sl-reveal">
+                    <div class="sl-gallery-item sl-reveal">
                         <img
                             src="/images/Legacy.png"
-                            alt="School life and student experiences"
+                            alt="St. Martin's school community"
                             loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/classroom.png';"
                         >
-                        <figcaption>Our School Community</figcaption>
-                    </figure>
+                        <div class="sl-gallery-overlay">
+                            <span>Our School Community</span>
+                        </div>
+                    </div>
 
-                    <figure class="sl-gallery-item sl-reveal">
-                        <img
-                            src="/images/skating.png"
-                            alt="Physical activity and skating"
-                            loading="lazy"
-                            onerror="this.onerror=null;this.src='/images/The-Spirit-Of-Sport.png';"
-                        >
-                        <figcaption>Movement & Fitness</figcaption>
-                    </figure>
-
-                    <figure class="sl-gallery-item sl-reveal">
+                    <div class="sl-gallery-item sl-reveal">
                         <img
                             src="/images/classroom.png"
-                            alt="Learning and classroom participation"
+                            alt="Classroom activities"
                             loading="lazy"
                             onerror="this.onerror=null;this.src='/images/Legacy.png';"
                         >
-                        <figcaption>Learning Together</figcaption>
-                    </figure>
+                        <div class="sl-gallery-overlay">
+                            <span>Learning Together</span>
+                        </div>
+                    </div>
+
+                    <div class="sl-gallery-item sl-reveal">
+                        <img
+                            src="/images/library.png"
+                            alt="Reading and library activities"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
+                        <div class="sl-gallery-overlay">
+                            <span>Discovering Books</span>
+                        </div>
+                    </div>
+
+                    <div class="sl-gallery-item sl-reveal">
+                        <img
+                            src="/images/laboratory.png"
+                            alt="Science and practical learning"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
+                        <div class="sl-gallery-overlay">
+                            <span>Curiosity in Action</span>
+                        </div>
+                    </div>
+
+                    <div class="sl-gallery-item sl-reveal">
+                        <img
+                            src="/images/computerlab.png"
+                            alt="Computer learning"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
+                        <div class="sl-gallery-overlay">
+                            <span>Digital Discovery</span>
+                        </div>
+                    </div>
+
+                    <div class="sl-gallery-item sl-reveal">
+                        <img
+                            src="/images/dance.png"
+                            alt="Dance and creative expression"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
+                        <div class="sl-gallery-overlay">
+                            <span>Creative Expression</span>
+                        </div>
+                    </div>
+
+                    <div class="sl-gallery-item sl-reveal">
+                        <img
+                            src="/images/skating.png"
+                            alt="Skating and physical activities"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='/images/Legacy.png';"
+                        >
+                        <div class="sl-gallery-overlay">
+                            <span>Movement and Fitness</span>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- CALL TO ACTION -->
+        <!-- ADMISSIONS CTA -->
         <section class="sl-cta">
-            <div class="sl-container">
-                <div class="sl-cta-inner sl-reveal">
+            <div class="sl-reveal">
+                <span class="sl-eyebrow">Begin Your Journey</span>
 
-                    <div>
-                        <span class="sl-eyebrow">The Journey Begins Here</span>
+                <h2>
+                    Every Great Journey<br>
+                    <span>Starts with a First Step.</span>
+                </h2>
 
-                        <h2>
-                            Discover a Place to Learn, Grow & Belong.
-                        </h2>
+                <p>
+                    Discover a school experience that values learning,
+                    character, creativity and personal growth.
+                </p>
 
-                        <p>
-                            Explore the educational experience at St. Martin's
-                            High School and learn more about joining our school
-                            community.
-                        </p>
-                    </div>
-
-                    <a href="/admissions" class="sl-button sl-button-gold">
-                        Explore Admissions
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                </div>
+                <a href="/admissions" class="sl-button">
+                    Explore Admissions
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
         </section>
 
@@ -1558,10 +1399,18 @@
     <%- include('partials/footer') %>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const revealItems = document.querySelectorAll(
-                ".student-life-page .sl-reveal"
-            );
+        /* =========================================
+           SCROLL REVEAL
+           Falls back to visible content if the
+           IntersectionObserver API is unavailable.
+        ========================================= */
+
+        (function () {
+            const page = document.querySelector(".student-life-page");
+
+            if (!page) return;
+
+            const revealItems = page.querySelectorAll(".sl-reveal");
 
             if (!("IntersectionObserver" in window)) {
                 revealItems.forEach(function (item) {
@@ -1569,6 +1418,8 @@
                 });
                 return;
             }
+
+            page.classList.add("sl-js");
 
             const observer = new IntersectionObserver(
                 function (entries, currentObserver) {
@@ -1588,8 +1439,9 @@
             revealItems.forEach(function (item) {
                 observer.observe(item);
             });
-        });
+        })();
     </script>
 
 </body>
 </html>
+```
