@@ -1022,6 +1022,157 @@ app.get(
 // PRINCIPAL: LIST TEACHERS
 // ============================================================
 
+
+/* ==========================================================
+   PRINCIPAL: TEACHER INSTRUCTIONS
+========================================================== */
+
+// Get all sent instructions
+app.get(
+    "/api/principal/notifications",
+    requirePrincipal,
+    (req, res) => {
+        try {
+            const notifications = db.prepare(`
+                SELECT id, title, message, created_at
+                FROM teacher_notifications
+                ORDER BY created_at DESC, id DESC
+            `).all();
+
+            res.json({
+                success: true,
+                notifications
+            });
+        } catch (error) {
+            console.error("Load notifications error:", error);
+
+            res.status(500).json({
+                success: false,
+                error: "Unable to load instructions."
+            });
+        }
+    }
+);
+
+// Send a new instruction to teachers
+app.post(
+    "/api/principal/notifications",
+    requirePrincipal,
+    (req, res) => {
+        try {
+            const title = cleanString(req.body.title);
+            const message = cleanString(req.body.message);
+
+            if (!title || !message) {
+                return res.status(400).json({
+                    success: false,
+                    error: "Title and message are required."
+                });
+            }
+
+            if (title.length > 200 || message.length > 10000) {
+                return res.status(400).json({
+                    success: false,
+                    error: "Title or message is too long."
+                });
+            }
+
+            const result = db.prepare(`
+                INSERT INTO teacher_notifications
+                    (title, message, created_by)
+                VALUES (?, ?, ?)
+            `).run(
+                title,
+                message,
+                req.session.principal.id
+            );
+
+            res.status(201).json({
+                success: true,
+                message: "Instruction sent successfully.",
+                id: result.lastInsertRowid
+            });
+        } catch (error) {
+            console.error("Send notification error:", error);
+
+            res.status(500).json({
+                success: false,
+                error: "Unable to send instruction."
+            });
+        }
+    }
+);
+
+// Delete an instruction
+app.delete(
+    "/api/principal/notifications/:id",
+    requirePrincipal,
+    (req, res) => {
+        try {
+            const id = Number(req.params.id);
+
+            if (!Number.isInteger(id) || id < 1) {
+                return res.status(400).json({
+                    success: false,
+                    error: "Invalid instruction ID."
+                });
+            }
+
+            const result = db.prepare(`
+                DELETE FROM teacher_notifications
+                WHERE id = ?
+            `).run(id);
+
+            if (!result.changes) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Instruction not found."
+                });
+            }
+
+            res.json({
+                success: true,
+                message: "Instruction deleted."
+            });
+        } catch (error) {
+            console.error("Delete notification error:", error);
+
+            res.status(500).json({
+                success: false,
+                error: "Unable to delete instruction."
+            });
+        }
+    }
+);
+
+// Teacher: retrieve instructions
+app.get(
+    "/api/teacher/notifications",
+    requireTeacher,
+    (req, res) => {
+        try {
+            const notifications = db.prepare(`
+                SELECT id, title, message, created_at
+                FROM teacher_notifications
+                ORDER BY created_at DESC, id DESC
+            `).all();
+
+            res.json({
+                success: true,
+                notifications
+            });
+        } catch (error) {
+            console.error("Teacher notifications error:", error);
+
+            res.status(500).json({
+                success: false,
+                error: "Unable to load instructions."
+            });
+        }
+    }
+);
+
+
 app.get(
     "/api/principal/teachers",
     requirePrincipal,
