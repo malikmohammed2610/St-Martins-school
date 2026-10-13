@@ -839,7 +839,108 @@
 
 </main>
 
+
+<script>
+(async function loadPrincipalInstructions() {
+    const container = document.getElementById(
+        "teacherNotifications"
+    );
+
+    function addTextElement(parent, tag, text, styles) {
+        const element = document.createElement(tag);
+        element.textContent = text;
+
+        if (styles) {
+            Object.assign(element.style, styles);
+        }
+
+        parent.appendChild(element);
+        return element;
+    }
+
+    try {
+        const response = await fetch(
+            "/api/teacher/notifications",
+            {
+                credentials: "same-origin"
+            }
+        );
+
+        if (response.status === 401) {
+            container.textContent =
+                "Your session has expired. Please log in again.";
+            return;
+        }
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(
+                data.error || "Unable to load instructions."
+            );
+        }
+
+        container.replaceChildren();
+
+        const notifications = data.notifications || [];
+
+        if (notifications.length === 0) {
+            container.textContent =
+                "No instructions from the principal yet.";
+            return;
+        }
+
+        notifications.forEach(function (item) {
+            const card = document.createElement("article");
+
+            Object.assign(card.style, {
+                padding: "18px",
+                marginTop: "14px",
+                border: "1px solid #e8e8e5",
+                borderLeft: "4px solid #c5a45a",
+                borderRadius: "10px",
+                background: "#fcfbf8"
+            });
+
+            addTextElement(card, "h3", item.title, {
+                margin: "0 0 8px",
+                color: "#071827",
+                fontSize: "18px"
+            });
+
+            addTextElement(card, "p", item.message, {
+                margin: "0 0 10px",
+                whiteSpace: "pre-wrap",
+                overflowWrap: "anywhere",
+                color: "#344454"
+            });
+
+            if (item.created_at) {
+                addTextElement(
+                    card,
+                    "small",
+                    "Sent: " + item.created_at,
+                    { color: "#7a8289" }
+                );
+            }
+
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error(
+            "Unable to load principal instructions:",
+            error
+        );
+
+        container.textContent =
+            "Unable to load instructions. Please refresh the page.";
+    }
+})();
+</script>
+
+
 <script src="/js/premium-effects.js"></script>
+
 
 </body>
 </html>
