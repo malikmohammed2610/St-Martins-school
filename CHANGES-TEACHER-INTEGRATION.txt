@@ -1,0 +1,21 @@
+ST. MARTIN'S HIGH SCHOOL - TEACHER INTEGRATION PATCH
+
+Files changed:
+1. server.js
+   - Teacher announcement API accepts a page destination (News & Updates or Resources).
+   - Teacher image uploads accept a destination (News & Updates or School Gallery).
+   - Public News and Resources routes show approved posts for their own page destination.
+2. views/teacher-dashboard.ejs
+   - Announcement and calendar forms submit to the authenticated JSON APIs.
+   - Image upload form sends multipart data to the authenticated upload API.
+   - Teacher can choose whether an uploaded image should appear on News & Updates or School Gallery.
+
+Publishing workflow:
+- Teacher submits an announcement, calendar event, or image.
+- Submission stays pending until the principal approves it.
+- Approved announcements appear on their selected public page.
+- Approved images appear on the selected News & Updates or School Gallery page.
+
+Password note:
+- Teacher passwords are stored as bcrypt hashes and cannot be displayed/recovered as plaintext.
+- The Principal Dashboard includes a Reset Password action; use that to set a new password securely.
