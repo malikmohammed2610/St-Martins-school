@@ -55,14 +55,23 @@ const emailOtpStore = new Map();
 function getMailTransporter() {
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
         return nodemailer.createTransport({
-            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false, // Must be false for 587 (STARTTLS)
+            requireTLS: true,
             auth: {
                 user: process.env.EMAIL_USER.trim(),
                 pass: process.env.EMAIL_PASS.trim()
             },
-            connectionTimeout: 10000, // 10 seconds
-            greetingTimeout: 10000,
-            socketTimeout: 15000
+            tls: {
+                ciphers: "SSLv3",
+                rejectUnauthorized: false
+            },
+            pool: true,
+            maxConnections: 1,
+            connectionTimeout: 15000,
+            greetingTimeout: 15000,
+            socketTimeout: 20000
         });
     }
     return null;
