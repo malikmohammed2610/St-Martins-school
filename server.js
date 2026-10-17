@@ -925,6 +925,16 @@ app.post("/api/principal/events/:id/reject", requirePrincipal, (req, res) => {
     res.json({ success: Boolean(result.changes), message: "Event rejected." });
 });
 
+
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: Number(process.env.EMAIL_PORT),
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 // Remove old items from anywhere
 app.get("/api/principal/all-content", requirePrincipal, (req, res) => {
     try {
