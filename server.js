@@ -54,10 +54,11 @@ const emailOtpStore = new Map();
 
 function getMailTransporter() {
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+        const port = Number(process.env.EMAIL_PORT) || 587;
         return nodemailer.createTransport({
             host: process.env.EMAIL_HOST || "smtp.gmail.com",
-            port: Number(process.env.EMAIL_PORT) || 465,
-            secure: Number(process.env.EMAIL_PORT) === 465 || !process.env.EMAIL_PORT,
+            port: port,
+            secure: port === 465, // false for port 587
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
