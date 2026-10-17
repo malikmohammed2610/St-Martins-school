@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Principal & Management | St. Martin's High School, Balanagar</title>
+
+    <meta
+        name="description"
+        content="Meet the Principal and Management of St. Martin's High School, Balanagar, Hyderabad."
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/images/Logo.png"
+    >
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- =========================================================
+         PAGE STYLES
+    ========================================================== -->
+
+    <style>
+
+        :root {
+            --navy: #071A2B;
+            --navy-light: #10283D;
+            --gold: #C5A45A;
+            --gold-light: #DFC982;
+            --ivory: #F7F3EB;
+            --white: #FFFFFF;
+            --text: #303944;
+            --muted: #727C86;
+            --border: rgba(7, 26, 43, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--ivory);
+            overflow-x: hidden;
+        }
+
+        a {
+            transition: all 0.3s ease;
+        }
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .page-hero {
+            position: relative;
+            min-height: 500px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(7, 26, 43, 0.90),
+                    rgba(7, 26, 43, 0.96)
+                ),
+                url('/images/school-campus.jpg');
+
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        /* Decorative glow */
+
+        .hero-glow {
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background: radial-gradient(
+                circle,
+                rgba(197,164,90,0.14),
+                transparent 70%
+            );
+
+            top: -250px;
+            right: -120px;
+
+            pointer-events: none;
+        }
+
+
+        .hero-glow-two {
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            border-radius: 50%;
+
+            background: radial-gradient(
+                circle,
+                rgba(197,164,90,0.10),
+                transparent 70%
+            );
+
+            bottom: -220px;
+            left: -100px;
+
+            pointer-events: none;
+        }
+
+
+        /* Geometric lines */
+
+        .hero-line {
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border: 1px solid rgba(197,164,90,0.20);
+
+            transform: rotate(45deg);
+
+            right: -100px;
+            bottom: -100px;
+        }
+
+        .hero-line-two {
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            transform: rotate(45deg);
+
+            left: -80px;
+            top: 70px;
+        }
+
+
+        .page-hero::after {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+            bottom: 0;
+
+            transform: translateX(-50%);
+
+            width: 150px;
+            height: 3px;
+
+            background: var(--gold);
+        }
+
+
+        .hero-content {
+            position: relative;
+
+            z-index: 5;
+
+            max-width: 900px;
+
+            padding: 90px 20px;
+        }
+
+
+        .hero-eyebrow {
+            color: var(--gold-light);
+
+            font-size: 0.72rem;
+
+            letter-spacing: 0.30em;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            margin-bottom: 22px;
+        }
+
+
+        .hero-title {
+            color: white;
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: clamp(3.5rem, 7vw, 6.5rem);
+
+            line-height: 0.92;
+
+            font-weight: 500;
+
+            margin-bottom: 30px;
+        }
+
+
+        .hero-title span {
+            color: var(--gold-light);
+        }
+
+
+        .hero-description {
+            color: rgba(255,255,255,0.74);
+
+            max-width: 720px;
+
+            margin: auto;
+
+            font-size: 0.94rem;
+
+            line-height: 1.9;
+
+            font-weight: 300;
+        }
+
+
+        /* =====================================================
+           LEADERSHIP INTRO
+        ===================================================== */
+
+        .section {
+            padding: 110px 0;
+        }
+
+
+        .section-heading {
+            text-align: center;
+
+            max-width: 780px;
+
+            margin: 0 auto 70px;
+        }
+
+
+        .section-label {
+            color: var(--gold);
+
+            font-size: 0.69rem;
+
+            letter-spacing: 0.27em;
+
+            text-transform: uppercase;
+
+            font-weight: 700;
+
+            margin-bottom: 14px;
+        }
+
+
+        .section-title {
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 3.7rem;
+
+            line-height: 0.98;
+
+            font-weight: 600;
+
+            margin-bottom: 22px;
+        }
+
+
+        .section-description {
+            color: var(--muted);
+
+            line-height: 1.9;
+
+            font-size: 0.91rem;
+        }
+
+
+        /* =====================================================
+           PRINCIPAL SECTION
+        ===================================================== */
+
+        .principal-section {
+            background: var(--white);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .principal-section::before {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(197,164,90,0.10);
+
+            right: -250px;
+            top: 80px;
+        }
+
+
+        .principal-section::after {
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(197,164,90,0.08);
+
+            right: -170px;
+            top: 155px;
+        }
+
+
+        .principal-wrapper {
+            max-width: 1100px;
+
+            margin: auto;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .principal-image-wrapper {
+            position: relative;
+
+            padding: 14px;
+
+            background: var(--ivory);
+
+            box-shadow:
+                0 30px 70px rgba(7,26,43,0.10);
+        }
+
+
+        .principal-image-wrapper::before {
+            content: "";
+
+            position: absolute;
+
+            top: -12px;
+            left: -12px;
+
+            width: 90px;
+            height: 90px;
+
+            border-top: 2px solid var(--gold);
+            border-left: 2px solid var(--gold);
+        }
+
+
+        .principal-image-wrapper::after {
+            content: "";
+
+            position: absolute;
+
+            right: -12px;
+            bottom: -12px;
+
+            width: 90px;
+            height: 90px;
+
+            border-right: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+
+
+        .principal-image {
+            width: 100%;
+
+            height: 570px;
+
+            object-fit: cover;
+
+            object-position: center top;
+
+            display: block;
+
+            background: #e9e4d9;
+        }
+
+
+        .principal-content {
+            padding: 25px 10px 25px 35px;
+        }
+
+
+        .principal-role {
+            color: var(--gold);
+
+            font-size: 0.70rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.22em;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+
+        .principal-name {
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 3.5rem;
+
+            line-height: 1;
+
+            margin-bottom: 25px;
+
+            font-weight: 600;
+        }
+
+
+        .gold-line {
+            width: 65px;
+
+            height: 2px;
+
+            background: var(--gold);
+
+            margin-bottom: 27px;
+        }
+
+
+        .principal-message {
+            color: #59636D;
+
+            font-size: 0.93rem;
+
+            line-height: 2;
+
+            margin-bottom: 24px;
+        }
+
+
+        .principal-note {
+            padding: 24px 27px;
+
+            background: var(--ivory);
+
+            border-left: 3px solid var(--gold);
+
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 1.30rem;
+
+            font-style: italic;
+
+            line-height: 1.6;
+
+            box-shadow: 0 12px 30px rgba(7,26,43,0.05);
+        }
+
+
+        /* =====================================================
+           SMALL PRINCIPAL BADGES
+        ===================================================== */
+
+        .principal-badges {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 28px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .principal-badge {
+            padding: 10px 15px;
+
+            background: white;
+
+            border: 1px solid rgba(7,26,43,0.09);
+
+            color: var(--navy);
+
+            font-size: 0.67rem;
+
+            letter-spacing: 0.08em;
+
+            text-transform: uppercase;
+        }
+
+
+        .principal-badge i {
+            color: var(--gold);
+
+            margin-right: 7px;
+        }
+
+
+        /* =====================================================
+           MANAGEMENT
+        ===================================================== */
+
+        .management-section {
+            background: var(--ivory);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .management-section::before {
+            content: "LEADERSHIP";
+
+            position: absolute;
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 12rem;
+
+            font-weight: 600;
+
+            color: rgba(7,26,43,0.025);
+
+            white-space: nowrap;
+
+            top: 40px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            pointer-events: none;
+        }
+
+
+        .management-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .management-card {
+            height: 100%;
+
+            background: white;
+
+            border: 1px solid rgba(7,26,43,0.07);
+
+            transition: all 0.45s ease;
+
+            overflow: hidden;
+
+            position: relative;
+
+            box-shadow: 0 10px 35px rgba(7,26,43,0.035);
+        }
+
+
+        .management-card:hover {
+            transform: translateY(-10px);
+
+            box-shadow:
+                0 25px 60px rgba(7,26,43,0.12);
+        }
+
+
+        .management-photo-wrapper {
+            position: relative;
+
+            background: #eee9df;
+
+            overflow: hidden;
+        }
+
+
+        .management-photo {
+            width: 100%;
+
+            height: 390px;
+
+            object-fit: cover;
+
+            object-position: center top;
+
+            display: block;
+
+            transition: transform 0.7s ease;
+        }
+
+
+        .management-card:hover .management-photo {
+            transform: scale(1.035);
+        }
+
+
+        .management-photo-wrapper::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 40%;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(7,26,43,0.22)
+                );
+
+            pointer-events: none;
+        }
+
+
+        .management-body {
+            padding: 30px 30px 38px;
+        }
+
+
+        .management-role {
+            color: var(--gold);
+
+            font-size: 0.65rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.18em;
+
+            margin-bottom: 10px;
+        }
+
+
+        .management-name {
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 2.05rem;
+
+            line-height: 1.05;
+
+            font-weight: 600;
+
+            margin-bottom: 18px;
+        }
+
+
+        .management-divider {
+            width: 42px;
+
+            height: 2px;
+
+            background: var(--gold);
+
+            margin-bottom: 20px;
+        }
+
+
+        .management-bio {
+            color: #68727C;
+
+            font-size: 0.82rem;
+
+            line-height: 1.85;
+
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           LEADERSHIP ICON
+        ===================================================== */
+
+        .leadership-icon {
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(7,26,43,0.88);
+
+            color: var(--gold-light);
+
+            z-index: 3;
+
+            font-size: 0.85rem;
+        }
+
+
+        /* =====================================================
+           STATISTICS
+        ===================================================== */
+
+        .leadership-stats {
+            background: white;
+
+            padding: 65px 0;
+
+            border-top: 1px solid rgba(7,26,43,0.06);
+
+            border-bottom: 1px solid rgba(7,26,43,0.06);
+        }
+
+
+        .stat-box {
+            text-align: center;
+
+            padding: 20px;
+
+            position: relative;
+        }
+
+
+        .stat-box:not(:last-child)::after {
+            content: "";
+
+            position: absolute;
+
+            right: 0;
+
+            top: 15px;
+
+            width: 1px;
+
+            height: 65px;
+
+            background: rgba(7,26,43,0.10);
+        }
+
+
+        .stat-icon {
+            color: var(--gold);
+
+            font-size: 1.15rem;
+
+            margin-bottom: 10px;
+        }
+
+
+        .stat-number {
+            color: var(--navy);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 2.5rem;
+
+            font-weight: 600;
+
+            line-height: 1;
+        }
+
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 0.65rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.16em;
+
+            margin-top: 8px;
+        }
+
+
+        /* =====================================================
+           LEADERSHIP STATEMENT
+        ===================================================== */
+
+        .leadership-statement {
+            position: relative;
+
+            background: var(--navy);
+
+            color: white;
+
+            text-align: center;
+
+            padding: 110px 20px;
+
+            overflow: hidden;
+        }
+
+
+        .leadership-statement::before {
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            border: 1px solid rgba(197,164,90,0.14);
+
+            border-radius: 50%;
+
+            left: -220px;
+            top: -220px;
+        }
+
+
+        .leadership-statement::after {
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            border: 1px solid rgba(197,164,90,0.10);
+
+            border-radius: 50%;
+
+            right: -180px;
+            bottom: -180px;
+        }
+
+
+        .statement-inner {
+            max-width: 850px;
+
+            margin: auto;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .statement-mark {
+            color: var(--gold);
+
+            font-family: Georgia, serif;
+
+            font-size: 4rem;
+
+            line-height: 0.5;
+
+            margin-bottom: 30px;
+        }
+
+
+        .statement-text {
+            color: rgba(255,255,255,0.86);
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 2.15rem;
+
+            line-height: 1.45;
+
+            font-weight: 400;
+        }
+
+
+        .statement-caption {
+            color: var(--gold-light);
+
+            font-size: 0.67rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.22em;
+
+            margin-top: 28px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .school-footer {
+            background: #05131F;
+
+            color: white;
+
+            padding: 75px 0 25px;
+        }
+
+
+        .footer-container {
+            max-width: 1150px;
+
+            margin: auto;
+        }
+
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+
+            color: white;
+
+            font-size: 1.65rem;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+        }
+
+
+        .footer-description {
+            color: #8E9BA7;
+
+            font-size: 0.82rem;
+
+            line-height: 1.9;
+
+            max-width: 350px;
+        }
+
+
+        .footer-heading {
+            color: white;
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 1.35rem;
+
+            margin-bottom: 20px;
+        }
+
+
+        .footer-links {
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+        }
+
+
+        .footer-links li {
+            margin-bottom: 9px;
+        }
+
+
+        .footer-links a {
+            color: #8E9BA7;
+
+            text-decoration: none;
+
+            font-size: 0.78rem;
+        }
+
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+
+            padding-left: 4px;
+        }
+
+
+        .footer-contact {
+            color: #8E9BA7;
+
+            font-size: 0.80rem;
+
+            line-height: 1.8;
+        }
+
+
+        .footer-contact i {
+            color: var(--gold);
+
+            width: 22px;
+        }
+
+
+        .footer-divider {
+            border: 0;
+
+            border-top: 1px solid rgba(255,255,255,0.09);
+
+            margin: 45px 0 22px;
+        }
+
+
+        .footer-bottom {
+            color: #697682;
+
+            font-size: 0.70rem;
+        }
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ===================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 991px) {
+
+            .principal-content {
+                padding: 40px 0 0;
+            }
+
+            .principal-image {
+                height: 500px;
+            }
+
+            .stat-box:nth-child(2)::after {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .page-hero {
+                min-height: 430px;
+            }
+
+            .hero-content {
+                padding: 80px 20px;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .section {
+                padding: 75px 0;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+
+            .principal-image {
+                height: 430px;
+            }
+
+            .principal-name {
+                font-size: 2.8rem;
+            }
+
+            .management-photo {
+                height: 420px;
+            }
+
+            .management-section::before {
+                font-size: 6rem;
+            }
+
+            .statement-text {
+                font-size: 1.55rem;
+            }
+
+            .stat-box {
+                border-bottom: 1px solid rgba(7,26,43,0.08);
+            }
+
+            .stat-box::after {
+                display: none !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SHARED HEADER
+========================================================== -->
+
+<%- include("partials/header") %>
+
+
+<!-- =========================================================
+     HERO
+========================================================== -->
+
+<section class="page-hero">
+
+    <div class="hero-glow"></div>
+
+    <div class="hero-glow-two"></div>
+
+    <div class="hero-line"></div>
+
+    <div class="hero-line-two"></div>
+
+
+    <div class="hero-content">
+
+        <div class="hero-eyebrow">
+            Leadership • Vision • Excellence
+        </div>
+
+        <h1 class="hero-title">
+            Principal <span>&</span><br>
+            Management
+        </h1>
+
+        <p class="hero-description">
+            The strength of an institution lies in the vision,
+            dedication and leadership of those who guide it.
+            Meet the individuals who help shape the educational
+            journey of St. Martin's High School.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRINCIPAL
+========================================================== -->
+
+<section class="section principal-section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                The Principal
+            </div>
+
+            <h2 class="section-title">
+                Leadership Begins<br>
+                With Purpose
+            </h2>
+
+            <p class="section-description">
+                At St. Martin's High School, the Principal plays
+                a central role in creating an environment where
+                students are encouraged to learn, grow and
+                develop into responsible individuals.
+            </p>
+
+        </div>
+
+
+        <div class="principal-wrapper">
+
+            <div class="row align-items-center g-5">
+
+
+                <!-- PRINCIPAL PHOTO -->
+
+                <div class="col-lg-6 reveal">
+
+                    <div class="principal-image-wrapper">
+
+                        <img
+                            src="/images/management-placeholder.png"
+                            alt="Principal of St. Martin's High School"
+                            class="principal-image"
+                            onerror="this.src='/images/Logo.png';"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRINCIPAL INFORMATION -->
+
+                <div class="col-lg-6 reveal">
+
+                    <div class="principal-content">
+
+                        <div class="principal-role">
+                            Principal
+                        </div>
+
+
+                        <h2 class="principal-name">
+                            Our Principal
+                        </h2>
+
+
+                        <div class="gold-line"></div>
+
+
+                        <p class="principal-message">
+                            The Principal provides academic and
+                            administrative leadership while
+                            working closely with teachers,
+                            students and parents to maintain
+                            a positive and purposeful school
+                            environment.
+                        </p>
+
+
+                        <p class="principal-message">
+                            With a commitment to academic
+                            excellence, discipline, character
+                            development and the overall
+                            wellbeing of students, the school
+                            leadership strives to prepare every
+                            learner for the opportunities and
+                            responsibilities of the future.
+                        </p>
+
+
+                        <div class="principal-note">
+                            "Education is not only about what
+                            students learn, but also about
+                            who they become."
+                        </div>
+
+
+                        <div class="principal-badges">
+
+                            <div class="principal-badge">
+                                <i class="fas fa-graduation-cap"></i>
+                                Academic Excellence
+                            </div>
+
+                            <div class="principal-badge">
+                                <i class="fas fa-heart"></i>
+                                Character
+                            </div>
+
+                            <div class="principal-badge">
+                                <i class="fas fa-users"></i>
+                                Student Growth
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LEADERSHIP STATS
+========================================================== -->
+
+<section class="leadership-stats">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-box">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+
+                    <div class="stat-number">
+                        01
+                    </div>
+
+                    <div class="stat-label">
+                        Institution
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-box">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+
+                    <div class="stat-number">
+                        05+
+                    </div>
+
+                    <div class="stat-label">
+                        Leadership Roles
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-box">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+
+                    <div class="stat-number">
+                        01
+                    </div>
+
+                    <div class="stat-label">
+                        Shared Vision
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-box">
+
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+
+                    <div class="stat-number">
+                        360°
+                    </div>
+
+                    <div class="stat-label">
+                        Student Development
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MANAGEMENT
+========================================================== -->
+
+<section class="section management-section">
+
+    <div class="container">
+
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                The Management
+            </div>
+
+            <h2 class="section-title">
+                The People Behind<br>
+                The Vision
+            </h2>
+
+            <p class="section-description">
+                St. Martin's High School is guided by a
+                committed management team whose experience,
+                vision and dedication continue to contribute
+                to the development of the institution.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 management-grid">
+
+
+            <!-- =================================================
+                 MALLA REDDY
+            ================================================== -->
+
+            <div class="col-lg-6 reveal">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <div class="leadership-icon">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/a09ec53a6_Malla-Reddy-Sir.jpg"
+                            alt="Sri CH. Malla Reddy"
+                            class="management-photo"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+                            Secretary & Correspondent
+                        </div>
+
+                        <h3 class="management-name">
+                            Sri CH. Malla Reddy
+                        </h3>
+
+                        <div class="management-divider"></div>
+
+                        <p class="management-bio">
+
+                            A visionary leader and Hon'ble MLA of
+                            Medchal Constituency, Sri CH. Malla
+                            Reddy has been associated with
+                            education for over three decades.
+
+                            <br><br>
+
+                            He is a founder member of St. Martin's
+                            Educational Society and the Founder
+                            Chairman of the Malla Reddy Group of
+                            Institutions.
+
+                            <br><br>
+
+                            With an extensive educational network
+                            and a mission of making quality
+                            education accessible, his journey
+                            reflects the values of an educationist,
+                            entrepreneur and philanthropist.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 LAXMAN REDDY
+            ================================================== -->
+
+            <div class="col-lg-6 reveal">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <div class="leadership-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/6438cfd8f_lakshmanreddy.jpg"
+                            alt="Sri M. Laxman Reddy"
+                            class="management-photo"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+                            Chairman
+                        </div>
+
+                        <h3 class="management-name">
+                            Sri M. Laxman Reddy
+                        </h3>
+
+                        <div class="management-divider"></div>
+
+                        <p class="management-bio">
+
+                            As Chairperson, Sri M. Laxman Reddy
+                            encourages students to understand the
+                            importance of a healthy lifestyle,
+                            including a good diet and regular
+                            exercise.
+
+                            <br><br>
+
+                            His association with sports and
+                            achievements through sports awards
+                            reflect his belief in developing
+                            balanced and healthy individuals.
+
+                            <br><br>
+
+                            <strong>
+                                "Health is the key to happiness
+                                and growth both on and off the
+                                field."
+                            </strong>
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 CHANDRA SEKHAR YADAV
+            ================================================== -->
+
+            <div class="col-lg-4 reveal">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <div class="leadership-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/92c737e17_ChnadrashekarYadav.jpg"
+                            alt="Sri Chandra Sekhar Yadav"
+                            class="management-photo"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+                            Vice-President
+                        </div>
+
+                        <h3 class="management-name">
+                            Sri Chandra Sekhar Yadav
+                        </h3>
+
+                        <div class="management-divider"></div>
+
+                        <p class="management-bio">
+
+                            Vice President of St. Martin's
+                            Education Society, Sri Chandra
+                            Sekhar Yadav is a respected
+                            educationist and entrepreneur.
+
+                            <br><br>
+
+                            He believes that quality education
+                            is the foundation of a progressive
+                            society and guides young minds
+                            towards academic excellence and
+                            personal growth.
+
+                            <br><br>
+
+                            His vision is to empower youth with
+                            knowledge, values and practical
+                            skills for the future.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 JAY KISHAN YADAV
+            ================================================== -->
+
+            <div class="col-lg-4 reveal">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <div class="leadership-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/a4d8f496c_Jaykishansir.png"
+                            alt="Sri Jay Kishan Yadav"
+                            class="management-photo"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+                            Director
+                        </div>
+
+                        <h3 class="management-name">
+                            Sri Jay Kishan Yadav
+                        </h3>
+
+                        <div class="management-divider"></div>
+
+                        <p class="management-bio">
+
+                            A young and dynamic educationist and
+                            entrepreneur, Sri Jay Kishan Yadav
+                            is dedicated to transforming
+                            education to meet the demands of
+                            the modern world.
+
+                            <br><br>
+
+                            He leads several schools with a focus
+                            on creating spacious, safe and
+                            well-equipped environments for
+                            students.
+
+                            <br><br>
+
+                            His approach emphasizes holistic
+                            development through academics,
+                            creativity, values and essential
+                            life skills.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 RAJASHEKHAR YADAV
+            ================================================== -->
+
+            <div class="col-lg-4 reveal">
+
+                <article class="management-card">
+
+                    <div class="management-photo-wrapper">
+
+                        <div class="leadership-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+
+                        <img
+                            src="https://media.base44.com/images/public/6a464a4d03da5966a79b6c2c/6ef0af693_IMG_3385.jpeg"
+                            alt="Sri Rajashekhar Yadav"
+                            class="management-photo"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="management-body">
+
+                        <div class="management-role">
+                            Assistant Secretary
+                        </div>
+
+                        <h3 class="management-name">
+                            Sri Rajashekhar Yadav
+                        </h3>
+
+                        <div class="management-divider"></div>
+
+                        <p class="management-bio">
+
+                            An Executive Member of St. Martin's
+                            Group of Institutions, Sri
+                            Rajashekhar Yadav encourages
+                            students with the philosophy of
+                            not being afraid to give up the good
+                            to go for the great.
+
+                            <br><br>
+
+                            He emphasizes spiritual thoughts
+                            and encourages young people to
+                            become responsible, compassionate
+                            and disciplined individuals.
+
+                            <br><br>
+
+                            His approach combines spiritual
+                            beliefs with updated technical
+                            knowledge and the skills required
+                            for the 21st century.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LEADERSHIP STATEMENT
+========================================================== -->
+
+<section class="leadership-statement">
+
+    <div class="statement-inner">
+
+        <div class="statement-mark">
+            “
+        </div>
+
+        <p class="statement-text">
+            Together, strong leadership and a shared
+            educational vision create an environment where
+            every student can discover their potential,
+            develop character and prepare for a meaningful
+            future.
+        </p>
+
+        <div class="statement-caption">
+            St. Martin's High School • Balanagar
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="school-footer">
+
+    <div class="container footer-container">
+
+        <div class="row g-5">
+
+
+            <!-- BRAND -->
+
+            <div class="col-lg-5">
+
+                <div class="footer-brand">
+                    ST. MARTIN'S HIGH SCHOOL
+                </div>
+
+                <p class="footer-description">
+                    A distinguished educational institution
+                    committed to academic excellence,
+                    character development and the holistic
+                    growth of every student.
+                </p>
+
+                <div class="footer-contact mt-4">
+
+                    <div class="mb-2">
+
+                        <i class="fas fa-location-dot"></i>
+
+                        Balanagar, Hyderabad, Telangana
+
+                    </div>
+
+                    <div>
+
+                        <i class="fas fa-phone"></i>
+
+                        040 - 4020 4839
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- EXPLORE -->
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-heading">
+                    Explore
+                </div>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/about">
+                            About School
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/principal">
+                            Leadership
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/facilities">
+                            Facilities
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/gallery">
+                            Gallery
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-heading">
+                    Information
+                </div>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/admissions">
+                            Admissions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/fee-structure">
+                            Fee Structure
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/student-life">
+                            Student Life
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/disclosure">
+                            Disclosure
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/teacher-login">
+                            Teacher Login
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="col-lg-3">
+
+                <div class="footer-heading">
+                    Contact
+                </div>
+
+                <div class="footer-contact">
+
+                    <div class="mb-3">
+
+                        <i class="fas fa-map-marker-alt"></i>
+
+                        St. Martin's High School,
+                        Balanagar, Hyderabad
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <i class="fas fa-phone-alt"></i>
+
+                        040 - 4020 4839
+
+                    </div>
+
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=St+Martins+High+School+Balanagar+Hyderabad"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="
+                            color:#DFC982;
+                            text-decoration:none;
+                            font-size:0.75rem;
+                            letter-spacing:0.08em;
+                            text-transform:uppercase;
+                        "
+                    >
+
+                        <i class="fas fa-location-arrow"></i>
+
+                        Open in Google Maps →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <hr class="footer-divider">
+
+
+        <div class="row align-items-center">
+
+            <div class="col-md-7">
+
+                <p class="footer-bottom mb-0">
+
+                    © 2026 St. Martin's High School,
+                    Balanagar, Hyderabad.
+                    All Rights Reserved.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-5 text-md-end mt-3 mt-md-0">
+
+                <span class="footer-bottom">
+
+                    Admissions Open 2026–2027
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     BOOTSTRAP
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- =========================================================
+     SCROLL REVEAL
+========================================================== -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+
+        const revealObserver =
+            new IntersectionObserver(
+
+                function (entries) {
+
+                    entries.forEach(function (entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("visible");
+
+                            revealObserver.unobserve(entry.target);
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: 0.12
+                }
+
+            );
+
+
+        revealElements.forEach(function (element) {
+
+            revealObserver.observe(element);
+
+        });
+
+    });
+
+</script>
+
+
+<%- include('partials/footer') %>
+</body>
+
+</html>

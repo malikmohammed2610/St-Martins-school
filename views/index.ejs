@@ -1,0 +1,3048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>St. Martin's High School | Balanagar, Hyderabad</title>
+
+    <meta name="description"
+          content="St. Martin's High School, Balanagar, Hyderabad — excellence in education, character and holistic development.">
+
+    <link rel="icon" type="image/png" href="/images/logo.png">
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        :root {
+            --navy: #071A2B;
+            --navy-light: #10283d;
+            --navy-soft: #17344c;
+
+            --gold: #C5A45A;
+            --gold-light: #dfc982;
+
+            --ivory: #F6F1E7;
+            --white: #ffffff;
+
+            --text: #263442;
+            --muted: #71808f;
+
+            --shadow: 0 25px 70px rgba(0,0,0,.14);
+            --radius: 22px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--ivory);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+
+        /* =========================================================
+           TOP BAR
+        ========================================================= */
+
+        .top-bar {
+            background: var(--navy);
+            color: rgba(255,255,255,.85);
+            font-size: 13px;
+            padding: 9px 0;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .top-bar-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .top-info {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .top-info span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .top-info i {
+            color: var(--gold-light);
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(246,241,231,.96);
+            backdrop-filter: blur(16px);
+
+            border-bottom: 1px solid rgba(197,164,90,.22);
+
+            transition: .35s ease;
+        }
+
+        .main-header.scrolled {
+            box-shadow: 0 10px 40px rgba(7,26,43,.12);
+        }
+
+        .header-inner {
+            min-height: 92px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+
+        /* =========================================================
+           LOGO
+        ========================================================= */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            color: var(--navy);
+            flex-shrink: 0;
+        }
+
+        .brand:hover {
+            color: var(--navy);
+        }
+
+        .brand-logo {
+            width: 63px;
+            height: 63px;
+
+            object-fit: contain;
+
+            filter: drop-shadow(
+                0 8px 12px rgba(7,26,43,.12)
+            );
+        }
+
+        .brand-text {
+            line-height: 1;
+        }
+
+        .brand-name {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 25px;
+            font-weight: 700;
+            letter-spacing: .4px;
+        }
+
+        .brand-location {
+            margin-top: 6px;
+
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+
+            color: var(--gold);
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 3px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            color: var(--navy) !important;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            padding: 13px 12px;
+
+            position: relative;
+
+            transition: .25s ease;
+
+            white-space: nowrap;
+        }
+
+        .nav-link::after {
+            content: "";
+
+            position: absolute;
+
+            left: 12px;
+            right: 12px;
+            bottom: 5px;
+
+            height: 2px;
+
+            background: var(--gold);
+
+            transform: scaleX(0);
+            transform-origin: center;
+
+            transition: transform .3s ease;
+        }
+
+        .nav-link:hover {
+            color: #8d702d !important;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-chevron {
+            font-size: 9px;
+            transition: transform .3s ease;
+        }
+
+        .nav-item:hover > .nav-link .nav-chevron {
+            transform: rotate(180deg);
+        }
+
+
+        /* =========================================================
+           PREMIUM DROPDOWNS
+        ========================================================= */
+
+        .dropdown-menu-custom {
+            position: absolute;
+
+            top: calc(100% + 14px);
+            left: 50%;
+
+            width: 255px;
+
+            transform:
+                translateX(-50%)
+                translateY(12px)
+                perspective(700px)
+                rotateX(-8deg);
+
+            transform-origin: top center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            background: rgba(7,26,43,.98);
+
+            border: 1px solid rgba(197,164,90,.35);
+
+            border-radius: 15px;
+
+            padding: 9px;
+
+            box-shadow:
+                0 25px 55px rgba(0,0,0,.28),
+                0 0 0 1px rgba(255,255,255,.03) inset;
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .3s ease;
+
+            z-index: 2000;
+        }
+
+        .dropdown-menu-custom::before {
+            content: "";
+
+            position: absolute;
+
+            top: -7px;
+            left: 50%;
+
+            width: 14px;
+            height: 14px;
+
+            background: var(--navy);
+
+            border-left: 1px solid rgba(197,164,90,.35);
+            border-top: 1px solid rgba(197,164,90,.35);
+
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .nav-item:hover > .dropdown-menu-custom {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translateX(-50%)
+                translateY(0)
+                perspective(700px)
+                rotateX(0);
+        }
+
+        .dropdown-item-custom {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            color: rgba(255,255,255,.88);
+
+            padding: 12px 13px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+            font-weight: 500;
+
+            transition: .25s ease;
+
+            overflow: hidden;
+        }
+
+        .dropdown-item-custom::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 3px;
+
+            background: var(--gold);
+
+            transform: scaleY(0);
+
+            transition: transform .25s ease;
+        }
+
+        .dropdown-item-custom i {
+            width: 18px;
+
+            color: var(--gold-light);
+
+            font-size: 12px;
+
+            transition: .25s ease;
+        }
+
+        .dropdown-item-custom:hover {
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(197,164,90,.16),
+                    rgba(197,164,90,.05)
+                );
+
+            transform: translateX(4px);
+        }
+
+        .dropdown-item-custom:hover::before {
+            transform: scaleY(1);
+        }
+
+        .dropdown-item-custom:hover i {
+            transform: translateX(2px);
+        }
+
+
+        /* =========================================================
+           HEADER CTA
+        ========================================================= */
+
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 11px 18px;
+
+            background: var(--navy);
+            color: white;
+
+            border: 1px solid var(--gold);
+
+            border-radius: 50px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            box-shadow: 0 8px 20px rgba(7,26,43,.16);
+
+            transition: .3s ease;
+
+            white-space: nowrap;
+        }
+
+        .header-cta:hover {
+            color: var(--navy);
+
+            background: var(--gold-light);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px rgba(7,26,43,.2);
+        }
+
+
+        /* =========================================================
+           MOBILE BUTTON
+        ========================================================= */
+
+        .mobile-menu-btn {
+            display: none;
+
+            width: 45px;
+            height: 45px;
+
+            border: 1px solid rgba(197,164,90,.4);
+
+            background: var(--navy);
+            color: white;
+
+            border-radius: 12px;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            position: relative;
+
+            min-height: calc(100vh - 101px);
+
+            overflow: hidden;
+
+            background: var(--navy);
+        }
+
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: scale(1.05);
+
+            transition:
+                opacity 1.2s ease,
+                transform 7s ease,
+                visibility 1.2s ease;
+
+            background: var(--navy);
+        }
+
+        .hero-slide img {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            object-position: center 38%;
+
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(7,26,43,.52) 0%,
+                    rgba(7,26,43,.30) 34%,
+                    rgba(7,26,43,.12) 67%,
+                    rgba(7,26,43,.06) 100%
+                ),
+                linear-gradient(
+                    180deg,
+                    rgba(7,26,43,.08) 0%,
+                    transparent 45%,
+                    rgba(7,26,43,.38) 100%
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+
+            min-height: calc(100vh - 101px);
+
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-copy {
+            max-width: 750px;
+
+            color: white;
+
+            padding: 30px 34px;
+            border-left: 2px solid var(--gold);
+
+            background: linear-gradient(
+                90deg,
+                rgba(7,26,43,.48),
+                rgba(7,26,43,.10)
+            );
+
+            border-radius: 0 20px 20px 0;
+            backdrop-filter: blur(2px);
+
+            box-shadow: 0 25px 70px rgba(0,0,0,.10);
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            margin-bottom: 17px;
+
+            color: var(--gold-light);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-eyebrow::before {
+            content: "";
+
+            width: 36px;
+            height: 1px;
+
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 7vw, 90px);
+
+            line-height: .92;
+
+            font-weight: 600;
+
+            margin-bottom: 24px;
+        }
+
+        .hero-title span {
+            color: var(--gold-light);
+        }
+
+        .hero-description {
+            max-width: 620px;
+
+            color: rgba(255,255,255,.8);
+
+            line-height: 1.8;
+
+            font-size: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 14px 22px;
+
+            background: var(--gold);
+
+            color: var(--navy);
+
+            border-radius: 50px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: .3s ease;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            color: var(--navy);
+
+            transform: translateY(-3px);
+        }
+
+        .btn-outline-light-custom {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 13px 22px;
+
+            border: 1px solid rgba(255,255,255,.5);
+
+            color: white;
+
+            border-radius: 50px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: .3s ease;
+        }
+
+        .btn-outline-light-custom:hover {
+            color: var(--navy);
+
+            background: white;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================================================
+           SECTION
+        ========================================================= */
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin-bottom: 55px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--gold);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+        .section-label::before {
+            content: "";
+
+            width: 30px;
+            height: 1px;
+
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-size: clamp(40px, 5vw, 62px);
+
+            line-height: 1;
+
+            color: var(--navy);
+
+            margin-bottom: 18px;
+        }
+
+        .section-description {
+            color: var(--muted);
+
+            line-height: 1.8;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           DISCOVER OUR STORY
+        ========================================================= */
+
+        .story-section {
+            background: var(--ivory);
+        }
+
+        .story-card {
+            position: relative;
+
+            background: white;
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow);
+
+            transform-style: preserve-3d;
+
+            transition: transform .2s ease, box-shadow .3s ease;
+        }
+
+        .story-card:hover {
+            box-shadow:
+                0 35px 90px rgba(7,26,43,.2);
+        }
+
+        .story-image-wrap {
+            position: relative;
+
+            height: 100%;
+
+            min-height: 530px;
+
+            overflow: hidden;
+
+            background: var(--navy);
+        }
+
+        .story-image {
+            width: 100%;
+            height: 100%;
+
+            min-height: 530px;
+
+            object-fit: contain;
+
+            background: var(--navy);
+
+            transition: transform .8s ease;
+        }
+
+        .story-card:hover .story-image {
+            transform: scale(1.025);
+        }
+
+        .story-image-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent 55%,
+                    rgba(7,26,43,.7)
+                );
+        }
+
+        .story-number {
+            position: absolute;
+
+            top: 25px;
+            right: 25px;
+
+            width: 70px;
+            height: 70px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.12);
+
+            border: 1px solid rgba(255,255,255,.4);
+
+            backdrop-filter: blur(10px);
+
+            color: white;
+
+            font-family: "Cormorant Garamond", serif;
+            font-size: 25px;
+
+            transform: translateZ(35px);
+        }
+
+        .story-content {
+            padding: 60px;
+        }
+
+        .story-content h3 {
+            font-size: 46px;
+            line-height: 1;
+
+            color: var(--navy);
+
+            margin-bottom: 20px;
+        }
+
+        .story-content p {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 22px;
+        }
+
+        .story-points {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 13px;
+
+            margin: 25px 0 30px;
+        }
+
+        .story-point {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            color: var(--navy);
+        }
+
+        .story-point i {
+            color: var(--gold);
+        }
+
+
+        /* =========================================================
+           FEATURE CARDS
+        ========================================================= */
+
+        .features-section {
+            background: white;
+        }
+
+        .feature-card {
+            height: 100%;
+
+            padding: 32px;
+
+            background: var(--ivory);
+
+            border: 1px solid rgba(197,164,90,.18);
+
+            border-radius: 20px;
+
+            transition: .35s ease;
+
+            transform-style: preserve-3d;
+        }
+
+        .feature-card:hover {
+            transform:
+                perspective(900px)
+                rotateX(4deg)
+                rotateY(-4deg)
+                translateY(-8px);
+
+            box-shadow:
+                0 25px 55px rgba(7,26,43,.12);
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 16px;
+
+            background: var(--navy);
+            color: var(--gold-light);
+
+            font-size: 20px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 10px 25px rgba(7,26,43,.15);
+
+            transform: translateZ(25px);
+        }
+
+        .feature-card h3 {
+            color: var(--navy);
+
+            font-size: 28px;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================================================
+           CAMPUS GALLERY
+        ========================================================= */
+
+        .campus-section {
+            background: var(--navy);
+        }
+
+        .campus-section .section-title {
+            color: white;
+        }
+
+        .campus-section .section-description {
+            color: rgba(255,255,255,.65);
+        }
+
+        .campus-grid {
+            display: grid;
+
+            grid-template-columns: 1.45fr 1fr 1fr;
+
+            grid-template-rows: 250px 250px;
+
+            gap: 14px;
+        }
+
+        .campus-image {
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 18px;
+
+            background: #10283d;
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.22);
+        }
+
+        .campus-image:first-child {
+            grid-row: span 2;
+        }
+
+        .campus-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            background: #10283d;
+
+            transition: transform .7s ease;
+        }
+
+        .campus-image:hover img {
+            transform: scale(1.06);
+        }
+
+        .campus-caption {
+            position: absolute;
+
+            left: 18px;
+            right: 18px;
+            bottom: 17px;
+
+            padding: 12px 14px;
+
+            border-radius: 12px;
+
+            background: rgba(7,26,43,.72);
+
+            backdrop-filter: blur(10px);
+
+            color: white;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           VIDEO
+        ========================================================= */
+
+        .video-card {
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 26px;
+
+            box-shadow: var(--shadow);
+
+            transform-style: preserve-3d;
+
+            transition: .4s ease;
+        }
+
+        .video-card:hover {
+            transform:
+                perspective(1000px)
+                rotateX(2deg)
+                rotateY(-2deg)
+                translateY(-5px);
+        }
+
+        .video-card video {
+            display: block;
+
+            width: 100%;
+
+            max-height: 650px;
+
+            object-fit: cover;
+
+            background: var(--navy);
+        }
+
+
+        /* =========================================================
+           MAP
+        ========================================================= */
+
+        .map-section {
+            background: var(--ivory);
+        }
+
+        .map-card {
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 28px;
+
+            min-height: 500px;
+
+            box-shadow: var(--shadow);
+
+            border: 1px solid rgba(197,164,90,.2);
+        }
+
+        .map-card iframe {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border: 0;
+        }
+
+        .map-info {
+            position: absolute;
+
+            left: 25px;
+            bottom: 25px;
+
+            width: min(360px, calc(100% - 50px));
+
+            padding: 24px;
+
+            background: rgba(7,26,43,.94);
+
+            backdrop-filter: blur(14px);
+
+            border: 1px solid rgba(197,164,90,.4);
+
+            border-radius: 18px;
+
+            color: white;
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.2);
+        }
+
+        .map-info h3 {
+            font-size: 27px;
+
+            margin-bottom: 8px;
+        }
+
+        .map-info p {
+            color: rgba(255,255,255,.68);
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-bottom: 14px;
+        }
+
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: var(--gold-light);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           REVIEW SECTION
+        ========================================================= */
+
+        .review-section {
+            background: white;
+        }
+
+        .review-form {
+            background: var(--ivory);
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            border: 1px solid rgba(197,164,90,.2);
+
+            box-shadow:
+                0 20px 50px rgba(7,26,43,.08);
+        }
+
+        .form-control-custom {
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border-radius: 11px;
+
+            border: 1px solid rgba(7,26,43,.12);
+
+            background: white;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            transition: .25s ease;
+        }
+
+        .form-control-custom:focus {
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 4px rgba(197,164,90,.1);
+        }
+
+        textarea.form-control-custom {
+            min-height: 130px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            background: var(--navy);
+
+            color: rgba(255,255,255,.7);
+
+            padding-top: 75px;
+        }
+
+        .footer-brand {
+            color: white;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 28px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+
+            line-height: 1.9;
+
+            color: rgba(255,255,255,.58);
+
+            max-width: 420px;
+        }
+
+        .footer-title {
+            color: white;
+
+            font-family: "Inter", sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: .5px;
+
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,.58);
+
+            font-size: 12px;
+
+            transition: .2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            margin-top: 55px;
+
+            padding: 20px 0;
+
+            border-top: 1px solid rgba(255,255,255,.1);
+
+            font-size: 11px;
+
+            color: rgba(255,255,255,.45);
+        }
+
+
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE NAVIGATION
+        ========================================================= */
+
+        @media (max-width: 1200px) {
+
+            .main-nav {
+                gap: 0;
+            }
+
+            .nav-link {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .header-cta {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+        }
+
+
+        @media (max-width: 991px) {
+
+            .top-bar {
+                display: none;
+            }
+
+            .header-inner {
+                min-height: 80px;
+            }
+
+            .brand-name {
+                font-size: 22px;
+            }
+
+            .brand-logo {
+                width: 54px;
+                height: 54px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-cta {
+                display: none;
+            }
+
+            .main-nav {
+                position: absolute;
+
+                top: 100%;
+                left: 0;
+                right: 0;
+
+                display: block;
+
+                max-height: 0;
+
+                overflow: hidden;
+
+                background: rgba(246,241,231,.99);
+
+                border-bottom: 1px solid rgba(197,164,90,.2);
+
+                box-shadow: 0 20px 40px rgba(7,26,43,.12);
+
+                transition:
+                    max-height .45s ease;
+            }
+
+            .main-nav.mobile-open {
+                max-height: 85vh;
+
+                overflow-y: auto;
+            }
+
+            .nav-item {
+                border-bottom: 1px solid rgba(7,26,43,.07);
+            }
+
+            .nav-link {
+                width: 100%;
+
+                padding: 16px 22px;
+
+                justify-content: space-between;
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .dropdown-menu-custom {
+                position: static;
+
+                width: 100%;
+
+                transform: none !important;
+
+                opacity: 1;
+                visibility: visible;
+
+                display: none;
+
+                border: 0;
+
+                border-radius: 0;
+
+                background: rgba(7,26,43,.98);
+
+                box-shadow: none;
+
+                padding: 5px 10px;
+            }
+
+            .dropdown-menu-custom::before {
+                display: none;
+            }
+
+            .nav-item.dropdown-open
+            .dropdown-menu-custom {
+                display: block;
+            }
+
+            .dropdown-item-custom {
+                padding: 12px 15px;
+            }
+
+            .story-content {
+                padding: 40px 30px;
+            }
+
+            .campus-grid {
+                grid-template-columns: 1fr 1fr;
+
+                grid-template-rows:
+                    300px
+                    220px
+                    220px;
+            }
+
+            .campus-image:first-child {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+
+        @media (max-width: 767px) {
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .brand-location {
+                display: none;
+            }
+
+            .brand-name {
+                font-size: 20px;
+            }
+
+            .hero,
+            .hero-content {
+                min-height: 720px;
+            }
+
+            .hero-title {
+                font-size: 55px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+            }
+
+            .hero-slide img {
+                object-position: center 35%;
+            }
+
+            .hero-overlay {
+                background:
+                    linear-gradient(
+                        180deg,
+                        rgba(7,26,43,.22) 0%,
+                        rgba(7,26,43,.16) 42%,
+                        rgba(7,26,43,.58) 100%
+                    );
+            }
+
+            .hero-copy {
+                max-width: 94%;
+                padding: 24px 20px;
+                background: rgba(7,26,43,.34);
+                border-left-width: 2px;
+                backdrop-filter: blur(3px);
+            }
+
+            .story-image-wrap,
+            .story-image {
+                min-height: 350px;
+            }
+
+            .story-content h3 {
+                font-size: 38px;
+            }
+
+            .story-points {
+                grid-template-columns: 1fr;
+            }
+
+            .campus-grid {
+                display: block;
+            }
+
+            .campus-image {
+                height: 260px;
+
+                margin-bottom: 12px;
+            }
+
+            .map-card {
+                min-height: 430px;
+            }
+
+            .map-info {
+                left: 15px;
+                bottom: 15px;
+
+                width: calc(100% - 30px);
+            }
+
+            .review-form {
+                padding: 25px 20px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ============================================================
+     TOP BAR
+============================================================ -->
+
+<div class="top-bar">
+    <div class="container top-bar-inner">
+
+        <div class="top-info">
+
+            <span>
+                <i class="fa-solid fa-phone"></i>
+                040 - 4020 4839
+            </span>
+
+            <span>
+                <i class="fa-solid fa-location-dot"></i>
+                Balanagar, Hyderabad
+            </span>
+
+        </div>
+
+        <div class="top-info">
+
+            <span>
+                <i class="fa-regular fa-clock"></i>
+                Mon - Sat
+            </span>
+
+            <span>
+                <i class="fa-solid fa-graduation-cap"></i>
+                ICSE Curriculum
+            </span>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+<header class="main-header" id="mainHeader">
+
+    <div class="container header-inner">
+
+
+        <!-- LOGO -->
+
+        <a href="/" class="brand">
+
+            <img
+                src="/images/logo.png"
+                alt="St. Martin's High School"
+                class="brand-logo"
+            >
+
+            <div class="brand-text">
+
+                <div class="brand-name">
+                    St. Martin's
+                </div>
+
+                <div class="brand-location">
+                    High School · Balanagar
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- MOBILE BUTTON -->
+
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Open Navigation"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+
+
+        <!-- ====================================================
+             MAIN NAVIGATION
+        ==================================================== -->
+
+        <nav class="main-nav" id="mainNav">
+
+            <!-- 1. HOME -->
+            <div class="nav-item">
+                <a href="/" class="nav-link">
+                    Home
+                </a>
+            </div>
+
+            <!-- 2. ABOUT -->
+            <div class="nav-item">
+                <a href="#" class="nav-link dropdown-trigger">
+                    About
+                    <i class="fa-solid fa-chevron-down nav-chevron"></i>
+                </a>
+
+                <div class="dropdown-menu-custom">
+
+                    <a href="/about" class="dropdown-item-custom">
+                        <i class="fa-solid fa-school"></i>
+                        School Overview
+                    </a>
+
+                    <a href="/principal" class="dropdown-item-custom">
+                        <i class="fa-solid fa-user-tie"></i>
+                        Principal &amp; Management
+                    </a>
+
+                    <a href="/educational-society" class="dropdown-item-custom">
+                        <i class="fa-solid fa-building-columns"></i>
+                        Educational Society
+                    </a>
+
+                    <a href="/disclosure" class="dropdown-item-custom">
+                        <i class="fa-solid fa-file-shield"></i>
+                        Mandatory Disclosure
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- 3. FACILITIES -->
+            <div class="nav-item">
+                <a href="/facilities" class="nav-link">
+                    Facilities
+                </a>
+            </div>
+
+            <!-- 4. ACADEMICS -->
+            <div class="nav-item">
+                <a href="#" class="nav-link dropdown-trigger">
+                    Academics
+                    <i class="fa-solid fa-chevron-down nav-chevron"></i>
+                </a>
+
+                <div class="dropdown-menu-custom">
+
+                    <a href="/academics" class="dropdown-item-custom">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        Academics
+                    </a>
+
+                    <a href="/curriculum" class="dropdown-item-custom">
+                        <i class="fa-solid fa-book-open"></i>
+                        Curriculum
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- 5. STUDENT LIFE -->
+            <div class="nav-item">
+                <a href="#" class="nav-link dropdown-trigger">
+                    Student Life
+                    <i class="fa-solid fa-chevron-down nav-chevron"></i>
+                </a>
+
+                <div class="dropdown-menu-custom">
+
+                    <a href="/student-life" class="dropdown-item-custom">
+                        <i class="fa-solid fa-people-group"></i>
+                        Campus Life
+                    </a>
+
+                    <a href="/news" class="dropdown-item-custom">
+                        <i class="fa-solid fa-newspaper"></i>
+                        News &amp; Updates
+                    </a>
+
+                    <a href="/gallery" class="dropdown-item-custom">
+                        <i class="fa-solid fa-images"></i>
+                        Gallery
+                    </a>
+
+                    <a href="/calendar" class="dropdown-item-custom">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Academic Calendar
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- 6. ADMISSION -->
+            <div class="nav-item">
+                <a href="#" class="nav-link dropdown-trigger">
+                    Admission
+                    <i class="fa-solid fa-chevron-down nav-chevron"></i>
+                </a>
+
+                <div class="dropdown-menu-custom">
+
+                    <a href="/admissions" class="dropdown-item-custom">
+                        <i class="fa-solid fa-door-open"></i>
+                        Admission Process
+                    </a>
+
+                    <a href="/fee-structure" class="dropdown-item-custom">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                        Fee Structure
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- 7. RESOURCES -->
+            <div class="nav-item">
+                <a href="#" class="nav-link dropdown-trigger">
+                    Resources
+                    <i class="fa-solid fa-chevron-down nav-chevron"></i>
+                </a>
+
+                <div class="dropdown-menu-custom">
+
+                    <a href="/resources" class="dropdown-item-custom">
+                        <i class="fa-solid fa-folder-open"></i>
+                        Resources
+                    </a>
+
+                    <a href="/teacher/login" class="dropdown-item-custom">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                        Teacher Login
+                    </a>
+
+                </div>
+            </div>
+
+        </nav>
+
+
+
+        <!-- HEADER CTA -->
+
+        <a href="/admissions" class="header-cta">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+            Apply Now
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+
+<section class="hero">
+
+    <div class="hero-slider" aria-label="St. Martin's High School campus slideshow">
+
+        <div class="hero-slide active">
+            <img
+                src="https://www.stmartinshighschool.in/public/assets/images/gallery/1.png"
+                alt="Students and campus life at St. Martin's High School"
+                style="object-position:center 38%;"
+                fetchpriority="high"
+            >
+        </div>
+
+        <div class="hero-slide">
+            <img
+                src="https://www.stmartinshighschool.in/public/assets/images/gallery/3.png"
+                alt="Students participating in school activities"
+                style="object-position:center 38%;"
+                loading="eager"
+            >
+        </div>
+
+        <div class="hero-slide">
+            <img
+                src="https://www.stmartinshighschool.in/public/assets/images/gallery/4.png"
+                alt="St. Martin's High School student activities"
+                style="object-position:center 36%;"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="hero-slide">
+            <img
+                src="https://www.stmartinshighschool.in/public/assets/images/gallery/5.png"
+                alt="School life at St. Martin's High School"
+                style="object-position:center 38%;"
+                loading="lazy"
+            >
+        </div>
+
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+
+        <div class="hero-copy reveal">
+
+            <div class="hero-eyebrow">
+                Excellence Since 1982
+            </div>
+
+            <h1 class="hero-title">
+                Shaping
+                <span>Tomorrow's</span>
+                Leaders.
+            </h1>
+
+            <p class="hero-description">
+                A distinguished institution where academic excellence,
+                character, creativity and leadership come together to
+                create confident young individuals prepared for the world.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/about" class="btn-gold">
+                    Discover Our School
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="/admissions" class="btn-outline-light-custom">
+                    Explore Admissions
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     DISCOVER OUR STORY
+============================================================ -->
+
+<section class="section story-section">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6 reveal">
+
+                <div
+                    class="story-card"
+                    id="storyCard"
+                >
+
+                    <div class="story-image-wrap">
+
+                        <img
+                            src="https://www.stmartinshighschool.in/public/assets/images/gallery/1.png"
+                            alt="St. Martin's High School"
+                            class="story-image"
+                        >
+
+                        <div class="story-image-overlay"></div>
+
+                        <div class="story-number">
+                            01
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6 reveal">
+
+                <div class="section-label">
+                    Our Story
+                </div>
+
+                <h2 class="section-title">
+                    Discover Our Story
+                </h2>
+
+                <div class="story-content p-0">
+
+                    <p>
+                        St. Martin's High School, Balanagar, stands as
+                        a respected centre of learning dedicated to
+                        academic excellence and the holistic development
+                        of every student.
+                    </p>
+
+                    <p>
+                        Since its establishment, the school has aimed to
+                        provide a balanced educational environment where
+                        students develop knowledge, confidence,
+                        discipline, creativity and a strong sense of
+                        responsibility.
+                    </p>
+
+                    <p>
+                        With dedicated educators, modern learning spaces,
+                        co-curricular opportunities and a nurturing
+                        campus environment, St. Martin's continues to
+                        prepare students for the challenges and
+                        opportunities of tomorrow.
+                    </p>
+
+
+                    <div class="story-points">
+
+                        <div class="story-point">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Academic Excellence
+                        </div>
+
+                        <div class="story-point">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Character Building
+                        </div>
+
+                        <div class="story-point">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Holistic Development
+                        </div>
+
+                        <div class="story-point">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Future Ready Learning
+                        </div>
+
+                    </div>
+
+
+                    <a href="/about" class="btn-gold">
+
+                        Read Our Story
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     FEATURES
+============================================================ -->
+
+<section class="section features-section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                The St. Martin's Difference
+            </div>
+
+            <h2 class="section-title">
+                An Environment Designed To Inspire
+            </h2>
+
+            <p class="section-description">
+                Every aspect of school life is designed to help
+                students discover their strengths, build confidence
+                and grow into responsible citizens.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <h3>
+                        Academic Excellence
+                    </h3>
+
+                    <p>
+                        A strong academic foundation supported by
+                        experienced educators and a structured
+                        learning environment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+
+                    <h3>
+                        Modern Facilities
+                    </h3>
+
+                    <p>
+                        Science laboratories, computer facilities,
+                        library resources, sports spaces and more.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-person-running"></i>
+                    </div>
+
+                    <h3>
+                        Student Life
+                    </h3>
+
+                    <p>
+                        Sports, cultural activities and experiences
+                        that encourage confidence, teamwork and
+                        creativity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 reveal">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+
+                    <h3>
+                        Future Ready
+                    </h3>
+
+                    <p>
+                        Students are encouraged to think critically,
+                        communicate confidently and embrace new
+                        opportunities.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     CAMPUS GALLERY
+============================================================ -->
+
+<section class="section campus-section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                Campus
+            </div>
+
+            <h2 class="section-title">
+                Experience Our Campus
+            </h2>
+
+            <p class="section-description">
+                Explore the learning spaces, activities and
+                experiences that form an important part of life
+                at St. Martin's.
+            </p>
+
+        </div>
+
+
+        <div class="campus-grid reveal">
+
+
+            <div class="campus-image">
+
+                <img
+                    src="https://www.stmartinshighschool.in/public/assets/images/gallery/1.png"
+                    alt="School Campus"
+                >
+
+                <div class="campus-caption">
+                    Our Campus
+                </div>
+
+            </div>
+
+
+            <div class="campus-image">
+
+                <img
+                    src="https://www.stmartinshighschool.in/public/assets/images/library.png"
+                    alt="School Library"
+                >
+
+                <div class="campus-caption">
+                    Library
+                </div>
+
+            </div>
+
+
+            <div class="campus-image">
+
+                <img
+                    src="https://www.stmartinshighschool.in/images/chemicallab.jpg"
+                    alt="Chemistry Laboratory"
+                >
+
+                <div class="campus-caption">
+                    Science Learning
+                </div>
+
+            </div>
+
+
+            <div class="campus-image">
+
+                <img
+                    src="https://www.stmartinshighschool.in/public/assets/images/skating.png"
+                    alt="Student Activities"
+                >
+
+                <div class="campus-caption">
+                    Sports & Activities
+                </div>
+
+            </div>
+
+
+            <div class="campus-image">
+
+                <img
+                    src="https://www.stmartinshighschool.in/public/assets/images/library.png"
+                    alt="Learning Facilities"
+                >
+
+                <div class="campus-caption">
+                    Learning Spaces
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     SCHOOL VIDEO
+============================================================ -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                A Glimpse Of St. Martin's
+            </div>
+
+            <h2 class="section-title">
+                More Than A School
+            </h2>
+
+            <p class="section-description">
+                Discover the spirit of our institution through
+                our campus and school experiences.
+            </p>
+
+        </div>
+
+
+        <div class="video-card reveal">
+
+            <video
+                src="/images/placeholders/master%20video.mp4"
+                controls
+                playsinline
+                preload="metadata"
+            ></video>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     MAP
+============================================================ -->
+
+<section class="section map-section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="section-label">
+                Find Us
+            </div>
+
+            <h2 class="section-title">
+                Visit Our Campus
+            </h2>
+
+            <p class="section-description">
+                Locate St. Martin's High School in Balanagar,
+                Hyderabad and plan your visit.
+            </p>
+
+        </div>
+
+
+        <div class="map-card reveal">
+
+            <iframe
+                src="https://www.google.com/maps?q=St.%20Martin's%20High%20School%20Balanagar%20Hyderabad&output=embed"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                title="St. Martin's High School Location"
+            ></iframe>
+
+
+            <div class="map-info">
+
+                <h3>
+                    St. Martin's High School
+                </h3>
+
+                <p>
+                    Balanagar, Ferozguda,
+                    Hyderabad, Telangana.
+                </p>
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=St.%20Martin's%20High%20School%20Balanagar%20Hyderabad"
+                    target="_blank"
+                    rel="noopener"
+                    class="map-link"
+                >
+                    Open In Google Maps
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     REVIEW
+============================================================ -->
+
+<section class="section review-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 reveal">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Your Voice Matters
+                    </div>
+
+                    <h2 class="section-title">
+                        Share Your Experience
+                    </h2>
+
+                    <p class="section-description">
+                        Parents, students and members of our school
+                        community can share their experience with
+                        St. Martin's High School.
+                    </p>
+
+                </div>
+
+
+                <form
+                    class="review-form"
+                    id="reviewForm"
+                >
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <input
+                                type="text"
+                                name="name"
+                                class="form-control-custom"
+                                placeholder="Your Name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control-custom"
+                                placeholder="Email Address"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <textarea
+                                name="review"
+                                class="form-control-custom"
+                                placeholder="Share your experience..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <button
+                                type="submit"
+                                class="btn-gold border-0"
+                            >
+
+                                Submit Review
+
+                                <i class="fa-solid fa-paper-plane"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="reviewMessage"
+                        class="mt-3"
+                        style="font-size:13px;"
+                    ></div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row g-5">
+
+
+            <div class="col-lg-5">
+
+                <div class="d-flex align-items-center gap-3 mb-3">
+
+                    <img
+                        src="/images/logo.png"
+                        alt="St. Martin's High School"
+                        style="
+                            width:65px;
+                            height:65px;
+                            object-fit:contain;
+                        "
+                    >
+
+                    <div class="footer-brand">
+                        St. Martin's
+                    </div>
+
+                </div>
+
+                <p class="footer-text">
+                    St. Martin's High School, Balanagar is committed
+                    to providing an environment where students can
+                    learn, grow, discover their potential and prepare
+                    confidently for the future.
+                </p>
+
+            </div>
+
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-title">
+                    SCHOOL
+                </div>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/about">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/principal">
+                            Principal
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/facilities">
+                            Facilities
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/gallery">
+                            Gallery
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-6 col-lg-2">
+
+                <div class="footer-title">
+                    ACADEMICS
+                </div>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/academics">
+                            Academics
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/curriculum">
+                            Curriculum
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="footer-title">
+                    CONTACT
+                </div>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/contact">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/admissions">
+                            Admissions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/fee-structure">
+                            Fee Structure
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/teacher/login">
+                            Teacher Login
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="d-flex justify-content-between flex-wrap gap-2">
+
+                <span>
+                    © <span id="year"></span>
+                    St. Martin's High School. All Rights Reserved.
+                </span>
+
+                <span>
+                    Balanagar · Hyderabad
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+
+<script>
+
+    /* =========================================================
+       HEADER SCROLL EFFECT
+    ========================================================= */
+
+    const mainHeader =
+        document.getElementById("mainHeader");
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 20) {
+
+            mainHeader.classList.add("scrolled");
+
+        } else {
+
+            mainHeader.classList.remove("scrolled");
+
+        }
+
+    });
+
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    const mobileMenuBtn =
+        document.getElementById("mobileMenuBtn");
+
+    const mainNav =
+        document.getElementById("mainNav");
+
+
+    if (mobileMenuBtn && mainNav) {
+
+    mobileMenuBtn.addEventListener("click", () => {
+
+        mainNav.classList.toggle("mobile-open");
+
+        const icon =
+            mobileMenuBtn.querySelector("i");
+
+        if (
+            mainNav.classList.contains("mobile-open")
+        ) {
+
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+
+        } else {
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+    }
+
+
+
+    /* =========================================================
+       MOBILE DROPDOWNS
+    ========================================================= */
+
+    const dropdownTriggers =
+        document.querySelectorAll(".dropdown-trigger");
+
+
+    dropdownTriggers.forEach(trigger => {
+
+        trigger.addEventListener("click", function(event) {
+
+            if (window.innerWidth <= 991) {
+
+                event.preventDefault();
+
+                const parent =
+                    this.closest(".nav-item");
+
+                parent.classList.toggle("dropdown-open");
+
+            }
+
+        });
+
+    });
+
+
+
+    /* =========================================================
+       CLOSE MOBILE MENU AFTER CLICK
+    ========================================================= */
+
+    document.querySelectorAll(
+        ".dropdown-item-custom, .main-nav > .nav-item > .nav-link:not(.dropdown-trigger)"
+    ).forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            if (window.innerWidth <= 991) {
+
+                mainNav.classList.remove("mobile-open");
+
+                mobileMenuBtn
+                    .querySelector("i")
+                    .classList.remove("fa-xmark");
+
+                mobileMenuBtn
+                    .querySelector("i")
+                    .classList.add("fa-bars");
+
+            }
+
+        });
+
+    });
+
+
+
+    /* =========================================================
+       HERO SLIDER
+    ========================================================= */
+
+    const heroSlides =
+        document.querySelectorAll(".hero-slide");
+
+    let currentSlide = 0;
+
+    if (heroSlides.length > 1) {
+
+        setInterval(() => {
+
+            heroSlides[currentSlide]
+                .classList.remove("active");
+
+            currentSlide =
+                (currentSlide + 1) % heroSlides.length;
+
+            heroSlides[currentSlide]
+                .classList.add("active");
+
+        }, 6500);
+
+    }
+
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    const revealObserver =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                        revealObserver
+                            .unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: .12
+            }
+
+        );
+
+
+    revealElements.forEach(element => {
+
+        revealObserver.observe(element);
+
+    });
+
+
+
+    /* =========================================================
+       STORY 3D TILT
+    ========================================================= */
+
+    const storyCard =
+        document.getElementById("storyCard");
+
+
+    if (storyCard) {
+
+        storyCard.addEventListener(
+            "mousemove",
+            event => {
+
+                if (window.innerWidth < 992) return;
+
+                const rect =
+                    storyCard.getBoundingClientRect();
+
+                const x =
+                    event.clientX - rect.left;
+
+                const y =
+                    event.clientY - rect.top;
+
+                const centerX =
+                    rect.width / 2;
+
+                const centerY =
+                    rect.height / 2;
+
+                const rotateY =
+                    ((x - centerX) / centerX) * 4;
+
+                const rotateX =
+                    ((centerY - y) / centerY) * 4;
+
+
+                storyCard.style.transform =
+                    `perspective(1000px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-5px)`;
+
+            }
+        );
+
+
+        storyCard.addEventListener(
+            "mouseleave",
+            () => {
+
+                storyCard.style.transform =
+                    "perspective(1000px) rotateX(0) rotateY(0)";
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================================
+       REVIEW FORM
+    ========================================================= */
+
+    const reviewForm =
+        document.getElementById("reviewForm");
+
+    const reviewMessage =
+        document.getElementById("reviewMessage");
+
+
+    if (reviewForm) {
+
+        reviewForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const formData =
+                    new FormData(reviewForm);
+
+
+                const data = {
+
+                    name:
+                        formData.get("name"),
+
+                    email:
+                        formData.get("email"),
+
+                    review:
+                        formData.get("review")
+
+                };
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/api/reviews",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(data)
+                            }
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Unable to submit review"
+                        );
+
+                    }
+
+
+                    reviewMessage.textContent =
+                        "Thank you. Your review has been submitted successfully.";
+
+                    reviewMessage.style.color =
+                        "#287a45";
+
+                    reviewForm.reset();
+
+
+                } catch (error) {
+
+                    reviewMessage.textContent =
+                        "Your review could not be submitted right now. Please try again.";
+
+                    reviewMessage.style.color =
+                        "#9b2d30";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================================
+       FOOTER YEAR
+    ========================================================= */
+
+    document.getElementById("year")
+        .textContent =
+        new Date().getFullYear();
+
+</script>
+
+
+</body>
+</html>

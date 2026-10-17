@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | St. Martin's High School</title>
+    <link rel="icon" type="image/png" href="/images/Logo.png">
+
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --navy: #071827;
+            --navy-light: #102c44;
+            --gold: #c5a45a;
+            --gold-light: #e0c67b;
+            --cream: #f4f1e9;
+            --text: #172635;
+            --muted: #7a8289;
+            --border: #e8e8e5;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .topbar {
+            background: var(--navy);
+            color: white;
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,.25);
+            padding: 8px 14px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 20px 60px;
+        }
+
+        .hero {
+            background: linear-gradient(125deg, #071827, #163b57);
+            color: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-family: Georgia, serif;
+            margin: 8px 0;
+            font-size: 32px;
+        }
+
+        .form-panel, .profile {
+            background: white;
+            border-radius: 14px;
+            padding: 26px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 12px;
+            border: 1px solid #dce1e5;
+            border-radius: 7px;
+            outline: none;
+            background: #fafafa;
+        }
+
+        .submit-button {
+            border: 0;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            background: var(--navy-light);
+            color: white;
+        }
+
+        .submit-button:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .action-table th, .action-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .action-table th {
+            background: #f8fafc;
+            color: var(--navy);
+        }
+
+        .btn-edit {
+            background: #e4eff8;
+            color: #285d80;
+            border: 0;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .btn-del {
+            background: #fae4e4;
+            color: #9b2b2b;
+            border: 0;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <img src="/images/Logo.png" alt="Logo">
+        <strong>St. Martin's High School — Faculty Dashboard</strong>
+    </div>
+    <a href="/teacher-logout" class="logout">Logout</a>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <div style="color:var(--gold-light); letter-spacing:1px; font-weight:bold; font-size:11px; text-transform:uppercase;">
+            Faculty Portal
+        </div>
+        <h1>Welcome, <%= teacher.full_name %></h1>
+        <p style="margin:0; color:#cbd5e1;">Department: <strong><%= teacher.department %></strong> | ID: <%= teacher.employee_id %></p>
+    </section>
+
+    <!-- INSTRUCTIONS DIRECT FROM PRINCIPAL -->
+    <section class="form-panel">
+        <h2 style="margin-top:0; font-family:Georgia,serif;">📢 Instructions from Principal</h2>
+        <div id="teacherNotifications" style="color:#64748b;">Loading instructions...</div>
+    </section>
+
+    <!-- 1. CREATE ANNOUNCEMENT FORM -->
+    <section class="form-panel">
+        <h2 style="margin-top:0; font-family:Georgia,serif;">📢 Post a School Announcement</h2>
+        <form id="teacherUpdateForm">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Announcement Title *</label>
+                    <input type="text" name="title" required placeholder="e.g. Science Fair Registration">
+                </div>
+
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select name="category" required>
+                        <option value="General Announcement">General Announcement</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Examination">Examination</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Holiday">Holiday</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Publish on Website Page *</label>
+                    <select name="page_key" required>
+                        <option value="news">News &amp; Updates</option>
+                        <option value="resources">Student &amp; Parent Resources</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Details *</label>
+                    <textarea name="description" required rows="4" placeholder="Announcement details..."></textarea>
+                </div>
+            </div>
+            <div style="margin-top:15px;">
+                <button type="submit" class="submit-button">Publish Announcement →</button>
+            </div>
+            <p id="updateFormMessage"></p>
+        </form>
+
+        <!-- MANAGE EXISTING ANNOUNCEMENTS (EDIT / DELETE) -->
+        <h3 style="margin:25px 0 10px; font-family:Georgia,serif;">Manage My Announcements</h3>
+        <table class="action-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Page</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="myUpdatesList">
+                <tr><td colspan="4" style="color:#94a3b8;">Loading your announcements...</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 2. CREATE CALENDAR EVENT FORM -->
+    <section class="form-panel">
+        <h2 style="margin-top:0; font-family:Georgia,serif;">🗓️ Add Academic Calendar Event</h2>
+        <form id="teacherEventForm">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Event Title *</label>
+                    <input type="text" name="title" required placeholder="e.g. Term Final Exams">
+                </div>
+
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select name="category" required>
+                        <option value="Examination">Examination</option>
+                        <option value="Holiday">Holiday</option>
+                        <option value="School Event">School Event</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Parent Meeting">Parent Meeting</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date (YYYY-MM-DD) *</label>
+                    <input type="date" name="event_date" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Location / Venue</label>
+                    <input type="text" name="location" placeholder="e.g. School Auditorium">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Event Description</label>
+                    <textarea name="description" rows="3" placeholder="Describe the event..."></textarea>
+                </div>
+            </div>
+            <div style="margin-top:15px;">
+                <button type="submit" class="submit-button">Publish Calendar Event →</button>
+            </div>
+            <p id="eventFormMessage"></p>
+        </form>
+
+        <!-- MANAGE EXISTING EVENTS (EDIT / DELETE) -->
+        <h3 style="margin:25px 0 10px; font-family:Georgia,serif;">Manage My Calendar Events</h3>
+        <table class="action-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Venue</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="myEventsList">
+                <tr><td colspan="4" style="color:#94a3b8;">Loading your events...</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+<script>
+// 1. Load Notifications from Principal
+async function loadNotifications() {
+    const container = document.getElementById("teacherNotifications");
+    try {
+        const res = await fetch("/api/teacher/notifications");
+        const data = await res.json();
+        const list = data.notifications || [];
+        if (!list.length) {
+            container.innerHTML = "<p style='color:#71808c; margin:0;'>No instructions from the principal yet.</p>";
+            return;
+        }
+        container.innerHTML = list.map(item => `
+            <div style="padding:12px; margin-bottom:10px; border-left:4px solid var(--gold); background:#fdfbf7; border-radius:6px;">
+                <div style="font-weight:bold; color:var(--navy); font-size:16px;">${escapeHtml(item.title)}</div>
+                <div style="margin:5px 0; color:#334155; font-size:14px; white-space:pre-wrap;">${escapeHtml(item.message)}</div>
+                <small style="color:#94a3b8;">Department: ${escapeHtml(item.department)} • ${item.created_at}</small>
+            </div>
+        `).join("");
+    } catch (_) {
+        container.innerHTML = "<p style='color:#9b2d2d;'>Could not load instructions.</p>";
+    }
+}
+
+// 2. Load & Manage My Announcements
+async function loadMyUpdates() {
+    const tbody = document.getElementById("myUpdatesList");
+    try {
+        const res = await fetch("/api/teacher/updates");
+        const data = await res.json();
+        const items = data.updates || [];
+        if (!items.length) {
+            tbody.innerHTML = `<tr><td colspan="4" style="color:#94a3b8;">You have not published any announcements yet.</td></tr>`;
+            return;
+        }
+        tbody.innerHTML = items.map(u => `
+            <tr>
+                <td><strong>${escapeHtml(u.title)}</strong></td>
+                <td>${escapeHtml(u.category)}</td>
+                <td>${escapeHtml(u.page_key || "news")}</td>
+                <td>
+                    <button class="btn-edit" onclick="editAnnouncement(${u.id}, '${escapeHtml(u.title)}', '${escapeHtml(u.description)}')">Edit</button>
+                    <button class="btn-del" onclick="deleteAnnouncement(${u.id})">Delete</button>
+                </td>
+            </tr>
+        `).join("");
+    } catch (_) {}
+}
+
+async function editAnnouncement(id, oldTitle, oldDesc) {
+    const title = prompt("Update Announcement Title:", oldTitle);
+    if (!title) return;
+    const description = prompt("Update Announcement Details:", oldDesc);
+    if (!description) return;
+
+    try {
+        const res = await fetch(`/api/teacher/updates/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, description })
+        });
+        const data = await res.json();
+        alert(data.message || "Updated successfully!");
+        loadMyUpdates();
+    } catch (_) { alert("Failed to update."); }
+}
+
+async function deleteAnnouncement(id) {
+    if (!confirm("Are you sure you want to permanently delete this announcement?")) return;
+    try {
+        const res = await fetch(`/api/teacher/updates/${id}`, { method: "DELETE" });
+        const data = await res.json();
+        alert(data.message || "Deleted.");
+        loadMyUpdates();
+    } catch (_) { alert("Failed to delete."); }
+}
+
+// 3. Load & Manage My Calendar Events
+async function loadMyEvents() {
+    const tbody = document.getElementById("myEventsList");
+    try {
+        const res = await fetch("/api/teacher/events");
+        const data = await res.json();
+        const items = data.events || [];
+        if (!items.length) {
+            tbody.innerHTML = `<tr><td colspan="4" style="color:#94a3b8;">You have not published any calendar events yet.</td></tr>`;
+            return;
+        }
+        tbody.innerHTML = items.map(e => `
+            <tr>
+                <td><strong>${escapeHtml(e.title)}</strong></td>
+                <td>${escapeHtml(e.event_date)}</td>
+                <td>${escapeHtml(e.location || "School")}</td>
+                <td>
+                    <button class="btn-edit" onclick="editEvent(${e.id}, '${escapeHtml(e.title)}', '${escapeHtml(e.event_date)}', '${escapeHtml(e.location || '')}')">Edit</button>
+                    <button class="btn-del" onclick="deleteEvent(${e.id})">Delete</button>
+                </td>
+            </tr>
+        `).join("");
+    } catch (_) {}
+}
+
+async function editEvent(id, oldTitle, oldDate, oldLoc) {
+    const title = prompt("Update Event Title:", oldTitle);
+    if (!title) return;
+    const event_date = prompt("Update Event Date (YYYY-MM-DD):", oldDate);
+    if (!event_date) return;
+    const location = prompt("Update Venue / Location:", oldLoc);
+
+    try {
+        const res = await fetch(`/api/teacher/events/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, event_date, location, description: title })
+        });
+        const data = await res.json();
+        alert(data.message || "Updated successfully!");
+        loadMyEvents();
+    } catch (_) { alert("Failed to update."); }
+}
+
+async function deleteEvent(id) {
+    if (!confirm("Are you sure you want to permanently delete this event?")) return;
+    try {
+        const res = await fetch(`/api/teacher/events/${id}`, { method: "DELETE" });
+        const data = await res.json();
+        alert(data.message || "Deleted.");
+        loadMyEvents();
+    } catch (_) { alert("Failed to delete."); }
+}
+
+// Form Handlers
+document.getElementById("teacherUpdateForm")?.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const msg = document.getElementById("updateFormMessage");
+    const payload = Object.fromEntries(new FormData(this).entries());
+    try {
+        const res = await fetch("/api/teacher/updates", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        msg.textContent = data.message || "Published!";
+        msg.style.color = res.ok ? "#27683d" : "#9b2d2d";
+        if (res.ok) {
+            this.reset();
+            loadMyUpdates();
+        }
+    } catch (_) { msg.textContent = "Error submitting."; msg.style.color = "#9b2d2d"; }
+});
+
+document.getElementById("teacherEventForm")?.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const msg = document.getElementById("eventFormMessage");
+    const payload = Object.fromEntries(new FormData(this).entries());
+    try {
+        const res = await fetch("/api/teacher/events", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        msg.textContent = data.message || "Published!";
+        msg.style.color = res.ok ? "#27683d" : "#9b2d2d";
+        if (res.ok) {
+            this.reset();
+            loadMyEvents();
+        }
+    } catch (_) { msg.textContent = "Error submitting."; msg.style.color = "#9b2d2d"; }
+});
+
+function escapeHtml(val) {
+    return String(val ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
+
+loadNotifications();
+loadMyUpdates();
+loadMyEvents();
+</script>
+
+</body>
+</html>
