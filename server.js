@@ -1,18 +1,22 @@
-// ============================================================
-// ST. MARTIN'S HIGH SCHOOL, BALANAGAR
-// COMPLETE SERVER.JS
-// ============================================================
 
-require("dotenv").config({ path: require("path").join(__dirname, ".env") });
+/* ============================================================
+   ST. MARTIN'S HIGH SCHOOL, BALANAGAR
+   Express + EJS + SQLite + Teacher Portal + Principal Portal
+   Gmail SMTP + Email OTP + Teacher Instructions
+   ============================================================ */
+
+require("dotenv").config({
+    path: require("path").join(__dirname, ".env")
+});
 
 const crypto = require("crypto");
 const fs = require("fs");
-const multer = require("multer");
-const nodemailer = require("nodemailer");
+const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const path = require("path");
+const multer = require("multer");
+const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 const Database = require("better-sqlite3");
 
@@ -30,6 +34,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "2mb" }));
 app.use(bodyParser.json({ limit: "2mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
+/* ============================================================
+   UPLOAD CONFIGURATION
+   ============================================================ */
+
 const uploadsDir = path.join(__dirname, "public", "uploads");
 fs.mkdirSync(uploadsDir, { recursive: true });
 
@@ -37,50 +45,87 @@ const instructionUpload = multer({
     storage: multer.diskStorage({
         destination: (_req, _file, cb) => cb(null, uploadsDir),
         filename: (_req, file, cb) => {
-            const safeExt = path.extname(file.originalname).toLowerCase();
-            cb(null, `${Date.now()}-${crypto.randomBytes(6).toString("hex")}${safeExt}`);
+            const ext = path.extname(file.originalname).toLowerCase();
+            const name = `${Date.now()}-${crypto.randomBytes(6).toString("hex")}${ext}`;
+            cb(null, name);
         }
     }),
-    limits: { fileSize: 8 * 1024 * 1024, files: 5 },
+    limits: {
+        fileSize: 8 * 1024 * 1024,
+        files: 5
+    },
     fileFilter: (_req, file, cb) => {
         const allowed = new Set([".pdf", ".png", ".jpg", ".jpeg", ".webp"]);
         const ext = path.extname(file.originalname).toLowerCase();
-        cb(allowed.has(ext) ? null : new Error("Only PDF and image attachments are allowed."), allowed.has(ext));
+
+        if (!allowed.has(ext)) {
+            return cb(new Error("Only PDF and image attachments are allowed."));
+        }
+
+        cb(null, true);
     }
 });
 
-// In-memory OTP storage
+/* ============================================================
+   EMAIL / GMAIL SMTP CONFIGURATION
+   ============================================================ */
+
 const emailOtpStore = new Map();
+let mailTransporter = null;
 
 function getMailTransporter() {
-    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-        return nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false, // Must be false for 587 (STARTTLS)
-            requireTLS: true,
+    const emailUser = (process.env.EMAIL_USER || "").trim();
+    const emailPass = (process.env.EMAIL_PASS || "").replace(/\s/g, "");
+    const host = (process.env.EMAIL_HOST || "smtp.gmail.com").trim();
+    const port = Number(process.env.EMAIL_PORT || 465);
+
+    if (!emailUser || !emailPass) {
+        console.error("[EMAIL] EMAIL_USER or EMAIL_PASS is missing.");
+        return null;
+    }
+
+    if (![465, 587].includes(port)) {
+        console.error("[EMAIL] Configure Gmail SMTP port 465 or 587.");
+        return null;
+    }
+
+    if (!mailTransporter) {
+        mailTransporter = nodemailer.createTransport({
+            host,
+            port,
+            secure: port === 465,
             auth: {
-                user: process.env.EMAIL_USER.trim(),
-                pass: process.env.EMAIL_PASS.trim()
+                user: emailUser,
+                pass: emailPass
             },
-            tls: {
-                ciphers: "SSLv3",
-                rejectUnauthorized: false
-            },
-            pool: true,
-            maxConnections: 1,
-            connectionTimeout: 15000,
-            greetingTimeout: 15000,
-            socketTimeout: 20000
+            connectionTimeout: 20000,
+            greetingTimeout: 20000,
+            socketTimeout: 30000
         });
     }
-    return null;
+
+    return mailTransporter;
 }
 
-// ============================================================
-// DATABASE INITIALIZATION
-// ============================================================
+async function sendSchoolEmail(options) {
+    const transporter = getMailTransporter();
+
+    if (!transporter) {
+        throw new Error("Email is not configured. Check EMAIL_USER and EMAIL_PASS.");
+    }
+
+    return transporter.sendMail({
+        from: `"St. Martin's High School" <${process.env.EMAIL_USER.trim()}>`,
+        ...options
+    });
+}
+
+/* ============================================================
+   DATABASE INITIALIZATION
+   ============================================================ */
+
 const db = new Database(path.join(__dirname, "school.db"));
+
 db.pragma("journal_mode = WAL");
 db.pragma("foreign_keys = ON");
 
@@ -163,10 +208,12 @@ db.exec(`
 
 function ensureColumn(table, column, definition) {
     const columns = db.prepare(`PRAGMA table_info(${table})`).all();
+
     if (!columns.some((item) => item.name === column)) {
         db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
     }
 }
+
 ensureColumn("teachers", "phone", "TEXT DEFAULT ''");
 ensureColumn("teachers", "phone_verified", "INTEGER NOT NULL DEFAULT 0");
 ensureColumn("teachers", "department", "TEXT NOT NULL DEFAULT 'General'");
@@ -177,33 +224,63 @@ ensureColumn("school_content", "color", "TEXT DEFAULT '#C5A45A'");
 ensureColumn("calendar_events", "color", "TEXT DEFAULT '#C5A45A'");
 ensureColumn("calendar_events", "image_url", "TEXT");
 
+/*
+ * Initialize the principal account.
+ *
+ * Set PRINCIPAL_USERNAME and PRINCIPAL_PASSWORD in your environment.
+ * The configured password is synchronized on startup, as in your
+ * original application. Use a strong unique password.
+ */
 async function syncPrincipalCredentials() {
     const username = (process.env.PRINCIPAL_USERNAME || "principal").trim();
-    const password = process.env.PRINCIPAL_PASSWORD || "smhshead";
-    const existing = db.prepare("SELECT id FROM principals WHERE username = ?").get(username);
+    const password = process.env.PRINCIPAL_PASSWORD;
+
+    if (!password || password.length < 12) {
+        throw new Error(
+            "Set a strong PRINCIPAL_PASSWORD (at least 12 characters) in .env."
+        );
+    }
+
+    const existing = db.prepare(
+        "SELECT id FROM principals WHERE username = ?"
+    ).get(username);
+
     const passwordHash = await bcrypt.hash(password, 12);
 
     if (existing) {
-        db.prepare("UPDATE principals SET password_hash = ? WHERE id = ?").run(passwordHash, existing.id);
+        db.prepare(
+            "UPDATE principals SET password_hash = ? WHERE id = ?"
+        ).run(passwordHash, existing.id);
     } else {
-        db.prepare("INSERT INTO principals (username, password_hash) VALUES (?, ?)").run(username, passwordHash);
+        db.prepare(
+            "INSERT INTO principals (username, password_hash) VALUES (?, ?)"
+        ).run(username, passwordHash);
     }
 }
 
-app.use(
-    session({
-        name: "smhs.sid",
-        secret: process.env.SESSION_SECRET || "smhs-school-session-secret-key",
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            httpOnly: true,
-            sameSite: "lax",
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 4 * 60 * 60 * 1000
-        }
-    })
-);
+/* ============================================================
+   SESSION CONFIGURATION
+   ============================================================ */
+
+if (
+    process.env.NODE_ENV === "production" &&
+    (!process.env.SESSION_SECRET || process.env.SESSION_SECRET.length < 32)
+) {
+    throw new Error("Set a strong SESSION_SECRET environment variable.");
+}
+
+app.use(session({
+    name: "smhs.sid",
+    secret: process.env.SESSION_SECRET || "local-development-session-secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 4 * 60 * 60 * 1000
+    }
+}));
 
 app.use((req, res, next) => {
     res.locals.currentPath = req.path;
@@ -214,44 +291,83 @@ app.use((req, res, next) => {
     next();
 });
 
+/* ============================================================
+   AUTHENTICATION HELPERS
+   ============================================================ */
+
 function requireTeacher(req, res, next) {
     if (!req.session.teacher) {
         if (req.originalUrl.startsWith("/api/")) {
-            return res.status(401).json({ success: false, message: "Please log in as a teacher." });
+            return res.status(401).json({
+                success: false,
+                message: "Please log in as a teacher."
+            });
         }
+
         return res.redirect("/teacher-login");
     }
+
     next();
 }
 
 function requirePrincipal(req, res, next) {
     if (!req.session.principal) {
         if (req.originalUrl.startsWith("/api/")) {
-            return res.status(401).json({ success: false, message: "Please log in as the principal." });
+            return res.status(401).json({
+                success: false,
+                message: "Please log in as the principal."
+            });
         }
+
         return res.redirect("/principal-login");
     }
+
     next();
 }
 
+function cleanString(value) {
+    return typeof value === "string" ? value.trim() : "";
+}
+
+function validDate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+
+    const date = new Date(`${value}T00:00:00Z`);
+
+    return !Number.isNaN(date.getTime()) &&
+        date.toISOString().slice(0, 10) === value;
+}
+
+function validTime(value) {
+    return !value || /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+}
+
 function getApprovedUpdates(pageKey = null) {
-    const baseQuery = `
-        SELECT id, title, description, category, image_url, page_key, color, created_by_name, created_at
+    const query = `
+        SELECT id, title, description, category, image_url, page_key,
+               color, created_by_name, created_at
         FROM school_content
         WHERE status = 'approved'
     `;
+
     if (pageKey) {
-        return db.prepare(`${baseQuery}
+        return db.prepare(`
+            ${query}
             AND COALESCE(NULLIF(page_key, ''), 'news') = ?
             ORDER BY created_at DESC, id DESC
         `).all(pageKey);
     }
-    return db.prepare(`${baseQuery} ORDER BY created_at DESC, id DESC`).all();
+
+    return db.prepare(
+        `${query} ORDER BY created_at DESC, id DESC`
+    ).all();
 }
 
 function getApprovedEvents() {
     return db.prepare(`
-        SELECT id, title, description, category, event_date, start_time, end_time, location, image_url, color, created_by_name, created_at
+        SELECT id, title, description, category, event_date,
+               start_time, end_time, location, image_url, color,
+               created_by_name, created_at
         FROM calendar_events
         WHERE status = 'approved'
         ORDER BY event_date ASC, start_time ASC, id ASC
@@ -259,40 +375,62 @@ function getApprovedEvents() {
 }
 
 function getTeacherUpdates(teacherId) {
-    return db.prepare("SELECT * FROM school_content WHERE created_by = ? ORDER BY created_at DESC, id DESC").all(teacherId);
+    return db.prepare(`
+        SELECT * FROM school_content
+        WHERE created_by = ?
+        ORDER BY created_at DESC, id DESC
+    `).all(teacherId);
 }
 
 function getTeacherEvents(teacherId) {
-    return db.prepare("SELECT * FROM calendar_events WHERE created_by = ? ORDER BY event_date ASC, id ASC").all(teacherId);
+    return db.prepare(`
+        SELECT * FROM calendar_events
+        WHERE created_by = ?
+        ORDER BY event_date ASC, id ASC
+    `).all(teacherId);
 }
 
-function cleanString(val) {
-    return typeof val === "string" ? val.trim() : "";
-}
+/* ============================================================
+   PUBLIC WEBSITE ROUTES
+   ============================================================ */
 
-function validDate(val) {
-    return /^\d{4}-\d{2}-\d{2}$/.test(val);
-}
+app.get("/", (req, res) =>
+    res.render("index", {
+        title: "St. Martin's High School | Balanagar, Hyderabad"
+    })
+);
 
-function validTime(val) {
-    if (!val) return true;
-    return /^([01]\d|2[0-3]):[0-5]\d$/.test(val);
-}
+app.get("/about", (req, res) =>
+    res.render("about", { title: "About Us" })
+);
 
-// ============================================================
-// PUBLIC ROUTES
-// ============================================================
-app.get("/", (req, res) => res.render("index", { title: "St. Martin's High School | Balanagar, Hyderabad" }));
-app.get("/about", (req, res) => res.render("about", { title: "About Us" }));
-app.get("/principal", (req, res) => res.render("principal", { title: "Principal's Message" }));
-app.get("/management", (req, res) => res.render("management", { title: "Management" }));
-app.get("/educational-society", (req, res) => res.render("educational-society", { title: "St. Martin's Educational Society" }));
-app.get("/disclosure", (req, res) => res.render("disclosure", { title: "Mandatory Disclosure" }));
-app.get("/facilities", (req, res) => res.render("facilities", { title: "School Facilities" }));
-app.get("/academics", (req, res) => res.render("academics", { title: "Academics" }));
+app.get("/principal", (req, res) =>
+    res.render("principal", { title: "Principal's Message" })
+);
+
+app.get("/management", (req, res) =>
+    res.render("management", { title: "Management" })
+);
+
+app.get("/educational-society", (req, res) =>
+    res.render("educational-society", {
+        title: "St. Martin's Educational Society"
+    })
+);
+
+app.get("/disclosure", (req, res) =>
+    res.render("disclosure", { title: "Mandatory Disclosure" })
+);
+
+app.get("/facilities", (req, res) =>
+    res.render("facilities", { title: "School Facilities" })
+);
+
+app.get("/academics", (req, res) =>
+    res.render("academics", { title: "Academics" })
+);
 
 app.get("/academics/:level", (req, res) => {
-    const level = req.params.level.toLowerCase();
     const pages = {
         primary: { view: "primary", title: "Primary Education" },
         middle: { view: "middle", title: "Middle School" },
@@ -300,14 +438,27 @@ app.get("/academics/:level", (req, res) => {
         curriculum: { view: "curriculum", title: "Curriculum" },
         approach: { view: "approach", title: "Our Teaching Approach" }
     };
-    const page = pages[level];
-    if (!page) return res.status(404).render("404", { title: "Page Not Found" });
+
+    const page = pages[req.params.level.toLowerCase()];
+
+    if (!page) {
+        return res.status(404).render("404", { title: "Page Not Found" });
+    }
+
     res.render(page.view, { title: page.title });
 });
 
-app.get("/curriculum", (req, res) => res.render("curriculum", { title: "Curriculum" }));
-app.get("/admissions", (req, res) => res.render("admissions", { title: "Admissions" }));
-app.get("/fee-structure", (req, res) => res.render("fee-structure", { title: "Fee Structure" }));
+app.get("/curriculum", (req, res) =>
+    res.render("curriculum", { title: "Curriculum" })
+);
+
+app.get("/admissions", (req, res) =>
+    res.render("admissions", { title: "Admissions" })
+);
+
+app.get("/fee-structure", (req, res) =>
+    res.render("fee-structure", { title: "Fee Structure" })
+);
 
 app.get("/student-life", (req, res) => {
     res.render("student-life", {
@@ -320,43 +471,52 @@ app.get("/student-life", (req, res) => {
 app.get("/gallery", (req, res) => {
     const galleryImages = db.prepare(`
         SELECT id, title, description, image_url, color, created_at
-        FROM school_content 
-        WHERE status = 'approved' AND page_key = 'gallery' AND image_url IS NOT NULL
+        FROM school_content
+        WHERE status = 'approved'
+          AND page_key = 'gallery'
+          AND image_url IS NOT NULL
         ORDER BY created_at DESC, id DESC
     `).all();
+
     res.render("gallery", { title: "School Gallery", galleryImages });
 });
 
-app.get("/calendar", (req, res) => {
+app.get("/calendar", (req, res) =>
     res.render("calendar", {
         title: "Academic Calendar",
         events: getApprovedEvents()
-    });
-});
+    })
+);
 
-app.get("/news", (req, res) => {
+app.get("/news", (req, res) =>
     res.render("news", {
         title: "News & Updates",
         updates: getApprovedUpdates("news"),
         events: getApprovedEvents()
-    });
-});
+    })
+);
 
-app.get("/resources", (req, res) => {
+app.get("/resources", (req, res) =>
     res.render("resources", {
         title: "Student & Parent Resources | St. Martin's High School",
         updates: getApprovedUpdates("resources"),
         events: getApprovedEvents()
-    });
-});
+    })
+);
 
-app.get("/contact", (req, res) => res.render("contact", { title: "Contact Us" }));
+app.get("/contact", (req, res) =>
+    res.render("contact", { title: "Contact Us" })
+);
 
-// ============================================================
-// TEACHER AUTHENTICATION
-// ============================================================
+/* ============================================================
+   TEACHER REGISTRATION AND LOGIN
+   ============================================================ */
+
 app.get(["/teacher-signup", "/teacher/signup"], (req, res) => {
-    res.render("teacher-signup", { title: "Teacher Registration", error: null });
+    res.render("teacher-signup", {
+        title: "Teacher Registration",
+        error: null
+    });
 });
 
 app.post("/api/teacher/signup", async (req, res, next) => {
@@ -368,24 +528,40 @@ app.post("/api/teacher/signup", async (req, res, next) => {
         const password = req.body.password || "";
 
         if (!fullName || !employeeId || !username || !email || !password) {
-            return res.status(400).json({ success: false, message: "Please complete all required fields." });
-        }
-        if (password.length < 8) {
-            return res.status(400).json({ success: false, message: "Password must contain at least 8 characters." });
+            return res.status(400).json({
+                success: false,
+                message: "Please complete all required fields."
+            });
         }
 
-        const duplicate = db.prepare("SELECT id FROM teachers WHERE username = ? OR email = ? OR employee_id = ?").get(username, email, employeeId);
+        if (password.length < 8) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must contain at least 8 characters."
+            });
+        }
+
+        const duplicate = db.prepare(`
+            SELECT id FROM teachers
+            WHERE username = ? OR email = ? OR employee_id = ?
+        `).get(username, email, employeeId);
+
         if (duplicate) {
-            return res.status(409).json({ success: false, message: "Username, email, or employee ID already exists." });
+            return res.status(409).json({
+                success: false,
+                message: "Username, email, or employee ID already exists."
+            });
         }
 
         const passwordHash = await bcrypt.hash(password, 12);
+
         db.prepare(`
-            INSERT INTO teachers (full_name, employee_id, username, email, password_hash, status)
-            VALUES (?, ?, ?, ?, ?, 'pending')
+            INSERT INTO teachers (
+                full_name, employee_id, username, email, password_hash, status
+            ) VALUES (?, ?, ?, ?, ?, 'pending')
         `).run(fullName, employeeId, username, email, passwordHash);
 
-        return res.status(201).json({
+        res.status(201).json({
             success: true,
             message: "Registration submitted. Please wait for principal approval."
         });
@@ -394,9 +570,12 @@ app.post("/api/teacher/signup", async (req, res, next) => {
     }
 });
 
-app.get(["/teacher-login", "/teacher/login"], (req, res) => {
-    res.render("teacher-login", { title: "Teacher Login", error: null });
-});
+app.get(["/teacher-login", "/teacher/login"], (req, res) =>
+    res.render("teacher-login", {
+        title: "Teacher Login",
+        error: null
+    })
+);
 
 async function teacherLoginHandler(req, res, next) {
     try {
@@ -404,24 +583,31 @@ async function teacherLoginHandler(req, res, next) {
         const password = req.body.password || "";
 
         if (!username || !password) {
-            return res.status(400).json({ success: false, message: "Enter your username and password." });
+            return res.status(400).json({
+                success: false,
+                message: "Enter your username and password."
+            });
         }
 
-        const teacher = db.prepare("SELECT * FROM teachers WHERE username = ? OR email = ? OR employee_id = ?").get(username, username.toLowerCase(), username);
-        if (!teacher) {
-            return res.status(401).json({ success: false, message: "Invalid login credentials." });
-        }
+        const teacher = db.prepare(`
+            SELECT * FROM teachers
+            WHERE username = ? OR email = ? OR employee_id = ?
+        `).get(username, username.toLowerCase(), username);
 
-        const passwordMatches = await bcrypt.compare(password, teacher.password_hash);
-        if (!passwordMatches) {
-            return res.status(401).json({ success: false, message: "Invalid login credentials." });
+        if (!teacher || !(await bcrypt.compare(password, teacher.password_hash))) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid login credentials."
+            });
         }
 
         if (teacher.status !== "approved") {
-            const message = teacher.status === "disabled"
-                ? "Your account has been disabled. Contact the principal."
-                : "Your account is awaiting principal approval.";
-            return res.status(403).json({ success: false, message });
+            return res.status(403).json({
+                success: false,
+                message: teacher.status === "disabled"
+                    ? "Your account has been disabled. Contact the principal."
+                    : "Your account is awaiting principal approval."
+            });
         }
 
         req.session.teacher = {
@@ -436,7 +622,12 @@ async function teacherLoginHandler(req, res, next) {
 
         req.session.save((error) => {
             if (error) return next(error);
-            res.json({ success: true, message: "Login successful.", redirect: "/teacher-dashboard" });
+
+            res.json({
+                success: true,
+                message: "Login successful.",
+                redirect: "/teacher-dashboard"
+            });
         });
     } catch (error) {
         next(error);
@@ -446,8 +637,9 @@ async function teacherLoginHandler(req, res, next) {
 app.post("/api/teacher-login", teacherLoginHandler);
 app.post("/api/teacher/login", teacherLoginHandler);
 
-app.get(["/teacher-dashboard", "/teacher/dashboard"], requireTeacher, (req, res) => {
+app.get("/teacher-dashboard", requireTeacher, (req, res) => {
     const teacher = req.session.teacher;
+
     res.render("teacher-dashboard", {
         title: "Teacher Dashboard",
         teacher,
@@ -456,29 +648,55 @@ app.get(["/teacher-dashboard", "/teacher/dashboard"], requireTeacher, (req, res)
     });
 });
 
-// ============================================================
-// TEACHER: CONTENT CREATION, EDIT & DELETE
-// ============================================================
+app.get("/teacher/dashboard", requireTeacher, (req, res) => {
+    const teacher = req.session.teacher;
+
+    res.render("teacher-dashboard", {
+        title: "Teacher Dashboard",
+        teacher,
+        updates: getTeacherUpdates(teacher.id),
+        events: getTeacherEvents(teacher.id)
+    });
+});
+
+/* ============================================================
+   TEACHER CONTENT MANAGEMENT
+   ============================================================ */
+
 app.post("/api/teacher/updates", requireTeacher, (req, res) => {
     const title = cleanString(req.body.title);
     const description = cleanString(req.body.description || req.body.content);
     const category = cleanString(req.body.category) || "Announcement";
     const imageUrl = cleanString(req.body.image_url);
     const requestedPage = cleanString(req.body.page_key);
-    const pageKey = ["news", "resources"].includes(requestedPage) ? requestedPage : "news";
+
+    const pageKey = ["news", "resources"].includes(requestedPage)
+        ? requestedPage
+        : "news";
 
     if (!title || !description) {
-        return res.status(400).json({ success: false, message: "Title and description are required." });
+        return res.status(400).json({
+            success: false,
+            message: "Title and description are required."
+        });
     }
 
     const result = db.prepare(`
         INSERT INTO school_content (
-            title, description, category, image_url, page_key, color, status, created_by, created_by_name
+            title, description, category, image_url, page_key, color,
+            status, created_by, created_by_name
         ) VALUES (?, ?, ?, ?, ?, ?, 'approved', ?, ?)
     `).run(
-        title, description, category, imageUrl || null, pageKey,
-        /^#[0-9A-Fa-f]{6}$/.test(req.body.color || "") ? req.body.color : "#C5A45A",
-        req.session.teacher.id, req.session.teacher.full_name
+        title,
+        description,
+        category,
+        imageUrl || null,
+        pageKey,
+        /^#[0-9A-Fa-f]{6}$/.test(req.body.color || "")
+            ? req.body.color
+            : "#C5A45A",
+        req.session.teacher.id,
+        req.session.teacher.full_name
     );
 
     res.status(201).json({
@@ -489,7 +707,10 @@ app.post("/api/teacher/updates", requireTeacher, (req, res) => {
 });
 
 app.get("/api/teacher/updates", requireTeacher, (req, res) => {
-    res.json({ success: true, updates: getTeacherUpdates(req.session.teacher.id) });
+    res.json({
+        success: true,
+        updates: getTeacherUpdates(req.session.teacher.id)
+    });
 });
 
 app.patch("/api/teacher/updates/:id", requireTeacher, (req, res) => {
@@ -497,26 +718,50 @@ app.patch("/api/teacher/updates/:id", requireTeacher, (req, res) => {
     const title = cleanString(req.body.title);
     const description = cleanString(req.body.description);
     const category = cleanString(req.body.category) || "Announcement";
-    const pageKey = cleanString(req.body.page_key) || "news";
+    const requestedPage = cleanString(req.body.page_key);
+    const pageKey = ["news", "resources"].includes(requestedPage)
+        ? requestedPage
+        : "news";
 
     if (!id || !title || !description) {
-        return res.status(400).json({ success: false, message: "Title and description are required." });
+        return res.status(400).json({
+            success: false,
+            message: "Title and description are required."
+        });
     }
 
     const result = db.prepare(`
-        UPDATE school_content 
-        SET title = ?, description = ?, category = ?, page_key = ? 
+        UPDATE school_content
+        SET title = ?, description = ?, category = ?, page_key = ?
         WHERE id = ? AND created_by = ?
-    `).run(title, description, category, pageKey, id, req.session.teacher.id);
+    `).run(
+        title, description, category, pageKey,
+        id, req.session.teacher.id
+    );
 
-    res.json({ success: result.changes > 0, message: result.changes ? "Announcement updated successfully!" : "Announcement not found." });
+    res.json({
+        success: result.changes > 0,
+        message: result.changes
+            ? "Announcement updated successfully!"
+            : "Announcement not found."
+    });
 });
 
 app.delete("/api/teacher/updates/:id", requireTeacher, (req, res) => {
-    const id = Number(req.params.id);
-    const result = db.prepare("DELETE FROM school_content WHERE id = ? AND created_by = ?").run(id, req.session.teacher.id);
-    res.json({ success: result.changes > 0, message: result.changes ? "Announcement deleted." : "Not found." });
+    const result = db.prepare(`
+        DELETE FROM school_content
+        WHERE id = ? AND created_by = ?
+    `).run(Number(req.params.id), req.session.teacher.id);
+
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Announcement deleted." : "Not found."
+    });
 });
+
+/* ============================================================
+   TEACHER CALENDAR EVENTS
+   ============================================================ */
 
 app.post("/api/teacher/events", requireTeacher, (req, res) => {
     const title = cleanString(req.body.title);
@@ -527,28 +772,42 @@ app.post("/api/teacher/events", requireTeacher, (req, res) => {
     const endTime = cleanString(req.body.end_time);
     const location = cleanString(req.body.location);
 
-    if (!title || !validDate(eventDate)) {
-        return res.status(400).json({ success: false, message: "Enter a title and valid date (YYYY-MM-DD)." });
+    if (
+        !title ||
+        !validDate(eventDate) ||
+        !validTime(startTime) ||
+        !validTime(endTime)
+    ) {
+        return res.status(400).json({
+            success: false,
+            message: "Enter a title, valid date and valid times."
+        });
     }
 
     const result = db.prepare(`
         INSERT INTO calendar_events (
-            title, description, category, event_date, start_time, end_time, location, color, image_url, status, created_by, created_by_name
+            title, description, category, event_date, start_time,
+            end_time, location, color, image_url, status,
+            created_by, created_by_name
         ) VALUES (?, ?, ?, ?, ?, ?, ?, '#C5A45A', NULL, 'approved', ?, ?)
     `).run(
-        title, description, category, eventDate, startTime, endTime, location,
-        req.session.teacher.id, req.session.teacher.full_name
+        title, description, category, eventDate, startTime,
+        endTime, location, req.session.teacher.id,
+        req.session.teacher.full_name
     );
 
     res.status(201).json({
         success: true,
-        message: "Calendar event published successfully to the Academic Calendar!",
+        message: "Calendar event published successfully!",
         id: result.lastInsertRowid
     });
 });
 
 app.get("/api/teacher/events", requireTeacher, (req, res) => {
-    res.json({ success: true, events: getTeacherEvents(req.session.teacher.id) });
+    res.json({
+        success: true,
+        events: getTeacherEvents(req.session.teacher.id)
+    });
 });
 
 app.patch("/api/teacher/events/:id", requireTeacher, (req, res) => {
@@ -560,46 +819,91 @@ app.patch("/api/teacher/events/:id", requireTeacher, (req, res) => {
     const location = cleanString(req.body.location);
 
     if (!id || !title || !validDate(eventDate)) {
-        return res.status(400).json({ success: false, message: "Valid title and date required." });
+        return res.status(400).json({
+            success: false,
+            message: "Valid title and date required."
+        });
     }
 
     const result = db.prepare(`
-        UPDATE calendar_events 
-        SET title = ?, description = ?, category = ?, event_date = ?, location = ? 
+        UPDATE calendar_events
+        SET title = ?, description = ?, category = ?,
+            event_date = ?, location = ?
         WHERE id = ? AND created_by = ?
-    `).run(title, description, category, eventDate, location, id, req.session.teacher.id);
+    `).run(
+        title, description, category, eventDate, location,
+        id, req.session.teacher.id
+    );
 
-    res.json({ success: result.changes > 0, message: result.changes ? "Event updated successfully!" : "Event not found." });
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Event updated successfully!" : "Event not found."
+    });
 });
 
 app.delete("/api/teacher/events/:id", requireTeacher, (req, res) => {
-    const id = Number(req.params.id);
-    const result = db.prepare("DELETE FROM calendar_events WHERE id = ? AND created_by = ?").run(id, req.session.teacher.id);
-    res.json({ success: result.changes > 0, message: result.changes ? "Event deleted." : "Not found." });
-});
-
-app.post("/api/teacher/gallery", requireTeacher, instructionUpload.single("image"), (req, res) => {
-    if (!req.file || !/^image\/(png|jpe?g|webp)$/i.test(req.file.mimetype)) {
-        return res.status(400).json({ success: false, message: "Choose a PNG, JPG or WebP image." });
-    }
-
-    const requestedPage = cleanString(req.body.page_key);
-    const pageKey = ["news", "gallery"].includes(requestedPage) ? requestedPage : "gallery";
-    const title = cleanString(req.body.title) || req.file.originalname;
-    const description = cleanString(req.body.description) || "School photo";
-    const category = pageKey === "gallery" ? "Gallery" : "School Update";
-
     const result = db.prepare(`
-        INSERT INTO school_content (title, description, category, image_url, page_key, color, status, created_by, created_by_name)
-        VALUES (?, ?, ?, ?, ?, '#C5A45A', 'approved', ?, ?)
-    `).run(title, description, category, "/uploads/" + req.file.filename, pageKey, req.session.teacher.id, req.session.teacher.full_name);
+        DELETE FROM calendar_events
+        WHERE id = ? AND created_by = ?
+    `).run(Number(req.params.id), req.session.teacher.id);
 
-    res.status(201).json({
-        success: true,
-        message: "Photo published successfully to the website!",
-        id: result.lastInsertRowid
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Event deleted." : "Not found."
     });
 });
+
+/* ============================================================
+   TEACHER GALLERY UPLOADS
+   ============================================================ */
+
+app.post(
+    "/api/teacher/gallery",
+    requireTeacher,
+    instructionUpload.single("image"),
+    (req, res) => {
+        if (
+            !req.file ||
+            !/^image\/(png|jpe?g|webp)$/i.test(req.file.mimetype)
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Choose a PNG, JPG or WebP image."
+            });
+        }
+
+        const requestedPage = cleanString(req.body.page_key);
+        const pageKey = ["news", "gallery"].includes(requestedPage)
+            ? requestedPage
+            : "gallery";
+
+        const title = cleanString(req.body.title) || req.file.originalname;
+        const description = cleanString(req.body.description) || "School photo";
+        const category = pageKey === "gallery" ? "Gallery" : "School Update";
+
+        const result = db.prepare(`
+            INSERT INTO school_content (
+                title, description, category, image_url, page_key,
+                color, status, created_by, created_by_name
+            ) VALUES (?, ?, ?, ?, ?, '#C5A45A', 'approved', ?, ?)
+        `).run(
+            title, description, category,
+            "/uploads/" + req.file.filename,
+            pageKey, req.session.teacher.id,
+            req.session.teacher.full_name
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Photo published successfully to the website!",
+            id: result.lastInsertRowid
+        });
+    }
+);
+
+/* ============================================================
+   TEACHER NOTIFICATIONS
+   ============================================================ */
 
 app.get("/api/teacher/notifications", requireTeacher, (req, res) => {
     try {
@@ -612,36 +916,67 @@ app.get("/api/teacher/notifications", requireTeacher, (req, res) => {
 
         res.json({ success: true, notifications });
     } catch (error) {
-        res.status(500).json({ success: false, error: "Unable to load instructions." });
-    }
-});
+        console.error("[TEACHER NOTIFICATIONS]", error.message);
 
-// ============================================================
-// PRINCIPAL AUTHENTICATION & DASHBOARD
-// ============================================================
-app.get("/principal-login", (req, res) => {
-    res.render("principal-login", { title: "Principal Login", error: null });
-});
-
-app.post(["/api/principal/login", "/api/principal-login"], async (req, res, next) => {
-    try {
-        const username = cleanString(req.body.username);
-        const password = req.body.password || "";
-
-        const principal = db.prepare("SELECT * FROM principals WHERE username = ?").get(username);
-        if (!principal || !(await bcrypt.compare(password, principal.password_hash))) {
-            return res.status(401).json({ success: false, message: "Invalid principal login credentials." });
-        }
-
-        req.session.principal = { id: principal.id, username: principal.username, role: "Principal" };
-        req.session.save((error) => {
-            if (error) return next(error);
-            res.json({ success: true, message: "Login successful.", redirect: "/principal-dashboard" });
+        res.status(500).json({
+            success: false,
+            message: "Unable to load instructions."
         });
-    } catch (error) {
-        next(error);
     }
 });
+
+/* ============================================================
+   PRINCIPAL LOGIN AND DASHBOARD
+   ============================================================ */
+
+app.get("/principal-login", (req, res) => {
+    res.render("principal-login", {
+        title: "Principal Login",
+        error: null
+    });
+});
+
+app.post(
+    ["/api/principal/login", "/api/principal-login"],
+    async (req, res, next) => {
+        try {
+            const username = cleanString(req.body.username);
+            const password = req.body.password || "";
+
+            const principal = db.prepare(
+                "SELECT * FROM principals WHERE username = ?"
+            ).get(username);
+
+            if (
+                !principal ||
+                !(await bcrypt.compare(password, principal.password_hash))
+            ) {
+                return res.status(401).json({
+                    success: false,
+                    message: "Invalid principal login credentials."
+                });
+            }
+
+            req.session.principal = {
+                id: principal.id,
+                username: principal.username,
+                role: "Principal"
+            };
+
+            req.session.save((error) => {
+                if (error) return next(error);
+
+                res.json({
+                    success: true,
+                    message: "Login successful.",
+                    redirect: "/principal-dashboard"
+                });
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
 
 app.get("/principal-dashboard", requirePrincipal, (req, res) => {
     res.render("principal-dashboard", {
@@ -650,175 +985,331 @@ app.get("/principal-dashboard", requirePrincipal, (req, res) => {
     });
 });
 
-// ============================================================
-// PRINCIPAL: EMAIL OTP ROUTE (REAL EMAIL ONLY)
-// ============================================================
-app.post("/api/principal/teachers/send-email-otp", requirePrincipal, async (req, res) => {
-    try {
-        const email = cleanString(req.body.email).toLowerCase();
-        if (!email || !email.includes("@")) {
-            return res.status(400).json({ success: false, message: "Please provide a valid email address." });
-        }
+/* ============================================================
+   PRINCIPAL EMAIL OTP — SEND
+   ============================================================ */
 
-        const transporter = getMailTransporter();
-        if (!transporter) {
-            return res.status(500).json({
+app.post(
+    "/api/principal/teachers/send-email-otp",
+    requirePrincipal,
+    async (req, res) => {
+        const email = cleanString(req.body.email).toLowerCase();
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({
                 success: false,
-                message: "Email SMTP is not configured in .env! Please set EMAIL_USER and EMAIL_PASS."
+                message: "Please provide a valid email address."
             });
         }
 
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        const expiresAt = Date.now() + 10 * 60 * 1000;
-        emailOtpStore.set(email, { otp, expiresAt, verified: false });
+        const transporter = getMailTransporter();
 
-        await transporter.sendMail({
-            from: `"St. Martin's High School" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: "St. Martin's - Teacher Account Verification OTP",
-            text: `Your one-time verification code is: ${otp}\n\nThis OTP will expire in 10 minutes.`
+        if (!transporter) {
+            return res.status(503).json({
+                success: false,
+                message: "Email is not configured. Check the email environment variables."
+            });
+        }
+
+        const otp = crypto.randomInt(100000, 1000000).toString();
+
+        emailOtpStore.set(email, {
+            otp,
+            expiresAt: Date.now() + 10 * 60 * 1000,
+            verified: false
         });
 
-        return res.json({
-            success: true,
-            message: `OTP sent successfully to ${email}. Please check the inbox.`
-        });
-    } catch (err) {
-        console.error("SMTP error sending mail:", err);
-        return res.status(500).json({
-            success: false,
-            message: `Failed to send email: ${err.message}. Check your EMAIL_USER/EMAIL_PASS settings.`
-        });
+        try {
+            await sendSchoolEmail({
+                to: email,
+                subject: "St. Martin's - Teacher Account Verification OTP",
+                text:
+                    `Your one-time verification code is: ${otp}\n\n` +
+                    "This OTP will expire in 10 minutes. Do not share it."
+            });
+
+            res.json({
+                success: true,
+                message: `OTP sent successfully to ${email}. Please check your inbox.`
+            });
+        } catch (error) {
+            emailOtpStore.delete(email);
+
+            console.error("[EMAIL OTP ERROR]", {
+                code: error.code || "UNKNOWN",
+                command: error.command || "UNKNOWN",
+                message: error.message
+            });
+
+            res.status(502).json({
+                success: false,
+                message:
+                    error.code === "ETIMEDOUT" ||
+                    error.code === "ESOCKET"
+                        ? "SMTP connection timed out. Check whether your hosting provider permits outbound SMTP."
+                        : "Failed to send the OTP email. Check server logs and email settings."
+            });
+        }
     }
-});
+);
 
-app.post("/api/principal/teachers/verify-email-otp", requirePrincipal, (req, res) => {
-    try {
+/* ============================================================
+   PRINCIPAL EMAIL OTP — VERIFY
+   ============================================================ */
+
+app.post(
+    "/api/principal/teachers/verify-email-otp",
+    requirePrincipal,
+    (req, res) => {
         const email = cleanString(req.body.email).toLowerCase();
         const otp = cleanString(req.body.otp);
 
         const record = emailOtpStore.get(email);
+
         if (!record) {
-            return res.status(400).json({ success: false, verified: false, message: "Please request an OTP first." });
+            return res.status(400).json({
+                success: false,
+                verified: false,
+                message: "Please request an OTP first."
+            });
         }
+
         if (Date.now() > record.expiresAt) {
             emailOtpStore.delete(email);
-            return res.status(400).json({ success: false, verified: false, message: "OTP has expired. Send a new one." });
+
+            return res.status(400).json({
+                success: false,
+                verified: false,
+                message: "OTP has expired. Send a new one."
+            });
         }
+
         if (record.otp !== otp) {
-            return res.status(400).json({ success: false, verified: false, message: "Incorrect OTP code." });
+            return res.status(400).json({
+                success: false,
+                verified: false,
+                message: "Incorrect OTP code."
+            });
         }
 
         record.verified = true;
-        return res.json({ success: true, verified: true, message: "Email successfully verified!" });
-    } catch (err) {
-        return res.status(500).json({ success: false, message: "Verification failed." });
-    }
-});
 
-// ============================================================
-// PRINCIPAL: TEACHER PROFILE MANAGEMENT
-// ============================================================
+        res.json({
+            success: true,
+            verified: true,
+            message: "Email successfully verified!"
+        });
+    }
+);
+
+/* ============================================================
+   PRINCIPAL TEACHER MANAGEMENT
+   ============================================================ */
+
 app.get("/api/principal/teachers", requirePrincipal, (req, res) => {
     try {
         const teachers = db.prepare(`
-            SELECT id, full_name, employee_id, username, email, phone, phone_verified, department, status, created_at, approved_at
+            SELECT id, full_name, employee_id, username, email, phone,
+                   phone_verified, department, status, created_at, approved_at
             FROM teachers
             ORDER BY created_at DESC
         `).all();
+
         res.json({ success: true, teachers });
-    } catch (err) {
-        res.status(500).json({ success: false, error: err.message });
-    }
-});
-
-app.post("/api/principal/teachers/create", requirePrincipal, async (req, res, next) => {
-    try {
-        const fullName = cleanString(req.body.full_name);
-        const employeeId = cleanString(req.body.employee_id);
-        const username = cleanString(req.body.username);
-        const email = cleanString(req.body.email).toLowerCase();
-        const phone = cleanString(req.body.phone);
-        const department = cleanString(req.body.department) || "General";
-        const password = req.body.password || "";
-
-        if (!fullName || !employeeId || !username || !email || !password) {
-            return res.status(400).json({ success: false, message: "Complete all required fields." });
-        }
-        if (password.length < 8) {
-            return res.status(400).json({ success: false, message: "Password must contain at least 8 characters." });
-        }
-
-        const otpRecord = emailOtpStore.get(email);
-        if (!otpRecord || !otpRecord.verified) {
-            return res.status(400).json({ success: false, message: "Please verify the teacher's email with the OTP first." });
-        }
-
-        const duplicate = db.prepare("SELECT id FROM teachers WHERE username = ? OR email = ? OR employee_id = ?").get(username, email, employeeId);
-        if (duplicate) {
-            return res.status(409).json({ success: false, message: "Username, email, or employee ID already exists." });
-        }
-
-        const passwordHash = await bcrypt.hash(password, 12);
-        const result = db.prepare(`
-            INSERT INTO teachers (
-                full_name, employee_id, username, email, phone, phone_verified, department, password_hash, status, approved_at
-            ) VALUES (?, ?, ?, ?, ?, 1, ?, ?, 'approved', CURRENT_TIMESTAMP)
-        `).run(fullName, employeeId, username, email, phone, department, passwordHash);
-
-        emailOtpStore.delete(email);
-
-        res.status(201).json({
-            success: true,
-            message: "Teacher account created and approved successfully!",
-            id: result.lastInsertRowid
-        });
     } catch (error) {
-        next(error);
+        console.error("[TEACHER LIST]", error.message);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to load teachers."
+        });
     }
 });
+
+app.post(
+    "/api/principal/teachers/create",
+    requirePrincipal,
+    async (req, res, next) => {
+        try {
+            const fullName = cleanString(req.body.full_name);
+            const employeeId = cleanString(req.body.employee_id);
+            const username = cleanString(req.body.username);
+            const email = cleanString(req.body.email).toLowerCase();
+            const phone = cleanString(req.body.phone);
+            const department = cleanString(req.body.department) || "General";
+            const password = req.body.password || "";
+
+            if (!fullName || !employeeId || !username || !email || !password) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Complete all required fields."
+                });
+            }
+
+            if (password.length < 8) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Password must contain at least 8 characters."
+                });
+            }
+
+            const otpRecord = emailOtpStore.get(email);
+
+            if (
+                !otpRecord ||
+                !otpRecord.verified ||
+                Date.now() > otpRecord.expiresAt
+            ) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Please verify the teacher's email with the OTP first."
+                });
+            }
+
+            const duplicate = db.prepare(`
+                SELECT id FROM teachers
+                WHERE username = ? OR email = ? OR employee_id = ?
+            `).get(username, email, employeeId);
+
+            if (duplicate) {
+                return res.status(409).json({
+                    success: false,
+                    message: "Username, email, or employee ID already exists."
+                });
+            }
+
+            const passwordHash = await bcrypt.hash(password, 12);
+
+            const result = db.prepare(`
+                INSERT INTO teachers (
+                    full_name, employee_id, username, email, phone,
+                    phone_verified, department, password_hash, status, approved_at
+                ) VALUES (?, ?, ?, ?, ?, 1, ?, ?, 'approved', CURRENT_TIMESTAMP)
+            `).run(
+                fullName, employeeId, username, email, phone,
+                department, passwordHash
+            );
+
+            emailOtpStore.delete(email);
+
+            res.status(201).json({
+                success: true,
+                message: "Teacher account created and approved successfully!",
+                id: result.lastInsertRowid
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
 
 app.post("/api/principal/teachers/:id/approve", requirePrincipal, (req, res) => {
-    const result = db.prepare("UPDATE teachers SET status = 'approved', approved_at = CURRENT_TIMESTAMP WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Teacher approved." });
+    const result = db.prepare(`
+        UPDATE teachers
+        SET status = 'approved', approved_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+    `).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Teacher approved." : "Teacher not found."
+    });
 });
 
 app.post("/api/principal/teachers/:id/reject", requirePrincipal, (req, res) => {
-    const result = db.prepare("DELETE FROM teachers WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Teacher rejected." });
+    const result = db.prepare(
+        "DELETE FROM teachers WHERE id = ?"
+    ).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Teacher rejected." : "Teacher not found."
+    });
 });
 
 app.post("/api/principal/teachers/:id/disable", requirePrincipal, (req, res) => {
-    const result = db.prepare("UPDATE teachers SET status = 'disabled' WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Teacher disabled." });
+    const result = db.prepare(`
+        UPDATE teachers SET status = 'disabled' WHERE id = ?
+    `).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Teacher disabled." : "Teacher not found."
+    });
 });
 
 app.post("/api/principal/teachers/:id/reactivate", requirePrincipal, (req, res) => {
-    const result = db.prepare("UPDATE teachers SET status = 'approved' WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Teacher reactivated." });
+    const result = db.prepare(`
+        UPDATE teachers SET status = 'approved' WHERE id = ?
+    `).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Teacher reactivated." : "Teacher not found."
+    });
 });
 
 app.patch("/api/principal/teachers/:id/department", requirePrincipal, (req, res) => {
     const id = Number(req.params.id);
     const department = cleanString(req.body.department);
-    const result = db.prepare("UPDATE teachers SET department = ? WHERE id = ?").run(department, id);
-    res.json({ success: result.changes > 0, message: "Department updated." });
+
+    if (!department) {
+        return res.status(400).json({
+            success: false,
+            message: "Department is required."
+        });
+    }
+
+    const result = db.prepare(`
+        UPDATE teachers SET department = ? WHERE id = ?
+    `).run(department, id);
+
+    res.json({
+        success: result.changes > 0,
+        message: result.changes ? "Department updated." : "Teacher not found."
+    });
 });
 
-app.post(["/api/principal/teachers/:id/password", "/api/principal/teachers/:id/reset-password"], requirePrincipal, async (req, res, next) => {
-    try {
-        const id = Number(req.params.id);
-        const password = cleanString(req.body.password);
-        if (password.length < 8) return res.status(400).json({ success: false, message: "Minimum 8 characters required." });
-        const passwordHash = await bcrypt.hash(password, 12);
-        const result = db.prepare("UPDATE teachers SET password_hash = ? WHERE id = ?").run(passwordHash, id);
-        res.json({ success: result.changes > 0, message: "Password reset successfully." });
-    } catch (error) { next(error); }
-});
+app.post(
+    [
+        "/api/principal/teachers/:id/password",
+        "/api/principal/teachers/:id/reset-password"
+    ],
+    requirePrincipal,
+    async (req, res, next) => {
+        try {
+            const id = Number(req.params.id);
+            const password = req.body.password || "";
 
-// ============================================================
-// PRINCIPAL: INSTRUCTIONS TO TEACHERS (DELIVERS VIA DASHBOARD & EMAIL)
-// ============================================================
+            if (password.length < 8) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Minimum 8 characters required."
+                });
+            }
+
+            const passwordHash = await bcrypt.hash(password, 12);
+
+            const result = db.prepare(`
+                UPDATE teachers SET password_hash = ? WHERE id = ?
+            `).run(passwordHash, id);
+
+            res.json({
+                success: result.changes > 0,
+                message: result.changes
+                    ? "Password reset successfully."
+                    : "Teacher not found."
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+/* ============================================================
+   PRINCIPAL INSTRUCTIONS
+   ============================================================ */
+
 app.get("/api/principal/notifications", requirePrincipal, (req, res) => {
     try {
         const notifications = db.prepare(`
@@ -826,160 +1317,284 @@ app.get("/api/principal/notifications", requirePrincipal, (req, res) => {
             FROM teacher_notifications
             ORDER BY created_at DESC, id DESC
         `).all();
+
         res.json({ success: true, notifications });
     } catch (error) {
-        res.status(500).json({ success: false, error: "Unable to load instructions." });
-    }
-});
+        console.error("[PRINCIPAL NOTIFICATIONS]", error.message);
 
-app.post("/api/principal/notifications", requirePrincipal, instructionUpload.array("attachments", 5), async (req, res) => {
-    try {
-        const title = cleanString(req.body.title);
-        const message = cleanString(req.body.message);
-        const department = cleanString(req.body.department) || "All";
-        const attachmentPath = (req.files || []).map(file => "/uploads/" + file.filename).join(",");
-
-        if (!title || !message) {
-            return res.status(400).json({ success: false, error: "Title and message are required." });
-        }
-
-        const result = db.prepare(`
-            INSERT INTO teacher_notifications (title, message, department, attachment_path, created_by)
-            VALUES (?, ?, ?, ?, ?)
-        `).run(title, message, department, attachmentPath, req.session.principal.id);
-
-        // Fetch teachers for the target department
-        const targetTeachers = department === "All"
-            ? db.prepare("SELECT email, full_name FROM teachers WHERE status = 'approved' AND email != ''").all()
-            : db.prepare("SELECT email, full_name FROM teachers WHERE status = 'approved' AND department = ? AND email != ''").all(department);
-
-        let emailsSent = 0;
-        const transporter = getMailTransporter();
-
-        if (transporter && targetTeachers.length > 0) {
-            const recipientEmails = targetTeachers.map(t => t.email);
-            
-            // Build attachment list for nodemailer
-            const emailAttachments = (req.files || []).map(file => ({
-                filename: file.originalname,
-                path: file.path
-            }));
-
-            try {
-                await transporter.sendMail({
-                    from: `"St. Martin's High School" <${process.env.EMAIL_USER}>`,
-                    to: process.env.EMAIL_USER, // Sender as 'to'
-                    bcc: recipientEmails,        // All recipient teachers in BCC
-                    subject: `[Principal Instruction] ${title} (${department})`,
-                    text: `Dear Teachers,\n\nThe Principal has posted a new instruction for the ${department} department:\n\nTitle: ${title}\n\n${message}\n\nPlease check your Teacher Dashboard for full details.`,
-                    attachments: emailAttachments
-                });
-                emailsSent = recipientEmails.length;
-                console.log(`[Instruction Email] Sent to ${emailsSent} teachers in ${department}`);
-            } catch (mailError) {
-                console.error("Failed to broadcast instruction email:", mailError.message);
-            }
-        }
-
-        res.status(201).json({
-            success: true,
-            message: `Instruction posted for department: ${department}.${emailsSent > 0 ? ` Email dispatched to ${emailsSent} teacher(s).` : ""}`,
-            id: result.lastInsertRowid
+        res.status(500).json({
+            success: false,
+            message: "Unable to load instructions."
         });
-    } catch (error) {
-        console.error("Instruction error:", error);
-        res.status(500).json({ success: false, error: "Unable to send instruction." });
     }
 });
+
+app.post(
+    "/api/principal/notifications",
+    requirePrincipal,
+    instructionUpload.array("attachments", 5),
+    async (req, res) => {
+        try {
+            const title = cleanString(req.body.title);
+            const message = cleanString(req.body.message);
+            const department = cleanString(req.body.department) || "All";
+
+            if (!title || !message) {
+                return res.status(400).json({
+                    success: false,
+                    error: "Title and message are required."
+                });
+            }
+
+            if (message.length > 5000) {
+                return res.status(400).json({
+                    success: false,
+                    error: "Instructions cannot exceed 5000 characters."
+                });
+            }
+
+            const attachmentPath = (req.files || [])
+                .map(file => "/uploads/" + file.filename)
+                .join(",");
+
+            const result = db.prepare(`
+                INSERT INTO teacher_notifications (
+                    title, message, department, attachment_path, created_by
+                ) VALUES (?, ?, ?, ?, ?)
+            `).run(
+                title,
+                message,
+                department,
+                attachmentPath,
+                req.session.principal.id
+            );
+
+            const targetTeachers = department === "All"
+                ? db.prepare(`
+                    SELECT email FROM teachers
+                    WHERE status = 'approved' AND email != ''
+                `).all()
+                : db.prepare(`
+                    SELECT email FROM teachers
+                    WHERE status = 'approved'
+                      AND department = ?
+                      AND email != ''
+                `).all(department);
+
+            let emailsSent = 0;
+
+            if (targetTeachers.length > 0) {
+                const recipients = targetTeachers
+                    .map(teacher => teacher.email)
+                    .filter(Boolean);
+
+                try {
+                    await sendSchoolEmail({
+                        to: process.env.EMAIL_USER.trim(),
+                        bcc: recipients,
+                        subject: `[Principal Instruction] ${title} (${department})`,
+                        text:
+                            `Dear Teachers,\n\n` +
+                            `The Principal has posted an instruction for ${department}.\n\n` +
+                            `Title: ${title}\n\n${message}\n\n` +
+                            "Please check your Teacher Dashboard for details.",
+                        attachments: (req.files || []).map(file => ({
+                            filename: file.originalname,
+                            path: file.path
+                        }))
+                    });
+
+                    emailsSent = recipients.length;
+                } catch (mailError) {
+                    console.error("[INSTRUCTION EMAIL]", {
+                        code: mailError.code,
+                        message: mailError.message
+                    });
+                }
+            }
+
+            res.status(201).json({
+                success: true,
+                message:
+                    `Instruction posted for department: ${department}.` +
+                    (emailsSent
+                        ? ` Email dispatched to ${emailsSent} teacher(s).`
+                        : " Dashboard instruction saved; email delivery was not confirmed."),
+                id: result.lastInsertRowid
+            });
+        } catch (error) {
+            console.error("[INSTRUCTION ERROR]", error);
+
+            res.status(500).json({
+                success: false,
+                error: "Unable to post instruction."
+            });
+        }
+    }
+);
 
 app.delete("/api/principal/notifications/:id", requirePrincipal, (req, res) => {
     try {
-        const result = db.prepare("DELETE FROM teacher_notifications WHERE id = ?").run(Number(req.params.id));
-        res.json({ success: result.changes > 0, message: "Instruction deleted." });
+        const result = db.prepare(`
+            DELETE FROM teacher_notifications WHERE id = ?
+        `).run(Number(req.params.id));
+
+        res.json({
+            success: result.changes > 0,
+            message: result.changes ? "Instruction deleted." : "Instruction not found."
+        });
     } catch (error) {
-        res.status(500).json({ success: false, error: "Unable to delete instruction." });
+        console.error("[DELETE INSTRUCTION]", error.message);
+
+        res.status(500).json({
+            success: false,
+            error: "Unable to delete instruction."
+        });
     }
 });
 
-// ============================================================
-// PRINCIPAL: PENDING CONTENT REVIEW & REMOVAL ROUTES
-// ============================================================
+/* ============================================================
+   PRINCIPAL CONTENT REVIEW
+   ============================================================ */
+
 app.get("/api/principal/pending-content", requirePrincipal, (req, res) => {
     try {
-        const updates = db.prepare("SELECT * FROM school_content WHERE status = 'pending' ORDER BY created_at DESC").all();
-        const events = db.prepare("SELECT * FROM calendar_events WHERE status = 'pending' ORDER BY event_date ASC").all();
-        res.json({ success: true, updates: updates || [], events: events || [] });
-    } catch (err) {
-        console.error("pending-content error:", err);
-        res.status(500).json({ success: false, error: err.message });
+        const updates = db.prepare(`
+            SELECT * FROM school_content
+            WHERE status = 'pending'
+            ORDER BY created_at DESC
+        `).all();
+
+        const events = db.prepare(`
+            SELECT * FROM calendar_events
+            WHERE status = 'pending'
+            ORDER BY event_date ASC
+        `).all();
+
+        res.json({ success: true, updates, events });
+    } catch (error) {
+        console.error("[PENDING CONTENT]", error.message);
+
+        res.status(500).json({
+            success: false,
+            error: "Unable to load pending content."
+        });
     }
 });
 
 app.post("/api/principal/updates/:id/approve", requirePrincipal, (req, res) => {
-    const result = db.prepare("UPDATE school_content SET status = 'approved' WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Announcement approved and published to website!" });
+    const result = db.prepare(`
+        UPDATE school_content SET status = 'approved' WHERE id = ?
+    `).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: "Announcement approved and published to website."
+    });
 });
 
 app.post("/api/principal/updates/:id/reject", requirePrincipal, (req, res) => {
-    const result = db.prepare("DELETE FROM school_content WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Announcement rejected." });
+    const result = db.prepare(
+        "DELETE FROM school_content WHERE id = ?"
+    ).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: "Announcement rejected."
+    });
 });
 
 app.post("/api/principal/events/:id/approve", requirePrincipal, (req, res) => {
-    const result = db.prepare("UPDATE calendar_events SET status = 'approved' WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Event approved and published to Academic Calendar!" });
+    const result = db.prepare(`
+        UPDATE calendar_events SET status = 'approved' WHERE id = ?
+    `).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: "Event approved and published to Academic Calendar."
+    });
 });
 
 app.post("/api/principal/events/:id/reject", requirePrincipal, (req, res) => {
-    const result = db.prepare("DELETE FROM calendar_events WHERE id = ?").run(Number(req.params.id));
-    res.json({ success: Boolean(result.changes), message: "Event rejected." });
+    const result = db.prepare(
+        "DELETE FROM calendar_events WHERE id = ?"
+    ).run(Number(req.params.id));
+
+    res.json({
+        success: result.changes > 0,
+        message: "Event rejected."
+    });
 });
 
-
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT),
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
-// Remove old items from anywhere
 app.get("/api/principal/all-content", requirePrincipal, (req, res) => {
     try {
-        const updates = db.prepare("SELECT id, title, category, page_key, status, created_by_name, created_at FROM school_content ORDER BY created_at DESC").all();
-        const events = db.prepare("SELECT id, title, category, event_date, location, status, created_by_name, created_at FROM calendar_events ORDER BY event_date DESC").all();
+        const updates = db.prepare(`
+            SELECT id, title, category, page_key, status,
+                   created_by_name, created_at
+            FROM school_content
+            ORDER BY created_at DESC
+        `).all();
+
+        const events = db.prepare(`
+            SELECT id, title, category, event_date, location,
+                   status, created_by_name, created_at
+            FROM calendar_events
+            ORDER BY event_date DESC
+        `).all();
+
         res.json({ success: true, updates, events });
-    } catch (err) {
-        res.status(500).json({ success: false, error: err.message });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 });
 
 app.delete("/api/principal/updates/:id", requirePrincipal, (req, res) => {
     try {
-        const result = db.prepare("DELETE FROM school_content WHERE id = ?").run(Number(req.params.id));
-        res.json({ success: result.changes > 0, message: "Announcement removed." });
-    } catch (err) {
-        res.status(500).json({ success: false, error: err.message });
+        const result = db.prepare(
+            "DELETE FROM school_content WHERE id = ?"
+        ).run(Number(req.params.id));
+
+        res.json({
+            success: result.changes > 0,
+            message: "Announcement removed."
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 });
 
 app.delete("/api/principal/events/:id", requirePrincipal, (req, res) => {
     try {
-        const result = db.prepare("DELETE FROM calendar_events WHERE id = ?").run(Number(req.params.id));
-        res.json({ success: result.changes > 0, message: "Event removed." });
-    } catch (err) {
-        res.status(500).json({ success: false, error: err.message });
+        const result = db.prepare(
+            "DELETE FROM calendar_events WHERE id = ?"
+        ).run(Number(req.params.id));
+
+        res.json({
+            success: result.changes > 0,
+            message: "Event removed."
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 });
 
-// ============================================================
-// LOGOUT & REVIEWS
-// ============================================================
+/* ============================================================
+   LOGOUT
+   ============================================================ */
+
 function logoutHandler(req, res, next) {
-    req.session.destroy((error) => {
+    req.session.destroy(error => {
         if (error) return next(error);
+
         res.clearCookie("smhs.sid");
         res.redirect("/");
     });
@@ -988,32 +1603,66 @@ function logoutHandler(req, res, next) {
 app.get(["/teacher-logout", "/teacher/logout"], logoutHandler);
 app.get("/principal-logout", logoutHandler);
 
+/* ============================================================
+   PUBLIC REVIEWS
+   ============================================================ */
+
 app.post("/api/reviews", (req, res) => {
     const name = cleanString(req.body.name);
     const email = cleanString(req.body.email);
     const message = cleanString(req.body.message || req.body.review);
-    if (!name || !message) return res.status(400).json({ success: false, message: "Required fields missing." });
 
-    db.prepare("INSERT INTO reviews (name, email, message, status) VALUES (?, ?, ?, 'approved')").run(name, email, message);
-    res.status(201).json({ success: true, message: "Review submitted." });
+    if (!name || !message) {
+        return res.status(400).json({
+            success: false,
+            message: "Required fields missing."
+        });
+    }
+
+    db.prepare(`
+        INSERT INTO reviews (name, email, message, status)
+        VALUES (?, ?, ?, 'approved')
+    `).run(name, email, message);
+
+    res.status(201).json({
+        success: true,
+        message: "Review submitted."
+    });
 });
 
-app.use((req, res) => res.status(404).render("404", { title: "Page Not Found" }));
+/* ============================================================
+   404 AND ERROR HANDLING
+   ============================================================ */
+
+app.use((req, res) => {
+    res.status(404).render("404", { title: "Page Not Found" });
+});
 
 app.use((error, req, res, next) => {
-    console.error("Server error:", error);
-    if (res.headersSent) return next(error);
+    console.error("[SERVER ERROR]", error);
+
+    if (res.headersSent) {
+        return next(error);
+    }
+
     res.status(500).send("Something went wrong. Please try again later.");
 });
+
+/* ============================================================
+   START SERVER
+   ============================================================ */
 
 async function startServer() {
     try {
         await syncPrincipalCredentials();
+
         app.listen(PORT, "0.0.0.0", () => {
-            console.log(`St. Martin's High School server running on port ${PORT}`);
+            console.log(
+                `St. Martin's High School server running on port ${PORT}`
+            );
         });
     } catch (error) {
-        console.error("Failed to initialize server:", error);
+        console.error("[STARTUP ERROR]", error);
         process.exit(1);
     }
 }
