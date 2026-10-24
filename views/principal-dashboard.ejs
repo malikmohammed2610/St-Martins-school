@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal Dashboard | St. Martin's High School</title>
+    <link rel="icon" type="image/png" href="/images/Logo.png">
+
+    <style>
+        :root {
+            --navy: #071827;
+            --navy-2: #173653;
+            --navy-3: #234b70;
+            --gold: #c5a45a;
+            --gold-light: #e4c982;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px rgba(7, 24, 39, .06), 0 2px 6px rgba(7, 24, 39, .05);
+            --shadow-md: 0 4px 10px rgba(7, 24, 39, .07), 0 12px 28px rgba(7, 24, 39, .08);
+            --shadow-lg: 0 10px 20px rgba(7, 24, 39, .10), 0 24px 50px rgba(7, 24, 39, .14);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            color: #243244;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(197, 164, 90, .10), transparent 40%),
+                radial-gradient(circle at 90% 20%, rgba(23, 54, 83, .08), transparent 45%),
+                #f2f5f9;
+            min-height: 100vh;
+        }
+
+        /* ---------- TOP BAR ---------- */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, .85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #172b43;
+            min-height: 70px;
+            padding: 12px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 6px 20px rgba(7, 24, 39, .06);
+        }
+
+        .brand { display: flex; align-items: center; gap: 14px; }
+
+        .brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(7, 24, 39, .25));
+            transition: transform .5s ease;
+        }
+
+        .brand:hover img { transform: rotateY(360deg); }
+
+        .brand-title { font-weight: 700; font-size: 17px; color: #172b43; }
+        .brand-subtitle { color: #66768a; font-size: 12px; }
+
+        .logout {
+            text-decoration: none;
+            color: #172b43;
+            border: 1px solid #d7dee7;
+            background: linear-gradient(#fff, #f3f6f9);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 0 #d0d8e2, 0 6px 12px rgba(7, 24, 39, .08);
+            transition: transform .15s ease, box-shadow .15s ease;
+            display: inline-block;
+        }
+
+        .logout:hover { transform: translateY(-2px); box-shadow: 0 5px 0 #d0d8e2, 0 10px 18px rgba(7, 24, 39, .12); }
+        .logout:active { transform: translateY(3px); box-shadow: 0 0 0 #d0d8e2, 0 2px 4px rgba(7, 24, 39, .1); }
+
+        .container {
+            max-width: 1320px;
+            margin: auto;
+            padding: 28px 25px 70px;
+        }
+
+        /* ---------- ENTRANCE ANIMATION ---------- */
+        @keyframes rise3d {
+            from { opacity: 0; transform: perspective(1000px) rotateX(12deg) translateY(30px); }
+            to   { opacity: 1; transform: perspective(1000px) rotateX(0) translateY(0); }
+        }
+
+        .hero, .stat, .section {
+            animation: rise3d .7s cubic-bezier(.2, .8, .2, 1) backwards;
+        }
+
+        .stat:nth-child(1) { animation-delay: .10s; }
+        .stat:nth-child(2) { animation-delay: .18s; }
+        .stat:nth-child(3) { animation-delay: .26s; }
+        .stat:nth-child(4) { animation-delay: .34s; }
+        .section:nth-of-type(3) { animation-delay: .35s; }
+        .section:nth-of-type(4) { animation-delay: .45s; }
+        .section:nth-of-type(5) { animation-delay: .55s; }
+        .section:nth-of-type(6) { animation-delay: .65s; }
+
+        /* ---------- 3D TILT + GLARE ---------- */
+        [data-tilt] {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform .2s ease-out, box-shadow .3s ease;
+            will-change: transform;
+        }
+
+        [data-tilt]::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .35), transparent 55%);
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+
+        [data-tilt]:hover::after { opacity: 1; }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0d2338 0%, #173653 55%, #22507a 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 36px 32px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, .12);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            right: -100px;
+            top: -160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(228, 201, 130, .25), transparent 70%);
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 680px; }
+
+        .eyebrow {
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin: 10px 0;
+            text-shadow: 0 2px 0 rgba(0, 0, 0, .25), 0 6px 16px rgba(0, 0, 0, .3);
+        }
+
+        .hero p { color: #c5d0d9; margin: 0; line-height: 1.6; }
+
+        /* Floating 3D cubes */
+        .hero-scene {
+            position: absolute;
+            right: 90px;
+            top: 50%;
+            width: 110px;
+            height: 110px;
+            margin-top: -55px;
+            perspective: 700px;
+            z-index: 1;
+        }
+
+        .hero-scene.small {
+            right: 230px;
+            top: 30%;
+            width: 50px;
+            height: 50px;
+            margin-top: -25px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spinCube 16s linear infinite;
+        }
+
+        .hero-scene.small .cube { animation-duration: 10s; animation-direction: reverse; }
+
+        .face {
+            position: absolute;
+            inset: 0;
+            border: 1.5px solid rgba(228, 201, 130, .7);
+            background: linear-gradient(135deg, rgba(228, 201, 130, .22), rgba(197, 164, 90, .05));
+            box-shadow: inset 0 0 20px rgba(228, 201, 130, .25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .hero-scene:not(.small) .front  { transform: translateZ(55px); }
+        .hero-scene:not(.small) .back   { transform: rotateY(180deg) translateZ(55px); }
+        .hero-scene:not(.small) .right  { transform: rotateY(90deg) translateZ(55px); }
+        .hero-scene:not(.small) .left   { transform: rotateY(-90deg) translateZ(55px); }
+        .hero-scene:not(.small) .top    { transform: rotateX(90deg) translateZ(55px); }
+        .hero-scene:not(.small) .bottom { transform: rotateX(-90deg) translateZ(55px); }
+
+        .hero-scene.small .front  { transform: translateZ(25px); }
+        .hero-scene.small .back   { transform: rotateY(180deg) translateZ(25px); }
+        .hero-scene.small .right  { transform: rotateY(90deg) translateZ(25px); }
+        .hero-scene.small .left   { transform: rotateY(-90deg) translateZ(25px); }
+        .hero-scene.small .top    { transform: rotateX(90deg) translateZ(25px); }
+        .hero-scene.small .bottom { transform: rotateX(-90deg) translateZ(25px); }
+
+        @keyframes spinCube {
+            from { transform: rotateX(-20deg) rotateY(0deg); }
+            to   { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+
+        .hero-scene { animation: floatY 5s ease-in-out infinite; }
+        .hero-scene.small { animation-duration: 4s; animation-delay: -1s; }
+
+        @keyframes floatY {
+            0%, 100% { translate: 0 0; }
+            50% { translate: 0 -12px; }
+        }
+
+        /* ---------- STATS ---------- */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: linear-gradient(160deg, #ffffff 0%, #f7f9fc 100%);
+            border-radius: 14px;
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--gold);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat:hover { box-shadow: var(--shadow-lg); }
+
+        .stat-label {
+            color: #78838d;
+            font-size: 13px;
+            margin-bottom: 6px;
+            transform: translateZ(20px);
+        }
+
+        .stat-number {
+            font-size: 34px;
+            font-weight: bold;
+            color: var(--navy);
+            transform: translateZ(45px);
+            text-shadow: 0 3px 6px rgba(7, 24, 39, .15);
+        }
+
+        /* ---------- SECTIONS ---------- */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 26px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header { margin-bottom: 20px; }
+
+        .section-header h2 {
+            font-size: 22px;
+            margin: 0 0 6px;
+            color: var(--navy);
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .section-header h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 3px;
+            bottom: 3px;
+            width: 5px;
+            border-radius: 4px;
+            background: linear-gradient(var(--gold-light), var(--gold));
+            box-shadow: 2px 2px 4px rgba(197, 164, 90, .4);
+        }
+
+        .section-header p { color: #71808c; margin: 0; font-size: 14px; }
+
+        .instruction-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .panel-3d {
+            background: linear-gradient(160deg, #fbfcfe, #f3f6fa);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: inset 0 1px 0 #fff, 0 6px 16px rgba(7, 24, 39, .06);
+        }
+
+        /* ---------- FORMS ---------- */
+        .form-group { margin-bottom: 16px; }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d5dde7;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+            box-shadow: inset 0 2px 4px rgba(7, 24, 39, .06);
+            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: inset 0 2px 4px rgba(7, 24, 39, .04), 0 0 0 3px rgba(197, 164, 90, .25), 0 6px 14px rgba(7, 24, 39, .08);
+            transform: translateY(-1px);
+        }
+
+        .form-group textarea { min-height: 140px; resize: vertical; }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .full { grid-column: 1 / -1; }
+
+        /* ---------- 3D BUTTONS ---------- */
+        .primary-button {
+            border: 0;
+            background: linear-gradient(180deg, var(--navy-3), var(--navy-2));
+            color: white;
+            padding: 13px 22px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 5px 0 #0b2032, 0 10px 18px rgba(7, 24, 39, .25);
+            transition: transform .12s ease, box-shadow .12s ease, filter .2s ease;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #0b2032, 0 14px 24px rgba(7, 24, 39, .28);
+            filter: brightness(1.08);
+        }
+
+        .primary-button:active {
+            transform: translateY(5px);
+            box-shadow: 0 0 0 #0b2032, 0 3px 6px rgba(7, 24, 39, .2);
+        }
+
+        .primary-button:disabled {
+            opacity: .7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .action-btn {
+            border: 0;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            box-shadow: 0 3px 0 rgba(7, 24, 39, .15), 0 4px 8px rgba(7, 24, 39, .08);
+            transition: transform .1s ease, box-shadow .1s ease;
+        }
+
+        .action-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 rgba(7, 24, 39, .15), 0 6px 10px rgba(7, 24, 39, .1); }
+        .action-btn:active { transform: translateY(3px); box-shadow: 0 0 0 rgba(7, 24, 39, .15); }
+
+        .btn-approve    { background: #dff3e5; color: #24683a; }
+        .btn-reject     { background: #fae4e4; color: #9b2b2b; }
+        .btn-disable    { background: #e7e9eb; color: #4e5962; }
+        .btn-reactivate { background: #e4eff8; color: #285d80; }
+
+        .delete-btn {
+            border: 0;
+            background: #f9e4e4;
+            color: #9a2c2c;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 11px;
+            margin-top: 10px;
+            box-shadow: 0 3px 0 #e8c4c4;
+            transition: transform .1s ease, box-shadow .1s ease;
+        }
+
+        .delete-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #e8c4c4; }
+
+        /* ---------- MESSAGES ---------- */
+        .form-message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-message.success { display: block; background: #e5f5e9; color: #27683d; }
+        .form-message.error   { display: block; background: #fae7e7; color: #9b2d2d; }
+
+        /* ---------- NOTIFICATIONS ---------- */
+        .notifications-list {
+            max-height: 480px;
+            overflow-y: auto;
+            padding: 4px 6px 4px 2px;
+        }
+
+        .notification-item {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .notification-item:hover {
+            transform: perspective(800px) rotateX(2deg) translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .notification-title { font-size: 16px; font-weight: bold; color: var(--navy); }
+        .notification-date { color: #8b949c; font-size: 12px; }
+
+        .notification-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 50px;
+            background: #eef2f5;
+            color: #56616b;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* ---------- PENDING REVIEW CARDS ---------- */
+        .review-card {
+            border: 1px solid #e1e7ee;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-2px) translateX(3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .review-card.update { border-left: 4px solid var(--gold); }
+        .review-card.event  { border-left: 4px solid var(--navy-2); }
+
+        /* ---------- TABLE ---------- */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: inset 0 1px 3px rgba(7, 24, 39, .04);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: linear-gradient(#f5f8fb, #ebf0f5);
+            text-align: left;
+            padding: 14px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #edf0f4;
+            font-size: 14px;
+        }
+
+        tbody tr { transition: background .2s ease, box-shadow .2s ease; }
+
+        tbody tr:hover {
+            background: #f8fafd;
+            box-shadow: inset 4px 0 0 var(--gold);
+        }
+
+        td select {
+            padding: 6px 8px;
+            border: 1px solid #d5dde7;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0 2px 0 #e3e8ee;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(7, 24, 39, .08);
+        }
+
+        .status.approved { background: #e2f4e8; color: #27683c; }
+        .status.pending  { background: #fff2cf; color: #8b681c; }
+        .status.disabled { background: #e4e7ea; color: #56616b; }
+
+        .actions { display: flex; gap: 6px; }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 900px) {
+            .instruction-layout, .form-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .hero-scene { display: none; }
+            .review-card { flex-direction: column; align-items: flex-start; }
+        }
+
+        /* Respect users who prefer less motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <img src="/images/Logo.png" alt="School Logo">
+        <div>
+            <div class="brand-title">St. Martin's High School</div>
+            <div class="brand-subtitle">Principal Administration Portal</div>
+        </div>
+    </div>
+    <a href="/principal-logout" class="logout">Logout</a>
+</header>
+
+<main class="container">
+
+    <section class="hero" data-tilt="4">
+        <div class="hero-content">
+            <div class="eyebrow">Principal Dashboard</div>
+            <h1>Welcome, Principal</h1>
+            <p>
+                Manage teacher registrations, create faculty accounts,
+                approve public announcements &amp; academic events, and communicate instructions.
+            </p>
+        </div>
+
+        <div class="hero-scene" aria-hidden="true">
+            <div class="cube">
+                <div class="face front">SMHS</div>
+                <div class="face back">SMHS</div>
+                <div class="face right"></div>
+                <div class="face left"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+            </div>
+        </div>
+
+        <div class="hero-scene small" aria-hidden="true">
+            <div class="cube">
+                <div class="face front"></div>
+                <div class="face back"></div>
+                <div class="face right"></div>
+                <div class="face left"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat" data-tilt="12">
+            <div class="stat-label">Total Teachers</div>
+            <div class="stat-number" id="totalTeachers">0</div>
+        </div>
+        <div class="stat" data-tilt="12">
+            <div class="stat-label">Pending Approval</div>
+            <div class="stat-number" id="pendingTeachers">0</div>
+        </div>
+        <div class="stat" data-tilt="12">
+            <div class="stat-label">Approved Faculty</div>
+            <div class="stat-number" id="approvedTeachers">0</div>
+        </div>
+        <div class="stat" data-tilt="12">
+            <div class="stat-label">Disabled Accounts</div>
+            <div class="stat-number" id="disabledTeachers">0</div>
+        </div>
+    </section>
+
+    <!-- PENDING WEBSITE ANNOUNCEMENTS & EVENTS REVIEW -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Website Updates &amp; Events Awaiting Approval</h2>
+            <p>Teacher submissions will only appear on the public News &amp; Updates or Academic Calendar pages after you approve them below.</p>
+        </div>
+
+        <div id="pendingReviewList">
+            <p style="color:#71808c;">Loading pending submissions...</p>
+        </div>
+    </section>
+
+    <!-- INSTRUCTIONS SECTION -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Department Instructions &amp; Announcements</h2>
+            <p>Send instructions directly to a specific department or broadcast to all faculty.</p>
+        </div>
+
+        <div class="instruction-layout">
+            <div class="panel-3d">
+                <h3 style="margin-top:0;">Send New Instruction</h3>
+                <div id="notificationMessage" class="form-message"></div>
+
+                <form id="notificationForm">
+                    <div class="form-group">
+                        <label for="notification_title">Instruction Title</label>
+                        <input type="text" id="notification_title" required placeholder="e.g. Science Department Meeting">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notification_department">Recipient Department</label>
+                        <select id="notification_department" required>
+                            <option value="All">All departments</option>
+                            <option value="Administration">Administration</option>
+                            <option value="Primary">Primary</option>
+                            <option value="Middle School">Middle School</option>
+                            <option value="Secondary">Secondary</option>
+                            <option value="Science">Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Languages">Languages</option>
+                            <option value="Social Studies">Social Studies</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Arts">Arts</option>
+                            <option value="IT">IT</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notification_body">Message</label>
+                        <textarea id="notification_body" required placeholder="Write the instruction..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instruction_attachments">Attachments (Optional)</label>
+                        <input type="file" id="instruction_attachments" accept=".png,.jpg,.jpeg,.pdf" multiple>
+                    </div>
+
+                    <button type="submit" class="primary-button" id="sendNotificationButton">
+                        Send to Teachers
+                    </button>
+                </form>
+            </div>
+
+            <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <h3 style="margin:0;">Sent Instructions History</h3>
+                    <span id="notificationCount" style="font-weight:bold; color:var(--navy);">0 Sent</span>
+                </div>
+                <div class="notifications-list" id="notificationsList">
+                    <div style="color:#71808c; text-align:center; padding:30px;">Loading instructions history...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREATE TEACHER PROFILE -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Create Teacher Profile</h2>
+            <p>Create an approved faculty account directly.</p>
+        </div>
+
+        <div id="createMessage" class="form-message"></div>
+
+        <form id="createTeacherForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="create_full_name">Full Name</label>
+                    <input type="text" id="create_full_name" required placeholder="Teacher's name">
+                </div>
+
+                <div class="form-group">
+                    <label for="create_employee_id">Employee ID</label>
+                    <input type="text" id="create_employee_id" required placeholder="SMHS-T001">
+                </div>
+
+                <div class="form-group">
+                    <label for="create_username">Username</label>
+                    <input type="text" id="create_username" minlength="4" required placeholder="Username for login">
+                </div>
+
+                <div class="form-group">
+                    <label for="create_department">Department</label>
+                    <select id="create_department" required>
+                        <option value="General">General</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Primary">Primary</option>
+                        <option value="Middle School">Middle School</option>
+                        <option value="Secondary">Secondary</option>
+                        <option value="Science">Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Languages">Languages</option>
+                        <option value="Social Studies">Social Studies</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Arts">Arts</option>
+                        <option value="IT">IT</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="create_email">Teacher Email Address</label>
+                    <input type="email" id="create_email" required placeholder="teacher@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="create_phone">Phone Number (Optional)</label>
+                    <input type="tel" id="create_phone" placeholder="+91 9876543210">
+                </div>
+
+                <div class="form-group">
+                    <label for="create_password">Password</label>
+                    <input type="password" id="create_password" minlength="8" required placeholder="Min 8 characters">
+                </div>
+
+                <div class="form-group">
+                    <label for="create_confirm_password">Confirm Password</label>
+                    <input type="password" id="create_confirm_password" minlength="8" required placeholder="Re-enter password">
+                </div>
+
+                <div class="full">
+                    <button type="submit" class="primary-button" id="createTeacherBtn">
+                        + Create Teacher Profile
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- TEACHER ACCOUNTS TABLE -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Faculty Accounts</h2>
+            <p>View registered teachers and edit departments or status.</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Teacher</th>
+                        <th>Employee ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="teacherTableBody">
+                    <tr><td colspan="7" style="text-align:center; padding:30px;">Loading teacher accounts...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+<script>
+let teachers = [];
+
+/* 0. 3D TILT EFFECT */
+function initTilt() {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const noHover = window.matchMedia("(hover: none)").matches;
+    if (reduceMotion || noHover) return;
+
+    document.querySelectorAll("[data-tilt]").forEach(el => {
+        const max = Number(el.dataset.tilt) || 8;
+
+        el.addEventListener("mousemove", e => {
+            const rect = el.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+            el.style.transform =
+                `perspective(900px) rotateX(${(-y * max).toFixed(2)}deg) rotateY(${(x * max).toFixed(2)}deg) translateY(-4px)`;
+            el.style.setProperty("--gx", `${((x + 0.5) * 100).toFixed(1)}%`);
+            el.style.setProperty("--gy", `${((y + 0.5) * 100).toFixed(1)}%`);
+        });
+
+        el.addEventListener("mouseleave", () => {
+            el.style.transform = "";
+        });
+    });
+}
+
+/* Animated counter for stats */
+function animateCount(el, target) {
+    const start = Number(el.textContent) || 0;
+    if (start === target) return;
+    const duration = 600;
+    const t0 = performance.now();
+
+    function step(now) {
+        const p = Math.min((now - t0) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(start + (target - start) * eased);
+        if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+
+/* 1. LOAD & RENDER TEACHERS */
+async function loadTeachers() {
+    const tbody = document.getElementById("teacherTableBody");
+    try {
+        const response = await fetch("/api/principal/teachers");
+        if (response.redirected) return window.location.href = "/principal-login";
+
+        const data = await response.json();
+        if (!data.success) throw new Error(data.error);
+
+        teachers = data.teachers || [];
+        renderTeachers();
+        updateStats();
+    } catch (error) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#9b2d2d;">Unable to load teacher accounts.</td></tr>`;
+    }
+}
+
+function renderTeachers() {
+    const tbody = document.getElementById("teacherTableBody");
+    if (!teachers.length) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px;">No faculty accounts found.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = teachers.map(teacher => {
+        const id = Number(teacher.id);
+        let actionButtons = "";
+        if (teacher.status === "pending") {
+            actionButtons = `
+                <button class="action-btn btn-approve" onclick="updateTeacher(${id}, 'approve')">Approve</button>
+                <button class="action-btn btn-reject" onclick="updateTeacher(${id}, 'reject')">Reject</button>
+            `;
+        } else if (teacher.status === "approved") {
+            actionButtons = `<button class="action-btn btn-disable" onclick="updateTeacher(${id}, 'disable')">Disable</button>`;
+        } else if (teacher.status === "disabled") {
+            actionButtons = `<button class="action-btn btn-reactivate" onclick="updateTeacher(${id}, 'reactivate')">Reactivate</button>`;
+        }
+
+        const depts = ["General","Administration","Primary","Middle School","Secondary","Science","Mathematics","Languages","Social Studies","Sports","Arts","IT"]
+            .map(d => `<option value="${d}" ${(teacher.department || "General") === d ? "selected" : ""}>${d}</option>`)
+            .join("");
+
+        return `
+            <tr>
+                <td><strong>${escapeHtml(teacher.full_name)}</strong></td>
+                <td>${escapeHtml(teacher.employee_id)}</td>
+                <td>${escapeHtml(teacher.username)}</td>
+                <td>${escapeHtml(teacher.email)}</td>
+                <td>
+                    <select onchange="updateTeacherDepartment(${id}, this.value)">
+                        ${depts}
+                    </select>
+                </td>
+                <td><span class="status ${escapeHtml(teacher.status)}">${escapeHtml(teacher.status)}</span></td>
+                <td>
+                    <div class="actions">
+                        ${actionButtons}
+                        <button class="action-btn btn-reactivate" onclick="resetTeacherPassword(${id})">Reset PWD</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join("");
+}
+
+function updateStats() {
+    animateCount(document.getElementById("totalTeachers"), teachers.length);
+    animateCount(document.getElementById("pendingTeachers"), teachers.filter(t => t.status === "pending").length);
+    animateCount(document.getElementById("approvedTeachers"), teachers.filter(t => t.status === "approved").length);
+    animateCount(document.getElementById("disabledTeachers"), teachers.filter(t => t.status === "disabled").length);
+}
+
+async function updateTeacher(id, action) {
+    if (!confirm(`Are you sure you want to ${action} this teacher?`)) return;
+    try {
+        const response = await fetch(`/api/principal/teachers/${id}/${action}`, { method: "POST" });
+        const data = await response.json();
+        if (!data.success) alert(data.error || "Update failed.");
+        await loadTeachers();
+    } catch (_) { alert("Connection error."); }
+}
+
+async function updateTeacherDepartment(id, department) {
+    try {
+        const response = await fetch(`/api/principal/teachers/${id}/department`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ department })
+        });
+        const data = await response.json();
+        if (!data.success) throw new Error(data.message);
+    } catch (e) {
+        alert(e.message || "Failed to update department.");
+        await loadTeachers();
+    }
+}
+
+async function resetTeacherPassword(id) {
+    const newPwd = prompt("Enter a new password (min 8 characters):");
+    if (newPwd === null) return;
+    if (newPwd.length < 8) return alert("Password must be at least 8 characters.");
+    try {
+        const response = await fetch(`/api/principal/teachers/${id}/reset-password`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ password: newPwd })
+        });
+        const data = await response.json();
+        alert(data.message || "Password updated.");
+    } catch (_) { alert("Connection error."); }
+}
+
+/* 2. PENDING CONTENT REVIEW LOADER & APPROVER */
+async function loadPendingContent() {
+    const container = document.getElementById("pendingReviewList");
+    try {
+        const response = await fetch("/api/principal/pending-content");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const data = await response.json();
+        if (!data.success) throw new Error(data.error || "Error loading items");
+
+        const updates = data.updates || [];
+        const events = data.events || [];
+
+        if (updates.length === 0 && events.length === 0) {
+            container.innerHTML = `<p style="color:#71808c; margin:0;">All announcements and calendar events are published and up to date.</p>`;
+            return;
+        }
+
+        let html = "";
+        if (updates.length > 0) {
+            html += `<h4 style="margin:10px 0 8px;">Pending Announcements (${updates.length})</h4>`;
+            updates.forEach(u => {
+                html += `
+                    <div class="review-card update">
+                        <div>
+                            <strong>${escapeHtml(u.title)}</strong> [Page: ${escapeHtml(u.page_key || "news")}]<br>
+                            <small style="color:#71808c;">By ${escapeHtml(u.created_by_name || "Teacher")} — ${escapeHtml(u.description)}</small>
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <button class="action-btn btn-approve" onclick="approveUpdate(${Number(u.id)})">Publish to Page</button>
+                            <button class="action-btn btn-reject" onclick="rejectUpdate(${Number(u.id)})">Reject</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        if (events.length > 0) {
+            html += `<h4 style="margin:16px 0 8px;">Pending Calendar Events (${events.length})</h4>`;
+            events.forEach(e => {
+                html += `
+                    <div class="review-card event">
+                        <div>
+                            <strong>${escapeHtml(e.title)}</strong> [Date: ${escapeHtml(e.event_date)}]<br>
+                            <small style="color:#71808c;">Venue: ${escapeHtml(e.location || "School")} — By ${escapeHtml(e.created_by_name || "Teacher")}</small>
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <button class="action-btn btn-approve" onclick="approveEvent(${Number(e.id)})">Publish to Calendar</button>
+                            <button class="action-btn btn-reject" onclick="rejectEvent(${Number(e.id)})">Reject</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        container.innerHTML = html;
+    } catch (err) {
+        console.error("loadPendingContent error:", err);
+        container.innerHTML = `<p style="color:#9b2d2d; margin:0;">Unable to load pending submissions. Please refresh the page.</p>`;
+    }
+}
+
+async function approveUpdate(id) {
+    await fetch(`/api/principal/updates/${id}/approve`, { method: "POST" });
+    await loadPendingContent();
+}
+
+async function rejectUpdate(id) {
+    await fetch(`/api/principal/updates/${id}/reject`, { method: "POST" });
+    await loadPendingContent();
+}
+
+async function approveEvent(id) {
+    await fetch(`/api/principal/events/${id}/approve`, { method: "POST" });
+    await loadPendingContent();
+}
+
+async function rejectEvent(id) {
+    await fetch(`/api/principal/events/${id}/reject`, { method: "POST" });
+    await loadPendingContent();
+}
+
+/* 3. CREATE TEACHER PROFILE FORM */
+const createForm = document.getElementById("createTeacherForm");
+createForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const msg = document.getElementById("createMessage");
+    const btn = document.getElementById("createTeacherBtn");
+    msg.className = "form-message";
+
+    const full_name = document.getElementById("create_full_name").value.trim();
+    const employee_id = document.getElementById("create_employee_id").value.trim();
+    const username = document.getElementById("create_username").value.trim();
+    const email = document.getElementById("create_email").value.trim();
+    const phone = document.getElementById("create_phone").value.trim();
+    const department = document.getElementById("create_department").value;
+    const password = document.getElementById("create_password").value;
+    const confirm_password = document.getElementById("create_confirm_password").value;
+
+    if (password !== confirm_password) {
+        msg.className = "form-message error";
+        msg.textContent = "Passwords do not match.";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Creating...";
+
+    try {
+        const response = await fetch("/api/principal/teachers/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ full_name, employee_id, username, email, phone, department, password })
+        });
+        const data = await response.json();
+        if (!data.success) {
+            msg.className = "form-message error";
+            msg.textContent = data.message || "Failed to create teacher.";
+            return;
+        }
+
+        msg.className = "form-message success";
+        msg.textContent = data.message || "Teacher account created and approved.";
+        createForm.reset();
+        await loadTeachers();
+    } catch (_) {
+        msg.className = "form-message error";
+        msg.textContent = "Connection error.";
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "+ Create Teacher Profile";
+    }
+});
+
+/* 4. INSTRUCTION BROADCAST FORM & HISTORY */
+const notificationForm = document.getElementById("notificationForm");
+notificationForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const title = document.getElementById("notification_title").value.trim();
+    const message = document.getElementById("notification_body").value.trim();
+    const department = document.getElementById("notification_department").value;
+    const attachmentInput = document.getElementById("instruction_attachments");
+    const msgBox = document.getElementById("notificationMessage");
+    const btn = document.getElementById("sendNotificationButton");
+
+    msgBox.className = "form-message";
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    try {
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("message", message);
+        formData.append("department", department);
+        Array.from(attachmentInput.files || []).forEach(f => formData.append("attachments", f));
+
+        const response = await fetch("/api/principal/notifications", {
+            method: "POST",
+            body: formData
+        });
+        const data = await response.json();
+        if (!data.success) throw new Error(data.error || "Unable to send instruction.");
+
+        msgBox.className = "form-message success";
+        msgBox.textContent = data.message || "Instruction sent!";
+        notificationForm.reset();
+        await loadNotifications();
+    } catch (e) {
+        msgBox.className = "form-message error";
+        msgBox.textContent = e.message || "Failed to send instruction.";
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "Send to Teachers";
+    }
+});
+
+async function loadNotifications() {
+    const list = document.getElementById("notificationsList");
+    const count = document.getElementById("notificationCount");
+
+    try {
+        const response = await fetch("/api/principal/notifications");
+        const data = await response.json();
+        if (!data.success) throw new Error();
+
+        const notifications = data.notifications || [];
+        count.textContent = `${notifications.length} Sent`;
+
+        if (!notifications.length) {
+            list.innerHTML = `<div style="text-align:center; padding:30px; color:#71808c;">No instructions sent yet.</div>`;
+            return;
+        }
+
+        list.innerHTML = notifications.map(n => `
+            <div class="notification-item">
+                <div style="display:flex; justify-content:space-between; gap:10px;">
+                    <span class="notification-title">${escapeHtml(n.title)}</span>
+                    <span class="notification-date">${escapeHtml(formatDate(n.created_at))}</span>
+                </div>
+                <div style="margin:8px 0; color:#596771; font-size:13px; white-space:pre-wrap;">${escapeHtml(n.message)}</div>
+                <span class="notification-badge">Department: ${escapeHtml(n.department || "All")}</span>
+                <br>
+                <button class="delete-btn" onclick="deleteNotification(${Number(n.id)})">Delete</button>
+            </div>
+        `).join("");
+    } catch (_) {
+        list.innerHTML = `<div style="text-align:center; padding:30px; color:#9b2d2d;">Unable to load instruction history.</div>`;
+    }
+}
+
+async function deleteNotification(id) {
+    if (!confirm("Delete this instruction?")) return;
+    await fetch(`/api/principal/notifications/${id}`, { method: "DELETE" });
+    await loadNotifications();
+}
+
+function formatDate(val) {
+    if (!val) return "";
+    const d = new Date(val);
+    return isNaN(d.getTime()) ? String(val) : d.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+}
+
+function escapeHtml(val) {
+    return String(val ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+/* INITIAL INVOCATION */
+initTilt();
+loadTeachers();
+loadNotifications();
+loadPendingContent();
+</script>
+
+</body>
+</html>

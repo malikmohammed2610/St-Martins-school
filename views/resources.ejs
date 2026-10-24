@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student &amp; Parent Resources | St. Martin's High School</title>
+
+    <meta name="description" content="Access student and parent resources, academic calendars, syllabus information and school guidelines at St. Martin's High School, Balanagar, Hyderabad.">
+    <meta name="theme-color" content="#071A2B">
+
+    <link rel="icon" type="image/png" href="/images/logo.png">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        :root {
+            --resources-navy: #071A2B;
+            --resources-navy-light: #0C2235;
+            --resources-gold: #C5A45A;
+            --resources-gold-light: #DFC982;
+            --resources-ivory: #F6F1E7;
+            --resources-white: #FFFFFF;
+            --resources-text: #253443;
+            --resources-muted: #687585;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: var(--resources-ivory) !important;
+            color: var(--resources-text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .resources-page {
+            display: block !important;
+            width: 100% !important;
+            position: relative;
+            z-index: 1;
+            background-color: var(--resources-ivory);
+        }
+
+        /* HERO */
+        .resources-hero {
+            position: relative;
+            padding: 85px 0 75px;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(197, 164, 90, 0.18), transparent 40%),
+                linear-gradient(135deg, var(--resources-navy), var(--resources-navy-light));
+            border-bottom: 1px solid rgba(197, 164, 90, 0.25);
+        }
+
+        .resources-eyebrow {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: var(--resources-gold-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .resources-hero h1 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 18px;
+            color: #ffffff;
+        }
+
+        .resources-hero h1 span {
+            color: var(--resources-gold-light);
+        }
+
+        .resources-gold-rule {
+            width: 75px;
+            height: 3px;
+            margin: 20px 0;
+            background: var(--resources-gold);
+        }
+
+        .resources-hero p {
+            max-width: 680px;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* CONTENT */
+        .resources-content {
+            padding: 65px 0 90px;
+        }
+
+        .resources-section-heading {
+            margin-bottom: 35px;
+        }
+
+        .resources-section-heading h2 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            font-weight: 600;
+            color: var(--resources-navy);
+            margin: 0 0 10px;
+        }
+
+        .resources-section-heading p {
+            color: var(--resources-muted);
+            font-size: 0.98rem;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: 0;
+        }
+
+        /* CARDS */
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 32px 28px;
+            background: var(--resources-white);
+            border: 1px solid rgba(197, 164, 90, 0.28);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(7, 26, 43, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--resources-gold);
+            box-shadow: 0 16px 40px rgba(7, 26, 43, 0.09);
+        }
+
+        .resource-card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .resource-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 52px;
+            width: 52px;
+            height: 52px;
+            color: var(--resources-gold);
+            background: var(--resources-navy);
+            font-size: 1.4rem;
+        }
+
+        .resource-card h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--resources-navy);
+            margin: 0 0 8px;
+            line-height: 1.3;
+        }
+
+        .resource-card p {
+            color: var(--resources-muted);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .resource-category {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--resources-gold);
+            margin-bottom: 8px;
+        }
+
+        .resource-card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 24px;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            color: #ffffff !important;
+            background: var(--resources-navy);
+            border: 1px solid var(--resources-navy);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--resources-navy) !important;
+            background: var(--resources-gold);
+            border-color: var(--resources-gold);
+        }
+
+        .resource-link-secondary {
+            color: var(--resources-navy) !important;
+            background: transparent;
+            border-color: rgba(7, 26, 43, 0.25);
+        }
+
+        .resource-link-secondary:hover {
+            color: #ffffff !important;
+            background: var(--resources-navy);
+            border-color: var(--resources-navy);
+        }
+
+        .resources-note {
+            margin: 45px 0;
+            padding: 24px 28px;
+            background: rgba(197, 164, 90, 0.12);
+            border-left: 4px solid var(--resources-gold);
+        }
+
+        .resources-note h3 {
+            margin: 0 0 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--resources-navy);
+        }
+
+        .resources-note p {
+            margin: 0;
+            color: #4b5765;
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        .resources-contact {
+            margin-top: 60px;
+            padding: 50px 30px;
+            background: var(--resources-navy);
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .resources-contact h2 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin: 0 0 12px;
+            color: #ffffff;
+        }
+
+        .resources-contact p {
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.96rem;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .resources-contact .resource-link {
+            background: var(--resources-gold);
+            color: var(--resources-navy) !important;
+            border-color: var(--resources-gold);
+        }
+
+        .resources-contact .resource-link:hover {
+            background: transparent;
+            color: #ffffff !important;
+            border-color: var(--resources-gold);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Partial -->
+    <%- include('partials/header') %>
+
+    <!-- MAIN BODY -->
+    <main class="resources-page">
+
+        <!-- Hero Section -->
+        <section class="resources-hero">
+            <div class="container">
+                <span class="resources-eyebrow">
+                    Student &amp; Parent Resources
+                </span>
+
+                <h1>
+                    Everything You Need,<br>
+                    <span>In One Place.</span>
+                </h1>
+
+                <div class="resources-gold-rule"></div>
+
+                <p>
+                    Welcome to the St. Martin's High School Resource Hub.
+                    Find important academic information, school guidelines
+                    and useful resources for students and parents.
+                </p>
+            </div>
+        </section>
+
+        <!-- Content Area -->
+        <section class="resources-content">
+            <div class="container">
+
+                <div class="resources-section-heading">
+                    <span class="resources-eyebrow">Download Center</span>
+                    <h2>Student &amp; Parent Resources</h2>
+                    <p>
+                        Access key academic resources and official documents.
+                    </p>
+                </div>
+
+                <!-- 4 Core Download Cards -->
+                <div class="row g-4">
+                    <!-- Academic Calendar -->
+                    <div class="col-lg-6">
+                        <article class="resource-card">
+                            <div class="resource-card-top">
+                                <div class="resource-icon" aria-hidden="true">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div>
+                                    <h3>Academic Calendar &amp; Syllabus Guide</h3>
+                                    <p>Important academic dates, examination schedules and syllabus information.</p>
+                                </div>
+                            </div>
+                            <div class="resource-card-actions">
+                                <a class="resource-link" href="/downloads/academic-calendar.pdf" target="_blank" rel="noopener">
+                                    View Calendar PDF
+                                </a>
+                                <a class="resource-link resource-link-secondary" href="/calendar">
+                                    School Calendar
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Parent Handbook -->
+                    <div class="col-lg-6">
+                        <article class="resource-card">
+                            <div class="resource-card-top">
+                                <div class="resource-icon" aria-hidden="true">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+                                <div>
+                                    <h3>Parent Handbook &amp; Code of Conduct</h3>
+                                    <p>Review school expectations, attendance, discipline and parental responsibilities.</p>
+                                </div>
+                            </div>
+                            <div class="resource-card-actions">
+                                <a class="resource-link" href="/downloads/parent-handbook.pdf" target="_blank" rel="noopener">
+                                    View Handbook PDF
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Mandatory Disclosure -->
+                    <div class="col-lg-6">
+                        <article class="resource-card">
+                            <div class="resource-card-top">
+                                <div class="resource-icon" aria-hidden="true">
+                                    <i class="fa-solid fa-file-shield"></i>
+                                </div>
+                                <div>
+                                    <h3>Mandatory Disclosure</h3>
+                                    <p>Find the school's published disclosure information and institutional details.</p>
+                                </div>
+                            </div>
+                            <div class="resource-card-actions">
+                                <a class="resource-link" href="/disclosure">
+                                    View Disclosure
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Admissions Information -->
+                    <div class="col-lg-6">
+                        <article class="resource-card">
+                            <div class="resource-card-top">
+                                <div class="resource-icon" aria-hidden="true">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <h3>Admissions Information</h3>
+                                    <p>Learn about the admission process, forms, and fee structures.</p>
+                                </div>
+                            </div>
+                            <div class="resource-card-actions">
+                                <a class="resource-link" href="/admissions">
+                                    Admission Process
+                                </a>
+                                <a class="resource-link resource-link-secondary" href="/fee-structure">
+                                    Fee Structure
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Notice -->
+                <aside class="resources-note">
+                    <h3>Important Information</h3>
+                    <p>
+                        Official documents are updated on a rolling basis. If a file is not yet available online, please check with the school administrative desk.
+                    </p>
+                </aside>
+
+                <!-- Help CTA -->
+                <section class="resources-contact">
+                    <h2>Need Help Finding a Resource?</h2>
+                    <p>If you cannot find a specific syllabus document or guideline, reach out to the school administrative office.</p>
+                    <a class="resource-link" href="/contact">Contact The School</a>
+                </section>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Partial Wrapped In Safety Catch -->
+    <%- include('partials/footer') %>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
