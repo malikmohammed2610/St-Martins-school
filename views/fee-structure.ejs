@@ -1,4 +1,4 @@
-```ejs
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -610,161 +610,20 @@
             </div>
         </div>
 
-        <!-- PAYMENT INFORMATION -->
-        <section class="payment-section">
-            <div class="payment-content">
-                <span class="section-number">03 · Payment Information</span>
-                <h2>Making Your Fee Payment</h2>
-                <p>
-                    Parents and guardians are requested to use
-                    the payment method officially communicated
-                    by the school. Please ensure that all
-                    payment details are entered correctly.
-                </p>
-
-                <ul class="payment-list">
-                    <li><i class="fas fa-check"></i> Confirm the applicable fee before payment.</li>
-                    <li><i class="fas fa-check"></i> Use only official school payment channels.</li>
-                    <li><i class="fas fa-check"></i> Keep the payment confirmation or receipt.</li>
-                    <li><i class="fas fa-check"></i> Contact the accounts office for payment-related queries.</li>
-                </ul>
-            </div>
-
-            <div class="accounts-panel">
-                <h3>Accounts Office</h3>
-                <p>
-                    For clarification regarding tuition fees,
-                    additional charges, payment deadlines,
-                    receipts, or any discrepancy in the fee
-                    information, please contact the school office.
-                </p>
-                <a href="tel:040 2377 4208" class="contact-account">
-                    <i class="fas fa-phone"></i>
-                    &nbsp; 040 2377 4208
-                </a>
-            </div>
-        </section>
-
-        <!-- IMPORTANT NOTES -->
-        <section class="notes-box">
-            <h2>Important Notes</h2>
+        <!-- NOTES -->
+        <div class="notes-box">     
+        <h2>Important Notes</h2>
             <ol>
-                <li>
-                    The fee amounts shown on this page should be
-                    replaced with the school's officially approved
-                    fee schedule before the website is published.
-                </li>
-                <li>
-                    Fee amounts may vary depending on the student's
-                    class, programme, transport requirements, or
-                    other applicable services.
-                </li>
-                <li>
-                    Any applicable admission, registration,
-                    examination, activity, transport, or other
-                    charges should be confirmed with the school
-                    administration.
-                </li>
-                <li>
-                    Parents should make payments only through
-                    officially authorised school payment channels.
-                </li>
-                <li>
-                    Please retain all official receipts and
-                    transaction confirmations for future reference.
-                </li>
-                <li>
-                    For the most current fee information, parents
-                    and guardians should contact the school office
-                    directly.
-                </li>
+                <li>The fee amounts listed above are placeholders and may not reflect the final official fees. Please verify with the school administration.</li>
+                <li>All fees are subject to change at the discretion of the school management.</li>
+                <li>Late payments may incur additional charges as per school policy.</li>
+                <li>For any fee-related queries, please contact the school's accounts office directly.</li>
             </ol>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="smhs-footer">
-        <div class="smhs-footer-inner">
-
-            <div class="smhs-footer-grid">
-
-                <div class="smhs-footer-brand">
-                    <img src="/images/logo.png"
-                         alt="St. Martin's High School Logo"
-                         onerror="this.style.display='none'">
-
-                    <h3>St. Martin's High School</h3>
-                    <div class="smhs-footer-location">Balanagar, Hyderabad</div>
-
-                    <p>
-                        A learning environment committed to
-                        academic excellence, character, confidence,
-                        and the holistic development of every student.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="smhs-footer-title">Explore</h4>
-                    <ul class="smhs-footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">School Overview</a></li>
-                        <li><a href="/principal">Principal &amp; Management</a></li>
-                        <li><a href="/facilities">Facilities</a></li>
-                        <li><a href="/gallery">Gallery</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="smhs-footer-title">Information</h4>
-                    <ul class="smhs-footer-links">
-                        <li><a href="/academics/curriculum">Curriculum</a></li>
-                        <li><a href="/student-life">Student Life</a></li>
-                        <li><a href="/admissions">Admissions</a></li>
-                        <li>
-                            <a href="/fee-structure" style="color:var(--gold)">
-                                Fee Structure
-                            </a>
-                        </li>
-                        <li><a href="/teacher-login">Teacher Login</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="smhs-footer-title">Contact</h4>
-                    <div class="smhs-footer-contact">
-                        <p><strong>St. Martin's High School</strong></p>
-                        <p>Balanagar, Hyderabad, Telangana</p>
-                        <p>
-                            Phone:
-                            <a href="tel:040 2377 4208">040 2377 4208</a>
-                        </p>
-                        <p>
-                            For admissions and school enquiries,
-                            please contact the school office.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="smhs-footer-divider"></div>
-
-            <div class="smhs-footer-bottom">
-                <span>
-                    &copy; 2026 St. Martin's High School.
-                    All rights reserved.
-                </span>
-
-                <span>
-                    <a href="/contact">Contact School</a>
-                    &nbsp; · &nbsp;
-                    <a href="/teacher-login">Teacher Portal</a>
-                </span>
-            </div>
-
         </div>
-    </footer>
+    </main>
+        
+    <!-- GLOBAL FOOTER -->
+    <%- include('partials/footer') %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/script.js"></script>
@@ -772,4 +631,3 @@
 
 </body>
 </html>
-```
